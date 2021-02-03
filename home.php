@@ -6,12 +6,12 @@ require_once 'connect.php';
 session_start();
 
 //Verificação
-if(!isset($_SESSION['logado'])):
-	header('Location: index.php');
+if (!isset($_SESSION['logado'])) :
+    header('Location: index.php');
 endif;
 
 //Dados
-$id= $_SESSION['id_usuario'];
+$id = $_SESSION['id_usuario'];
 $sql = "SELECT * FROM dirigentes WHERE id = '$id'";
 $stmt = connect::conn()->prepare($sql);
 $stmt->execute();
@@ -26,6 +26,6 @@ $stmt = connect::closeConn();
     </head>
     <body>
         <h1> Olá <?php echo $dados['nome'];?></h1>
-	<a href="logout.php">Sair</a>
+    <a href="logout.php">Sair</a>
     </body>
 </html>
