@@ -1,14 +1,12 @@
 <?php
 
-namespace conexao;
-
-class Connect
+class connect
 {
     private static $instance;
     protected static $servername = "localhost";
     protected static $username = "root";
     protected static $password = "";
-    protected static $db_name = "mapsassistant";
+    protected static $db_name = "oasis_assistant";
     public static function conn()
     {
         if (!isset(self::$instance)) :

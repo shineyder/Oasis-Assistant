@@ -13,12 +13,12 @@ if (isset($_POST['btn-entrar'])) :
     if (empty($login) or empty($senha)) :
         $erros[] = "<li>Os campos Login e Senha precisam ser preenchidos</li>";
     else :
-        $sql = "SELECT login FROM dirigentes WHERE login = '$login'";
+        $sql = "SELECT usuario FROM dirigentes WHERE usuario = '$login'";
         $stmt = connect::conn()->prepare($sql);
         $stmt->execute();
         if ($stmt->rowCount() > 0) :
             $senha = md5($senha);
-            $sql = "SELECT * FROM dirigentes WHERE login = '$login' AND senha = '$senha'";
+            $sql = "SELECT * FROM dirigentes WHERE usuario = '$login' AND senha = '$senha'";
             $stmt = connect::conn()->prepare($sql);
             $stmt->execute();
 
