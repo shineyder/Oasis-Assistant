@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <?php
 require_once 'connect.php';
 
-//Sessão
+// Sessão
 session_start();
 
 //Verificação
@@ -19,13 +18,17 @@ $dados = $stmt->fetch(\PDO::FETCH_BOTH);
 $stmt = connect::closeConn();
 ?>
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Página Restrita</title>
-    </head>
-    <body>
+<?php
+// Header
+include_once 'includes/header.php';
+// Message
+include_once 'includes/message.php';
+?>
+
         <h1> Olá <?php echo $dados['nome'];?></h1>
     <a href="logout.php">Sair</a>
-    </body>
-</html>
+
+<?php
+//Footer
+include_once 'includes/footer.php';
+?>

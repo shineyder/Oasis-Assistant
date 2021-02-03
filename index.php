@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <?php
 require_once 'connect.php';
 
-//Sessão
+// Sessão
 session_start();
 
 if (isset($_POST['btn-entrar'])) :
@@ -11,12 +10,12 @@ if (isset($_POST['btn-entrar'])) :
     $senha = $_POST['senha'];
 
     if (empty($login) or empty($senha)) :
-        $erros[] = "<li>Os campos Login e Senha precisam ser preenchidos</li>";
+        $_SESSION['mensagem'] = "Os campos Login e Senha precisam ser preenchidos";
     else :
         $sql = "SELECT usuario FROM dirigentes WHERE usuario = '$login'";
         $stmt = connect::conn()->prepare($sql);
         $stmt->execute();
-        if ($stmt->rowCount() > 0) :
+        if ($stmt->rowCount() == 1) :
             $senha = md5($senha);
             $sql = "SELECT * FROM dirigentes WHERE usuario = '$login' AND senha = '$senha'";
             $stmt = connect::conn()->prepare($sql);
@@ -29,33 +28,28 @@ if (isset($_POST['btn-entrar'])) :
                 $_SESSION['id_usuario'] = $dados['id'];
                 header('Location: home.php');
             else :
-                $erros[] = "<li>Usuário e senha não conferem</li>";
+                $_SESSION['mensagem'] = "Usuário e senha não conferem";
             endif;
         else :
-            $erros[] = "<li> Usuário inexistente</li>";
+            $_SESSION['mensagem'] = "Usuário inexistente";
         endif;
     endif;
 endif;
-?>
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Maps Assistant</title>
-    </head>
-    <body>
-        <?php
-        if (!empty($erros)) :
-            foreach ($erros as $erro) :
-                echo $erro;
-            endforeach;
-        endif;
-        ?>
-        
+// Header
+include_once 'includes/header.php';
+// Message
+include_once 'includes/message.php';
+?>
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
             Login: <input type="text" name="login"><br>
             Senha: <input type="password" name="senha"><br>
             <button type="submit" name="btn-entrar">Entrar</button>
         </form>
-    </body>
-</html>
+
+        <button><a href="signup.php">Criar conta</a></button>
+        <a href="recovery.php">Recuperar senha</a>
+<?php
+//Footer
+include_once 'includes/footer.php';
+?>

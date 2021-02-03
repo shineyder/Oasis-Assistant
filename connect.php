@@ -7,6 +7,7 @@ class connect
     protected static $username = "root";
     protected static $password = "";
     protected static $db_name = "oasis_assistant";
+
     public static function conn()
     {
         if (!isset(self::$instance)) :
@@ -14,6 +15,7 @@ class connect
         endif;
         return self::$instance;
     }
+
     public static function closeConn()
     {
         if (isset(self::$instance)) :
