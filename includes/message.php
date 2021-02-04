@@ -1,6 +1,6 @@
 <?php
-if(isset($_SESSION['mensagem'])) : 
-?>	
+if(isset($_SESSION['mensagem'])) :
+?>
 
 <script>
     // Mensagem

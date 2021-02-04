@@ -16,17 +16,15 @@ $stmt = connect::conn()->prepare($sql);
 $stmt->execute();
 $dados = $stmt->fetch(\PDO::FETCH_BOTH);
 $stmt = connect::closeConn();
-?>
 
-<?php
 // Header
 include_once 'includes/header.php';
 // Message
 include_once 'includes/message.php';
 ?>
 
-        <h1> Olá <?php echo $dados['nome'];?></h1>
-    <a href="logout.php">Sair</a>
+    <h1> Olá <?php echo $dados['nome'];?></h1>
+<a href="logout.php">Sair</a>
 
 <?php
 //Footer

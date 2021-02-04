@@ -7,7 +7,6 @@ session_start();
 require_once '../connect.php';
 
 if (isset($_POST['btn-confirm'])) :
-    $erros = array();
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
     $email = $_POST['email'];

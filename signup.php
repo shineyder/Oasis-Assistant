@@ -1,36 +1,55 @@
 <?php
-require_once 'connect.php';
 
 // Sessão
 session_start();
-?>
 
-<?php
 // Header
 include_once 'includes/header.php';
 // Message
 include_once 'includes/message.php';
 ?>
 
-        <?php
-        if (!empty($erros)) :
-            foreach ($erros as $erro) :
-                echo $erro;
-            endforeach;
-        endif;
-        ?>
+<div class="row">
+    <form class="col s12 push-s2 m8 push-m2" action="phpaction/create_dir.php" method="POST">
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="nome" name="nome" type="text" class="validate">
+                <label for="nome">Nome</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="sobrenome" name="sobrenome" type="text" class="validate">
+                <label for="sobrenome">Sobrenome</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <input id="email" name="email" type="email" class="validate">
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <input id="user" name="user" type="text" class="validate">
+                <label for="user">Usuário</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <input id="senha" name="senha" type="password" class="validate">
+                <label for="senha">Senha</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8">
+                <input id="repeat-senha" name="repeat-senha" type="password" class="validate">
+                <label for="repeat-senha">Confirmar Senha</label>
+            </div>
+        </div>
         
-        <form action="phpaction/create_dir.php" method="POST">
-            Nome: <input type="text" name="nome"><br>
-            Sobrenome: <input type="text" name="sobrenome"><br>
-            Email: <input type="text" name="email"><br>
-            Usuário: <input type="text" name="user"><br>
-            Senha: <input type="password" name="senha"><br>
-            Confirmar Senha: <input type="password" name="repeat-senha"><br>
-            <button type="submit" name="btn-confirm">Criar Conta</button>
-        </form>
-
-        <button><a href="index.php">Cancelar</a></button>
+        <button type="submit" name="btn-confirm" class="btn blue darken-2">Criar Conta</button>
+        <a href="index.php" class="btn red darken-2">Cancelar</a>
+    </form>
+</div>
         
 <?php
 // Footer
