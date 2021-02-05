@@ -22,16 +22,20 @@ if (isset($_POST['btn-entrar'])) :
             $sql = "SELECT * FROM dirigentes WHERE usuario = '$login' AND senha = '$senha'";
             $stmt = connect::conn()->prepare($sql);
             $stmt->execute();
-
-            if ($stmt->rowCount() == 1) :
-                $dados = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $dados = $stmt->fetch(\PDO::FETCH_BOTH);
+            if ($stmt->rowCount() == 1 and $dados['access'] != 0) :
                 $stmt = connect::closeConn();
                 $_SESSION['logado'] = true;
                 $_SESSION['id_usuario'] = $dados['id'];
                 header('Location: ../home.php');
             else :
-                $_SESSION['mensagem'] = "Usuário e senha não conferem";
-                header('Location: ../index.php');
+                if ($stmt->rowCount() != 1) :
+                    $_SESSION['mensagem'] = "Usuário e senha não conferem";
+                    header('Location: ../index.php');
+                else :
+                    $_SESSION['mensagem'] = "Acesse o email de verificação para liberar o acesso a conta";
+                    header('Location: ../index.php');
+                endif;
             endif;
         else :
             $_SESSION['mensagem'] = "Usuário inexistente";

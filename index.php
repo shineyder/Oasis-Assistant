@@ -3,6 +3,11 @@
 // Sessão
 session_start();
 
+//Verificação
+if (isset($_SESSION['logado'])) :
+    header('Location: home.php');
+endif;
+
 // Header
 include_once 'includes/header.php';
 // Message
