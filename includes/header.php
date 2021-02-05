@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title> Maps Assistant</title>
+		<link rel="stylesheet" href="_css/style.css"/>
 		<!--Import Google Icon Font-->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!--Import materialize.css-->
@@ -13,3 +14,26 @@
     </head>
 
     <body>
+		<header class="cabecalho row">
+			<div class="center">
+				<img id="logo" src="../img/logo_oasis_assistant.png" alt="Logo Oásis Assistant">
+			</div>
+			
+			<?php
+			if (isset($_SESSION['logado'])) :
+			?>	
+			
+				<div class="cabecalho-inf col s12 center">
+					<a href="home.php" class="btn-small blue darken-2">Ver Perfil</a>
+					<a href="master.php" class="btn-small blue darken-2">Master Page</a>
+					<a href="meus_relatorios.php" class="btn-small blue darken-2">Meus Relatórios</a>
+					<a href="vis_territorio.php" class="btn-small blue darken-2">Visualizar Territórios</a>
+					<a href="logout.php" class="btn-small red darken-2">Sair</a>
+				</div>
+
+			<?php
+			endif;
+			?>
+		</header>
+
+		<div class="content">

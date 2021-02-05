@@ -23,8 +23,12 @@ include_once 'includes/header.php';
 include_once 'includes/message.php';
 ?>
 
-    <h1> Olá <?php echo $dados['nome'];?></h1>
-<a href="logout.php">Sair</a>
+    <b>Nome: </b> <?php echo $dados['nome'];?> <br>
+    <b>Sobrenome: </b> <?php echo $dados['sobrenome'];?> <br>
+    <b>Email: </b> <?php echo $dados['email'];?> <br>
+    <b>Usuário: </b> <?php echo $dados['usuario'];?> <br><br>
+    <a href="" class="btn-small blue darken-4">Alterar Email</a>
+    <a href="" class="btn-small blue darken-4">Alterar Senha</a>
 
 <?php
 //Footer
