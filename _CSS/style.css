@@ -23,7 +23,7 @@ div.cabecalho-inf{
 
 div.content{
     width: auto;
-    max-width: 800px;
+    max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
     margin-top: -20px;
@@ -32,4 +32,12 @@ div.content{
     padding-left: 20px;
     background: white;
     box-shadow: 1px 1px 4px black;
+}
+
+img#Mapa_Completo,img#Mapa_Regio,img#Mapa_Local{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-width: 1000px;
 }
