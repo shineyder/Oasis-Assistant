@@ -21,8 +21,9 @@ require_once 'phpaction/connect.php';
         <style>
             article{
                 height: 50000px;
-                width: auto;
-                max-width: 1120px;
+            }
+            body{
+                display: block;
             }
         </style>
     </head>

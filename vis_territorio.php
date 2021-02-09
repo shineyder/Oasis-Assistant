@@ -116,15 +116,13 @@ function volt2() {
 }
 </script>
 
-<script type="text/javascript" src="_JS/imageMapResizer.min.js"></script>
-
-<script type="text/javascript">
-    $('map').imageMapResize();
-</script>
-
 <div class="iframes">
     <iframe scrolling="no" src="fazer_rel.php" name="rel" id="frame-rel" class="hide"></iframe>
 </div>
+
+<script>
+    imageMapResize();
+</script>
 
 <?php
 //Footer

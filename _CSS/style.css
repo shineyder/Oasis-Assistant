@@ -5,6 +5,7 @@ body{
 
 header.cabecalho{
     height: 150px;
+    min-width: 660px;
     background-color: rgb(248, 80, 80);
 }
 
@@ -39,8 +40,8 @@ img#Mapa_Completo,img#Mapa_Regio,img#Mapa_Local{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: auto;
-    max-width: 1120px;
+    max-width: 100%;
+    height: auto;
 }
 
 div.iframes{
@@ -49,9 +50,9 @@ div.iframes{
 
 iframe#frame-rel{
     display: block;
+    min-width: 600px;
+    width: 90%;
     margin: 10px;
-    width: auto;
-    max-width: 1120px;
     height: 4000px;
     border: none;
 	overflow: hidden;
