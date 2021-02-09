@@ -1,3 +1,7 @@
+<?php
+require_once 'phpaction/connect.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,133 +20,78 @@
 
         <style>
             article{
-                height: 700px;
+                height: 50000px;
+                width: auto;
+                max-width: 1120px;
             }
-
         </style>
     </head>
 
     <body> 
         <div class="container">
-            <article id="1">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">TEXTO 1</div>
-                        <div class="collapsible-body"><span>CONTEUDO 1</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 2</div>
-                        <div class="collapsible-body"><span>CONTEUDO 2</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 3</div>
-                        <div class="collapsible-body"><span>CONTEUDO 3</span></div>
-                    </li>
-                </ul>
-            </article>
-        
-            <article id="2">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">TEXTO 4</div>
-                        <div class="collapsible-body"><span>CONTEUDO 4</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 5</div>
-                        <div class="collapsible-body"><span>CONTEUDO 5</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 6</div>
-                        <div class="collapsible-body"><span>CONTEUDO 6</span></div>
-                    </li>
-                </ul>
-            </article>
+            <?php 
+            for( $i = 1; $i <= 24; $i++) {
+                $sql = "SELECT id FROM mapas WHERE maps = '$i'";
+                $stmt = connect::conn()->prepare($sql);
+                $stmt->execute();
+                $dados_first = $stmt->fetch(\PDO::FETCH_BOTH);
 
-            <article id="3">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">TEXTO 7</div>
-                        <div class="collapsible-body"><span>CONTEUDO 7</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 8</div>
-                        <div class="collapsible-body"><span>CONTEUDO 8</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 9</div>
-                        <div class="collapsible-body"><span>CONTEUDO 9</span></div>
-                    </li>
-                </ul>
+                $sql = "SELECT id FROM mapas WHERE maps = '$i' ORDER BY id DESC";
+                $stmt = connect::conn()->prepare($sql);
+                $stmt->execute();
+                $dados_last = $stmt->fetch(\PDO::FETCH_BOTH);
+                $stmt = connect::closeConn();
+            ?>
+            <article id="<?php echo $i;?>">
+                <form action="phpaction/update_maps.php" method="POST">
+                    <ul class="collapsible">
+                        <?php 
+                        for( $j = $dados_first['id']; $j <= $dados_last['id']; $j++) {
+                            $sql = "SELECT * FROM mapas WHERE id = '$j'";
+                            $stmt = connect::conn()->prepare($sql);
+                            $stmt->execute();
+                            $dados_quadra = $stmt->fetch(\PDO::FETCH_BOTH);
+                        ?>
+                        <li>
+                            <div class="collapsible-header">Quadra <?php echo $dados_quadra['quadra'] . (($dados_quadra['trab'] == 0) ? " não trabalhada" : " trabalhada");?> </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s4" style="margin-top: -35px;">
+                                        <input id="n_res_<?php echo $j; ?>" name="n_res_<?php echo $j; ?>" type="number" class="validate" value=<?php echo $dados_quadra['n_residencia']?>>
+                                        <label for="n_res_<?php echo $j; ?>">Número de Residências</label>
+                                    </div>
+                                        
+                                    <div class="col s4" style="margin-top: -35px;">
+                                        <input id="n_com_<?php echo $j; ?>" name="n_com_<?php echo $j; ?>" type="number" class="validate" value=<?php echo $dados_quadra['n_comercio']?>>
+                                        <label for="n_com_<?php echo $j; ?>">Número de Comércios</label>
+                                    </div>
+                                        
+                                    <div class="col s4" style="margin-top: -35px;">
+                                        <input id="n_edi_<?php echo $j; ?>" name="n_edi_<?php echo $j; ?>" type="number" class="validate" value=<?php echo $dados_quadra['n_edificio']?>>
+                                        <label for="n_edi_<?php echo $j; ?>">Número de Edifícios</label>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: -20px;">
+                                    <label>
+                                        <input type="checkbox" id="trab_<?php echo $j; ?>" name="trab_<?php echo $j; ?>" <?php echo (($dados_quadra['trab'] == 1) ? "checked" : "")?>>
+                                        <span> Quadra Trabalhada</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                    <input type="hidden" name="first" value="<?php echo $dados_first['id']; ?>">
+                    <input type="hidden" name="last" value="<?php echo $dados_last['id']; ?>">
+                    <input type="hidden" name="mapactive" value="<?php echo $i; ?>">
+                    <button type="submit" name="btn-env-rel" class="btn teal darken-2">Enviar Relatório</button>
+                </form>
             </article>
-
-            <article id="4">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">TEXTO 10</div>
-                        <div class="collapsible-body"><span>CONTEUDO 10</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 11</div>
-                        <div class="collapsible-body"><span>CONTEUDO 11</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 12</div>
-                        <div class="collapsible-body"><span>CONTEUDO 12</span></div>
-                    </li>
-                </ul>
-            </article>
-
-            <article id="5">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">TEXTO 13</div>
-                        <div class="collapsible-body"><span>CONTEUDO 13</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 14</div>
-                        <div class="collapsible-body"><span>CONTEUDO 14</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 15</div>
-                        <div class="collapsible-body"><span>CONTEUDO 15</span></div>
-                    </li>
-                </ul>
-            </article>
-
-            <article id="6">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">TEXTO 16</div>
-                        <div class="collapsible-body"><span>CONTEUDO 16</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 17</div>
-                        <div class="collapsible-body"><span>CONTEUDO 17</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 18</div>
-                        <div class="collapsible-body"><span>CONTEUDO 18</span></div>
-                    </li>
-                </ul>
-            </article>
-
-            <article id="7">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header">TEXTO 19</div>
-                        <div class="collapsible-body"><span>CONTEUDO 19</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 20</div>
-                        <div class="collapsible-body"><span>CONTEUDO 20</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header">TEXTO 21</div>
-                        <div class="collapsible-body"><span>CONTEUDO 21</span></div>
-                    </li>
-                </ul>
-            </article>
-        </div>
+            <?php 
+            } 
+            ?>
 
         <script>
         $(document).ready(function(){

@@ -40,25 +40,19 @@ img#Mapa_Completo,img#Mapa_Regio,img#Mapa_Local{
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    max-width: 1000px;
+    max-width: 1120px;
 }
 
 div.iframes{
     display: block;
-    position: relative;
-}
-
-iframe#frame-sug,iframe#frame-rel{
-    display: block;
-    position:relative;
-    margin: 10px;
-    width: 550px;
-    height: 700px;
-    border: none;
-	overflow: hidden;
 }
 
 iframe#frame-rel{
-    left: 550px;
-    top:-710px;
+    display: block;
+    margin: 10px;
+    width: auto;
+    max-width: 1120px;
+    height: 4000px;
+    border: none;
+	overflow: hidden;
 }

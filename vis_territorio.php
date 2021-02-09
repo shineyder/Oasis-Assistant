@@ -95,7 +95,7 @@ function edit(param) {
 function edit2(param) {
     document.getElementById("Mapa_Local").setAttribute("class", "");
     document.getElementById("Mapa_Local").setAttribute("src", "mapas/" + param + ".jpg");
-    document.getElementById("frame-rel").setAttribute("class", "");
+    document.getElementById("frame-rel").setAttribute("class", "");    
     document.getElementById("Mapa_Regio").setAttribute("class", "hide");
     document.getElementById("voltar1").setAttribute("class", "hide");
     document.getElementById("voltar2").setAttribute("class", "btn-small red darken-2");
@@ -116,8 +116,13 @@ function volt2() {
 }
 </script>
 
+<script type="text/javascript" src="_JS/imageMapResizer.min.js"></script>
+
+<script type="text/javascript">
+    $('map').imageMapResize();
+</script>
+
 <div class="iframes">
-    <iframe scrolling="no" src="sugestao_terr.php" name="janela" id="frame-sug"></iframe>
     <iframe scrolling="no" src="fazer_rel.php" name="rel" id="frame-rel" class="hide"></iframe>
 </div>
 

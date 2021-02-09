@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title> Maps Assistant</title>
 		<link rel="stylesheet" href="_css/style.css"/>
-		
+
 		<!-- Compiled and minified CSS and Import Google Icon Font -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
