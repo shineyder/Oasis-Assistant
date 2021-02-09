@@ -4,7 +4,7 @@
 session_start();
 
 // Conexão
-require_once '../connect.php';
+require_once 'connect.php';
 
 if (isset($_POST['btn-confirm'])) :
     $nome = $_POST['nome'];

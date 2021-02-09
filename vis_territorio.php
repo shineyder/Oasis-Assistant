@@ -1,5 +1,5 @@
 <?php
-require_once 'connect.php';
+require_once 'phpaction/connect.php';
 
 // Sessão
 session_start();
@@ -114,6 +114,11 @@ function volt2() {
     document.getElementById("voltar2").setAttribute("class", "hide");
 }
 </script>
+
+<div class="iframes">
+    <iframe scrolling="no" src="sugestao_terr.php" name="janela" id="frame-sug"></iframe>
+    <iframe scrolling="no" src="fazer_rel.php" name="janela" id="frame-rel"></iframe>
+</div>
 
 <?php
 //Footer

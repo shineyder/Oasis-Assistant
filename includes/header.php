@@ -9,7 +9,6 @@
 		<!--Import materialize.css-->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -39,7 +38,7 @@
 					
 					<a href="meus_relatorios.php" class="btn-small blue darken-2">Meus Relatórios</a>
 					<a href="vis_territorio.php" class="btn-small blue darken-2">Visualizar Territórios</a>
-					<a href="logout.php" class="btn-small red darken-2">Sair</a>
+					<a href="phpaction/logout.php" class="btn-small red darken-2">Sair</a>
 				</div>
 
 			<?php

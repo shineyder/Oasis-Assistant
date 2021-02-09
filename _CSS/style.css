@@ -22,6 +22,7 @@ div.cabecalho-inf{
 }
 
 div.content{
+    display: block;
     width: auto;
     max-width: 1140px;
     margin-left: auto;
@@ -40,4 +41,24 @@ img#Mapa_Completo,img#Mapa_Regio,img#Mapa_Local{
     margin-right: auto;
     width: auto;
     max-width: 1000px;
+}
+
+div.iframes{
+    display: block;
+    position: relative;
+}
+
+iframe#frame-sug,iframe#frame-rel{
+    display: block;
+    position:relative;
+    margin: 10px;
+    width: 550px;
+    height: 700px;
+    border: none;
+	overflow: hidden;
+}
+
+iframe#frame-rel{
+    left: 550px;
+    top:-710px;
 }
