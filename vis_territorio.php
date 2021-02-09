@@ -120,10 +120,6 @@ function volt2() {
     <iframe scrolling="no" src="fazer_rel.php" name="rel" id="frame-rel" class="hide"></iframe>
 </div>
 
-<script>
-    imageMapResize();
-</script>
-
 <?php
 //Footer
 include_once 'includes/footer.php';
