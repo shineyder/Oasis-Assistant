@@ -1,3 +1,9 @@
+<!--
+Página:
+    Inicial
+Conteúdo:
+    Área de LogIn, opções de Criar Conta e Recuperar Senha. 
+-->
 <?php
 
 // Sessão
