@@ -1,6 +1,6 @@
 <?php
-if(isset($_SESSION['mensagem'])) :
-?>
+if (isset($_SESSION['mensagem'])) :
+    ?>
 
 <script>
     // Mensagem
@@ -10,7 +10,7 @@ if(isset($_SESSION['mensagem'])) :
     };
 </script>
 
-<?php
+    <?php
 endif;
 
 $_SESSION['mensagem'] = [];

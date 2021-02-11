@@ -1,0 +1,25 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.wordWrap": "on",
+    "php.validate.executablePath": "C:\\xampp\\php\\php.exe",
+    "php.suggest.basic": false,
+    "phpSniffer.autoDetect": true,
+    "phpSniffer.standard": "PSR12",
+    "[php]": {
+        "editor.defaultFormatter": "wongjn.php-sniffer"
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "phpSniffer.snippetExcludeSniffs": [
+        
+    ],
+    "editor.codeActionsOnSave": null,
+    "editor.rulers": [
+
+    
+    ],
+    "phpcs.executablePath": "C:\\Users\\Adriano\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs",
+    "phpcs.showSources": true,
+    "phpcs.standard": "",
+    "php.executablePath": ""
+}

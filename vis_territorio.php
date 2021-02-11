@@ -34,7 +34,9 @@ include_once 'includes/message.php';
     <area alt="Del Porto" title="Del Porto" href="#" onclick='edit("Del_porto")' coords="384,327,384,379,386,395,399,409,403,424,415,434,426,417,440,432,448,441,458,456,477,455,507,447,511,433,547,419,560,404,590,401,592,378,557,336,594,341,609,289,599,270,465,274,440,323,437,330,406,326" shape="poly">
 </map>
 
-<img id="Mapa_Regio" class="hide" src="mapas/Porto_novo_1.jpg" alt="Mapa Regional" usemap="#Porto_novo_1">
+<div id="Mapa_Regio" class="hide">
+
+<img id="Porto_novo_1" class="hide" src="mapas/Porto_novo_1.jpg" alt="Mapa Regional" usemap="#Porto_novo_1">
 
 <map name="Porto_novo_1">
     <area target="rel" alt="24" title="24" href="fazer_rel.php#24" onclick='edit2("24")' coords="199,28,106,142,129,150,116,166,104,246,85,254,92,328,86,373,89,429,70,467,98,498,111,485,159,503,164,546,195,545,203,534,207,468,222,438,232,397,244,386,259,386,269,402,300,342,333,308,340,273,326,265,302,293,322,238,265,100,240,69,218,42" shape="poly">
@@ -42,10 +44,14 @@ include_once 'includes/message.php';
     <area alt="12" title="12" href="fazer_rel.php#12" onclick='edit2("12")' coords="251,593,313,593,313,653,313,706,320,727,343,749,359,784,359,796,316,801,294,810,256,807,241,793,218,786,192,765,187,743,196,719,217,691,235,667,251,649,269,638" shape="poly">
 </map>
 
+<img id="Porto_novo_2" class="hide" src="mapas/Porto_novo_2.jpg" alt="Mapa Regional" usemap="#Porto_novo_2">
+
 <map name="Porto_novo_2">
     <area target="rel" alt="8" title="8" href="fazer_rel.php#8" onclick='edit2("8")' coords="37,126,43,278,180,427,153,461,169,504,220,475,230,500,269,474,482,492,485,451,455,447,468,420,435,378,454,356,459,316,422,286,399,282,372,286,339,66,278,46,171,92,89,104" shape="poly">
     <area target="rel" alt="13" title="13" href="fazer_rel.php#13" onclick='edit2("13")' coords="430,285,464,316,460,355,441,377,469,417,545,338,628,313,674,383,680,456,656,618,655,697,685,763,701,749,730,739,712,644,704,601,736,608,760,588,814,610,937,640,961,604,952,567,850,496,835,457,843,425,903,351,986,274,938,200,870,198,865,104,806,104,796,182,710,196,549,144,513,232,481,269" shape="poly">
 </map>
+
+<img id="Bairro_aparecida" class="hide" src="mapas/Bairro_aparecida.jpg" alt="Mapa Regional" usemap="#Bairro_aparecida">
 
 <map name="Bairro_aparecida">
     <area target="rel" alt="1" title="1" href="fazer_rel.php#1" onclick='edit2("1")' coords="161,579,211,584,257,568,298,578,330,621,362,628,374,617,458,630,466,624,471,608,467,592,531,527,552,578,559,572,560,541,545,529,528,489,520,485,515,475,495,449,492,471,470,477,440,464,410,486,385,496,347,494,343,538,296,514,287,543,227,552,189,557,173,565" shape="poly">
@@ -57,12 +63,16 @@ include_once 'includes/message.php';
     <area target="rel" alt="7" title="7" href="fazer_rel.php#7" onclick='edit2("7")' coords="116,701,105,832,220,832,242,731,217,679" shape="poly">
 </map>
 
+<img id="Presidente_medici" class="hide" src="mapas/Presidente_medici.jpg" alt="Mapa Regional" usemap="#Presidente_medici">
+
 <map name="Presidente_medici">
     <area target="rel" alt="9" title="9" href="fazer_rel.php#9" onclick='edit2("9")' coords="148,356,120,396,97,413,97,446,124,512,166,530,192,557,215,569,280,565,318,557,349,539,357,522,366,517,378,491,398,414,413,365,415,316,394,327,378,380,363,350,339,314,327,308,318,273,295,286,279,293,252,303,201,332" shape="poly">
     <area target="rel" alt="10" title="10" href="fazer_rel.php#10" onclick='edit2("10")' coords="95,407,73,339,69,261,44,201,39,158,32,90,61,99,78,86,104,85,191,117,259,129,263,140,295,160,310,192,313,218,313,261,278,285,253,294,203,326,169,342,144,352,117,393" shape="poly">
     <area target="rel" alt="11" title="11" href="fazer_rel.php#11" onclick='edit2("11")' coords="283,67,297,57,344,59,376,51,475,37,426,120,428,141,444,161,453,188,452,216,453,258,431,289,412,311,391,325,378,370,366,345,345,312,333,304,321,270,316,206,301,160,266,135,288,103" shape="poly">
     <area target="rel" alt="15" title="15" href="fazer_rel.php#15" onclick='edit2("15")' coords="149,526,148,561,188,665,232,767,259,798,265,777,284,745,331,672,360,633,371,605,371,519,359,522,355,539,332,556,317,563,295,568,218,574,189,562,167,534" shape="poly">
 </map>
+
+<img id="Morro_Sesi" class="hide" src="mapas/Morro_Sesi.jpg" alt="Mapa Regional" usemap="#Morro_Sesi">
 
 <map name="Morro_Sesi">
     <area target="rel" alt="14" title="14" href="fazer_rel.php#14" onclick='edit2("14")' coords="33,510,98,691,110,695,140,789,212,768,203,739,205,710,238,690,235,632,307,594,295,546,269,554,274,534,289,528,285,498,244,487,187,490,148,482,106,475,77,469,59,507" shape="poly">
@@ -71,12 +81,16 @@ include_once 'includes/message.php';
     <area target="rel" alt="18" title="18" href="fazer_rel.php#18" onclick='edit2("18")' coords="143,275,219,258,237,266,283,269,294,248,321,227,325,205,315,186,321,162,329,139,357,80,320,85,301,52,241,58,211,23,158,107,170,138,172,178,151,213,149,241" shape="poly">
 </map>
 
+<img id="Del_porto" class="hide" src="mapas/Del_porto.jpg" alt="Mapa Regional" usemap="#Del_porto">
+
 <map name="Del_porto">
     <area target="rel" alt="19" title="19" href="fazer_rel.php#19" onclick='edit2("19")' coords="353,427,409,447,504,403,515,369,538,294,498,289,444,266,401,251" shape="poly">
     <area target="rel" alt="20" title="20" href="fazer_rel.php#20" onclick='edit2("20")' coords="290,566,358,474,401,450,348,429,378,326,396,251,257,226,188,223,190,416,204,455,239,486,255,540,272,559" shape="poly">
     <area target="rel" alt="21" title="21" href="fazer_rel.php#21" onclick='edit2("21")' coords="333,514,358,480,482,422,507,408,546,295,630,293,636,314,678,318,728,399,818,378,838,400,839,440,798,466,731,470,712,509,628,544,614,512,571,481,539,502,565,517,585,551,536,577,538,627,414,633,372,584,348,542" shape="poly">
     <area target="rel" alt="22" title="22" href="fazer_rel.php#22" onclick='edit2("22")' coords="387,244,409,251,457,269,498,287,544,290,631,290,639,313,677,313,758,237,827,255,846,214,831,161,830,103,493,75,453,90,459,185,394,227" shape="poly">
 </map>
+
+</div>
 
 <img id="Mapa_Local" class="hide" src="mapas/1.jpg" alt="Mapa Local">
 
@@ -85,9 +99,8 @@ include_once 'includes/message.php';
 
 <script>
 function edit(param) {
+    document.getElementById(param).setAttribute("class", "");
     document.getElementById("Mapa_Regio").setAttribute("class", "");
-    document.getElementById("Mapa_Regio").setAttribute("src", "mapas/" + param + ".jpg");
-    document.getElementById("Mapa_Regio").setAttribute("usemap", "#" + param);
     document.getElementById("Mapa_Completo").setAttribute("class", "hide");
     document.getElementById("voltar1").setAttribute("class", "btn-small red darken-2");
 }
@@ -95,8 +108,8 @@ function edit(param) {
 function edit2(param) {
     document.getElementById("Mapa_Local").setAttribute("class", "");
     document.getElementById("Mapa_Local").setAttribute("src", "mapas/" + param + ".jpg");
-    document.getElementById("frame-rel").setAttribute("class", "");    
     document.getElementById("Mapa_Regio").setAttribute("class", "hide");
+    document.getElementById("frame-rel").setAttribute("class", "");    
     document.getElementById("voltar1").setAttribute("class", "hide");
     document.getElementById("voltar2").setAttribute("class", "btn-small red darken-2");
 }
@@ -104,6 +117,12 @@ function edit2(param) {
 function volt1() {
     document.getElementById("Mapa_Completo").setAttribute("class", "");
     document.getElementById("Mapa_Regio").setAttribute("class", "hide");
+    document.getElementById("Porto_novo_1").setAttribute("class", "hide");
+    document.getElementById("Porto_novo_2").setAttribute("class", "hide");
+    document.getElementById("Bairro_aparecida").setAttribute("class", "hide");
+    document.getElementById("Presidente_medici").setAttribute("class", "hide");
+    document.getElementById("Morro_Sesi").setAttribute("class", "hide");
+    document.getElementById("Del_porto").setAttribute("class", "hide");
     document.getElementById("voltar1").setAttribute("class", "hide");
 }
 

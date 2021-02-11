@@ -1,6 +1,6 @@
 <?php
 
-// Sessão
+//Sessão
 session_start();
 
 // Header

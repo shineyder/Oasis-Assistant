@@ -15,7 +15,7 @@ include_once 'includes/message.php';
 ?>
 
 <div class="row">
-    <form class="col s12 push-s2 m8 push-m2" action="phpaction/login.php" method="POST">
+    <form class="col s12 m8 push-m2" action="phpaction/login.php" method="POST">
         <div class="row">
             <div class="input-field col s8">
                 <input id="login" name="login" type="text" class="validate">

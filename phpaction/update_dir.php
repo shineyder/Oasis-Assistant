@@ -7,7 +7,7 @@ session_start();
 require_once 'connect.php';
 
 if (isset($_POST['btn-up-email'])) :
-    $id=$_POST['id'];
+    $id = $_POST['id'];
     $email = $_POST['email-up'];
 
     if (empty($email)) :
@@ -33,7 +33,7 @@ if (isset($_POST['btn-up-email'])) :
 endif;
 
 if (isset($_POST['btn-up-senha'])) :
-    $id=$_POST['id'];
+    $id = $_POST['id'];
     $senha_old = $_POST['senha-old'];
     $senha = $_POST['senha-up'];
     $senha_conf = $_POST['senha-up-conf'];

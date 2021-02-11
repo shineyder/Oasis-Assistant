@@ -10,13 +10,13 @@ require_once 'phpaction/connect.php';
         <!-- Compiled and minified CSS and Import Google Icon Font -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
-		<!-- Compiled and minified JavaScript -->
-		<script type = "text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
+        <!-- Compiled and minified JavaScript -->
+        <script type = "text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.4/js/materialize.min.js"></script>
 
-		<!--Let browser know website is optimized for mobile-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <style>
             article{
@@ -30,8 +30,8 @@ require_once 'phpaction/connect.php';
 
     <body> 
         <div class="container">
-            <?php 
-            for( $i = 1; $i <= 24; $i++) {
+            <?php
+            for ($i = 1; $i <= 24; $i++) {
                 $sql = "SELECT id FROM mapas WHERE maps = '$i'";
                 $stmt = connect::conn()->prepare($sql);
                 $stmt->execute();
@@ -41,20 +41,18 @@ require_once 'phpaction/connect.php';
                 $stmt = connect::conn()->prepare($sql);
                 $stmt->execute();
                 $dados_last = $stmt->fetch(\PDO::FETCH_BOTH);
-                $stmt = connect::closeConn();
-            ?>
-            <article id="<?php echo $i;?>">
+                $stmt = connect::closeConn(); ?>
+            <article id="<?php echo $i; ?>">
                 <form action="phpaction/update_maps.php" method="POST">
                     <ul class="collapsible">
-                        <?php 
-                        for( $j = $dados_first['id']; $j <= $dados_last['id']; $j++) {
+                        <?php
+                        for ($j = $dados_first['id']; $j <= $dados_last['id']; $j++) {
                             $sql = "SELECT * FROM mapas WHERE id = '$j'";
                             $stmt = connect::conn()->prepare($sql);
                             $stmt->execute();
-                            $dados_quadra = $stmt->fetch(\PDO::FETCH_BOTH);
-                        ?>
+                            $dados_quadra = $stmt->fetch(\PDO::FETCH_BOTH); ?>
                         <li>
-                            <div class="collapsible-header">Quadra <?php echo $dados_quadra['quadra'] . (($dados_quadra['trab'] == 0) ? " não trabalhada" : " trabalhada");?> </div>
+                            <div class="collapsible-header">Quadra <?php echo $dados_quadra['quadra'] . (($dados_quadra['trab'] == 0) ? " não trabalhada" : " trabalhada"); ?> </div>
                             <div class="collapsible-body">
                                 <div class="row">
                                     <div class="col s4" style="margin-top: -35px;">
@@ -74,15 +72,14 @@ require_once 'phpaction/connect.php';
                                 </div>
                                 <div style="margin-bottom: -20px;">
                                     <label>
-                                        <input type="checkbox" id="trab_<?php echo $j; ?>" name="trab_<?php echo $j; ?>" <?php echo (($dados_quadra['trab'] == 1) ? "checked" : "")?>>
+                                        <input type="checkbox" id="trab_<?php echo $j; ?>" name="trab_<?php echo $j; ?>" <?php echo(($dados_quadra['trab'] == 1) ? "checked" : "")?>>
                                         <span> Quadra Trabalhada</span>
                                     </label>
                                 </div>
                             </div>
                         </li>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                        } ?>
                     </ul>
                     <input type="hidden" name="first" value="<?php echo $dados_first['id']; ?>">
                     <input type="hidden" name="last" value="<?php echo $dados_last['id']; ?>">
@@ -90,8 +87,8 @@ require_once 'phpaction/connect.php';
                     <button type="submit" name="btn-env-rel" class="btn teal darken-2">Enviar Relatório</button>
                 </form>
             </article>
-            <?php 
-            } 
+                <?php
+            }
             ?>
 
         <script>
