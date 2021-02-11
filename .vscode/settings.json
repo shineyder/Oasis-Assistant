@@ -18,7 +18,7 @@
 
     
     ],
-    "phpcs.executablePath": "C:\\Users\\Adriano\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs",
+    "phpcs.executablePath": "C:\\Users\\Adriano\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs.bat",
     "phpcs.showSources": true,
     "phpcs.standard": "",
     "php.executablePath": ""

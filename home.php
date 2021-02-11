@@ -18,9 +18,9 @@ $dados = $stmt->fetch(\PDO::FETCH_BOTH);
 $stmt = connect::closeConn();
 
 // Header
-include_once 'includes/header.php';
+require_once 'includes/header.php';
 // Message
-include_once 'includes/message.php';
+require_once 'includes/message.php';
 ?>
 
     <b>Nome: </b> <?php echo $dados['nome'];?> <br>
@@ -64,5 +64,5 @@ include_once 'includes/message.php';
 
 <?php
 //Footer
-include_once 'includes/footer.php';
+require_once 'includes/footer.php';
 ?>

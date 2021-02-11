@@ -1,3 +1,14 @@
+<!--
+    Página: Visualizar Território
+    Conteúdo: Todos os mapas e sessão de relatório de serviço
+
+    Exibição inicial tem o mapa do território todo da congregação (Mapa_Completo), com link para exibir o território de cada grupo (Mapa_Regio), nesse tem outro link para cada território individual (Mapa_Local). 
+
+    A sessão de relatório de serviço só é exibida quando um Mapa_Local está em foco. Essa sessão está dentro de um iframe e exibe as informações atuais no sistema sobre cada quadra (se a quadra já foi trabalhada, número de residencias, número de comércios e número de edifícios). Nessa sessão também é possivel emitir um relatório de serviço e preencher ou atualizar as informações da quadra.
+    
+    Ao emitir o relatório o usuário tem até 24h para realizar qualquer correção na página de relatórios, após isso só o administrador do sistema poderá fazer alterações.
+-->
+
 <?php
 require_once 'phpaction/connect.php';
 
@@ -18,9 +29,9 @@ $dados = $stmt->fetch(\PDO::FETCH_BOTH);
 $stmt = connect::closeConn();
 
 // Header
-include_once 'includes/header.php';
+require_once 'includes/header.php';
 // Message
-include_once 'includes/message.php';
+require_once 'includes/message.php';
 ?>
 
 <img id="Mapa_Completo" class="" src="mapas/Mapa_completo.jpg" alt="Mapa Completo" usemap="#Mapa_Completo">
@@ -139,7 +150,11 @@ function volt2() {
     <iframe scrolling="no" src="fazer_rel.php" name="rel" id="frame-rel" class="hide"></iframe>
 </div>
 
+<script>
+    imageMapResize();
+</script>
+
 <?php
 //Footer
-include_once 'includes/footer.php';
+require_once 'includes/footer.php';
 ?>

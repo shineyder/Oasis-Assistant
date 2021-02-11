@@ -9,9 +9,9 @@ if (isset($_SESSION['logado'])) :
 endif;
 
 // Header
-include_once 'includes/header.php';
+require_once 'includes/header.php';
 // Message
-include_once 'includes/message.php';
+require_once 'includes/message.php';
 ?>
 
 <div class="row">
@@ -36,5 +36,5 @@ include_once 'includes/message.php';
     
 <?php
 //Footer
-include_once 'includes/footer.php';
+require_once 'includes/footer.php';
 ?>
