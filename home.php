@@ -1,3 +1,10 @@
+<!--
+Página:
+    Home
+Conteúdo:
+    Dados do Usuário, opções de trocar email e senha. 
+-->
+
 <?php
 require_once 'phpaction/connect.php';
 

@@ -1,3 +1,10 @@
+<!--
+Página:
+    Oculta - Ação PHP - Criar Dirigente
+Conteúdo:
+    Insere informação no servidor com respeito a novos dirigentes. 
+-->
+
 <?php
 
 // Sessão

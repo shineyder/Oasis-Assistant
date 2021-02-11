@@ -1,3 +1,10 @@
+<!--
+Página:
+    iFrame de Relatórios de Serviço
+Conteúdo:
+    Exibe informações a respeito dos mapas locais (se quadra já foi trabalhada, número de residências, número de comercios e número de edifícios) e permite emitir relatórios.
+-->
+
 <?php
 require_once 'phpaction/connect.php';
 ?>

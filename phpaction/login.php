@@ -1,3 +1,10 @@
+<!--
+Página:
+    Oculta - Ação PHP - LogIn
+Conteúdo:
+    Confere usuário e senha e inicia sessão. 
+-->
+
 <?php
 
 // Sessão

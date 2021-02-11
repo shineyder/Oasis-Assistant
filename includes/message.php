@@ -1,3 +1,10 @@
+<!--
+Página:
+    Mensagem
+Conteúdo:
+    Sistema de exibição de mensagem.
+-->
+
 <?php
 if (isset($_SESSION['mensagem'])) :
     ?>

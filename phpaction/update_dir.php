@@ -1,3 +1,10 @@
+<!--
+Página:
+    Oculta - Ação PHP - Atualizar dirigentes
+Conteúdo:
+    Atualiza a informação do servidor com respeito aos dados dos dirigentes. 
+-->
+
 <?php
 
 // Sessão

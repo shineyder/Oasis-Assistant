@@ -1,3 +1,10 @@
+<!--
+Página:
+    Oculta - Ação PHP - LogOut
+Conteúdo:
+    Encerra a sessão. 
+-->
+
 <?php
 
 //Encerrando a sessão

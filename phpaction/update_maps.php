@@ -1,3 +1,10 @@
+<!--
+Página:
+    Oculta - Ação PHP - Atualizar mapas
+Conteúdo:
+    Atualiza a informação do servidor com respeito aos dados das quadras. 
+-->
+
 <?php
 
 // Sessão

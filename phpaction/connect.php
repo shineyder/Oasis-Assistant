@@ -1,3 +1,10 @@
+<!--
+Página:
+    Oculta - Ação PHP - Conexão
+Conteúdo:
+    Cria conexão com o servidor. 
+-->
+
 <?php
 
 class connect
