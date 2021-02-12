@@ -8,6 +8,11 @@ Detalhes:
 -->
 
 <?php
+
+// Função redirect
+require_once 'phpaction/redirect.php';
+
+//Conexão
 require_once 'phpaction/connect.php';
 
 // Sessão
@@ -15,7 +20,7 @@ session_start();
 
 //Verificação
 if (!isset($_GET['cd'])) :
-    header('Location: index.php');
+    redirect('http://oasisassistant.com/');
     exit();
 endif;
 

@@ -7,6 +7,9 @@ Conteúdo:
 
 <?php
 
+// Função redirect
+require_once 'redirect.php';
+
 // Sessão
 session_start();
 
@@ -24,12 +27,12 @@ if (isset($_POST['btn-confirm'])) :
 
     if (empty($nome) or empty($sobrenome) or empty($email) or empty($user) or empty($senha) or empty($repeatsenha)) :
         $_SESSION['mensagem'] = "Todos os campos precisam ser preenchidos";
-        header('Location: ../signup.php');
+        redirect('http://oasisassistant.com/signup.php');
         exit();
     else :
         if ($senha != $repeatsenha) :
             $_SESSION['mensagem'] = "As senhas preenchidas não são iguais";
-            header('Location: ../signup.php');
+            redirect('http://oasisassistant.com/signup.php');
             exit();
         else :
             $sql = "SELECT usuario FROM dirigentes WHERE usuario = '$user'";
@@ -38,7 +41,7 @@ if (isset($_POST['btn-confirm'])) :
             if ($stmt->rowCount() != 0) :
                 $_SESSION['mensagem'] = "Usuário já registrado";
                 $stmt = conectar\Connect::closeConn();
-                header('Location: ../signup.php');
+                redirect('http://oasisassistant.com/signup.php');
                 exit();
             else :
                 $sql = "SELECT email FROM dirigentes WHERE email = '$email'";
@@ -47,7 +50,7 @@ if (isset($_POST['btn-confirm'])) :
                 if ($stmt->rowCount() != 0) :
                     $_SESSION['mensagem'] = "E-mail já cadastrado";
                     $stmt = conectar\Connect::closeConn();
-                    header('Location: ../signup.php');
+                    redirect('http://oasisassistant.com/signup.php');
                     exit();
                 else :
                     $senha = md5($senha);

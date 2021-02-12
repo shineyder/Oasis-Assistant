@@ -1,8 +1,8 @@
 <?php
 
-namespace Relatorio;
+namespace Eventos;
 
-class RelatorioDAO
+class EventoDAO
 {
     public function create()
     {

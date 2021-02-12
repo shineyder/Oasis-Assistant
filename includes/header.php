@@ -9,8 +9,9 @@ Conteúdo:
 <html>
     <head>
         <meta charset="utf-8">
-        <title> Maps Assistant</title>
+        <title> Oasis Assistant</title>
         <link rel="stylesheet" href="_css/style.css"/>
+        <link rel="shortcut icon" href="img/logo_oasis_assistant_min.ico">
 
         <!-- Compiled and minified CSS and Import Google Icon Font -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -39,16 +40,16 @@ Conteúdo:
                     <a href="home.php" class="btn-small blue darken-2">Ver Perfil</a>
 
                     <?php
-                    if ($dados['access'] == 10) :
+                    if ($dados['access'] >= 6) :
                         ?>
 
-                    <a href="master.php" class="btn-small blue darken-2">Master Page</a>
+                    <a href="master_page.php" class="btn-small blue darken-2">Master Page</a>
 
                         <?php
                     endif;
                     ?>
                     
-                    <a href="meus_relatorios.php" class="btn-small blue darken-2">Meus Relatórios</a>
+                    <a href="my_relatorios.php" class="btn-small blue darken-2">Meus Relatórios</a>
                     <a href="vis_territorio.php" class="btn-small blue darken-2">Visualizar Territórios</a>
                     <a href="phpaction/logout.php" class="btn-small red darken-2">Sair</a>
                 </div>

@@ -10,6 +10,12 @@ Conteúdo:
 //Sessão
 session_start();
 
+//Verificação
+if (isset($_SESSION['logado'])) :
+    redirect('http://oasisassistant.com/home.php');
+    exit();
+endif;
+
 // Header
 require_once 'includes/header.php';
 // Message

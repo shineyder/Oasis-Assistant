@@ -9,15 +9,8 @@ Detalhes:
 
 <?php
 
-function redirect($url)
-{
-    if (headers_sent()) {
-        die('<script type="text/javascript">window.location=\'' . $url . '\';</script>');
-    } else {
-        header('Location: ' . $url);
-        die();
-    }
-}
+// Função redirect
+require_once 'redirect.php';
 
 // Sessão
 session_start();
@@ -36,12 +29,12 @@ if (isset($_POST['btn-pro'])) :
 
     if (empty($tipo)) :
         $_SESSION['mensagem'] = "Nenhum problema selecionado";
-        header('Location: ../problem.php');
+        redirect('http://oasisassistant.com/problem.php');
         exit();
     else :
         if (empty($detail) or (isset($_POST['rec2']) ? empty($detail2) : false)) :
             $_SESSION['mensagem'] = "Informações solicitadas não preenchidas";
-            header('Location: ../problem.php');
+            redirect('http://oasisassistant.com/problem.php');
             exit();
         else :
             switch ($tipo) {
@@ -53,7 +46,7 @@ if (isset($_POST['btn-pro'])) :
                     if ($stmt->rowCount() == 0) :
                         $_SESSION['mensagem'] = "E-mail não cadastrado";
                         $stmt = conectar\Connect::closeConn();
-                        header('Location: ../problem.php');
+                        redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
                         $dados = $stmt->fetch(\PDO::FETCH_BOTH);
@@ -77,7 +70,7 @@ if (isset($_POST['btn-pro'])) :
                     if ($stmt->rowCount() == 0) :
                         $_SESSION['mensagem'] = "E-mail e/ou Usuário não cadastrado";
                         $stmt = conectar\Connect::closeConn();
-                        header('Location: ../problem.php');
+                        redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
                         $dados = $stmt->fetch(\PDO::FETCH_BOTH);
@@ -105,7 +98,7 @@ if (isset($_POST['btn-pro'])) :
                     if ($stmt->rowCount() == 0) :
                         $_SESSION['mensagem'] = "Usuário não cadastrado";
                         $stmt = conectar\Connect::closeConn();
-                        header('Location: ../problem.php');
+                        redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
                         $sql = "SELECT * FROM dirigentes WHERE usuario = '$detail' AND access = 0";
@@ -115,7 +108,7 @@ if (isset($_POST['btn-pro'])) :
                         if ($stmt->rowCount() == 0) :
                             $_SESSION['mensagem'] = "E-mail da conta já foi autenticado";
                             $stmt = conectar\Connect::closeConn();
-                            header('Location: ../problem.php');
+                            redirect('http://oasisassistant.com/problem.php');
                             exit();
                         else :
                             $sql = "SELECT * FROM dirigentes WHERE usuario = '$detail' AND email = '$detail2'";
@@ -125,7 +118,7 @@ if (isset($_POST['btn-pro'])) :
                             if ($stmt->rowCount() == 0) :
                                 $_SESSION['mensagem'] = "E-mail informado no cadastro não confere";
                                 $stmt = conectar\Connect::closeConn();
-                                header('Location: ../problem.php');
+                                redirect('http://oasisassistant.com/problem.php');
                                 exit();
                             else :
                                 $dados = $stmt->fetch(\PDO::FETCH_BOTH);
@@ -154,7 +147,7 @@ if (isset($_POST['btn-pro-plus'])) :
 
     if (empty($detail) or empty($detail2)) :
         $_SESSION['mensagem'] = "Informações solicitadas não preenchidas";
-        header('Location: ../problem.php');
+        redirect('http://oasisassistant.com/problem.php');
         exit();
     else :
         $target_dir = "../uploads/";

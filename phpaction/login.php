@@ -7,6 +7,9 @@ Conteúdo:
 
 <?php
 
+// Função redirect
+require_once 'redirect.php';
+
 // Sessão
 session_start();
 
@@ -19,7 +22,7 @@ if (isset($_POST['btn-entrar'])) :
 
     if (empty($login) or empty($senha)) :
         $_SESSION['mensagem'] = "Os campos Login e Senha precisam ser preenchidos";
-        header('Location: ../index.php');
+        redirect('http://oasisassistant.com/');
         exit();
     else :
         $sql = "SELECT usuario FROM dirigentes WHERE usuario = '$login'";
@@ -41,19 +44,19 @@ if (isset($_POST['btn-entrar'])) :
                 if ($stmt->rowCount() != 1) :
                     $_SESSION['mensagem'] = "Usuário e senha não conferem";
                     $stmt = conectar\Connect::closeConn();
-                    header('Location: ../index.php');
+                    redirect('http://oasisassistant.com/');
                     exit();
                 else :
                     $_SESSION['mensagem'] = "Acesse o email de verificação para liberar o acesso a conta";
                     $stmt = conectar\Connect::closeConn();
-                    header('Location: ../index.php');
+                    redirect('http://oasisassistant.com/');
                     exit();
                 endif;
             endif;
         else :
             $_SESSION['mensagem'] = "Usuário inexistente";
             $stmt = conectar\Connect::closeConn();
-            header('Location: ../index.php');
+            redirect('http://oasisassistant.com/');
             exit();
         endif;
     endif;

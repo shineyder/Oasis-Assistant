@@ -7,6 +7,9 @@ Conteúdo:
 
 <?php
 
+// Função redirect
+require_once 'redirect.php';
+
 // Sessão
 session_start();
 
@@ -28,6 +31,6 @@ if (isset($_POST['btn-env-rel'])) :
         $stmt->execute();
     }
     $stmt = conectar\Connect::closeConn();
-    header('Location: ../fazer_rel.php#' . $_POST['mapactive']);
+    redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
     exit();
 endif;

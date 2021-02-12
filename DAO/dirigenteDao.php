@@ -1,18 +1,26 @@
 <?php
-class dirigenteDao {
-    public function create(){
+
+namespace Dirigente;
+
+class DirigenteDAO
+{
+    public function create()
+    {
         
     }
-    
-    public function read(){
+
+    public function read()
+    {
         
     }
-    
-    public function update(){
+
+    public function update()
+    {
         
     }
-    
-    public function delete(){
+
+    public function delete()
+    {
         
     }
 }

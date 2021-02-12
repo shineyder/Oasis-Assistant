@@ -6,12 +6,15 @@ Conteúdo:
 -->
 <?php
 
+// Função redirect
+require_once 'phpaction/redirect.php';
+
 // Sessão
 session_start();
 
 //Verificação
 if (isset($_SESSION['logado'])) :
-    header('Location: home.php');
+    redirect('http://oasisassistant.com/home.php');
     exit();
 endif;
 

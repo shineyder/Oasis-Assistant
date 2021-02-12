@@ -6,10 +6,12 @@ Conteúdo:
 -->
 
 <?php
+// Função redirect
+require_once 'redirect.php';
 
 //Encerrando a sessão
 session_start();
 session_unset();
 session_destroy();
-header('Location: ../index.php');
+redirect('http://oasisassistant.com/');
 exit();
