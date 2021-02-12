@@ -40,24 +40,27 @@ require_once 'phpaction/connect.php';
             <?php
             for ($i = 1; $i <= 24; $i++) {
                 $sql = "SELECT id FROM mapas WHERE maps = '$i'";
-                $stmt = connect::conn()->prepare($sql);
+                $stmt = conectar\Connect::conn()->prepare($sql);
                 $stmt->execute();
                 $dados_first = $stmt->fetch(\PDO::FETCH_BOTH);
 
                 $sql = "SELECT id FROM mapas WHERE maps = '$i' ORDER BY id DESC";
-                $stmt = connect::conn()->prepare($sql);
+                $stmt = conectar\Connect::conn()->prepare($sql);
                 $stmt->execute();
                 $dados_last = $stmt->fetch(\PDO::FETCH_BOTH);
-                $stmt = connect::closeConn(); ?>
+                $stmt = conectar\Connect::closeConn();
+                ?>
             <article id="<?php echo $i; ?>">
                 <form action="phpaction/update_maps.php" method="POST">
                     <ul class="collapsible">
                         <?php
                         for ($j = $dados_first['id']; $j <= $dados_last['id']; $j++) {
                             $sql = "SELECT * FROM mapas WHERE id = '$j'";
-                            $stmt = connect::conn()->prepare($sql);
+                            $stmt = conectar\Connect::conn()->prepare($sql);
                             $stmt->execute();
-                            $dados_quadra = $stmt->fetch(\PDO::FETCH_BOTH); ?>
+                            $dados_quadra = $stmt->fetch(\PDO::FETCH_BOTH);
+                            $stmt = conectar\Connect::closeConn();
+                            ?>
                         <li>
                             <div class="collapsible-header">Quadra <?php echo $dados_quadra['quadra'] . (($dados_quadra['trab'] == 0) ? " não trabalhada" : " trabalhada"); ?> </div>
                             <div class="collapsible-body">

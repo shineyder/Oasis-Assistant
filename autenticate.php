@@ -16,31 +16,32 @@ session_start();
 //Verificação
 if (!isset($_GET['cd'])) :
     header('Location: index.php');
+    exit();
 endif;
 
 //Dados
 $sql = "SELECT id FROM dirigentes ORDER BY id DESC";
-$stmt = connect::conn()->prepare($sql);
+$stmt = conectar\Connect::conn()->prepare($sql);
 $stmt->execute();
 $dados_last = $stmt->fetch(\PDO::FETCH_BOTH);
 
 for ($i = 1; $i <= $dados_last['id']; $i++) {
     $sql = "SELECT usuario FROM dirigentes WHERE id = '$i' AND access = 0";
-    $stmt = connect::conn()->prepare($sql);
+    $stmt = conectar\Connect::conn()->prepare($sql);
     $stmt->execute();
     $dadostemp = $stmt->fetch(\PDO::FETCH_BOTH);
 
     if ($dadostemp != false) {
         if ($_GET['cd'] == md5($dadostemp['usuario'])) {
             $sql = "UPDATE dirigentes SET access = 1 WHERE id = '$i'";
-            $stmt = connect::conn()->prepare($sql);
+            $stmt = conectar\Connect::conn()->prepare($sql);
             $stmt->execute();
             break;
         }
     }
 }
 
-$stmt = connect::closeConn();
+$stmt = conectar\Connect::closeConn();
 
 // Header
 require_once 'includes/header.php';

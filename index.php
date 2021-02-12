@@ -12,6 +12,7 @@ session_start();
 //Verificação
 if (isset($_SESSION['logado'])) :
     header('Location: home.php');
+    exit();
 endif;
 
 // Header
@@ -36,7 +37,7 @@ require_once 'includes/message.php';
         </div>
         <button type="submit" name="btn-entrar" class="btn blue darken-2">Entrar</button>
         <a href="signup.php" class="btn blue darken-2">Criar conta</a>
-        <a href="problem.php" class="btn red lighten-2">Problema com Login</a>
+        <a href="problem.php" class="btn red lighten-2">Problemas com Login</a>
     </form>
 </div>
     

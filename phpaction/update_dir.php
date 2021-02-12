@@ -18,23 +18,26 @@ if (isset($_POST['btn-up-email'])) :
     $email = $_POST['email-up'];
 
     if (empty($email)) :
-        $_SESSION['mensagem'] = "Campo Novo Email não foi preenchido";
+        $_SESSION['mensagem'] = "Campo Novo E-mail não foi preenchido";
         header('Location: ../home.php');
+        exit();
     else :
         $sql = "SELECT email FROM dirigentes WHERE id = '$id'";
-        $stmt = connect::conn()->prepare($sql);
+        $stmt = conectar\Connect::conn()->prepare($sql);
         $stmt->execute();
         $dados = $stmt->fetch(\PDO::FETCH_BOTH);
         if ($dados[0] == $email) :
-            $_SESSION['mensagem'] = "Email antigo e novo são iguais";
+            $_SESSION['mensagem'] = "E-mail antigo e novo são iguais";
             header('Location: ../home.php');
+            exit();
         else :
             $sql = "UPDATE dirigentes SET email = '$email' WHERE id = '$id'";
-            $stmt = connect::conn()->prepare($sql);
+            $stmt = conectar\Connect::conn()->prepare($sql);
             $stmt->execute();
-            $stmt = connect::closeConn();
-            $_SESSION['mensagem'] = "Email alterado com sucesso!";
+            $_SESSION['mensagem'] = "E-mail alterado com sucesso!";
+            $stmt = conectar\Connect::closeConn();
             header('Location: ../home.php');
+            exit();
         endif;
     endif;
 endif;
@@ -48,26 +51,31 @@ if (isset($_POST['btn-up-senha'])) :
     if (empty($senha_old) or empty($senha) or empty($senha_conf)) :
         $_SESSION['mensagem'] = "Todos os campos precisam ser preenchidos";
         header('Location: ../home.php');
+        exit();
     else :
         if ($senha != $senha_conf) :
             $_SESSION['mensagem'] = "As novas senhas preenchidas não são iguais";
             header('Location: ../home.php');
+            exit();
         else :
             $sql = "SELECT senha FROM dirigentes WHERE id = '$id'";
-            $stmt = connect::conn()->prepare($sql);
+            $stmt = conectar\Connect::conn()->prepare($sql);
             $stmt->execute();
             $dados = $stmt->fetch(\PDO::FETCH_BOTH);
             if ($dados[0] != md5($senha_old)) :
                 $_SESSION['mensagem'] = "Senha antiga não confere";
+                $stmt = conectar\Connect::closeConn();
                 header('Location: ../home.php');
+                exit();
             else :
                 $senha = md5($senha);
                 $sql = "UPDATE dirigentes SET senha = '$senha' WHERE id = '$id'";
-                $stmt = connect::conn()->prepare($sql);
+                $stmt = conectar\Connect::conn()->prepare($sql);
                 $stmt->execute();
-                $stmt = connect::closeConn();
                 $_SESSION['mensagem'] = "Senha alterada com sucesso!";
+                $stmt = conectar\Connect::closeConn();
                 header('Location: ../home.php');
+                exit();
             endif;
         endif;
     endif;

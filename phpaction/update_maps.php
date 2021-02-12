@@ -24,9 +24,10 @@ if (isset($_POST['btn-env-rel'])) :
         $n_edi = $_POST['n_edi_' . $i];
 
         $sql = "UPDATE mapas SET trab = '$trab', n_residencia = '$n_res', n_comercio = '$n_com', n_edificio = '$n_edi' WHERE id = '$i'";
-        $stmt = connect::conn()->prepare($sql);
+        $stmt = conectar\Connect::conn()->prepare($sql);
         $stmt->execute();
-        $stmt = connect::closeConn();
     }
+    $stmt = conectar\Connect::closeConn();
     header('Location: ../fazer_rel.php#' . $_POST['mapactive']);
+    exit();
 endif;

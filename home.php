@@ -14,15 +14,16 @@ session_start();
 //Verificação
 if (!isset($_SESSION['logado'])) :
     header('Location: index.php');
+    exit();
 endif;
 
 //Dados
 $id = $_SESSION['id_usuario'];
 $sql = "SELECT * FROM dirigentes WHERE id = '$id'";
-$stmt = connect::conn()->prepare($sql);
+$stmt = conectar\Connect::conn()->prepare($sql);
 $stmt->execute();
 $dados = $stmt->fetch(\PDO::FETCH_BOTH);
-$stmt = connect::closeConn();
+$stmt = conectar\Connect::closeConn();
 
 // Header
 require_once 'includes/header.php';
@@ -32,15 +33,15 @@ require_once 'includes/message.php';
 
     <b>Nome: </b> <?php echo $dados['nome'];?> <br>
     <b>Sobrenome: </b> <?php echo $dados['sobrenome'];?> <br>
-    <b>Email: </b> <?php echo $dados['email'];?> <br>
+    <b>E-mail: </b> <?php echo $dados['email'];?> <br>
     <b>Usuário: </b> <?php echo $dados['usuario'];?> <br><br>
-    <a href="#modal-email" class="btn-small blue darken-4 modal-trigger">Alterar Email</a>
+    <a href="#modal-email" class="btn-small blue darken-4 modal-trigger">Alterar E-mail</a>
     <a href="#modal-senha" class="btn-small blue darken-4 modal-trigger">Alterar Senha</a>
 
     <!-- Modal Structure -->
     <div id="modal-email" class="modal">
         <div class="modal-content">
-            <p>Preencha os campos abaixo para alterar seu email</p>
+            <p>Preencha os campos abaixo para alterar seu e-mail</p>
             <form action="phpaction/update_dir.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
                 <input id="email-up" name="email-up" type="email" class="validate">
@@ -68,6 +69,12 @@ require_once 'includes/message.php';
             </form>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+            });
+    </script>
 
 <?php
 //Footer

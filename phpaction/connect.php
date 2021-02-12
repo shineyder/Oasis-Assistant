@@ -1,13 +1,15 @@
-<!--
-Página:
-    Oculta - Ação PHP - Conexão
-Conteúdo:
-    Cria conexão com o servidor. 
--->
-
 <?php
 
-class connect
+/**
+* Página:
+*     Oculta - Ação PHP - Conexão
+* Conteúdo:
+*     Cria conexão com o servidor.
+*/
+
+namespace Conectar;
+
+class Connect
 {
     private static $instance;
     protected static $servername = "localhost";

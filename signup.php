@@ -31,7 +31,7 @@ require_once 'includes/message.php';
         <div class="row">
             <div class="input-field col s8">
                 <input id="email" name="email" type="email" class="validate">
-                <label for="email">Email</label>
+                <label for="email">E-mail</label>
             </div>
         </div>
         <div class="row">
