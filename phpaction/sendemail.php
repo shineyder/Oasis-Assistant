@@ -1,48 +1,60 @@
-
 <?php
+
+/**
+ * Página:
+ *      Oculta - Ação PHP - Enviar Email
+ * Conteúdo:
+ *      Envia email.
+ * Detalhes:
+ *      Necessário email de destino, nome e sobrenome do destinátario, mensagem, assunto e anexo. O anexo é a única informação opcional e, caso não exista, deve ser definida como string vazia "".
+ */
+
+namespace EnviarEmail;
+
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Load Composer's autoloader
-require '../vendor/autoload.php';
+class Mail
+{
+    public function sendMail($email, $nome, $sobrenome, $message, $subject, $anexo)
+    {
+        //Load Composer's autoloader
+        require '../vendor/autoload.php';
 
-// Instantiation and passing `true` enables exceptions
-$mail = new PHPMailer(true);
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
 
-try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host = 'smtp.gmail.com';                             // Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'oasisassistente@gmail.com';            // SMTP username
-    $mail->Password   = 'Oasis.1914';                           // SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-    $mail->Port = 465;                                  // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+        try {
+            //Configurações do Servidor
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;              // Enable verbose debug output
+            $mail->isSMTP();                                    // Send using SMTP
+            $mail->Host = 'smtp.gmail.com';                     // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                           // Enable SMTP authentication
+            $mail->Username   = 'oasisassistente@gmail.com';    // SMTP username
+            $mail->Password   = 'Oasis.1914';                   // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465;
 
-    //Recipients
-    $mail->setFrom('oasisassistente@gmail.com', 'Mailer');
-    $mail->addAddress('oasisassistant@hotmail.com', 'Adriano');     // Add a recipient
-    //$mail->addAddress('ellen@example.com');               // Name is optional
-    //$mail->addReplyTo('info@example.com', 'Information');
-    //$mail->addCC('cc@example.com');
-    //$mail->addBCC('bcc@example.com');
+            $mail->setFrom('oasisassistente@gmail.com', 'Oasis Assistant'); // Origem do email
+            $mail->addAddress($email, $nome . " " . $sobrenome);                                      // Destino do email
 
-    // Attachments
-    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+            // Anexos
+            if ($anexo != "") {
+                $mail->addAttachment($anexo);   // anexo = "" para não enviar anexos
+            }
 
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'TESTE';
-    $mail->Body    = 'TESTANDO, TESTANDO, 1 2 3';
-    $mail->AltBody = 'TESTANDO ALTERNATIVAMENTE';
+            // Content
+            $mail->isHTML(true);                // Formato HTML
+            $mail->Subject = $subject;          // Assunto
+            $mail->Body    = $message;          // Mensagem
 
-    $mail->send();
-    echo 'Message has been sent';
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
 }

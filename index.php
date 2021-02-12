@@ -2,7 +2,7 @@
 Página:
     Inicial
 Conteúdo:
-    Área de LogIn, opções de Criar Conta e Recuperar Senha. 
+    Área de LogIn, opções de Criar Conta e Problemas de LogIn. 
 -->
 <?php
 
@@ -36,7 +36,7 @@ require_once 'includes/message.php';
         </div>
         <button type="submit" name="btn-entrar" class="btn blue darken-2">Entrar</button>
         <a href="signup.php" class="btn blue darken-2">Criar conta</a>
-        <a href="recovery.php" class="btn red lighten-2">Recuperar senha</a>
+        <a href="problem.php" class="btn red lighten-2">Problema com Login</a>
     </form>
 </div>
     
