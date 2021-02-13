@@ -40,7 +40,7 @@ Conteúdo:
                     <a href="home.php" class="btn-small blue darken-2">Ver Perfil</a>
 
                     <?php
-                    if ($dados['access'] >= 6) :
+                    if ($dirigente->getAccess() >= 6) :
                         ?>
 
                     <a href="master_page.php" class="btn-small blue darken-2">Master Page</a>

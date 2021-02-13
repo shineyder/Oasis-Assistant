@@ -22,7 +22,7 @@ class Mail
     public function sendMail($email, $nome, $sobrenome, $message, $subject, $anexo)
     {
         //Load Composer's autoloader
-        require '../vendor/autoload.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);

@@ -8,10 +8,11 @@ Conteúdo:
 <?php
 
 // Função redirect
-require_once 'phpaction/redirect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-//Conexão
-require_once 'phpaction/connect.php';
+//Dirigente e DirigenteDAO
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
 
 // Sessão
 session_start();
@@ -23,12 +24,7 @@ if (!isset($_SESSION['logado'])) :
 endif;
 
 //Dados
-$id = $_SESSION['id_usuario'];
-$sql = "SELECT * FROM dirigentes WHERE id = '$id'";
-$stmt = conectar\Connect::conn()->prepare($sql);
-$stmt->execute();
-$dados = $stmt->fetch(\PDO::FETCH_BOTH);
-$stmt = conectar\Connect::closeConn();
+$dirigente = unserialize($_SESSION['obj']);
 
 // Header
 require_once 'includes/header.php';
@@ -36,10 +32,10 @@ require_once 'includes/header.php';
 require_once 'includes/message.php';
 ?>
 
-    <b>Nome: </b> <?php echo $dados['nome'];?> <br>
-    <b>Sobrenome: </b> <?php echo $dados['sobrenome'];?> <br>
-    <b>E-mail: </b> <?php echo $dados['email'];?> <br>
-    <b>Usuário: </b> <?php echo $dados['usuario'];?> <br><br>
+    <b>Nome: </b> <?php echo $dirigente->getNome();?> <br>
+    <b>Sobrenome: </b> <?php echo $dirigente->getSobrenome();?> <br>
+    <b>E-mail: </b> <?php echo $dirigente->getEmail();?> <br>
+    <b>Usuário: </b> <?php echo $dirigente->getUsuario();?> <br><br>
     <a href="#modal-email" class="btn-small blue darken-4 modal-trigger">Alterar E-mail</a>
     <a href="#modal-senha" class="btn-small blue darken-4 modal-trigger">Alterar Senha</a>
 
@@ -48,7 +44,7 @@ require_once 'includes/message.php';
         <div class="modal-content">
             <p>Preencha os campos abaixo para alterar seu e-mail</p>
             <form action="phpaction/update_dir.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
+                <input type="hidden" name="id" value="<?php echo $dirigente->getId(); ?>">
                 <input id="email-up" name="email-up" type="email" class="validate">
                 <label for="email-up">Novo Email</label><br><br>
                 <button type="submit" name="btn-up-email" class="btn-small blue darken-2">Confirmar</button>
@@ -62,7 +58,7 @@ require_once 'includes/message.php';
         <div class="modal-content">
             <p>Preencha os campos abaixo para alterar sua senha</p>
             <form action="phpaction/update_dir.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
+                <input type="hidden" name="id" value="<?php echo $dirigente->getId(); ?>">
                 <input id="senha-old" name="senha-old" type="password" class="validate">
                 <label for="senha-old">Senha Antiga</label><br>
                 <input id="senha-up" name="senha-up" type="password" class="validate">
@@ -83,5 +79,5 @@ require_once 'includes/message.php';
 
 <?php
 //Footer
-require_once 'includes/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
 ?>

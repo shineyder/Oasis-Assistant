@@ -17,9 +17,9 @@ if (isset($_SESSION['logado'])) :
 endif;
 
 // Header
-require_once 'includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 // Message
-require_once 'includes/message.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
 <div class="row">
@@ -66,5 +66,5 @@ require_once 'includes/message.php';
         
 <?php
 // Footer
-require_once 'includes/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
 ?>

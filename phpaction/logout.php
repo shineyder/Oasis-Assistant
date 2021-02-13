@@ -7,7 +7,7 @@ Conteúdo:
 
 <?php
 // Função redirect
-require_once 'redirect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 //Encerrando a sessão
 session_start();

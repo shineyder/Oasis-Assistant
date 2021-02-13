@@ -8,13 +8,13 @@ Conteúdo:
 <?php
 
 // Função redirect
-require_once 'redirect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 // Sessão
 session_start();
 
 // Conexão
-require_once 'connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 
 if (isset($_POST['btn-env-rel'])) :
     $id_first = $_POST['first'];

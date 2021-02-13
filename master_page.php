@@ -7,10 +7,10 @@ Conteúdo:
 <?php
 
 // Função redirect
-require_once 'phpaction/redirect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 //Conexão
-require_once 'phpaction/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 
 // Sessão
 session_start();
@@ -36,14 +36,14 @@ if ($dados['access'] <= 2) :
 endif;
 
 // Header
-require_once 'includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 // Message
-require_once 'includes/message.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
 TEM Q FAZER ISSO AE TAOKEY?
     
 <?php
 //Footer
-require_once 'includes/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
 ?>

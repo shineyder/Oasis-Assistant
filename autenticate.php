@@ -10,10 +10,10 @@ Detalhes:
 <?php
 
 // Função redirect
-require_once 'phpaction/redirect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 //Conexão
-require_once 'phpaction/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 
 // Sessão
 session_start();
@@ -49,9 +49,9 @@ for ($i = 1; $i <= $dados_last['id']; $i++) {
 $stmt = conectar\Connect::closeConn();
 
 // Header
-require_once 'includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 // Message
-require_once 'includes/message.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
 <div class="center">
@@ -62,5 +62,5 @@ require_once 'includes/message.php';
 
 <?php
 //Footer
-require_once 'includes/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
 ?>

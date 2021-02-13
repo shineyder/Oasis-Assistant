@@ -7,7 +7,7 @@ Conteúdo:
 <?php
 
 // Função redirect
-require_once 'phpaction/redirect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 // Sessão
 session_start();
@@ -19,9 +19,9 @@ if (isset($_SESSION['logado'])) :
 endif;
 
 // Header
-require_once 'includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 // Message
-require_once 'includes/message.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
 <p><h4>Está tendo problemas para fazer login?</h4></p><br>
@@ -112,5 +112,5 @@ if (isset($_POST['btn-prox'])) {
 
 <?php
 //Footer
-require_once 'includes/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
 ?>

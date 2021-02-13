@@ -6,7 +6,7 @@ Conteúdo:
 -->
 
 <?php
-require_once 'phpaction/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 ?>
 
 <!DOCTYPE html>

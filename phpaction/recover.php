@@ -10,52 +10,47 @@ Detalhes:
 <?php
 
 // Função redirect
-require_once 'redirect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 // Sessão
 session_start();
 
-// Conexão
-require_once 'connect.php';
-require_once 'sendemail.php';
+// Enviar E-mail
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/sendemail.php';
+
+// Dirigente e DirigenteDAO
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
 
 if (isset($_POST['btn-pro'])) :
     $tipo = $_POST['cod_err'];
-    $detail = $_POST['rec'];
-
-    if (isset($_POST['rec2'])) :
-        $detail2 = $_POST['rec2'];
-    endif;
+    $detail = [$_POST['rec'], (isset($_POST['rec2']) ? $_POST['rec2'] : "")];
+    $data_type = ["", ""];
 
     if (empty($tipo)) :
         $_SESSION['mensagem'] = "Nenhum problema selecionado";
         redirect('http://oasisassistant.com/problem.php');
         exit();
     else :
-        if (empty($detail) or (isset($_POST['rec2']) ? empty($detail2) : false)) :
+        if (empty($detail[0]) or (isset($_POST['rec2']) ? empty($detail[1]) : false)) :
             $_SESSION['mensagem'] = "Informações solicitadas não preenchidas";
             redirect('http://oasisassistant.com/problem.php');
             exit();
         else :
             switch ($tipo) {
                 case 1:
-                    $sql = "SELECT * FROM dirigentes WHERE email = '$detail'";
-                    $stmt = conectar\Connect::conn()->prepare($sql);
-                    $stmt->execute();
+                    $data_type[0] = "email";
+                    $dirigente = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
 
-                    if ($stmt->rowCount() == 0) :
+                    if ($dirigente->getAccess() === null) :
                         $_SESSION['mensagem'] = "E-mail não cadastrado";
-                        $stmt = conectar\Connect::closeConn();
                         redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
-                        $dados = $stmt->fetch(\PDO::FETCH_BOTH);
-                        $stmt = conectar\Connect::closeConn();
-
-                        $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $dados['nome'] . " " . $dados['sobrenome'] . ", houve uma solicita&ccedil;&atilde;o de recuperar usu&aacute;rio em sua conta.<br>Seu nome de usu&aacute;rio &eacute; <b>" . $dados['usuario'] . "</b>.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
+                        $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $dirigente->getNome() . " " . $dirigente->getSobrenome() . ", houve uma solicita&ccedil;&atilde;o de recuperar usu&aacute;rio em sua conta.<br>Seu nome de usu&aacute;rio &eacute; <b>" . $dirigente->getUsuario() . "</b>.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
 
                         $email_send = new EnviarEmail\Mail();
-                        $email_send->sendMail($dados['email'], $dados['nome'], $dados['sobrenome'], $message, "Recuperacao de usuario", "");
+                        $email_send->sendMail($dirigente->getEmail(), $dirigente->getNome(), $dirigente->getSobrenome(), $message, "Recuperacao de usuario", "");
                         $_SESSION['mensagem'] = "Um e-mail para recuperação do usuario foi enviado!";
                         redirect('http://oasisassistant.com/');
                         exit();
@@ -63,27 +58,22 @@ if (isset($_POST['btn-pro'])) :
                     break;
 
                 case 2:
-                    $sql = "SELECT * FROM dirigentes WHERE usuario = '$detail' AND email = '$detail2'";
-                    $stmt = conectar\Connect::conn()->prepare($sql);
-                    $stmt->execute();
+                    $data_type[0] = "usuario";
+                    $data_type[1] = "email";
+                    $dirigente = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
 
-                    if ($stmt->rowCount() == 0) :
+                    if ($dirigente->getAccess() === null) :
                         $_SESSION['mensagem'] = "E-mail e/ou Usuário não cadastrado";
-                        $stmt = conectar\Connect::closeConn();
                         redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
-                        $dados = $stmt->fetch(\PDO::FETCH_BOTH);
-                        $senha = 'e10adc3949ba59abbe56e057f20f883e';
-                        $sql = "UPDATE dirigentes SET senha = '$senha' WHERE usuario = '$detail' AND email = '$detail2'";
-                        $stmt = conectar\Connect::conn()->prepare($sql);
-                        $stmt->execute();
-                        $stmt = conectar\Connect::closeConn();
+                        $dirigente->setSenha('e10adc3949ba59abbe56e057f20f883e');
+                        $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->update($dirigente);
 
-                        $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $dados['nome'] . " " . $dados['sobrenome'] . ", houve uma solicita&ccedil;&atilde;o de recuperar senha em sua conta.<br>Sua senha foi redefinida para <b>123456</b>.<br> Note que essa &eacute; uma senha padr&atildeo e de baixa seguran&ccedil;a, favor trocar sua senha o mais breve poss&iacute;vel.<br>A equipe do <b>Setor de Suporte</b> do <b>Oasis Assistant</b> nunca entra em contato com seus usu&aacute;rios solicitando sua senha, portanto n&atilde;o a compartilhe com ningu&eacute;m.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
+                        $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $dirigente->getNome() . " " . $dirigente->getSobrenome() . ", houve uma solicita&ccedil;&atilde;o de recuperar senha em sua conta.<br>Sua senha foi redefinida para <b>123456</b>.<br> Note que essa &eacute; uma senha padr&atilde;o e de baixa seguran&ccedil;a, favor trocar sua senha o mais breve poss&iacute;vel.</p><p>A equipe do <b>Setor de Suporte</b> do <b>Oasis Assistant</b> nunca entra em contato com seus usu&aacute;rios solicitando sua senha, portanto n&atilde;o a compartilhe com ningu&eacute;m.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
 
                         $email_send = new EnviarEmail\Mail();
-                        $email_send->sendMail($dados['email'], $dados['nome'], $dados['sobrenome'], $message, "Recuperacao de senha", "");
+                        $email_send->sendMail($dirigente->getEmail(), $dirigente->getNome(), $dirigente->getSobrenome(), $message, "Recuperacao de senha", "");
                         $_SESSION['mensagem'] = "Um e-mail para recuperação de senha foi enviado!";
                         redirect('http://oasisassistant.com/');
                         exit();
@@ -91,43 +81,40 @@ if (isset($_POST['btn-pro'])) :
                     break;
 
                 case 3:
-                    $sql = "SELECT * FROM dirigentes WHERE usuario = '$detail'";
-                    $stmt = conectar\Connect::conn()->prepare($sql);
-                    $stmt->execute();
+                    $data_type[0] = "usuario";
+                    $dirigente = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
 
-                    if ($stmt->rowCount() == 0) :
+                    if ($dirigente->getAccess() === null) :
                         $_SESSION['mensagem'] = "Usuário não cadastrado";
-                        $stmt = conectar\Connect::closeConn();
                         redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
-                        $sql = "SELECT * FROM dirigentes WHERE usuario = '$detail' AND access = 0";
-                        $stmt = conectar\Connect::conn()->prepare($sql);
-                        $stmt->execute();
+                        $data_type[0] = "usuario";
+                        $data_type[1] = "access";
+                        $$detail[1] = 0;
 
-                        if ($stmt->rowCount() == 0) :
+                        $dirigente = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
+
+                        if ($dirigente->getAccess() === null) :
                             $_SESSION['mensagem'] = "E-mail da conta já foi autenticado";
-                            $stmt = conectar\Connect::closeConn();
                             redirect('http://oasisassistant.com/problem.php');
                             exit();
                         else :
-                            $sql = "SELECT * FROM dirigentes WHERE usuario = '$detail' AND email = '$detail2'";
-                            $stmt = conectar\Connect::conn()->prepare($sql);
-                            $stmt->execute();
+                            $data_type[0] = "usuario";
+                            $data_type[1] = "email";
+                            $$detail[1] = $_POST['rec2'];
 
-                            if ($stmt->rowCount() == 0) :
+                            $dirigente = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
+
+                            if ($dirigente->getAccess() === null) :
                                 $_SESSION['mensagem'] = "E-mail informado no cadastro não confere";
-                                $stmt = conectar\Connect::closeConn();
                                 redirect('http://oasisassistant.com/problem.php');
                                 exit();
                             else :
-                                $dados = $stmt->fetch(\PDO::FETCH_BOTH);
-                                $stmt = conectar\Connect::closeConn();
-
-                                $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $dados['nome'] . " " . $dados['sobrenome'] . ", houve uma solicita&ccedil;&atilde;o para reenviar o email de autentica&ccedil;&atilde;o em sua conta. Para evitar que tal problema se repita, ser&aacute; enviado um email automaticamente e pouco depois o mesmo e-mail ser&aacute; enviado manualmente, favor desconsiderar duplicatas.<br>Sua conta j&aacute; est&aacute; quase pronta, para concluir seu cadastro e liberar seu acesso basta clicar no link abaixo:<br><br>http://oasisassistant.com/autenticate.php?cd=" . md5($dados['usuario']) . "<br><br>No Oasis Assistant voc&ecirc; ter&aacute; acesso a diversas informa&ccedil;&otilde;es &uacute;teis para o servi&ccedil;o de campo local, fa&ccedil;a bom proveito dessa ferramenta.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
+                                $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $dirigente->getNome() . " " . $dirigente->getSobrenome() . ", houve uma solicita&ccedil;&atilde;o para reenviar o email de autentica&ccedil;&atilde;o em sua conta. Para evitar que tal problema se repita, ser&aacute; enviado um email automaticamente e pouco depois o mesmo e-mail ser&aacute; enviado manualmente, favor desconsiderar duplicatas.<br>Sua conta j&aacute; est&aacute; quase pronta, para concluir seu cadastro e liberar seu acesso basta clicar no link abaixo:<br><br>http://oasisassistant.com/autenticate.php?cd=" . md5($dirigente->getUsuario()) . "<br><br>No Oasis Assistant voc&ecirc; ter&aacute; acesso a diversas informa&ccedil;&otilde;es &uacute;teis para o servi&ccedil;o de campo local, fa&ccedil;a bom proveito dessa ferramenta.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
 
                                 $email_send = new EnviarEmail\Mail();
-                                $email_send->sendMail($dados['email'], $dados['nome'], $dados['sobrenome'], $message, "Reenvio de email de autenticacao", "");
+                                $email_send->sendMail($dirigente->getEmail(), $dirigente->getNome(), $dirigente->getSobrenome(), $message, "Reenvio de email de autenticacao", "");
                                 $_SESSION['mensagem'] = "E-mail de autenticação foi reenviado!";
 
                                 redirect('http://oasisassistant.com/');
