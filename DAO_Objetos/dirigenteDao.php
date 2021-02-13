@@ -96,15 +96,31 @@ class DirigenteDAO
 
     public function read($data_type, $desc, $subject)
     {
-        // $data_type = id ou usuario ou email
-        // $desc = dado propriamente dito
+        // $data_type = id ou usuario ou email  (até 2)
+        // $desc = dado propriamente dito       (até 2)
         // $subject = dado desejado
         // Exemplo: $data_type = email - $desc = adrianoshineyder@hotmail.com
-        $sql = "SELECT $subject FROM dirigentes WHERE $data_type = :cod";
+
+        if (is_array($data_type)) :
+            $sql = "SELECT $subject FROM dirigentes WHERE $data_type[0] = :cod AND $data_type[1] = :cod2";
+            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql->bindValue(":cod", $desc[0]);
+            $p_sql->bindValue(":cod2", $desc[1]);
+        else :
+            $sql = "SELECT $subject FROM dirigentes WHERE $data_type = :cod";
+            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql->bindValue(":cod", $desc);
+        endif;
+            $p_sql->execute();
+            return $p_sql;
+    }
+
+    public function lastId()
+    {
+        $sql = "SELECT id FROM dirigentes ORDER BY id DESC";
         $p_sql = \Conectar\Connect::conn()->prepare($sql);
-        $p_sql->bindValue(":cod", $desc);
         $p_sql->execute();
-        return $p_sql;
+        return $p_sql->fetch(\PDO::FETCH_BOTH);
     }
 
     public function update(Dirigentes $dirigente)

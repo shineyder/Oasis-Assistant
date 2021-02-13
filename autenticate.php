@@ -12,8 +12,9 @@ Detalhes:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-//Conexão
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
+// Dirigente e DirigenteDAO
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
 
 // Sessão
 session_start();
@@ -23,44 +24,49 @@ if (!isset($_GET['cd'])) :
     redirect('http://oasisassistant.com/');
     exit();
 endif;
+$is_ok = 0;
 
 //Dados
-$sql = "SELECT id FROM dirigentes ORDER BY id DESC";
-$stmt = conectar\Connect::conn()->prepare($sql);
-$stmt->execute();
-$dados_last = $stmt->fetch(\PDO::FETCH_BOTH);
+$dados_last = Dirigente\DirigenteDAO::getInstance()->lastId();
 
 for ($i = 1; $i <= $dados_last['id']; $i++) {
-    $sql = "SELECT usuario FROM dirigentes WHERE id = '$i' AND access = 0";
-    $stmt = conectar\Connect::conn()->prepare($sql);
-    $stmt->execute();
-    $dadostemp = $stmt->fetch(\PDO::FETCH_BOTH);
+    $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->read(['id' , 'access'], [$i, 0], 'usuario');
+    $dadostemp = $dirigenteDAO->fetch(\PDO::FETCH_BOTH);
 
     if ($dadostemp != false) {
         if ($_GET['cd'] == md5($dadostemp['usuario'])) {
-            $sql = "UPDATE dirigentes SET access = 1 WHERE id = '$i'";
-            $stmt = conectar\Connect::conn()->prepare($sql);
-            $stmt->execute();
+            $is_ok = 1;
+            $dirigente = Dirigente\DirigenteDAO::getInstance()->readAll(['id', ""], [$i, ""]);
+            $dirigente->setAccess(1);
+            $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->update($dirigente);
             break;
         }
     }
 }
 
-$stmt = conectar\Connect::closeConn();
-
 // Header
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 // Message
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
-?>
 
-<div class="center">
-    <h4>Autenticação concluida com sucesso!</h4>
-    <p>Seu email foi autenticado e seu acesso ao Oasis Assistant foi liberado.</p>
-    <a href="index.php" class="btn blue darken-2">Fazer LogIn</a>
-</div>
+if ($is_ok == 1) :
+    ?>
+    <div class="center">
+        <h4>Autenticação concluida com sucesso!</h4>
+        <p>Seu email foi autenticado e seu acesso ao Oasis Assistant foi liberado.</p>
+        <a href="index.php" class="btn blue darken-2">Fazer LogIn</a>
+    </div>
+    <?php
+else :
+    ?>
+    <div class="center">
+        <h4>Houve algum erro com a autenticação!</h4>
+        <p>Link de verificação utilizado inválido.</p>
+        <a href="index.php" class="btn blue darken-2">Página Inicial</a>
+    </div>
+    <?php
+endif;
 
-<?php
 //Footer
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
 ?>

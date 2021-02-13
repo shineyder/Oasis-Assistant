@@ -9,6 +9,10 @@ Conteúdo:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
+//Dirigente e DirigenteDAO
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
+
 //Conexão
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 
@@ -22,15 +26,10 @@ if (!isset($_SESSION['logado'])) :
 endif;
 
 //Dados
-$id = $_SESSION['id_usuario'];
-$sql = "SELECT * FROM dirigentes WHERE id = '$id'";
-$stmt = conectar\Connect::conn()->prepare($sql);
-$stmt->execute();
-$dados = $stmt->fetch(\PDO::FETCH_BOTH);
-$stmt = conectar\Connect::closeConn();
+$dirigente = unserialize($_SESSION['obj']);
 
 //Verificação de nível de acesso
-if ($dados['access'] <= 2) :
+if ($dirigente->getAccess() <= 2) :
     redirect('http://oasisassistant.com/home.php');
     exit();
 endif;

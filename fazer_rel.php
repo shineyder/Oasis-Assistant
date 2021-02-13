@@ -7,6 +7,7 @@ Conteúdo:
 
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +104,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 
         <script>
         $(document).ready(function(){
-            $('.collapsible').collapsible({accordion: false});
+            $(' . collapsible').collapsible({accordion: false});
         });
         </script>
     </body>   
