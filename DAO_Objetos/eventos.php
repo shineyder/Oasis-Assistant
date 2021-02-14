@@ -5,23 +5,35 @@ namespace Evento;
 class Eventos
 {
     private $id;
-    private $data;
-    private $user;
-    private $quadra;
-    private $mapa;
+    private $idUser;
+    private $idMap;
+    private $time;
     private $eventType;
-    private $event;
+    private $data1;
+    private $desc1;
+    private $data2;
+    private $desc2;
+    private $data3;
+    private $desc3;
+    private $data4;
+    private $desc4;
     private $cobert;
 
-    public function __construct($id, $data, $user, $quadra, $mapa, $eventType, $event, $cobert)
+    public function __construct($id, $idUser, $idMap, $time, $eventType, $data1, $desc1, $data2, $desc2, $data3, $desc3, $data4, $desc4, $cobert)
     {
         $this->id = $id;
-        $this->data = $data;
-        $this->user = $user;
-        $this->quadra = $quadra;
-        $this->mapa = $mapa;
+        $this->idUser = $idUser;
+        $this->idMap = $idMap;
+        $this->time = $time;
         $this->eventType = $eventType;
-        $this->event = $event;
+        $this->data1 = $data1;
+        $this->desc1 = $desc1;
+        $this->data2 = $data2;
+        $this->desc2 = $desc2;
+        $this->data3 = $data3;
+        $this->desc3 = $desc3;
+        $this->data4 = $data4;
+        $this->desc4 = $desc4;
         $this->cobert = $cobert;
     }
 
@@ -36,47 +48,36 @@ class Eventos
         return $this;
     }
 
-    public function getData()
+    public function getIdUser()
     {
-        return $this->data;
+        return $this->idUser;
     }
 
-    public function setData($data)
+    public function setIdUser($idUser)
     {
-        $this->data = $data;
+        $this->idUser = $idUser;
         return $this;
     }
 
-    public function getUser()
+    public function getIdMap()
     {
-        return $this->user;
+        return $this->idMap;
     }
 
-    public function setUser($user)
+    public function setIdMap($idMap)
     {
-        $this->user = $user;
+        $this->idMap = $idMap;
         return $this;
     }
 
-    public function getQuadra()
+    public function getTime()
     {
-        return $this->quadra;
+        return $this->time;
     }
 
-    public function setQuadra($quadra)
+    public function setTime($time)
     {
-        $this->quadra = $quadra;
-        return $this;
-    }
-
-    public function getMapa()
-    {
-        return $this->mapa;
-    }
-
-    public function setMapa($mapa)
-    {
-        $this->mapa = $mapa;
+        $this->time = $time;
         return $this;
     }
 
@@ -91,14 +92,91 @@ class Eventos
         return $this;
     }
 
-    public function getEvent()
+    public function getData1()
     {
-        return $this->event;
+        return $this->data1;
     }
 
-    public function setEvent($event)
+    public function setData1($data1)
     {
-        $this->event = $event;
+        $this->data1 = $data1;
+        return $this;
+    }
+
+    public function getDesc1()
+    {
+        return $this->desc1;
+    }
+
+    public function setDesc1($desc1)
+    {
+        $this->desc1 = $desc1;
+        return $this;
+    }
+
+    public function getData2()
+    {
+        return $this->data2;
+    }
+
+    public function setData2($data2)
+    {
+        $this->data2 = $data2;
+        return $this;
+    }
+
+    public function getDesc2()
+    {
+        return $this->desc2;
+    }
+
+    public function setDesc2($desc2)
+    {
+        $this->desc2 = $desc2;
+        return $this;
+    }
+
+    public function getData3()
+    {
+        return $this->data3;
+    }
+
+    public function setData3($data3)
+    {
+        $this->data3 = $data3;
+        return $this;
+    }
+
+    public function getDesc3()
+    {
+        return $this->desc3;
+    }
+
+    public function setDesc3($desc3)
+    {
+        $this->desc3 = $desc3;
+        return $this;
+    }
+
+    public function getData4()
+    {
+        return $this->data4;
+    }
+
+    public function setData4($data4)
+    {
+        $this->data4 = $data4;
+        return $this;
+    }
+
+    public function getDesc4()
+    {
+        return $this->desc4;
+    }
+
+    public function setDesc4($desc4)
+    {
+        $this->desc4 = $desc4;
         return $this;
     }
 
