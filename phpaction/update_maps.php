@@ -10,27 +10,23 @@ Conteúdo:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-// Sessão
-session_start();
-
-// Conexão
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
+//Mapa e MapaDAO
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/mapa.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/mapaDao.php';
 
 if (isset($_POST['btn-env-rel'])) :
     $id_first = $_POST['first'];
     $id_last = $_POST['last'];
 
     for ($i = $id_first; $i <= $id_last; $i++) {
-        $trab = (isset($_POST['trab_' . $i]) ? "1" : "0");
-        $n_res = $_POST['n_res_' . $i];
-        $n_com = $_POST['n_com_' . $i];
-        $n_edi = $_POST['n_edi_' . $i];
+        $dados_quadra = Mapa\MapasDAO::getInstance()->read($i);
+        $dados_quadra->setTrab(isset($_POST['trab_' . $i]) ? "1" : "0");
+        $dados_quadra->setRes($_POST['n_res_' . $i]);
+        $dados_quadra->setCom($_POST['n_com_' . $i]);
+        $dados_quadra->setEdi($_POST['n_edi_' . $i]);
 
-        $sql = "UPDATE mapas SET trab = '$trab', n_residencia = '$n_res', n_comercio = '$n_com', n_edificio = '$n_edi' WHERE id = '$i'";
-        $stmt = conectar\Connect::conn()->prepare($sql);
-        $stmt->execute();
+        $mapDAO = Mapa\MapasDAO::getInstance()->update($dados_quadra);
     }
-    $stmt = conectar\Connect::closeConn();
     redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
     exit();
 endif;

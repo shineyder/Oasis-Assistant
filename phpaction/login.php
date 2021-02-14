@@ -8,7 +8,6 @@ Conteúdo:
 <?php
 
 // Função redirect
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 // Sessão

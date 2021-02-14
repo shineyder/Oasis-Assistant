@@ -10,7 +10,7 @@ Conteúdo:
     <head>
         <meta charset="utf-8">
         <title> Oasis Assistant</title>
-        <link rel="stylesheet" href="_css/style.css"/>
+        <link rel="stylesheet" href= "_css/style.css"/>
         <link rel="shortcut icon" href="img/logo_oasis_assistant_min.ico">
 
         <!-- Compiled and minified CSS and Import Google Icon Font -->
