@@ -20,6 +20,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
 
+// Sessão
+session_start();
+
 //Verificação
 if (!isset($_SESSION['logado'])) :
     redirect('http://oasisassistant.com/');
@@ -52,8 +55,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 
 <map name="Porto_novo_1">
     <area target="rel" alt="24" title="24" href="fazer_rel.php#24" onclick='edit2("24")' coords="199,28,106,142,129,150,116,166,104,246,85,254,92,328,86,373,89,429,70,467,98,498,111,485,159,503,164,546,195,545,203,534,207,468,222,438,232,397,244,386,259,386,269,402,300,342,333,308,340,273,326,265,302,293,322,238,265,100,240,69,218,42" shape="poly">
-    <area alt="23" title="23" href="fazer_rel.php#23" onclick='edit2("23")' coords="206,587,292,583,358,589,424,600,424,582,381,572,382,558,368,552,375,529,385,508,373,470,327,465,271,405,256,389,244,388,234,399,227,428,210,465,206,525" shape="poly">
-    <area alt="12" title="12" href="fazer_rel.php#12" onclick='edit2("12")' coords="251,593,313,593,313,653,313,706,320,727,343,749,359,784,359,796,316,801,294,810,256,807,241,793,218,786,192,765,187,743,196,719,217,691,235,667,251,649,269,638" shape="poly">
+    <area target="rel" alt="23" title="23" href="fazer_rel.php#23" onclick='edit2("23")' coords="206,587,292,583,358,589,424,600,424,582,381,572,382,558,368,552,375,529,385,508,373,470,327,465,271,405,256,389,244,388,234,399,227,428,210,465,206,525" shape="poly">
+    <area target="rel" alt="12" title="12" href="fazer_rel.php#12" onclick='edit2("12")' coords="251,593,313,593,313,653,313,706,320,727,343,749,359,784,359,796,316,801,294,810,256,807,241,793,218,786,192,765,187,743,196,719,217,691,235,667,251,649,269,638" shape="poly">
 </map>
 
 <img id="Porto_novo_2" class="hide" src="mapas/Porto_novo_2.jpg" alt="Mapa Regional" usemap="#Porto_novo_2">
