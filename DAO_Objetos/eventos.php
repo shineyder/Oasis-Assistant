@@ -8,7 +8,7 @@ class Eventos
     private $idUser;
     private $idMap;
     private $time;
-    private $eventType;
+    private $eventType; //criateDir, attDir, delDir, doRel, attRel, delRel, terrComp
     private $data1;
     private $desc1;
     private $data2;

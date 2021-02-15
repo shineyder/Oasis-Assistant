@@ -34,6 +34,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
+    <ul class="collection">
+      <li class="collection-item"></li>
+      <li class="collection-item"></li>
+      <li class="collection-item"></li>
+      <li class="collection-item"></li>
+    </ul>
+
 TEM Q FAZER ISSO AE TAOKEY?
     
 <?php

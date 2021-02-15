@@ -1,6 +1,6 @@
 <?php
 
-namespace Eventos;
+namespace Evento;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/eventos.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
@@ -23,19 +23,102 @@ class EventoDAO
         return self::$instance;
     }
 
-    public function create()
+    public function create(Eventos $evento)
     {
+        $sql = "INSERT INTO log_eventos 
+        (id_user,
+        id_mapa,
+        timeN,
+        event_type,
+        data1,
+        desc1,
+        data2,
+        desc2,
+        data3,
+        desc3,
+        data4,
+        desc4,
+        cobert)
+        VALUES 
+        (:idUser,
+        :idMapa,
+        :timeN,
+        :eventType,
+        :data1,
+        :desc1,
+        :data2,
+        :desc2,
+        :data3,
+        :desc3,
+        :data4,
+        :desc4,
+        :cobert)";
+
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+
+        $p_sql->bindValue(":idUser", $evento->getIdUser());
+        $p_sql->bindValue(":idMapa", $evento->getIdMap());
+        $p_sql->bindValue(":timeN", $evento->getTime());
+        $p_sql->bindValue(":eventType", $evento->getEventType());
+        $p_sql->bindValue(":data1", $evento->getData1());
+        $p_sql->bindValue(":desc1", $evento->getDesc1());
+        $p_sql->bindValue(":data2", $evento->getData2());
+        $p_sql->bindValue(":desc2", $evento->getDesc2());
+        $p_sql->bindValue(":data3", $evento->getData3());
+        $p_sql->bindValue(":desc3", $evento->getDesc3());
+        $p_sql->bindValue(":data4", $evento->getData4());
+        $p_sql->bindValue(":desc4", $evento->getDesc4());
+        $p_sql->bindValue(":cobert", $evento->getCobert());
+
+        return $p_sql->execute();
     }
 
-    public function read()
+    public function read($desc, $ini)
     {
+        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod ORDER BY id LIMIT 1 OFFSET :ini";
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", $desc);
+        $p_sql->bindValue(":cod", $ini);
+        $p_sql->execute();
+        return $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
     }
 
-    public function update()
+    private function showEvento($row)
     {
+        $Evento = new Eventos($row['id'], $row['id_user'], $row['id_mapa'], $row['timeN'], $row['event_type'], $row['data1'], $row['desc1'], $row['data2'], $row['desc2'], $row['data3'], $row['desc3'], $row['data4'], $row['desc4'], $row['cobert']);
+        return $Evento;
     }
 
-    public function delete()
+    public function readRelatorio($desc, $ini)
     {
+        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' ORDER BY id LIMIT 1 OFFSET :ini";
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", $desc);
+        $p_sql->bindValue(":ini", $ini);
+        $p_sql->execute();
+        $dados = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
+
+        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND id_mapa = ':idMap' AND (event_type = 'attRel' OR event_type = 'delRel') ORDER BY id DESC";
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", $desc);
+        $p_sql->bindValue(":idMap", $dados->getIdMap());
+        $p_sql->execute();
+        $p_sql->fetch(\PDO::FETCH_BOTH);
+        var_dump($p_sql);
+
+        if ($p_sql->getCobert() !== null) :
+            return $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
+        else :
+            return $dados;
+        endif;
+    }
+
+    public function lastId($desc)
+    {
+        $sql = "SELECT id FROM log_eventos WHERE id_user = :cod ORDER BY id DESC";
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", $desc);
+        $p_sql->execute();
+        return $p_sql->fetch(\PDO::FETCH_BOTH);
     }
 }
