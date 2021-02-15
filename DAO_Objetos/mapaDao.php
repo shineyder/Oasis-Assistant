@@ -4,6 +4,7 @@ namespace Mapa;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/mapa.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/eventosDao.php';
 
 class MapasDAO
 {
@@ -60,6 +61,8 @@ class MapasDAO
         $p_sql->bindValue(":edi", $mapas->getEdi());
         $p_sql->bindValue(":cod", $mapas->getId());
 
+        $this->completTerr();
+
         return $p_sql->execute();
     }
 
@@ -81,5 +84,24 @@ class MapasDAO
         $dados[1] = $p_sql->fetch(\PDO::FETCH_ASSOC);
 
         return $dados;
+    }
+
+    private function completTerr()
+    {
+        $sql = "SELECT * FROM mapas WHERE trab = :cod";
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", 0);
+        $p_sql->execute();
+
+        if ($p_sql->rowCount() == 0) :
+            \Evento\EventoDAO::getInstance()->completTerr();
+            $sql = "UPDATE mapas SET trab = :trab";
+            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql->bindValue(":trab", 0);
+            $p_sql->execute();
+            return 0;
+        else :
+            return 0;
+        endif;
     }
 }

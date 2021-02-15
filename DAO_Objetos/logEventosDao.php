@@ -2,6 +2,8 @@
 
 namespace Evento;
 
+use Mapa\Mapas;
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/eventos.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 
@@ -83,12 +85,6 @@ class EventoDAO
         return $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
     }
 
-    private function showEvento($row)
-    {
-        $Evento = new Eventos($row['id'], $row['id_user'], $row['id_mapa'], $row['timeN'], $row['event_type'], $row['data1'], $row['desc1'], $row['data2'], $row['desc2'], $row['data3'], $row['desc3'], $row['data4'], $row['desc4'], $row['cobert']);
-        return $Evento;
-    }
-
     public function readRelatorio($desc, $ini)
     {
         $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' ORDER BY id LIMIT 1 OFFSET :ini";
@@ -104,13 +100,22 @@ class EventoDAO
         $p_sql->bindValue(":idMap", $dados->getIdMap());
         $p_sql->execute();
         $p_sql->fetch(\PDO::FETCH_BOTH);
-        var_dump($p_sql);
 
-        if ($p_sql->getCobert() !== null) :
+        if ($p_sql->getEventType() === 'attRel') :
             return $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
         else :
-            return $dados;
+            if ($p_sql->getEventType() === 'delRel') :
+                return null;
+            else :
+                return $dados;
+            endif;
         endif;
+    }
+
+    private function showEvento($row)
+    {
+        $Evento = new Eventos($row['id'], $row['id_user'], $row['id_mapa'], $row['timeN'], $row['event_type'], $row['data1'], $row['desc1'], $row['data2'], $row['desc2'], $row['data3'], $row['desc3'], $row['data4'], $row['desc4'], $row['cobert']);
+        return $Evento;
     }
 
     public function lastId($desc)
@@ -120,5 +125,25 @@ class EventoDAO
         $p_sql->bindValue(":cod", $desc);
         $p_sql->execute();
         return $p_sql->fetch(\PDO::FETCH_BOTH);
+    }
+
+    public function completTerr()
+    {
+        $sql = "SELECT cobert FROM log_eventos ORDER BY id LIMIT 1 DESC";
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql->execute();
+        $cobertNow = $p_sql->fetch(\PDO::FETCH_BOTH);
+
+        $sql = "ALTER TABLE log_eventos ALTER cobert SET default :cobert";
+        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cobert", $cobertNow['cobert'] + 1);
+        $p_sql->execute();
+
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $event = new Eventos(null, null, null, date('d/m/Y \à\s H:i:s'), 'terrComp', null, null, null, null, null, null, null, null, null);
+        $this->create($event);
+
+        return 0;
     }
 }

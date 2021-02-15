@@ -10,8 +10,8 @@ Conteúdo:
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 //Dirigente e DirigenteDAO
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/eventos.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/logEventosDao.php';
 
 //Conexão
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
@@ -41,8 +41,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
       <li class="collection-item"></li>
     </ul>
 
-TEM Q FAZER ISSO AE TAOKEY?
-    
+<?php
+    $evento = new Evento\Eventos($id, $idUser, $idMap, $time, $eventType, $data1, $desc1, $data2, $desc2, $data3, $desc3, $data4, $desc4, $cobert);
+    $eventoDAO = Evento\EventoDAO::getInstance()->create($evento);
+?>
+
+
+TEM Q FAZER ISSO AE TAOKEY ?
+
 <?php
 //Footer
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
