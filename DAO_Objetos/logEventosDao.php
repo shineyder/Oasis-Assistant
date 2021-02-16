@@ -2,8 +2,6 @@
 
 namespace Evento;
 
-use Mapa\Mapas;
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/eventos.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
 
