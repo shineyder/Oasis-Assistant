@@ -6,19 +6,19 @@
     'aliases' => 
     array (
     ),
-    'reference' => '00c21a714e34cd3e3ce5133e885379c6917d08e4',
-    'name' => '__root__',
+    'reference' => 'f30f92a7f7e3a673e81c60dc5447f6aea6d518e7',
+    'name' => 'oasisassistant-php/composer-autoloading',
   ),
   'versions' => 
   array (
-    '__root__' => 
+    'oasisassistant-php/composer-autoloading' => 
     array (
       'pretty_version' => 'dev-main',
       'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => '00c21a714e34cd3e3ce5133e885379c6917d08e4',
+      'reference' => 'f30f92a7f7e3a673e81c60dc5447f6aea6d518e7',
     ),
     'phpmailer/phpmailer' => 
     array (

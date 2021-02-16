@@ -11,6 +11,10 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'A' => 
+        array (
+            'Assistant\\' => 10,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -18,10 +22,27 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Assistant\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/SrcClasses',
+        ),
     );
 
     public static $classMap = array (
+        'Assistant\\Connect' => __DIR__ . '/../..' . '/SrcClasses/Connect.php',
+        'Assistant\\DirigenteDAO' => __DIR__ . '/../..' . '/SrcClasses/DirigenteDAO.php',
+        'Assistant\\Dirigentes' => __DIR__ . '/../..' . '/SrcClasses/Dirigentes.php',
+        'Assistant\\EventoDAO' => __DIR__ . '/../..' . '/SrcClasses/EventoDAO.php',
+        'Assistant\\Eventos' => __DIR__ . '/../..' . '/SrcClasses/Eventos.php',
+        'Assistant\\Mail' => __DIR__ . '/../..' . '/SrcClasses/Mail.php',
+        'Assistant\\Mapas' => __DIR__ . '/../..' . '/SrcClasses/Mapas.php',
+        'Assistant\\MapasDAO' => __DIR__ . '/../..' . '/SrcClasses/MapasDAO.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
+        'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
+        'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
+        'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
+        'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

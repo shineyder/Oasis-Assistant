@@ -10,12 +10,14 @@ Conteúdo:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
 // Sessão
 session_start();
 
-//Dirigente e DirigenteDAO
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
+use Assistant\DirigenteDAO;
+use Assistant\Dirigentes;
 
 if (isset($_POST['btn-confirm'])) :
     $nome = $_POST['nome'];
@@ -35,21 +37,21 @@ if (isset($_POST['btn-confirm'])) :
             redirect('http://oasisassistant.com/signup.php');
             exit();
         else :
-            $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->read('usuario', $user, 'usuario');
+            $dirigenteDAO = DirigenteDAO::getInstance()->read('usuario', $user, 'usuario');
             if ($dirigenteDAO->rowCount() != 0) :
                 $_SESSION['mensagem'] = "Usuário já registrado";
                 redirect('http://oasisassistant.com/signup.php');
                 exit();
             else :
-                $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->read('email', $email, 'email');
+                $dirigenteDAO = DirigenteDAO::getInstance()->read('email', $email, 'email');
                 if ($dirigenteDAO->rowCount() != 0) :
                     $_SESSION['mensagem'] = "E-mail já cadastrado";
                     redirect('http://oasisassistant.com/signup.php');
                     exit();
                 else :
                     $senha = md5($senha);
-                    $dirigente = new Dirigente\Dirigentes(null, $nome, $sobrenome, $email, $user, $senha, null);
-                    $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->create($dirigente);
+                    $dirigente = new Dirigentes(null, $nome, $sobrenome, $email, $user, $senha, null);
+                    $dirigenteDAO = DirigenteDAO::getInstance()->create($dirigente);
 
                     if ($dirigenteDAO) :
                         $_SESSION['mensagem'] = "Cadastrado com sucesso!";

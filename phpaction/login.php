@@ -10,12 +10,13 @@ Conteúdo:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
 // Sessão
 session_start();
 
-//Dirigente e DirigenteDAO
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
+use Assistant\DirigenteDAO;
 
 if (isset($_POST['btn-entrar'])) :
     $login = $_POST['login'];
@@ -26,11 +27,11 @@ if (isset($_POST['btn-entrar'])) :
         redirect('http://oasisassistant.com/');
         exit();
     else :
-        $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->read('usuario', $login, 'usuario');
+        $dirigenteDAO = DirigenteDAO::getInstance()->read('usuario', $login, 'usuario');
 
         if ($dirigenteDAO->rowCount() == 1) :
             $senha = md5($senha);
-            $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->logIn($login, $senha);
+            $dirigenteDAO = DirigenteDAO::getInstance()->logIn($login, $senha);
             if ($dirigenteDAO->getAccess() === null) :
                 $_SESSION['mensagem'] = "Usuário e senha não conferem";
                 redirect('http://oasisassistant.com/');
@@ -54,5 +55,4 @@ if (isset($_POST['btn-entrar'])) :
         endif;
     endif;
 endif;
-
 ?>

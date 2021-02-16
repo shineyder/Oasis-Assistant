@@ -1,6 +1,6 @@
 <?php
 
-namespace Mapa;
+namespace Assistant;
 
 class Mapas
 {

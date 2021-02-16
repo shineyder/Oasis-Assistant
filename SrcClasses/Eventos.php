@@ -1,6 +1,6 @@
 <?php
 
-namespace Evento;
+namespace Assistant;
 
 class Eventos
 {

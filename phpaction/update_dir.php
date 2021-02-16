@@ -11,12 +11,13 @@ Conteúdo:
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
 // Sessão
 session_start();
 
-// Dirigente e DirigenteDAO
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
+use Assistant\DirigenteDAO;
 
 if (isset($_POST['btn-up-email'])) :
     $id = $_POST['id'];
@@ -29,7 +30,7 @@ if (isset($_POST['btn-up-email'])) :
     else :
         $data_type = ['id', 'email'];
         $detail = [$id, $email];
-        $dirigenteup = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
+        $dirigenteup = DirigenteDAO::getInstance()->readAll($data_type, $detail);
 
         if ($dirigenteup->getAccess() !== null) :
             $_SESSION['mensagem'] = "E-mail antigo e novo são iguais";
@@ -38,9 +39,9 @@ if (isset($_POST['btn-up-email'])) :
         else :
             $data_type = ['id', ""];
             $detail = [$id, ""];
-            $dirigenteup = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
+            $dirigenteup = DirigenteDAO::getInstance()->readAll($data_type, $detail);
             $dirigenteup->setEmail($email);
-            $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->update($dirigenteup);
+            $dirigenteDAO = DirigenteDAO::getInstance()->update($dirigenteup);
             $_SESSION['obj'] = serialize($dirigenteup);
             $_SESSION['mensagem'] = "E-mail alterado com sucesso!";
             redirect('http://oasisassistant.com/home.php');
@@ -67,7 +68,7 @@ if (isset($_POST['btn-up-senha'])) :
         else :
             $data_type = ['id', 'senha'];
             $detail = [$id, md5($senha_old)];
-            $dirigenteup = Dirigente\DirigenteDAO::getInstance()->readAll($data_type, $detail);
+            $dirigenteup = DirigenteDAO::getInstance()->readAll($data_type, $detail);
 
             if ($dirigenteup->getAccess() === null) :
                 $_SESSION['mensagem'] = "Senha antiga não confere";
@@ -76,7 +77,7 @@ if (isset($_POST['btn-up-senha'])) :
             else :
                 $senha = md5($senha);
                 $dirigenteup->setSenha($senha);
-                $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->update($dirigenteup);
+                $dirigenteDAO = DirigenteDAO::getInstance()->update($dirigenteup);
                 $_SESSION['obj'] = serialize($dirigenteup);
                 $_SESSION['mensagem'] = "Senha alterada com sucesso!";
                 redirect('http://oasisassistant.com/home.php');

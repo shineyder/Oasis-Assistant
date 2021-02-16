@@ -1,9 +1,9 @@
 <?php
 
-namespace Evento;
+namespace Assistant;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/eventos.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
+use Assistant\Connect;
+use Assistant\Eventos;
 
 class EventoDAO
 {
@@ -54,7 +54,7 @@ class EventoDAO
         :desc4,
         :cobert)";
 
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
 
         $p_sql->bindValue(":idUser", $evento->getIdUser());
         $p_sql->bindValue(":idMapa", $evento->getIdMap());
@@ -76,7 +76,7 @@ class EventoDAO
     public function read($desc, $ini)
     {
         $sql = "SELECT * FROM log_eventos WHERE id_user = :cod ORDER BY id LIMIT 1 OFFSET :ini";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
         $p_sql->bindValue(":cod", $ini);
         $p_sql->execute();
@@ -86,14 +86,14 @@ class EventoDAO
     public function readRelatorio($desc, $ini)
     {
         $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' ORDER BY id LIMIT 1 OFFSET :ini";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
         $p_sql->bindValue(":ini", $ini);
         $p_sql->execute();
         $dados = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
 
         $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND id_mapa = ':idMap' AND (event_type = 'attRel' OR event_type = 'delRel') ORDER BY id DESC";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
         $p_sql->bindValue(":idMap", $dados->getIdMap());
         $p_sql->execute();
@@ -119,7 +119,7 @@ class EventoDAO
     public function lastId($desc)
     {
         $sql = "SELECT id FROM log_eventos WHERE id_user = :cod ORDER BY id DESC";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
         $p_sql->execute();
         return $p_sql->fetch(\PDO::FETCH_BOTH);
@@ -128,12 +128,12 @@ class EventoDAO
     public function completTerr()
     {
         $sql = "SELECT cobert FROM log_eventos ORDER BY id LIMIT 1 DESC";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         $cobertNow = $p_sql->fetch(\PDO::FETCH_BOTH);
 
         $sql = "ALTER TABLE log_eventos ALTER cobert SET default :cobert";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cobert", $cobertNow['cobert'] + 1);
         $p_sql->execute();
 

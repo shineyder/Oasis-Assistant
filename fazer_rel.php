@@ -10,9 +10,10 @@ Conteúdo:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-//Mapa e MapaDAO
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/mapa.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/mapaDao.php';
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+use Assistant\MapasDAO;
 ?>
 
 <!DOCTYPE html>
@@ -45,14 +46,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/mapaDao.php';
         <div class="container">
             <?php
             for ($i = 1; $i <= 24; $i++) {
-                $mapaDAO = Mapa\MapasDAO::getInstance()->firstLast($i);
+                $mapaDAO = MapasDAO::getInstance()->firstLast($i);
                 ?>
                 <article id="<?php echo $i; ?>">
                     <form action="phpaction/update_maps.php" method="POST">
                         <ul class="collapsible">
                             <?php
                             for ($j = $mapaDAO[0]["id"]; $j <= $mapaDAO[1]["id"]; $j++) {
-                                $dados_quadra = Mapa\MapasDAO::getInstance()->read($j);
+                                $dados_quadra = MapasDAO::getInstance()->read($j);
                                 ?>
                                 <li>
                                     <div class="collapsible-header">Quadra <?php echo $dados_quadra->getQuadra() . (($dados_quadra->getTrab() == 0) ? " não trabalhada" : " trabalhada"); ?> </div>

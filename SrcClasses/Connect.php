@@ -1,13 +1,6 @@
 <?php
 
-/**
-* Página:
-*     Oculta - Ação PHP - Conexão
-* Conteúdo:
-*     Cria conexão com o servidor.
-*/
-
-namespace Conectar;
+namespace Assistant;
 
 class Connect
 {

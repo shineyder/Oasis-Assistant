@@ -5,6 +5,14 @@ Conteúdo:
     Abertura das tags, inclusão de todas as bibliotecas utilizadas, logo e menu de navegação.
 -->
 
+<?php
+// Função redirect
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
+
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>

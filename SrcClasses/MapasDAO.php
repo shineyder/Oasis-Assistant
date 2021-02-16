@@ -1,10 +1,10 @@
 <?php
 
-namespace Mapa;
+namespace Assistant;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/mapa.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/eventosDao.php';
+use Assistant\Connect;
+use Assistant\EventoDAO;
+use Assistant\Mapas;
 
 class MapasDAO
 {
@@ -32,7 +32,7 @@ class MapasDAO
     public function read($desc)
     {
         $sql = "SELECT * FROM mapas WHERE id = :cod ";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
         $p_sql->execute();
         return $this->showMapa($p_sql->fetch(\PDO::FETCH_BOTH));
@@ -53,7 +53,7 @@ class MapasDAO
                     n_edificio = :edi
                     WHERE id = :cod";
 
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
 
         $p_sql->bindValue(":trab", $mapas->getTrab());
         $p_sql->bindValue(":res", $mapas->getRes());
@@ -74,12 +74,12 @@ class MapasDAO
     public function firstLast($data)
     {
         $sql = "SELECT id FROM mapas WHERE maps = '$data'";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         $dados[0] = $p_sql->fetch(\PDO::FETCH_ASSOC);
 
         $sql = "SELECT id FROM mapas WHERE maps = '$data' ORDER BY id DESC";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         $dados[1] = $p_sql->fetch(\PDO::FETCH_ASSOC);
 
@@ -89,14 +89,14 @@ class MapasDAO
     private function completTerr()
     {
         $sql = "SELECT * FROM mapas WHERE trab = :cod";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", 0);
         $p_sql->execute();
 
         if ($p_sql->rowCount() == 0) :
-            \Evento\EventoDAO::getInstance()->completTerr();
+            EventoDAO::getInstance()->completTerr();
             $sql = "UPDATE mapas SET trab = :trab";
-            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql = Connect::conn()->prepare($sql);
             $p_sql->bindValue(":trab", 0);
             $p_sql->execute();
             return 0;

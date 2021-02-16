@@ -9,6 +9,9 @@ Conteúdo:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
 // Sessão
 session_start();
 
@@ -103,6 +106,7 @@ if (isset($_POST['btn-prox'])) {
     }
 }
 ?>
+    <a href="index.php" class="btn red darken-2">Cancelar</a>
 </form>
 
 <script>

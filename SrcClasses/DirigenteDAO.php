@@ -1,10 +1,10 @@
 <?php
 
-namespace Dirigente;
+namespace Assistant;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/sendemail.php';
+use Assistant\Connect;
+use Assistant\Mail;
+use Assistant\Dirigentes;
 
 class DirigenteDAO
 {
@@ -39,7 +39,7 @@ class DirigenteDAO
                     :usuario, 
                     :senha)";
 
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
 
         $p_sql->bindValue(":nome", $dirigente->getNome());
         $p_sql->bindValue(":sobrenome", $dirigente->getSobrenome());
@@ -49,7 +49,7 @@ class DirigenteDAO
 
         $message = "<h3>Bem vindo ao Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $dirigente->getNome() . " " . $dirigente->getSobrenome() . ", sua conta j&aacute; est&aacute; quase pronta, para concluir seu cadastro e liberar seu acesso basta clicar no link abaixo:<br><br>http://oasisassistant.com/autenticate.php?cd=" . md5($dirigente->getUsuario()) . "<br><br>No Oasis Assistant voc&ecirc; ter&aacute; acesso a diversas informa&ccedil;&otilde;es &uacute;teis para o servi&ccedil;o de campo local, fa&ccedil;a bom proveito dessa ferramenta.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
 
-        $email_send = new \EnviarEmail\Mail();
+        $email_send = new Mail();
         $email_send->sendMail($dirigente->getEmail(), $dirigente->getNome(), $dirigente->getSobrenome(), $message, "E-mail de Autenticacao", "");
 
         return $p_sql->execute();
@@ -62,12 +62,12 @@ class DirigenteDAO
         // Exemplo: $data_type = email - $desc = adrianoshineyder@hotmail.com
         if ($data_type[1] != "") :
             $sql = "SELECT * FROM dirigentes WHERE $data_type[0] = :cod AND $data_type[1] = :cod2";
-            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql = Connect::conn()->prepare($sql);
             $p_sql->bindValue(":cod", $desc[0]);
             $p_sql->bindValue(":cod2", $desc[1]);
         else :
             $sql = "SELECT * FROM dirigentes WHERE $data_type[0] = :cod ";
-            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql = Connect::conn()->prepare($sql);
             $p_sql->bindValue(":cod", $desc[0]);
         endif;
         $p_sql->execute();
@@ -81,7 +81,7 @@ class DirigenteDAO
         // Exemplo: $data_type = email - $desc = adrianoshineyder@hotmail.com
 
         $sql = "SELECT * FROM dirigentes WHERE usuario = :user AND senha = :senha";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":user", $user);
         $p_sql->bindValue(":senha", $senha);
         $p_sql->execute();
@@ -103,12 +103,12 @@ class DirigenteDAO
 
         if (is_array($data_type)) :
             $sql = "SELECT $subject FROM dirigentes WHERE $data_type[0] = :cod AND $data_type[1] = :cod2";
-            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql = Connect::conn()->prepare($sql);
             $p_sql->bindValue(":cod", $desc[0]);
             $p_sql->bindValue(":cod2", $desc[1]);
         else :
             $sql = "SELECT $subject FROM dirigentes WHERE $data_type = :cod";
-            $p_sql = \Conectar\Connect::conn()->prepare($sql);
+            $p_sql = Connect::conn()->prepare($sql);
             $p_sql->bindValue(":cod", $desc);
         endif;
             $p_sql->execute();
@@ -118,7 +118,7 @@ class DirigenteDAO
     public function lastId()
     {
         $sql = "SELECT id FROM dirigentes ORDER BY id DESC";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         return $p_sql->fetch(\PDO::FETCH_BOTH);
     }
@@ -134,7 +134,7 @@ class DirigenteDAO
                     access = :access
                     WHERE id = :cod";
 
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
 
         $p_sql->bindValue(":nome", $dirigente->getNome());
         $p_sql->bindValue(":sobrenome", $dirigente->getSobrenome());
@@ -150,7 +150,7 @@ class DirigenteDAO
     public function delete($cod)
     {
         $sql = "DELETE FROM dirigentes WHERE id = :cod";
-        $p_sql = \Conectar\Connect::conn()->prepare($sql);
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $cod);
 
         return $p_sql->execute();

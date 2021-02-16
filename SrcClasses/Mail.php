@@ -1,15 +1,6 @@
 <?php
 
-/**
- * Página:
- *      Oculta - Ação PHP - Enviar Email
- * Conteúdo:
- *      Envia email.
- * Detalhes:
- *      Necessário email de destino, nome e sobrenome do destinátario, mensagem, assunto e anexo. O anexo é a única informação opcional e, caso não exista, deve ser definida como string vazia "".
- */
-
-namespace EnviarEmail;
+namespace Assistant;
 
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
@@ -21,7 +12,7 @@ class Mail
 {
     public function sendMail($email, $nome, $sobrenome, $message, $subject, $anexo)
     {
-        //Load Composer's autoloader
+        // Load Composer's autoloader
         require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
         // Instantiation and passing `true` enables exceptions
@@ -39,7 +30,7 @@ class Mail
             $mail->Port = 465;
 
             $mail->setFrom('oasisassistente@gmail.com', 'Oasis Assistant'); // Origem do email
-            $mail->addAddress($email, $nome . " " . $sobrenome);                                      // Destino do email
+            $mail->addAddress($email, $nome . " " . $sobrenome);            // Destino do email
 
             // Anexos
             if ($anexo != "") {

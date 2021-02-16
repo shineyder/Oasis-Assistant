@@ -1,6 +1,6 @@
 <?php
 
-namespace Dirigente;
+namespace Assistant;
 
 class Dirigentes
 {

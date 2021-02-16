@@ -12,9 +12,10 @@ Detalhes:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-// Dirigente e DirigenteDAO
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+use Assistant\DirigenteDAO;
 
 // Sessão
 session_start();
@@ -27,18 +28,18 @@ endif;
 $is_ok = 0;
 
 //Dados
-$dados_last = Dirigente\DirigenteDAO::getInstance()->lastId();
+$dados_last = DirigenteDAO::getInstance()->lastId();
 
 for ($i = 1; $i <= $dados_last['id']; $i++) {
-    $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->read(['id' , 'access'], [$i, 0], 'usuario');
+    $dirigenteDAO = DirigenteDAO::getInstance()->read(['id' , 'access'], [$i, 0], 'usuario');
     $dadostemp = $dirigenteDAO->fetch(\PDO::FETCH_BOTH);
 
     if ($dadostemp != false) {
         if ($_GET['cd'] == md5($dadostemp['usuario'])) {
             $is_ok = 1;
-            $dirigente = Dirigente\DirigenteDAO::getInstance()->readAll(['id', ""], [$i, ""]);
+            $dirigente = DirigenteDAO::getInstance()->readAll(['id', ""], [$i, ""]);
             $dirigente->setAccess(1);
-            $dirigenteDAO = Dirigente\DirigenteDAO::getInstance()->update($dirigente);
+            $dirigenteDAO = DirigenteDAO::getInstance()->update($dirigente);
             break;
         }
     }

@@ -6,8 +6,8 @@ Conteúdo:
 -->
 <?php
 
-// Função redirect
-require_once 'phpaction/redirect.php';
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 // Sessão
 session_start();

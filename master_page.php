@@ -9,12 +9,8 @@ Conteúdo:
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-//Dirigente e DirigenteDAO
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigente.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DAO_Objetos/dirigenteDao.php';
-
-//Conexão
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/connect.php';
+// Load Composer's autoloader
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 // Sessão
 session_start();
