@@ -2,9 +2,6 @@
 
 namespace Assistant;
 
-use Assistant\Connect;
-use Assistant\Eventos;
-
 class EventoDAO
 {
     public static $instance;
@@ -37,8 +34,7 @@ class EventoDAO
         data3,
         desc3,
         data4,
-        desc4,
-        cobert)
+        desc4)
         VALUES 
         (:idUser,
         :idMapa,
@@ -51,14 +47,15 @@ class EventoDAO
         :data3,
         :desc3,
         :data4,
-        :desc4,
-        :cobert)";
+        :desc4)";
 
         $p_sql = Connect::conn()->prepare($sql);
 
+        date_default_timezone_set('America/Sao_Paulo');
+
         $p_sql->bindValue(":idUser", $evento->getIdUser());
         $p_sql->bindValue(":idMapa", $evento->getIdMap());
-        $p_sql->bindValue(":timeN", $evento->getTime());
+        $p_sql->bindValue(":timeN", date('d/m/Y \à\s H:i:s'));
         $p_sql->bindValue(":eventType", $evento->getEventType());
         $p_sql->bindValue(":data1", $evento->getData1());
         $p_sql->bindValue(":desc1", $evento->getDesc1());
@@ -68,7 +65,6 @@ class EventoDAO
         $p_sql->bindValue(":desc3", $evento->getDesc3());
         $p_sql->bindValue(":data4", $evento->getData4());
         $p_sql->bindValue(":desc4", $evento->getDesc4());
-        $p_sql->bindValue(":cobert", $evento->getCobert());
 
         return $p_sql->execute();
     }
@@ -78,7 +74,7 @@ class EventoDAO
         $sql = "SELECT * FROM log_eventos WHERE id_user = :cod ORDER BY id LIMIT 1 OFFSET :ini";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
-        $p_sql->bindValue(":cod", $ini);
+        $p_sql->bindValue(":ini", $ini);
         $p_sql->execute();
         return $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
     }
@@ -87,27 +83,37 @@ class EventoDAO
     {
         $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' ORDER BY id LIMIT 1 OFFSET :ini";
         $p_sql = Connect::conn()->prepare($sql);
-        $p_sql->bindValue(":cod", $desc);
-        $p_sql->bindValue(":ini", $ini);
+        $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
+        $p_sql->bindValue(":ini", intval($ini, 10), \PDO::PARAM_INT);
         $p_sql->execute();
         $dados = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
 
-        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND id_mapa = ':idMap' AND (event_type = 'attRel' OR event_type = 'delRel') ORDER BY id DESC";
+        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND id_mapa = :idMap AND (event_type = 'attRel' OR event_type = 'delRel') ORDER BY id DESC LIMIT 1 ";
         $p_sql = Connect::conn()->prepare($sql);
-        $p_sql->bindValue(":cod", $desc);
-        $p_sql->bindValue(":idMap", $dados->getIdMap());
+        $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
+        $p_sql->bindValue(":idMap", intval($dados->getIdMap(), 10), \PDO::PARAM_INT);
         $p_sql->execute();
-        $p_sql->fetch(\PDO::FETCH_BOTH);
 
-        if ($p_sql->getEventType() === 'attRel') :
-            return $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
-        else :
-            if ($p_sql->getEventType() === 'delRel') :
-                return null;
+        if ($p_sql->rowCount() != 0) :
+            $dados2 = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
+            if ($dados2->getEventType() == 'attRel') :
+                return $dados2;
             else :
-                return $dados;
+                return null;
             endif;
+        else :
+            return $dados;
         endif;
+    }
+
+    public function readLastRelatorio($desc)
+    {
+        $sql = "SELECT * FROM log_eventos WHERE id_map = :cod  AND (event_type = 'doRel' OR event_type = 'attRel') ORDER BY id DESC LIMIT 1";
+        $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
+        $p_sql->execute();
+        $dados = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
+        return $dados;
     }
 
     private function showEvento($row)
@@ -116,13 +122,13 @@ class EventoDAO
         return $Evento;
     }
 
-    public function lastId($desc)
+    public function relCount($desc)
     {
-        $sql = "SELECT id FROM log_eventos WHERE id_user = :cod ORDER BY id DESC";
+        $sql = "SELECT id FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' ORDER BY id DESC";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
         $p_sql->execute();
-        return $p_sql->fetch(\PDO::FETCH_BOTH);
+        return $p_sql->rowCount();
     }
 
     public function completTerr()
@@ -137,9 +143,7 @@ class EventoDAO
         $p_sql->bindValue(":cobert", $cobertNow['cobert'] + 1);
         $p_sql->execute();
 
-        date_default_timezone_set('America/Sao_Paulo');
-
-        $event = new Eventos(null, null, null, date('d/m/Y \à\s H:i:s'), 'terrComp', null, null, null, null, null, null, null, null, null);
+        $event = new Eventos(null, null, null, null, 'terrComp', null, null, null, null, null, null, null, null, null);
         $this->create($event);
 
         return 0;

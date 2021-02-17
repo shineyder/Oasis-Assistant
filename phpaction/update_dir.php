@@ -18,6 +18,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 session_start();
 
 use Assistant\DirigenteDAO;
+use Assistant\EventoDAO;
+use Assistant\Eventos;
 
 if (isset($_POST['btn-up-email'])) :
     $id = $_POST['id'];
@@ -44,6 +46,10 @@ if (isset($_POST['btn-up-email'])) :
             $dirigenteDAO = DirigenteDAO::getInstance()->update($dirigenteup);
             $_SESSION['obj'] = serialize($dirigenteup);
             $_SESSION['mensagem'] = "E-mail alterado com sucesso!";
+
+            $event = new Eventos(null, $dirigenteup->getId(), null, null, "attDir", "AltEmail", $dirigenteup->getEmail(), null, null, null, null, null, null, null);
+            EventoDAO::getInstance()->create($event);
+
             redirect('http://oasisassistant.com/home.php');
             exit();
         endif;
@@ -80,6 +86,10 @@ if (isset($_POST['btn-up-senha'])) :
                 $dirigenteDAO = DirigenteDAO::getInstance()->update($dirigenteup);
                 $_SESSION['obj'] = serialize($dirigenteup);
                 $_SESSION['mensagem'] = "Senha alterada com sucesso!";
+
+                $event = new Eventos(null, $dirigenteup->getId(), null, null, "attDir", "AltSenha", $dirigenteup->getSenha(), null, null, null, null, null, null, null);
+                EventoDAO::getInstance()->create($event);
+
                 redirect('http://oasisassistant.com/home.php');
                 exit();
             endif;

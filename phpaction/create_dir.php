@@ -18,6 +18,8 @@ session_start();
 
 use Assistant\DirigenteDAO;
 use Assistant\Dirigentes;
+use Assistant\EventoDAO;
+use Assistant\Eventos;
 
 if (isset($_POST['btn-confirm'])) :
     $nome = $_POST['nome'];
@@ -55,6 +57,10 @@ if (isset($_POST['btn-confirm'])) :
 
                     if ($dirigenteDAO) :
                         $_SESSION['mensagem'] = "Cadastrado com sucesso!";
+
+                        $evento = new Eventos(null, null, null, null, "criateDirr", "nome", $dirigente->getNome(), "sobrenome", $dirigente->getSobrenome(), "email", $dirigente->getEmail(), "user", $dirigente->getUsuario(), null);
+                        EventoDAO::getInstance()->create($evento);
+
                         header('Location: ../index.php');
                         exit();
                     else :

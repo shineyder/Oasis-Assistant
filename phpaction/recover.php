@@ -20,6 +20,8 @@ session_start();
 
 use Assistant\Mail;
 use Assistant\DirigenteDAO;
+use Assistant\EventoDAO;
+use Assistant\Eventos;
 
 if (isset($_POST['btn-pro'])) :
     $tipo = $_POST['cod_err'];
@@ -51,6 +53,10 @@ if (isset($_POST['btn-pro'])) :
                         $email_send = new Mail();
                         $email_send->sendMail($dirigente->getEmail(), $dirigente->getNome(), $dirigente->getSobrenome(), $message, "Recuperacao de usuario", "");
                         $_SESSION['mensagem'] = "Um e-mail para recuperação do usuario foi enviado!";
+
+                        $event = new Eventos(null, $dirigente->getId(), null, null, "recDir", "RecUser", $dirigente->getUsuario(), null, null, null, null, null, null, null);
+                        EventoDAO::getInstance()->create($event);
+
                         redirect('http://oasisassistant.com/');
                         exit();
                     endif;
@@ -74,6 +80,10 @@ if (isset($_POST['btn-pro'])) :
                         $email_send = new Mail();
                         $email_send->sendMail($dirigente->getEmail(), $dirigente->getNome(), $dirigente->getSobrenome(), $message, "Recuperacao de senha", "");
                         $_SESSION['mensagem'] = "Um e-mail para recuperação de senha foi enviado!";
+
+                        $event = new Eventos(null, $dirigente->getId(), null, null, "recDir", "RecSenha", "e10adc3949ba59abbe56e057f20f883e", null, null, null, null, null, null, null);
+                        EventoDAO::getInstance()->create($event);
+
                         redirect('http://oasisassistant.com/');
                         exit();
                     endif;
@@ -114,6 +124,10 @@ if (isset($_POST['btn-pro'])) :
 
                                 $email_send = new Mail();
                                 $email_send->sendMail($dirigente->getEmail(), $dirigente->getNome(), $dirigente->getSobrenome(), $message, "Reenvio de email de autenticacao", "");
+
+                                $event = new Eventos(null, $dirigente->getId(), null, null, "recDir", "ReEmailAut", null, null, null, null, null, null, null, null);
+                                EventoDAO::getInstance()->create($event);
+
                                 $_SESSION['mensagem'] = "E-mail de autenticação foi reenviado!";
 
                                 redirect('http://oasisassistant.com/');

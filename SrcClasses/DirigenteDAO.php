@@ -2,10 +2,6 @@
 
 namespace Assistant;
 
-use Assistant\Connect;
-use Assistant\Mail;
-use Assistant\Dirigentes;
-
 class DirigenteDAO
 {
     public static $instance;

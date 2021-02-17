@@ -2,10 +2,6 @@
 
 namespace Assistant;
 
-use Assistant\Connect;
-use Assistant\EventoDAO;
-use Assistant\Mapas;
-
 class MapasDAO
 {
     public static $instance;
@@ -36,6 +32,15 @@ class MapasDAO
         $p_sql->bindValue(":cod", $desc);
         $p_sql->execute();
         return $this->showMapa($p_sql->fetch(\PDO::FETCH_BOTH));
+    }
+
+    public function readLoc($desc)
+    {
+        $sql = "SELECT maps, quadra FROM mapas WHERE id = :cod ";
+        $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", $desc);
+        $p_sql->execute();
+        return $p_sql->fetch(\PDO::FETCH_BOTH);
     }
 
     private function showMapa($row)
