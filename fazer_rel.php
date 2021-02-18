@@ -76,8 +76,18 @@ use Assistant\MapasDAO;
                                         </div>
                                         <div style="margin-bottom: -20px;">
                                             <label>
-                                                <input type="checkbox" id="trab_<?php echo $j; ?>" name="trab_<?php echo $j; ?>" <?php echo(($dados_quadra->getTrab() == 1) ? "checked = 'checked' disabled = 'disabled'" : "")?>>
+                                                <?php
+                                                if ($dados_quadra->getTrab() == 1) :
+                                                    ?>
+                                                    <input type="hidden" id="trab_<?php echo $j; ?>" name="trab_<?php echo $j; ?>" value = "1">
+                                                    <?php
+                                                else :
+                                                    ?>
+                                                    <input type="checkbox" id="trab_<?php echo $j; ?>" name="trab_<?php echo $j; ?>" <?php echo(($dados_quadra->getTrab() == 1) ? "checked = 'checked' disabled = 'disabled'" : "")?>>
                                                 <span> Quadra Trabalhada</span>
+                                                    <?php
+                                                endif;
+                                                ?>
                                             </label>
                                         </div>
                                     </div>

@@ -121,7 +121,8 @@ class EventoDAO
         $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod  AND event_type = 'doRel' LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
-        return $p_sql->execute();
+        $p_sql->execute();
+        return $p_sql->rowCount();
     }
 
     private function showEvento($row)

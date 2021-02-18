@@ -124,7 +124,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
         <?php
     endfor;
     ?>
-
 </ul>
 
 <script>

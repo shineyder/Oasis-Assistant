@@ -38,7 +38,7 @@ if (isset($_POST['btn-env-rel'])) :
             continue;
         endif;
 
-        if (EventoDAO::getInstance()->isRel($i)->rowCount == 1) :
+        if (EventoDAO::getInstance()->isRel($i) == 1) :
             $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
         else :
             $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "doRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);

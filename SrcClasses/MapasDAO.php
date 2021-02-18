@@ -66,9 +66,11 @@ class MapasDAO
         $p_sql->bindValue(":edi", $mapas->getEdi());
         $p_sql->bindValue(":cod", $mapas->getId());
 
+        $p_sql->execute();
+
         $this->completTerr();
 
-        return $p_sql->execute();
+        return 0;
     }
 
     public function delete()
