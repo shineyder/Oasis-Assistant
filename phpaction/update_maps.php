@@ -38,7 +38,12 @@ if (isset($_POST['btn-env-rel'])) :
             continue;
         endif;
 
-        $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "doRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
+        if (EventoDAO::getInstance()->isRel($i)->rowCount == 1) :
+            $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
+        else :
+            $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "doRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
+        endif;
+
         EventoDAO::getInstance()->create($event);
     }
     redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
@@ -82,8 +87,6 @@ for ($i = 0; $i < $count; $i++) :
         if ($dados_quadra->getTrab() == 0 and ($dados_quadra->getRes() == 0 or $dados_quadra->getRes() == null) and ($dados_quadra->getCom() == 0 or $dados_quadra->getCom() == null) and ($dados_quadra->getEdi() == 0 or $dados_quadra->getEdi() == null)) :
             continue;
         endif;
-
-        
 
         redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
         exit();

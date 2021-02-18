@@ -116,6 +116,14 @@ class EventoDAO
         return $dados;
     }
 
+    public function isRel($desc)
+    {
+        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod  AND event_type = 'doRel' LIMIT 1";
+        $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cod", $desc);
+        return $p_sql->execute();
+    }
+
     private function showEvento($row)
     {
         $Evento = new Eventos($row['id'], $row['id_user'], $row['id_mapa'], $row['timeN'], $row['event_type'], $row['data1'], $row['desc1'], $row['data2'], $row['desc2'], $row['data3'], $row['desc3'], $row['data4'], $row['desc4'], $row['cobert']);
