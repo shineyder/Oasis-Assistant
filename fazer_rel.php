@@ -59,20 +59,57 @@ use Assistant\MapasDAO;
                                     <div class="collapsible-header">Quadra <?php echo $dados_quadra->getQuadra() . (($dados_quadra->getTrab() == 0) ? " não trabalhada" : " trabalhada"); ?> </div>
                                     <div class="collapsible-body">
                                         <div class="row">
+
+                                        <?php
+                                        if ($dados_quadra->getTrab() == 1) :
+                                            ?>
+                                            <div class="col s12">
+                                                <span> Número de Residências: <?php echo $dados_quadra->getRes()?></span><br>
+                                                <span> Número de Comércios: <?php echo $dados_quadra->getCom()?></span><br>
+                                                <span> Número de Edifícios: <?php echo $dados_quadra->getEdi()?></span>
+                                            </div>
+                                            <?php
+                                        endif;
+
+                                        if ($dados_quadra->getTrab() == 1) :
+                                            ?>
+                                            <input type="hidden" id="n_res_<?php echo $j; ?>" name="n_res_<?php echo $j; ?>" type="number" value=<?php echo $dados_quadra->getRes()?>>
+                                            <?php
+                                        else :
+                                            ?>
                                             <div class="col s4" style="margin-top: -35px;">
                                                 <input id="n_res_<?php echo $j; ?>" name="n_res_<?php echo $j; ?>" type="number" class="validate" value=<?php echo $dados_quadra->getRes()?> min="0">
                                                 <label for="n_res_<?php echo $j; ?>">Número de Residências</label>
                                             </div>
-                                                
+                                            <?php
+                                        endif;
+
+                                        if ($dados_quadra->getTrab() == 1) :
+                                            ?>
+                                            <input type="hidden" id="n_com_<?php echo $j; ?>" name="n_com_<?php echo $j; ?>" type="number" value=<?php echo $dados_quadra->getCom()?>>
+                                            <?php
+                                        else :
+                                            ?>
                                             <div class="col s4" style="margin-top: -35px;">
                                                 <input id="n_com_<?php echo $j; ?>" name="n_com_<?php echo $j; ?>" type="number" class="validate" value=<?php echo $dados_quadra->getCom()?> min="0">
                                                 <label for="n_com_<?php echo $j; ?>">Número de Comércios</label>
                                             </div>
-                                                
+                                            <?php
+                                        endif;
+
+                                        if ($dados_quadra->getTrab() == 1) :
+                                            ?>
+                                            <input type="hidden" id="n_edi_<?php echo $j; ?>" name="n_edi_<?php echo $j; ?>" type="number" value=<?php echo $dados_quadra->getEdi()?>>
+                                            <?php
+                                        else :
+                                            ?>
                                             <div class="col s4" style="margin-top: -35px;">
                                                 <input id="n_edi_<?php echo $j; ?>" name="n_edi_<?php echo $j; ?>" type="number" class="validate" value=<?php echo $dados_quadra->getEdi()?> min="0">
                                                 <label for="n_edi_<?php echo $j; ?>">Número de Edifícios</label>
                                             </div>
+                                            <?php
+                                        endif;
+                                        ?>
                                         </div>
                                         <div style="margin-bottom: -20px;">
                                             <label>
@@ -84,7 +121,7 @@ use Assistant\MapasDAO;
                                                 else :
                                                     ?>
                                                     <input type="checkbox" id="trab_<?php echo $j; ?>" name="trab_<?php echo $j; ?>" <?php echo(($dados_quadra->getTrab() == 1) ? "checked = 'checked' disabled = 'disabled'" : "")?>>
-                                                <span> Quadra Trabalhada</span>
+                                                    <span> Quadra Trabalhada</span>
                                                     <?php
                                                 endif;
                                                 ?>

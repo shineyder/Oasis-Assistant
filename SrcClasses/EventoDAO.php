@@ -55,7 +55,7 @@ class EventoDAO
 
         $p_sql->bindValue(":idUser", $evento->getIdUser());
         $p_sql->bindValue(":idMapa", $evento->getIdMap());
-        $p_sql->bindValue(":timeN", date('d/m/Y \à\s H:i:s'));
+        $p_sql->bindValue(":timeN", date('d/m/Y H:i:s'));
         $p_sql->bindValue(":eventType", $evento->getEventType());
         $p_sql->bindValue(":data1", $evento->getData1());
         $p_sql->bindValue(":desc1", $evento->getDesc1());
@@ -106,13 +106,20 @@ class EventoDAO
         endif;
     }
 
-    public function readLastRelatorio($desc)
+    public function readLastRelatorio($desc, $desc2)
     {
-        $sql = "SELECT * FROM log_eventos WHERE id_map = :cod  AND (event_type = 'doRel' OR event_type = 'attRel') ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod AND id_user <> :cod2  AND (event_type = 'doRel' OR event_type = 'attRel') ORDER BY id DESC LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
+        $p_sql->bindValue(":cod2", intval($desc2, 10), \PDO::PARAM_INT);
         $p_sql->execute();
-        $dados = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
+
+        if ($p_sql->rowCount() != 0) :
+            $dados = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
+        else :
+            $dados = 0;
+        endif;
+
         return $dados;
     }
 

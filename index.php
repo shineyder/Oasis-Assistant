@@ -9,6 +9,9 @@ Conteúdo:
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
+// Função redirect
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
+
 // Sessão
 session_start();
 

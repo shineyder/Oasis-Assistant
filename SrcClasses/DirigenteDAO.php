@@ -107,8 +107,8 @@ class DirigenteDAO
             $p_sql = Connect::conn()->prepare($sql);
             $p_sql->bindValue(":cod", $desc);
         endif;
-            $p_sql->execute();
-            return $p_sql;
+        $p_sql->execute();
+        return $p_sql;
     }
 
     public function lastId()
