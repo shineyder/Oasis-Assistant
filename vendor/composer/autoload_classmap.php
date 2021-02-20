@@ -7,8 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Assistant\\Connect' => $baseDir . '/SrcClasses/Connect.php',
-    'Assistant\\DirigenteDAO' => $baseDir . '/SrcClasses/DirigenteDAO.php',
-    'Assistant\\Dirigentes' => $baseDir . '/SrcClasses/Dirigentes.php',
+    'Assistant\\PublicadorDAO' => $baseDir . '/SrcClasses/PublicadorDAO.php',
+    'Assistant\\Publicadores' => $baseDir . '/SrcClasses/Publicadores.php',
     'Assistant\\EventoDAO' => $baseDir . '/SrcClasses/EventoDAO.php',
     'Assistant\\Eventos' => $baseDir . '/SrcClasses/Eventos.php',
     'Assistant\\Mail' => $baseDir . '/SrcClasses/Mail.php',

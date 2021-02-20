@@ -27,7 +27,7 @@ if (!isset($_SESSION['logado'])) :
 endif;
 
 //Dados
-$dirigente = unserialize($_SESSION['obj']);
+$publicador = unserialize($_SESSION['obj']);
 
 // Header
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';

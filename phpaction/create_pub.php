@@ -1,8 +1,8 @@
 <!--
 Página:
-    Oculta - Ação PHP - Criar Dirigente
+    Oculta - Ação PHP - Criar publicador
 Conteúdo:
-    Insere informação no servidor com respeito a novos dirigentes. 
+    Insere informação no servidor com respeito a novos Publicadores. 
 -->
 
 <?php
@@ -16,8 +16,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 // Sessão
 session_start();
 
-use Assistant\DirigenteDAO;
-use Assistant\Dirigentes;
+use Assistant\PublicadorDAO;
+use Assistant\Publicadores;
 use Assistant\EventoDAO;
 use Assistant\Eventos;
 
@@ -39,26 +39,26 @@ if (isset($_POST['btn-confirm'])) :
             redirect('http://oasisassistant.com/signup.php');
             exit();
         else :
-            $dirigenteDAO = DirigenteDAO::getInstance()->read('usuario', $user, 'usuario');
-            if ($dirigenteDAO->rowCount() != 0) :
+            $PublicadorDAO = PublicadorDAO::getInstance()->read('usuario', $user, 'usuario');
+            if ($PublicadorDAO->rowCount() != 0) :
                 $_SESSION['mensagem'] = "Usuário já registrado";
                 redirect('http://oasisassistant.com/signup.php');
                 exit();
             else :
-                $dirigenteDAO = DirigenteDAO::getInstance()->read('email', $email, 'email');
-                if ($dirigenteDAO->rowCount() != 0) :
+                $PublicadorDAO = PublicadorDAO::getInstance()->read('email', $email, 'email');
+                if ($PublicadorDAO->rowCount() != 0) :
                     $_SESSION['mensagem'] = "E-mail já cadastrado";
                     redirect('http://oasisassistant.com/signup.php');
                     exit();
                 else :
                     $senha = md5($senha);
-                    $dirigente = new Dirigentes(null, $nome, $sobrenome, $email, $user, $senha, null);
-                    $dirigenteDAO = DirigenteDAO::getInstance()->create($dirigente);
+                    $publicador = new Publicadores(null, $nome, $sobrenome, null, $email, $user, $senha, null);
+                    $PublicadorDAO = PublicadorDAO::getInstance()->create($publicador);
 
-                    if ($dirigenteDAO) :
+                    if ($PublicadorDAO) :
                         $_SESSION['mensagem'] = "Cadastrado com sucesso!";
 
-                        $evento = new Eventos(null, null, null, null, "criateDirr", "nome", $dirigente->getNome(), "sobrenome", $dirigente->getSobrenome(), "email", $dirigente->getEmail(), "user", $dirigente->getUsuario(), null);
+                        $evento = new Eventos(null, null, null, null, "criatePub", "nome", $publicador->getNome(), "sobrenome", $publicador->getSobrenome(), "email", $publicador->getEmail(), "user", $publicador->getUsuario(), null);
                         EventoDAO::getInstance()->create($evento);
 
                         header('Location: ../index.php');

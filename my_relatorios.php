@@ -12,7 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-use Assistant\DirigenteDAO;
+use Assistant\PublicadorDAO;
 use Assistant\EventoDAO;
 use Assistant\MapasDao;
 
@@ -26,15 +26,15 @@ if (!isset($_SESSION['logado'])) :
 endif;
 
 //Dados
-$dirigente = unserialize($_SESSION['obj']);
+$publicador = unserialize($_SESSION['obj']);
 
 // Header
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 // Message
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 
-if ($dirigente->getAccess() == 10) :
-    $totId = DirigenteDAO::getInstance()->lastId();
+if ($publicador->getAccess() >= 8) :
+    $totId = PublicadorDAO::getInstance()->lastId();
     $totId = intval($totId['id']);
     ?>
     <p><h4>Ver relatórios de:</h4></p><br>
@@ -47,11 +47,11 @@ if ($dirigente->getAccess() == 10) :
 
     <form action="#" method="POST">
         <div class="input-field">
-            <select id="dirigente" name="dirigente">
+            <select id="publicador" name="publicador">
             <option value="" disabled selected>Selecione uma opção</option>
             <?php
             for ($i = 1; $i <= $totId; $i++) :
-                $nome = DirigenteDAO::getInstance()->read('id', $i, 'nome, sobrenome')->fetch(\PDO::FETCH_BOTH);
+                $nome = PublicadorDAO::getInstance()->read('id', $i, 'nome, sobrenome')->fetch(\PDO::FETCH_BOTH);
                 ?>
                 <option value="<?php echo $i; ?>"><?php echo $nome["nome"] . " " . $nome["sobrenome"];?></option>
                 <?php
@@ -59,7 +59,7 @@ if ($dirigente->getAccess() == 10) :
             ?>
             </select>
         </div>
-        <button type="submit" name="btn-dir" class="btn blue darken-2">Próximo</button>
+        <button type="submit" name="btn-pub" class="btn blue darken-2">Próximo</button>
     </form>
     <?php
 else :
@@ -68,21 +68,21 @@ endif;
 ?>
 
 <?php
-if (isset($_POST['btn-dir'])) :
+if (isset($_POST['btn-pub'])) :
     if (isset($ver)) :
-        $dir = $dirigente->getId();
+        $pub = $publicador->getId();
     else :
-        $dir = $_POST['dirigente'];
+        $pub = $_POST['publicador'];
     endif;
     ?>
     <h4>Relatórios feitos:</h4>
 
     <ul class="collapsible">
         <?php
-        $count = EventoDAO::getInstance()->relCount($dir);
+        $count = EventoDAO::getInstance()->relCount($pub);
 
         for ($i = 0; $i < $count; $i++) :
-            $dados = EventoDAO::getInstance()->readRelatorio($dir, $i);
+            $dados = EventoDAO::getInstance()->readRelatorio($pub, $i);
 
             if ($dados === null) :
                 continue;

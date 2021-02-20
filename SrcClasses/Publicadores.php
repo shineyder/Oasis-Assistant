@@ -2,21 +2,23 @@
 
 namespace Assistant;
 
-class Dirigentes
+class Publicadores
 {
     private $id;
     private $nome;
     private $sobrenome;
+    private $grupo; // 1 = Porto Novo 1; 2 = Porto Novo 2; 3 = Presidente Médici; 4 = Morro do Sesi; 5 = Del Porto
     private $email;
     private $usuario;
     private $senha;
     private $access;
 
-    public function __construct($id, $nome, $sobrenome, $email, $usuario, $senha, $access)
+    public function __construct($id, $nome, $sobrenome, $grupo, $email, $usuario, $senha, $access)
     {
         $this->id = $id;
         $this->nome = $nome;
         $this->sobrenome = $sobrenome;
+        $this->grupo = $grupo;
         $this->email = $email;
         $this->usuario = $usuario;
         $this->senha = $senha;
@@ -53,6 +55,17 @@ class Dirigentes
     public function setSobrenome($sobrenome)
     {
         $this->sobrenome = $sobrenome;
+        return $this;
+    }
+
+    public function getGrupo()
+    {
+        return $this->grupo;
+    }
+
+    public function setGrupo($grupo)
+    {
+        $this->grupo = $grupo;
         return $this;
     }
 

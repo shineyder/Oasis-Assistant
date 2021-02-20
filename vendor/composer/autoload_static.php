@@ -30,8 +30,8 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
 
     public static $classMap = array (
         'Assistant\\Connect' => __DIR__ . '/../..' . '/SrcClasses/Connect.php',
-        'Assistant\\DirigenteDAO' => __DIR__ . '/../..' . '/SrcClasses/DirigenteDAO.php',
-        'Assistant\\Dirigentes' => __DIR__ . '/../..' . '/SrcClasses/Dirigentes.php',
+        'Assistant\\PublicadorDAO' => __DIR__ . '/../..' . '/SrcClasses/PublicadorDAO.php',
+        'Assistant\\Publicadores' => __DIR__ . '/../..' . '/SrcClasses/Publicadores.php',
         'Assistant\\EventoDAO' => __DIR__ . '/../..' . '/SrcClasses/EventoDAO.php',
         'Assistant\\Eventos' => __DIR__ . '/../..' . '/SrcClasses/Eventos.php',
         'Assistant\\Mail' => __DIR__ . '/../..' . '/SrcClasses/Mail.php',

@@ -16,7 +16,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 // Sessão
 session_start();
 
-use Assistant\DirigenteDAO;
+use Assistant\PublicadorDAO;
 
 if (isset($_POST['btn-entrar'])) :
     $login = $_POST['login'];
@@ -27,19 +27,19 @@ if (isset($_POST['btn-entrar'])) :
         redirect('http://oasisassistant.com/');
         exit();
     else :
-        $dirigenteDAO = DirigenteDAO::getInstance()->read('usuario', $login, 'usuario');
+        $PublicadorDAO = PublicadorDAO::getInstance()->read('usuario', $login, 'usuario');
 
-        if ($dirigenteDAO->rowCount() == 1) :
+        if ($PublicadorDAO->rowCount() == 1) :
             $senha = md5($senha);
-            $dirigenteDAO = DirigenteDAO::getInstance()->logIn($login, $senha);
-            if ($dirigenteDAO->getAccess() === null) :
+            $PublicadorDAO = PublicadorDAO::getInstance()->logIn($login, $senha);
+            if ($PublicadorDAO->getAccess() === null) :
                 $_SESSION['mensagem'] = "Usuário e senha não conferem";
                 redirect('http://oasisassistant.com/');
                 exit();
             else :
-                if ($dirigenteDAO->getAccess() != 0) :
+                if ($PublicadorDAO->getAccess() != 0) :
                     $_SESSION['logado'] = true;
-                    $_SESSION['obj'] = serialize($dirigenteDAO);
+                    $_SESSION['obj'] = serialize($PublicadorDAO);
                     redirect('http://oasisassistant.com/home.php');
                     exit();
                 else :

@@ -48,7 +48,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
                     <a href="home.php" class="btn-small blue darken-2">Ver Perfil</a>
 
                     <?php
-                    if ($dirigente->getAccess() >= 6) :
+                    if ($publicador->getAccess() >= 6) :
                         ?>
 
                     <a href="master_page.php" class="btn-small blue darken-2">Master Page</a>

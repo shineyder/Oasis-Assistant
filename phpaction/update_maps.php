@@ -20,7 +20,7 @@ use Assistant\MapasDAO;
 // Sessão
 session_start();
 //Dados
-$dirigente = unserialize($_SESSION['obj']);
+$publicador = unserialize($_SESSION['obj']);
 
 if (isset($_POST['btn-env-rel'])) :
     $id_first = $_POST['first'];
@@ -53,23 +53,19 @@ if (isset($_POST['btn-env-rel'])) :
             MapasDAO::getInstance()->update($dados_quadra);
 
             if (EventoDAO::getInstance()->isRel($i) == 1) :
-                $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
+                $event = new Eventos(null, $publicador->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
             else :
-                $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "doRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
+                $event = new Eventos(null, $publicador->getId(), $dados_quadra->getId(), null, "doRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
             endif;
 
             EventoDAO::getInstance()->create($event);
         endif;
-
-        //if ($dados_quadra->getTrab() == 0 and ($dados_quadra->getRes() == 0 or $dados_quadra->getRes() == null) and ($dados_quadra->getCom() == 0 or $dados_quadra->getCom() == null) and ($dados_quadra->getEdi() == 0 or $dados_quadra->getEdi() == null)) :
-        //    continue;
-        //endif;
     }
     redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
     exit();
 endif;
 
-$count = EventoDAO::getInstance()->relCount($dirigente->getId());
+$count = EventoDAO::getInstance()->relCount($publicador->getId());
 
 for ($i = 0; $i < $count; $i++) :
     if (isset($_POST['btn-up-rel-' . $i])) :
@@ -81,7 +77,7 @@ for ($i = 0; $i < $count; $i++) :
         $dados_quadra->setEdi($_POST['n_edi_' . $i]);
         MapasDAO::getInstance()->update($dados_quadra);
 
-        $event = new Eventos(null, $dirigente->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
+        $event = new Eventos(null, $publicador->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
         EventoDAO::getInstance()->create($event);
 
         redirect('http://oasisassistant.com/my_relatorios.php');
@@ -93,10 +89,10 @@ for ($i = 0; $i < $count; $i++) :
 
         $dados_quadra = MapasDAO::getInstance()->read($id_map);
 
-        $event = new Eventos(null, $dirigente->getId(), $id_map, null, "delRel", null, null, null, null, null, null, null, null, null);
+        $event = new Eventos(null, $publicador->getId(), $id_map, null, "delRel", null, null, null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
 
-        $dados_quadra_old = EventoDAO::getInstance()->readLastRelatorio($id_map, $dirigente->getId());
+        $dados_quadra_old = EventoDAO::getInstance()->readLastRelatorio($id_map, $publicador->getId());
 
         if ($dados_quadra_old == 0) :
             $dados_quadra->setTrab(0);

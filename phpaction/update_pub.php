@@ -1,8 +1,8 @@
 <!--
 Página:
-    Oculta - Ação PHP - Atualizar dirigentes
+    Oculta - Ação PHP - Atualizar Publicadores
 Conteúdo:
-    Atualiza a informação do servidor com respeito aos dados dos dirigentes. 
+    Atualiza a informação do servidor com respeito aos dados dos Publicadores. 
 -->
 
 <?php
@@ -17,7 +17,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 // Sessão
 session_start();
 
-use Assistant\DirigenteDAO;
+use Assistant\PublicadorDAO;
 use Assistant\EventoDAO;
 use Assistant\Eventos;
 
@@ -32,22 +32,22 @@ if (isset($_POST['btn-up-email'])) :
     else :
         $data_type = ['id', 'email'];
         $detail = [$id, $email];
-        $dirigenteup = DirigenteDAO::getInstance()->readAll($data_type, $detail);
+        $publicadorup = PublicadorDAO::getInstance()->readAll($data_type, $detail);
 
-        if ($dirigenteup->getAccess() !== null) :
+        if ($publicadorup->getAccess() !== null) :
             $_SESSION['mensagem'] = "E-mail antigo e novo são iguais";
             redirect('http://oasisassistant.com/home.php');
             exit();
         else :
             $data_type = ['id', ""];
             $detail = [$id, ""];
-            $dirigenteup = DirigenteDAO::getInstance()->readAll($data_type, $detail);
-            $dirigenteup->setEmail($email);
-            $dirigenteDAO = DirigenteDAO::getInstance()->update($dirigenteup);
-            $_SESSION['obj'] = serialize($dirigenteup);
+            $publicadorup = PublicadorDAO::getInstance()->readAll($data_type, $detail);
+            $publicadorup->setEmail($email);
+            $PublicadorDAO = PublicadorDAO::getInstance()->update($publicadorup);
+            $_SESSION['obj'] = serialize($publicadorup);
             $_SESSION['mensagem'] = "E-mail alterado com sucesso!";
 
-            $event = new Eventos(null, $dirigenteup->getId(), null, null, "attDir", "AltEmail", $dirigenteup->getEmail(), null, null, null, null, null, null, null);
+            $event = new Eventos(null, $publicadorup->getId(), null, null, "attPub", "AltEmail", $publicadorup->getEmail(), null, null, null, null, null, null, null);
             EventoDAO::getInstance()->create($event);
 
             redirect('http://oasisassistant.com/home.php');
@@ -74,20 +74,20 @@ if (isset($_POST['btn-up-senha'])) :
         else :
             $data_type = ['id', 'senha'];
             $detail = [$id, md5($senha_old)];
-            $dirigenteup = DirigenteDAO::getInstance()->readAll($data_type, $detail);
+            $publicadorup = PublicadorDAO::getInstance()->readAll($data_type, $detail);
 
-            if ($dirigenteup->getAccess() === null) :
+            if ($publicadorup->getAccess() === null) :
                 $_SESSION['mensagem'] = "Senha antiga não confere";
                 redirect('http://oasisassistant.com/home.php');
                 exit();
             else :
                 $senha = md5($senha);
-                $dirigenteup->setSenha($senha);
-                $dirigenteDAO = DirigenteDAO::getInstance()->update($dirigenteup);
-                $_SESSION['obj'] = serialize($dirigenteup);
+                $publicadorup->setSenha($senha);
+                $PublicadorDAO = PublicadorDAO::getInstance()->update($publicadorup);
+                $_SESSION['obj'] = serialize($publicadorup);
                 $_SESSION['mensagem'] = "Senha alterada com sucesso!";
 
-                $event = new Eventos(null, $dirigenteup->getId(), null, null, "attDir", "AltSenha", $dirigenteup->getSenha(), null, null, null, null, null, null, null);
+                $event = new Eventos(null, $publicadorup->getId(), null, null, "attPub", "AltSenha", $publicadorup->getSenha(), null, null, null, null, null, null, null);
                 EventoDAO::getInstance()->create($event);
 
                 redirect('http://oasisassistant.com/home.php');
@@ -96,4 +96,23 @@ if (isset($_POST['btn-up-senha'])) :
         endif;
     endif;
 endif;
+
+$countPub = PublicadorDAO::getInstance()->lastId();
+$countPub = intval($countPub['id']);
+
+for ($i = 1; $i <= $countPub; $i++) :
+    if (isset($_POST['btn-up-gru-' . $i])) :
+        $pub = PublicadorDAO::getInstance()->readAll(["id", ""], [$i, ""]);
+        $pub->setGrupo($_POST['grup']);
+        PublicadorDAO::getInstance()->update($pub);
+        $_SESSION['obj'] = serialize($pub);
+
+        $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltGrup", $pub->getGrupo(), null, null, null, null, null, null, null);
+        EventoDAO::getInstance()->create($event);
+        redirect('http://oasisassistant.com/master_page.php');
+    endif;
+
+    if (isset($_POST['btn-up-acc-' . $i])) :
+    endif;
+endfor;
 ?>
