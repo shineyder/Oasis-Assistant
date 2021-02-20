@@ -147,20 +147,35 @@ class EventoDAO
         return $p_sql->rowCount();
     }
 
+    public function cobertNow()
+    {
+        $sql = "SELECT cobert, event_type FROM log_eventos ORDER BY id DESC LIMIT 1";
+        $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->execute();
+        $data = $p_sql->fetch(\PDO::FETCH_BOTH);
+        if ($data['event_type'] == "terrComp") :
+            $cobertNow = $data['cobert'] + 1;
+        else :
+            $cobertNow = $data['cobert'];
+        endif;
+
+        return $cobertNow;
+    }
+
     public function completTerr()
     {
-        $sql = "SELECT cobert FROM log_eventos ORDER BY id LIMIT 1 DESC";
+        $sql = "SELECT cobert FROM log_eventos ORDER BY id DESC LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         $cobertNow = $p_sql->fetch(\PDO::FETCH_BOTH);
+
+        $event = new Eventos(null, null, null, null, 'terrComp', null, null, null, null, null, null, null, null, null);
+        $this->create($event);
 
         $sql = "ALTER TABLE log_eventos ALTER cobert SET default :cobert";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cobert", $cobertNow['cobert'] + 1);
         $p_sql->execute();
-
-        $event = new Eventos(null, null, null, null, 'terrComp', null, null, null, null, null, null, null, null, null);
-        $this->create($event);
 
         return 0;
     }

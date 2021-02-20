@@ -117,53 +117,60 @@ if (isset($_POST['btn-dir'])) :
                         echo "Número de Edifícios: Não informado<br>";
                     endif;
 
-                    ?>
+                    if ($dados->getCobert() == EventoDAO::getInstance()->cobertNow()) :
+                        ?>
                         <a href="#modal-up-rel-<?php echo $i; ?>" class="btn-small blue darken-4 modal-trigger">Corrigir</a>
                         <a href="#modal-del-rel-<?php echo $i; ?>" class="btn-small red darken-4 modal-trigger">Deletar</a>
-                    <?php
-                    //endif;
+                        <?php
+                    endif;
                     ?>
                 </div>
 
-                <!-- Modal Structure -->
-                <div id="modal-up-rel-<?php echo $i; ?>" class="modal">
-                    <div class="modal-content">
-                        <p>Preencha os campos abaixo para alterar o relatório</p>
-                        <form action="phpaction/update_maps.php" method="POST">
-                            <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap(); ?>">
+                <?php
+                if ($dados->getCobert() == EventoDAO::getInstance()->cobertNow()) :
+                    ?>
+                    <!-- Modal Structure -->
+                    <div id="modal-up-rel-<?php echo $i; ?>" class="modal">
+                        <div class="modal-content">
+                            <p>Preencha os campos abaixo para alterar o relatório</p>
+                            <form action="phpaction/update_maps.php" method="POST">
+                                <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap(); ?>">
 
-                            <input id="n_res_<?php echo $i; ?>" name="n_res_<?php echo $i; ?>" type="number" class="validate" value=<?php echo $dados->getDesc2()?> min="0">
-                            <label for="n_res_<?php echo $i; ?>">Número de Residências</label>
+                                <input id="n_res_<?php echo $i; ?>" name="n_res_<?php echo $i; ?>" type="number" class="validate" value=<?php echo $dados->getDesc2()?> min="0">
+                                <label for="n_res_<?php echo $i; ?>">Número de Residências</label>
 
-                            <input id="n_com_<?php echo $i; ?>" name="n_com_<?php echo $i; ?>" type="number" class="validate" value=<?php echo $dados->getDesc3()?> min="0">
-                            <label for="n_com_<?php echo $i; ?>">Número de Comércios</label>
+                                <input id="n_com_<?php echo $i; ?>" name="n_com_<?php echo $i; ?>" type="number" class="validate" value=<?php echo $dados->getDesc3()?> min="0">
+                                <label for="n_com_<?php echo $i; ?>">Número de Comércios</label>
 
-                            <input id="n_edi_<?php echo $i; ?>" name="n_edi_<?php echo $i; ?>" type="number" class="validate" value=<?php echo $dados->getDesc4()?> min="0">
-                            <label for="n_edi_<?php echo $i; ?>">Número de Edifícios</label><br><br>
-                            
-                            <label>
-                                <input type="checkbox" id="trab_<?php echo $i; ?>" name="trab_<?php echo $i; ?>" <?php echo(($dados->getDesc1() === "1") ? "checked = 'checked'" : "")?>>
-                                <span> Quadra Trabalhada</span>
-                            </label><br><br>
+                                <input id="n_edi_<?php echo $i; ?>" name="n_edi_<?php echo $i; ?>" type="number" class="validate" value=<?php echo $dados->getDesc4()?> min="0">
+                                <label for="n_edi_<?php echo $i; ?>">Número de Edifícios</label><br><br>
+                                
+                                <label>
+                                    <input type="checkbox" id="trab_<?php echo $i; ?>" name="trab_<?php echo $i; ?>" <?php echo(($dados->getDesc1() === "1") ? "checked = 'checked'" : "")?>>
+                                    <span> Quadra Trabalhada</span>
+                                </label><br><br>
 
-                            <button type="submit" name="btn-up-rel-<?php echo $i; ?>" class="btn-small blue darken-2">Confirmar</button>
-                            <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
-                        </form>
+                                <button type="submit" name="btn-up-rel-<?php echo $i; ?>" class="btn-small blue darken-2">Confirmar</button>
+                                <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
+                            </form>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Modal Structure -->
-                <div id="modal-del-rel-<?php echo $i; ?>" class="modal">
-                    <div class="modal-content">
-                        <h4>Tem certeza que deseja deletar esse relatório?</h4>
-                        <p>Todas as informações fornecidas serão deletadas!</p>
-                        <form action="phpaction/update_maps.php" method="POST">
-                            <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap(); ?>">
-                            <button type="submit" name="btn-del-rel-<?php echo $i; ?>" class="btn-small blue darken-2">Confirmar</button>
-                            <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
-                        </form>
+                    <!-- Modal Structure -->
+                    <div id="modal-del-rel-<?php echo $i; ?>" class="modal">
+                        <div class="modal-content">
+                            <h4>Tem certeza que deseja deletar esse relatório?</h4>
+                            <p>Todas as informações fornecidas serão deletadas!</p>
+                            <form action="phpaction/update_maps.php" method="POST">
+                                <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap(); ?>">
+                                <button type="submit" name="btn-del-rel-<?php echo $i; ?>" class="btn-small blue darken-2">Confirmar</button>
+                                <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                    <?php
+                endif;
+                ?>
             </li>
             <?php
         endfor;
