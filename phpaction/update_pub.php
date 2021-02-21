@@ -103,9 +103,7 @@ $countPub = intval($countPub['id']);
 for ($i = 1; $i <= $countPub; $i++) :
     if (isset($_POST['btn-up-gru-' . $i])) :
         $pub = PublicadorDAO::getInstance()->readAll(["id", ""], [$i, ""]);
-        var_dump($pub);
         $pub->setGrupo($_POST['grup-' . $i]);
-        var_dump($_POST);
         PublicadorDAO::getInstance()->update($pub);
 
         $publicador = unserialize($_SESSION['obj']);
@@ -115,7 +113,7 @@ for ($i = 1; $i <= $countPub; $i++) :
 
         $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltGrup", $pub->getGrupo(), null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
-        //redirect('http://oasisassistant.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page.php');
     endif;
 
     if (isset($_POST['btn-up-acc-' . $i])) :
@@ -126,7 +124,7 @@ for ($i = 1; $i <= $countPub; $i++) :
 
         $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltAcc", $pub->getAccess(), null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
-        //redirect('http://oasisassistant.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page.php');
     endif;
 endfor;
 ?>

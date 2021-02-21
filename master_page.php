@@ -38,7 +38,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
-<h4>Lista de Publicadores: </h4>
+<h5>Emitir S-13:</h5>
+<a target="_blank" href="http://oasisassistant.com/phpaction/doS13.php" class="btn-small blue darken-4">S-13</a><br>
+<h5>Lista de Publicadores: </h5>
 
 <?php
 $action = '';
@@ -96,7 +98,6 @@ endif;
     for ($i = 1; $i <= $countPub; $i++) :
         $ini = $i - 1;
         $dadosPub = PublicadorDAO::getInstance()->readTable($desc, $action, $ini);
-        echo "SELECT * FROM publicadores ORDER BY $desc $action LIMIT 1 OFFSET $ini<br>";
         ?>
         <tr>
             <td><?php echo $dadosPub->getNome(); ?></td>
