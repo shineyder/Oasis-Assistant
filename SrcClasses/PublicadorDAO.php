@@ -67,7 +67,7 @@ class PublicadorDAO
             $p_sql->bindValue(":cod", $desc[0]);
         endif;
         $p_sql->execute();
-        return $this->showpublicador($p_sql->fetch(\PDO::FETCH_BOTH));
+        return $this->showPublicador($p_sql->fetch(\PDO::FETCH_BOTH));
     }
 
     public function logIn($user, $senha)
@@ -81,10 +81,10 @@ class PublicadorDAO
         $p_sql->bindValue(":user", $user);
         $p_sql->bindValue(":senha", $senha);
         $p_sql->execute();
-        return $this->showpublicador($p_sql->fetch(\PDO::FETCH_BOTH));
+        return $this->showPublicador($p_sql->fetch(\PDO::FETCH_BOTH));
     }
 
-    private function showpublicador($row)
+    private function showPublicador($row)
     {
         $publicador = new Publicadores($row['id'], $row['nome'], $row['sobrenome'], $row['grupo'], $row['email'], $row['usuario'], $row['senha'], $row['access']);
         return $publicador;
@@ -114,16 +114,18 @@ class PublicadorDAO
     public function readTable($desc, $action, $ini)
     {
         if ($desc == '') :
-            $sql = "SELECT * FROM publicadores LIMIT 1 OFFSET :ini";
+            $sql = "SELECT * FROM publicadores ORDER BY id LIMIT 1 OFFSET :ini";
+            $p_sql = Connect::conn()->prepare($sql);
+            $p_sql->bindValue(":ini", intval($ini, 10), \PDO::PARAM_INT);
         else :
             $sql = "SELECT * FROM publicadores ORDER BY :cod1 :cod2 LIMIT 1 OFFSET :ini";
+            $p_sql = Connect::conn()->prepare($sql);
+            $p_sql->bindValue(":cod1", $desc);
+            $p_sql->bindValue(":cod2", $action);
+            $p_sql->bindValue(":ini", intval($ini, 10), \PDO::PARAM_INT);
         endif;
-        $p_sql = Connect::conn()->prepare($sql);
-        $p_sql->bindValue(":cod1", $desc);
-        $p_sql->bindValue(":cod2", $action);
-        $p_sql->bindValue(":ini", intval($ini, 10), \PDO::PARAM_INT);
         $p_sql->execute();
-        return $this->showpublicador($p_sql->fetch(\PDO::FETCH_BOTH));
+        return $this->showPublicador($p_sql->fetch(\PDO::FETCH_BOTH));
     }
 
     public function lastId()
