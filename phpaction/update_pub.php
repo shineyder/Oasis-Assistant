@@ -113,6 +113,13 @@ for ($i = 1; $i <= $countPub; $i++) :
     endif;
 
     if (isset($_POST['btn-up-acc-' . $i])) :
+        $pub = PublicadorDAO::getInstance()->readAll(["id", ""], [$i, ""]);
+        $pub->setAccess($_POST['acc']);
+        PublicadorDAO::getInstance()->update($pub);
+
+        $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltAcc", $pub->getAccess(), null, null, null, null, null, null, null);
+        EventoDAO::getInstance()->create($event);
+        redirect('http://oasisassistant.com/master_page.php');
     endif;
 endfor;
 ?>
