@@ -69,29 +69,21 @@ class EventoDAO
         return $p_sql->execute();
     }
 
-    public function read($desc, $ini)
+    public function readRelatorio($desc, $ini, $cobert)
     {
-        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod ORDER BY id LIMIT 1 OFFSET :ini";
-        $p_sql = Connect::conn()->prepare($sql);
-        $p_sql->bindValue(":cod", $desc);
-        $p_sql->bindValue(":ini", $ini);
-        $p_sql->execute();
-        return $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
-    }
-
-    public function readRelatorio($desc, $ini)
-    {
-        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' ORDER BY id LIMIT 1 OFFSET :ini";
+        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' AND cobert = :cob ORDER BY id LIMIT 1 OFFSET :ini";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
+        $p_sql->bindValue(":cob", intval($cobert, 10), \PDO::PARAM_INT);
         $p_sql->bindValue(":ini", intval($ini, 10), \PDO::PARAM_INT);
         $p_sql->execute();
         $dados = $this->showEvento($p_sql->fetch(\PDO::FETCH_BOTH));
 
-        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND id_mapa = :idMap AND (event_type = 'attRel' OR event_type = 'delRel') ORDER BY id DESC LIMIT 1 ";
+        $sql = "SELECT * FROM log_eventos WHERE id_user = :cod AND id_mapa = :idMap AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = :cob ORDER BY id DESC LIMIT 1 ";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
         $p_sql->bindValue(":idMap", intval($dados->getIdMap(), 10), \PDO::PARAM_INT);
+        $p_sql->bindValue(":cob", intval($cobert, 10), \PDO::PARAM_INT);
         $p_sql->execute();
 
         if ($p_sql->rowCount() != 0) :
@@ -106,12 +98,13 @@ class EventoDAO
         endif;
     }
 
-    public function readLastRelatorio($desc, $desc2)
+    public function readLastRelatorio($desc, $desc2, $cobert)
     {
-        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod AND id_user <> :cod2  AND (event_type = 'doRel' OR event_type = 'attRel') ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod AND id_user <> :cod2  AND (event_type = 'doRel' OR event_type = 'attRel') AND cobert = :cob ORDER BY id DESC LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
         $p_sql->bindValue(":cod2", intval($desc2, 10), \PDO::PARAM_INT);
+        $p_sql->bindValue(":cob", intval($cobert, 10), \PDO::PARAM_INT);
         $p_sql->execute();
 
         if ($p_sql->rowCount() != 0) :
@@ -123,11 +116,12 @@ class EventoDAO
         return $dados;
     }
 
-    public function isRel($desc)
+    public function isRel($desc, $cobert)
     {
-        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod  AND event_type = 'doRel' LIMIT 1";
+        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod  AND event_type = 'doRel' AND cobert = :cob LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
+        $p_sql->bindValue(":cob", $cobert);
         $p_sql->execute();
         return $p_sql->rowCount();
     }
@@ -138,11 +132,12 @@ class EventoDAO
         return $Evento;
     }
 
-    public function relCount($desc)
+    public function relCount($desc, $cobert)
     {
-        $sql = "SELECT id FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' ORDER BY id DESC";
+        $sql = "SELECT id FROM log_eventos WHERE id_user = :cod AND event_type = 'doRel' AND cobert = :cob ORDER BY id DESC";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", $desc);
+        $p_sql->bindValue(":cob", $cobert);
         $p_sql->execute();
         return $p_sql->rowCount();
     }
@@ -162,31 +157,46 @@ class EventoDAO
         return $cobertNow;
     }
 
-    public function idS13($ini, $end)
+    public function idS13($ini, $end, $cobert)
     {
-        $sql = "SELECT id_user, COUNT(id_user) AS Qtd FROM log_eventos WHERE id_mapa BETWEEN :com AND :fim GROUP BY id_user ORDER BY COUNT(id_user) DESC LIMIT 1";
+        $sql = "SELECT id_user, COUNT(id_user) AS Qtd FROM log_eventos WHERE cobert = :cob AND id_mapa BETWEEN :com AND :fim GROUP BY id_user ORDER BY COUNT(id_user) DESC LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cob", $cobert);
         $p_sql->bindValue(":com", $ini);
         $p_sql->bindValue(":fim", $end);
         $p_sql->execute();
         return $p_sql->fetch(\PDO::FETCH_BOTH);
     }
 
-    public function timeS13($ini, $end)
+    public function timeS13($ini, $end, $cobert)
     {
-        $sql = "SELECT timeN FROM log_eventos WHERE event_type = 'doRel' AND id_mapa BETWEEN :com AND :fim ORDER BY timeN LIMIT 1";
+        $sql = "SELECT timeN FROM log_eventos WHERE cobert = :cob AND event_type = 'doRel' AND id_mapa BETWEEN :com AND :fim ORDER BY timeN LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cob", $cobert);
         $p_sql->bindValue(":com", $ini);
         $p_sql->bindValue(":fim", $end);
         $p_sql->execute();
         $dados[0] = $p_sql->fetch(\PDO::FETCH_ASSOC);
 
-        $sql = "SELECT timeN FROM log_eventos WHERE event_type = 'doRel' AND id_mapa BETWEEN :com AND :fim ORDER BY timeN DESC LIMIT 1";
+        $sql = "SELECT COUNT(id_user) AS Qtd FROM log_eventos WHERE cobert = :cob AND event_type = 'doRel' AND id_mapa BETWEEN :com AND :fim";
         $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":cob", $cobert);
         $p_sql->bindValue(":com", $ini);
         $p_sql->bindValue(":fim", $end);
         $p_sql->execute();
-        $dados[1] = $p_sql->fetch(\PDO::FETCH_ASSOC);
+        $conf = $p_sql->fetch(\PDO::FETCH_ASSOC);
+
+        if ($conf['Qtd'] < ($end - $ini + 1)) :
+            $dados[1]['timeN'] = "";
+        else :
+            $sql = "SELECT timeN FROM log_eventos WHERE cobert = :cob AND event_type = 'doRel' AND id_mapa BETWEEN :com AND :fim ORDER BY timeN DESC LIMIT 1";
+            $p_sql = Connect::conn()->prepare($sql);
+            $p_sql->bindValue(":cob", $cobert);
+            $p_sql->bindValue(":com", $ini);
+            $p_sql->bindValue(":fim", $end);
+            $p_sql->execute();
+            $dados[1] = $p_sql->fetch(\PDO::FETCH_ASSOC);
+        endif;
 
         return $dados;
     }

@@ -51,8 +51,9 @@ if (isset($_POST['btn-env-rel'])) :
 
         if ($isChange == 1) :
             MapasDAO::getInstance()->update($dados_quadra);
+            $cob = EventoDAO::getInstance()->cobertNow();
 
-            if (EventoDAO::getInstance()->isRel($i) == 1) :
+            if (EventoDAO::getInstance()->isRel($i, $cob) == 1) :
                 $event = new Eventos(null, $publicador->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
             else :
                 $event = new Eventos(null, $publicador->getId(), $dados_quadra->getId(), null, "doRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
@@ -61,11 +62,13 @@ if (isset($_POST['btn-env-rel'])) :
             EventoDAO::getInstance()->create($event);
         endif;
     }
+    MapasDAO::getInstance()->completTerr();
     redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
     exit();
 endif;
 
-$count = EventoDAO::getInstance()->relCount($publicador->getId());
+$cob = EventoDAO::getInstance()->cobertNow();
+$count = EventoDAO::getInstance()->relCount($publicador->getId(), $cob);
 
 for ($i = 0; $i < $count; $i++) :
     if (isset($_POST['btn-up-rel-' . $i])) :
@@ -92,7 +95,8 @@ for ($i = 0; $i < $count; $i++) :
         $event = new Eventos(null, $publicador->getId(), $id_map, null, "delRel", null, null, null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
 
-        $dados_quadra_old = EventoDAO::getInstance()->readLastRelatorio($id_map, $publicador->getId());
+        $cob = EventoDAO::getInstance()->cobertNow();
+        $dados_quadra_old = EventoDAO::getInstance()->readLastRelatorio($id_map, $publicador->getId(), $cob);
 
         if ($dados_quadra_old == 0) :
             $dados_quadra->setTrab(0);

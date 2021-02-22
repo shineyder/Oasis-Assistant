@@ -67,7 +67,6 @@ class MapasDAO
         $p_sql->bindValue(":cod", $mapas->getId());
 
         $p_sql->execute();
-        $this->completTerr();
         return 0;
     }
 
@@ -91,7 +90,7 @@ class MapasDAO
         return $dados;
     }
 
-    private function completTerr()
+    public function completTerr()
     {
         $sql = "SELECT * FROM mapas WHERE trab = :cod";
         $p_sql = Connect::conn()->prepare($sql);
