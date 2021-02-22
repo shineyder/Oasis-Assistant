@@ -67,9 +67,7 @@ class MapasDAO
         $p_sql->bindValue(":cod", $mapas->getId());
 
         $p_sql->execute();
-
         $this->completTerr();
-
         return 0;
     }
 

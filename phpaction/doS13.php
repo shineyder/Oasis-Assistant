@@ -7,6 +7,10 @@
 **/
 
 use Assistant\EventoDAO;
+use Assistant\MapasDAO;
+use Assistant\PublicadorDAO;
+
+header('Content-Type: text/html; charset=UTF-8');
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
@@ -18,7 +22,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 session_start();
 
 //declaramos uma variavel para monstarmos a tabela
-$dadosXls  = " ";
+
+$dadosXls  = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> ";
 $dadosXls .= "<table border='1'> ";
 $dadosXls .= "      <tr>";
 for ($i = 1; $i <= 24; $i++) :
@@ -30,13 +35,21 @@ $cobertNow = EventoDAO::getInstance()->cobertNow();
 for ($i = 1; $i <= $cobertNow; $i++) :
     $dadosXls .= "      <tr>";
     for ($j = 1; $j <= 24; $j++) :
-        $dadosXls .= "  <td colspan='2'>QUEM FEZ</td>";
+        $mapaDAO = MapasDAO::getInstance()->firstLast($i);
+        $id = EventoDAO::getInstance()->idS13($mapaDAO[0]['id'], $mapaDAO[1]['id']);
+        $name = PublicadorDAO::getInstance()->read(['id', ''], [$id['id_user'], ''], 'nome, sobrenome');
+        $name = $name->fetch(\PDO::FETCH_BOTH);
+        $dadosXls .= "  <td colspan='2'>" . $name['nome'] . " " . $name['sobrenome'] . "</td>";
     endfor;
     $dadosXls .= "      </tr>";
     $dadosXls .= "      <tr>";
     for ($j = 1; $j <= 24; $j++) :
-        $dadosXls .= "  <td>QUANDO COMEÇOU</td>";
-        $dadosXls .= "  <td>QUANDO TERMINOU</td>";
+        $mapaDAO = MapasDAO::getInstance()->firstLast($i);
+        $temp = EventoDAO::getInstance()->timeS13($mapaDAO[0]['id'], $mapaDAO[1]['id']);
+
+        $temp[0]['timeN'] = 
+        $dadosXls .= "          <td>" . $temp[0]['timeN'] . "</td>";
+        $dadosXls .= "          <td>" . $temp[1]['timeN'] . "</td>";
     endfor;
     $dadosXls .= "      </tr>";
 endfor;

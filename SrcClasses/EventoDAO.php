@@ -162,6 +162,35 @@ class EventoDAO
         return $cobertNow;
     }
 
+    public function idS13($ini, $end)
+    {
+        $sql = "SELECT id_user, COUNT(id_user) AS Qtd FROM log_eventos WHERE id_mapa BETWEEN :com AND :fim GROUP BY id_user ORDER BY COUNT(id_user) DESC LIMIT 1";
+        $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":com", $ini);
+        $p_sql->bindValue(":fim", $end);
+        $p_sql->execute();
+        return $p_sql->fetch(\PDO::FETCH_BOTH);
+    }
+
+    public function timeS13($ini, $end)
+    {
+        $sql = "SELECT timeN FROM log_eventos WHERE event_type = 'doRel' AND id_mapa BETWEEN :com AND :fim ORDER BY timeN LIMIT 1";
+        $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":com", $ini);
+        $p_sql->bindValue(":fim", $end);
+        $p_sql->execute();
+        $dados[0] = $p_sql->fetch(\PDO::FETCH_ASSOC);
+
+        $sql = "SELECT timeN FROM log_eventos WHERE event_type = 'doRel' AND id_mapa BETWEEN :com AND :fim ORDER BY timeN DESC LIMIT 1";
+        $p_sql = Connect::conn()->prepare($sql);
+        $p_sql->bindValue(":com", $ini);
+        $p_sql->bindValue(":fim", $end);
+        $p_sql->execute();
+        $dados[1] = $p_sql->fetch(\PDO::FETCH_ASSOC);
+
+        return $dados;
+    }
+
     public function completTerr()
     {
         $sql = "SELECT cobert FROM log_eventos ORDER BY id DESC LIMIT 1";
