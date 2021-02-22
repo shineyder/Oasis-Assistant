@@ -113,17 +113,8 @@ class PublicadorDAO
 
     public function readTable($desc, $action, $ini)
     {
-        if ($desc == '') :
-            $sql = "SELECT * FROM publicadores ORDER BY id LIMIT 1 OFFSET :ini";
-            $p_sql = Connect::conn()->prepare($sql);
-            $p_sql->bindValue(":ini", intval($ini, 10), \PDO::PARAM_INT);
-        else :
-            $sql = "SELECT * FROM publicadores ORDER BY :cod1 :cod2 LIMIT 1 OFFSET :ini";
-            $p_sql = Connect::conn()->prepare($sql);
-            $p_sql->bindValue(":cod1", $desc);
-            $p_sql->bindValue(":cod2", $action);
-            $p_sql->bindValue(":ini", intval($ini, 10), \PDO::PARAM_INT);
-        endif;
+        $sql = "SELECT * FROM publicadores ORDER BY $desc $action LIMIT 1 OFFSET $ini";
+        $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         return $this->showPublicador($p_sql->fetch(\PDO::FETCH_BOTH));
     }

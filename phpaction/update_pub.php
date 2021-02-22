@@ -103,7 +103,7 @@ $countPub = intval($countPub['id']);
 for ($i = 1; $i <= $countPub; $i++) :
     if (isset($_POST['btn-up-gru-' . $i])) :
         $pub = PublicadorDAO::getInstance()->readAll(["id", ""], [$i, ""]);
-        $pub->setGrupo($_POST['grup-' . $i]);
+        $pub->setGrupo($_POST['group-' . $i]);
         PublicadorDAO::getInstance()->update($pub);
 
         $publicador = unserialize($_SESSION['obj']);

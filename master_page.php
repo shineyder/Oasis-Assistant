@@ -43,7 +43,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 <h5>Lista de Publicadores: </h5>
 
 <?php
-$action = '';
+$action = 'ASC';
 $desc = 'id';
 if (isset($_GET["desc"])) :
     $desc = $_GET["desc"];
@@ -84,12 +84,6 @@ endif;
         <th>Definir Grupo</th>
         <th>Definir Acesso</th>
     </tr>
-    
-    <script>
-    $(document).ready(function(){
-        $('select').formSelect();
-    });
-    </script>
 
     <?php
     $countPub = PublicadorDAO::getInstance()->lastId();
@@ -116,16 +110,28 @@ endif;
         <!-- Modal Structure -->
         <div id="modal-up-gru-<?php echo $dadosPub->getId(); ?>" class="modal" style="height: 400px;">
             <div class="modal-content">
-                <p>Defina o Grupo ao qual o publicador pertence</p>
+                <p>Selecione o Grupo ao qual o publicador pertence</p>
                 <form action="phpaction/update_pub.php" method="POST">
-                    <select id="grup-<?php echo $dadosPub->getId(); ?>" name="grup-<?php echo $dadosPub->getId(); ?>">
-                        <option value="" disabled selected>Selecione uma opção</option>
-                        <option value="Porto Novo 1">Porto Novo 1</option>
-                        <option value="Porto Novo 2">Porto Novo 2</option>
-                        <option value="Presidente Médici">Presidente Médici</option>
-                        <option value="Morro do Sesi">Morro do Sesi</option>
-                        <option value="Del Porto">Del Porto</option>
-                    </select>
+                    <p><label>
+                        <input name="group-<?php echo $dadosPub->getId(); ?>" type="radio" value="Porto Novo 1" checked />
+                        <span>Porto Novo 1</span>
+                    </label></p>
+                    <p><label>
+                        <input name="group-<?php echo $dadosPub->getId(); ?>" type="radio" value="Porto Novo 2"/>
+                        <span>Porto Novo 2</span>
+                    </label></p>
+                    <p><label>
+                        <input name="group-<?php echo $dadosPub->getId(); ?>" type="radio" value="Presidente Médici"/>
+                        <span>Presidente Médici</span>
+                    </label></p>
+                    <p><label>
+                        <input name="group-<?php echo $dadosPub->getId(); ?>" type="radio" value="Morro do Sesi"/>
+                        <span>Morro do Sesi</span>
+                    </label></p>
+                    <p><label>
+                        <input name="group-<?php echo $dadosPub->getId(); ?>" type="radio" value="Del Porto"/>
+                        <span>Del Porto</span>
+                    </label></p>
                     <button type="submit" name="btn-up-gru-<?php echo $dadosPub->getId(); ?>" class="btn-small blue darken-2">Confirmar</button>
                     <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
                 </form>
@@ -137,25 +143,52 @@ endif;
             <div class="modal-content">
                 <p>Defina o nível de acesso do publicador</p>
                 <form action="phpaction/update_pub.php" method="POST">
-                    <select id="acc-<?php echo $dadosPub->getId(); ?>" name="acc-<?php echo $dadosPub->getId(); ?>">
-                        <option value="" disabled selected>Selecione uma opção</option>
-                        <option value="-1">Desassociado</option>
-                        <option value="1">Publicador nv 1</option>
-                        <option value="2">Publicador nv 2</option>
-                        <option value="3">Publicador nv 3</option>
-                        <option value="4">Publicador nv 4</option>
-                        <option value="5">Publicador nv 5</option>
-                        <option value="6">Publicador nv 6</option>
-                        <option value="7">Publicador nv 7</option>
-                        <option value="8">Publicador nv 8</option>
-                        <?php
-                        if ($publicador->getAccess() == 10) :
-                            ?>
-                            <option value="9">Publicador nv 9</option>
-                            <?php
-                        endif;
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="-1"/>
+                        <span>Desassociado</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="1" checked/>
+                        <span>Publicador nv 1</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="2"/>
+                        <span>Publicador nv 2</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="3"/>
+                        <span>Publicador nv 3</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="4"/>
+                        <span>Publicador nv 4</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="5"/>
+                        <span>Publicador nv 5</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="6"/>
+                        <span>Publicador nv 6</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="7"/>
+                        <span>Publicador nv 7</span>
+                    </label></p>
+                    <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="8"/>
+                        <span>Publicador nv 8</span>
+                    </label></p>
+                    <?php
+                    if ($publicador->getAccess() == 10) :
                         ?>
-                    </select>
+                        <p><label>
+                        <input name="acc-<?php echo $dadosPub->getId(); ?>" type="radio" value="9"/>
+                        <span>Publicador nv 9</span>
+                    </label></p>
+                        <?php
+                    endif;
+                    ?>
                     <button type="submit" name="btn-up-acc-<?php echo $dadosPub->getId(); ?>" class="btn-small blue darken-2">Confirmar</button>
                     <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
                 </form>
