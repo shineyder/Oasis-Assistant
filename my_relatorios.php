@@ -80,11 +80,11 @@ if (isset($_POST['btn-pub'])) :
     <ul class="collapsible">
         <?php
         $cob = EventoDAO::getInstance()->cobertNow();
-        for ($j = 1; $j < $cob; $j++) :
-            $count = EventoDAO::getInstance()->relCount($pub, $cob);
+        for ($j = 1; $j <= $cob; $j++) :
+            $count = EventoDAO::getInstance()->relCount($pub, $j);
 
             for ($i = 0; $i < $count; $i++) :
-                $dados = EventoDAO::getInstance()->readRelatorio($pub, $i, $cob);
+                $dados = EventoDAO::getInstance()->readRelatorio($pub, $i, $j);
 
                 if ($dados === null) :
                     continue;

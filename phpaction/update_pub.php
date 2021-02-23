@@ -114,6 +114,7 @@ for ($i = 1; $i <= $countPub; $i++) :
         $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltGrup", $pub->getGrupo(), null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
         redirect('http://oasisassistant.com/master_page.php');
+        exit();
     endif;
 
     if (isset($_POST['btn-up-acc-' . $i])) :
@@ -125,6 +126,7 @@ for ($i = 1; $i <= $countPub; $i++) :
         $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltAcc", $pub->getAccess(), null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
         redirect('http://oasisassistant.com/master_page.php');
+        exit();
     endif;
 endfor;
 ?>

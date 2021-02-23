@@ -7,13 +7,15 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Assistant\\Connect' => $baseDir . '/SrcClasses/Connect.php',
-    'Assistant\\PublicadorDAO' => $baseDir . '/SrcClasses/PublicadorDAO.php',
-    'Assistant\\Publicadores' => $baseDir . '/SrcClasses/Publicadores.php',
     'Assistant\\EventoDAO' => $baseDir . '/SrcClasses/EventoDAO.php',
     'Assistant\\Eventos' => $baseDir . '/SrcClasses/Eventos.php',
+    'Assistant\\FaleConosco' => $baseDir . '/SrcClasses/FaleConosco.php',
+    'Assistant\\FaleConoscoDAO' => $baseDir . '/SrcClasses/FaleConoscoDAO.php',
     'Assistant\\Mail' => $baseDir . '/SrcClasses/Mail.php',
     'Assistant\\Mapas' => $baseDir . '/SrcClasses/Mapas.php',
     'Assistant\\MapasDAO' => $baseDir . '/SrcClasses/MapasDAO.php',
+    'Assistant\\PublicadorDAO' => $baseDir . '/SrcClasses/PublicadorDAO.php',
+    'Assistant\\Publicadores' => $baseDir . '/SrcClasses/Publicadores.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'PHPMailer\\PHPMailer\\Exception' => $vendorDir . '/phpmailer/phpmailer/src/Exception.php',
     'PHPMailer\\PHPMailer\\OAuth' => $vendorDir . '/phpmailer/phpmailer/src/OAuth.php',

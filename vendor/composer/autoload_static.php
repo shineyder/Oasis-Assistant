@@ -30,13 +30,15 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
 
     public static $classMap = array (
         'Assistant\\Connect' => __DIR__ . '/../..' . '/SrcClasses/Connect.php',
-        'Assistant\\PublicadorDAO' => __DIR__ . '/../..' . '/SrcClasses/PublicadorDAO.php',
-        'Assistant\\Publicadores' => __DIR__ . '/../..' . '/SrcClasses/Publicadores.php',
         'Assistant\\EventoDAO' => __DIR__ . '/../..' . '/SrcClasses/EventoDAO.php',
         'Assistant\\Eventos' => __DIR__ . '/../..' . '/SrcClasses/Eventos.php',
+        'Assistant\\FaleConosco' => __DIR__ . '/../..' . '/SrcClasses/FaleConosco.php',
+        'Assistant\\FaleConoscoDAO' => __DIR__ . '/../..' . '/SrcClasses/FaleConoscoDAO.php',
         'Assistant\\Mail' => __DIR__ . '/../..' . '/SrcClasses/Mail.php',
         'Assistant\\Mapas' => __DIR__ . '/../..' . '/SrcClasses/Mapas.php',
         'Assistant\\MapasDAO' => __DIR__ . '/../..' . '/SrcClasses/MapasDAO.php',
+        'Assistant\\PublicadorDAO' => __DIR__ . '/../..' . '/SrcClasses/PublicadorDAO.php',
+        'Assistant\\Publicadores' => __DIR__ . '/../..' . '/SrcClasses/Publicadores.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
         'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',

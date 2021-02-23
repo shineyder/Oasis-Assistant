@@ -154,48 +154,43 @@ if (isset($_POST['btn-pro-plus'])) :
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        var_dump($_FILES);
 
-        // Verifica se é mesmo uma imagem
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if ($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
+        if ($_FILES["fileToUpload"]["error"] == 0) :
+            // Verifica se é mesmo uma imagem
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if ($check !== false) :
+                $uploadOk = 1;
+            else :
+                $uploadOk = 0;
+            endif;
+
+            // Verifica tamanho do arquivo
+            if ($_FILES["fileToUpload"]["size"] > 1000000) :
+                $uploadOk = 0;
+            endif;
+        else :
             $uploadOk = 0;
-        }
+        endif;
 
-        // Verifica se arquivo existe
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
-
-        // Verifica tamanho do arquivo
-        if ($_FILES["fileToUpload"]["size"] > 1000000) {
-            echo "Sorry, your file is too large.";
-            $uploadOk = 0;
-        }
-
-        // Verifica se houve algum erro
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // Faz upload se nada deu errado
-        } else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
+        if ($uploadOk == 0) :        // Verifica se houve algum erro
+            $target_file = '';
+        else :                      // Faz upload se nada deu errado
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) :
+            else :
+                $target_file = '';
+            endif;
+        endif;
 
         $message = "<h3>Uma solicita&ccedil;&atilde;o foi enviada no Oasis Assistant!</h3><br><p>Prezado irm&atilde;o Adriano Shineyder, houve uma solicitasolicita&ccedil;&atilde;o de resolu&ccedil;&atilde;o de problema n&atilde;o padr&atilde;o feita pelo usu&aacute;rio (ou dono do e-mail) <b>" . $detail2 . "</b>. Segue abaixo a descri&ccedil;&atilde;o do problema:</p><br>" . $detail . "";
 
         $email_send = new Mail();
         $email_send->sendMail('adrianoshineyder@hotmail.com', 'Adriano', 'Shineyder', $message, "Problema nao Padrao", $target_file);
         $_SESSION['mensagem'] = "Solicitação enviada!";
-        unlink($target_file);
+
+        if ($target_file != '') :
+            unlink($target_file);
+        endif;
+
         redirect('http://oasisassistant.com/');
         exit();
     endif;
