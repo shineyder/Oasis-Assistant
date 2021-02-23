@@ -42,30 +42,25 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
             
             <?php
             if (isset($_SESSION['logado'])) :
-                ?>  
-            
+                ?>
                 <div class="cabecalho-inf col s12 center">
                     <a href="home.php" class="btn-small blue darken-2">Ver Perfil</a>
 
                     <?php
                     if ($publicador->getAccess() >= 8) :
                         ?>
-
                     <a href="master_page.php" class="btn-small blue darken-2">Master Page</a>
-
                         <?php
                     endif;
                     ?>
-                    
                     <a href="my_relatorios.php" class="btn-small blue darken-2">Meus Relatórios</a>
                     <a href="vis_territorio.php" class="btn-small blue darken-2">Visualizar Territórios</a>
                     <a href="fale_conosco.php" class="btn-small blue darken-2">Fale Conosco</a>
+                    <a href="faq.php" class="btn-small blue darken-2">F.A.Q.</a>
                     <a href="phpaction/logout.php" class="btn-small red darken-2">Sair</a>
                 </div>
-
                 <?php
             endif;
             ?>
         </header>
-
         <div class="content">

@@ -148,10 +148,15 @@ class EventoDAO
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         $data = $p_sql->fetch(\PDO::FETCH_BOTH);
-        if ($data['event_type'] == "terrComp") :
-            $cobertNow = $data['cobert'] + 1;
+
+        if ($data != false) :
+            if ($data['event_type'] == "terrComp") :
+                $cobertNow = $data['cobert'] + 1;
+            else :
+                $cobertNow = $data['cobert'];
+            endif;
         else :
-            $cobertNow = $data['cobert'];
+            $cobertNow = 1;
         endif;
 
         return $cobertNow;
