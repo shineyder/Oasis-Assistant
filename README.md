@@ -1,7 +1,11 @@
-# Oasis Assistant ALPHA
+# Oasis Assistant BETA
  Projeto: Gerenciador de Territórios
  
- Versão do Projeto: 0.92
+ Versão do Projeto: 0.94
+ 
+ Notas da Atualização 0.94:
+ * Múltiplos erros corrigidos
+ * Sessão FAQ Criada
 
  Notas da Atualização 0.92:
  * Múltiplos erros corrigidos
@@ -9,11 +13,7 @@
  * Master Page tem acesso a todos os Tickets em aberto da sessão Fale Conosco
 
  Atualizações futuras: 
- * Criar um FAQ
  * Alterar exibição do menu para ocupar menos espaço
- 
- Nenhum teste em larga escala realizada. 
- Após a primeira bateria de testes o projeto será atualizado para versão BETA
  
  Propósito inicial (v1.0): Sistema de gerenciamento de territórios.
  
