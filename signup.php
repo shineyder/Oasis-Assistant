@@ -26,7 +26,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
 <div class="row">
-    <form class="col s12 push-s2 m8 push-m2" action="phpaction/create_pub.php" method="POST">
+    <form class="col s10 push-s1 m8 push-m2" action="phpaction/create_pub.php" method="POST">
         <div class="row">
             <div class="input-field col s4">
                 <input id="nome" name="nome" type="text" class="validate">

@@ -181,10 +181,10 @@ if (isset($_POST['btn-pro-plus'])) :
             endif;
         endif;
 
-        $message = "<h3>Uma solicita&ccedil;&atilde;o foi enviada no Oasis Assistant!</h3><br><p>Prezado irm&atilde;o Adriano Shineyder, houve uma solicitasolicita&ccedil;&atilde;o de resolu&ccedil;&atilde;o de problema n&atilde;o padr&atilde;o feita pelo usu&aacute;rio (ou dono do e-mail) <b>" . $detail2 . "</b>. Segue abaixo a descri&ccedil;&atilde;o do problema:</p><br>" . $detail . "";
+        $message = "<h3>Uma solicita&ccedil;&atilde;o foi enviada no Oasis Assistant!</h3><br><p>Prezado irm&atilde;o Adriano Shineyder, houve uma solicita&ccedil;&atilde;o de resolu&ccedil;&atilde;o de problema n&atilde;o padr&atilde;o feita pelo usu&aacute;rio (ou dono do e-mail) <b>" . $detail2 . "</b>. Segue abaixo a descri&ccedil;&atilde;o do problema:</p><br>" . $detail . "";
 
         $email_send = new Mail();
-        $email_send->sendMail('adrianoshineyder@hotmail.com', 'Adriano', 'Shineyder', $message, "Problema nao Padrao", $target_file);
+        $email_send->sendMail('adrianoshineyder@hotmail.com', 'Adriano', 'Shineyder', strtr($message, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_"), "Problema nao padrao", $target_file);
         $_SESSION['mensagem'] = "Solicitação enviada!";
 
         if ($target_file != '') :

@@ -74,7 +74,7 @@ if (isset($_GET["desc"])) :
 endif;
 ?>
 
-<table>
+<table style="width: 98%; word-wrap: break-word; table-layout: fixed;">
     <tr>
         <th><a href="master_page.php?desc=<?php echo 'nome';?>&action=<?php echo $action;?>">Nome</a></th>
         <th><a href="master_page.php?desc=<?php echo 'sobrenome';?>&action=<?php echo $action;?>">Sobrenome</a></th>
@@ -101,10 +101,10 @@ endif;
             <td><?php echo $dadosPub->getEmail(); ?></td>
             <td><?php echo $dadosPub->getGrupo(); ?></td>
             <td><?php echo $dadosPub->getAccess(); ?></td>
-            <td><a href="#modal-up-gru-<?php echo $i; ?>" class="btn-small blue darken-2 modal-trigger">Definir Grupo</a></td>
+            <td><a href="#modal-up-gru-<?php echo $dadosPub->getId(); ?>" class="btn-small blue darken-2 modal-trigger">Definir</a></td>
             <td>
-            <?php if ($publicador->getId() != $i) :?> 
-                <a href="#modal-up-acc-<?php echo $i; ?>" class="btn-small blue darken-4 modal-trigger">Definir Acesso</a>
+            <?php if ($publicador->getId() != $dadosPub->getId()) :?> 
+                <a href="#modal-up-acc-<?php echo $dadosPub->getId(); ?>" class="btn-small blue darken-4 modal-trigger">Definir</a>
             <?php endif; ?></td>
         </tr>
 
@@ -209,7 +209,7 @@ if ($countSol == 0) :
     echo "<p>Nenhuma solicitação em aberto com assunto Problema.</p>";
 else :
     ?>
-    <table>
+    <table style="width: 98%; word-wrap: break-word; table-layout: fixed;">
         <tr>
             <th>Nome</th>
             <th>Sobrenome</th>
@@ -237,7 +237,7 @@ else :
                 <td><?php echo $dadosSol->getTimeN(); ?></td>
                 <td><?php echo $dadosSol->getTicket(); ?></td>
                 <td><?php echo $dadosSol->getStatus(); ?></td>
-                <td><a href="#modal-up-sol-pro-<?php echo $i; ?>" class="btn-small blue darken-2 modal-trigger">Definir Status</a></td>
+                <td><a href="#modal-up-sol-pro-<?php echo $i; ?>" class="btn-small blue darken-2 modal-trigger">Definir</a></td>
                 <td>
             </tr>
 
@@ -279,7 +279,7 @@ if ($countSol == 0) :
     echo "<p>Nenhuma solicitação em aberto com assunto Sugestão.</p>";
 else :
     ?>
-    <table>
+    <table style="width: 98%; word-wrap: break-word; table-layout: fixed;">
         <tr>
             <th>Nome</th>
             <th>Sobrenome</th>
@@ -305,7 +305,7 @@ else :
                 <td><?php echo $dadosSol->getTimeN(); ?></td>
                 <td><?php echo $dadosSol->getTicket(); ?></td>
                 <td><?php echo $dadosSol->getStatus(); ?></td>
-                <td><a href="#modal-up-sol-sug-<?php echo $i; ?>" class="btn-small blue darken-2 modal-trigger">Definir Status</a></td>
+                <td><a href="#modal-up-sol-sug-<?php echo $i; ?>" class="btn-small blue darken-2 modal-trigger">Definir</a></td>
                 <td>
             </tr>
 
@@ -347,7 +347,7 @@ if ($countSol == 0) :
     echo "<p>Nenhuma solicitação em aberto com assunto Outro.</p>";
 else :
     ?>
-    <table>
+    <table style="width: 98%; word-wrap: break-word; table-layout: fixed;">
         <tr>
             <th>Nome</th>
             <th>Sobrenome</th>
@@ -373,7 +373,7 @@ else :
                 <td><?php echo $dadosSol->getTimeN(); ?></td>
                 <td><?php echo $dadosSol->getTicket(); ?></td>
                 <td><?php echo $dadosSol->getStatus(); ?></td>
-                <td><a href="#modal-up-sol-out-<?php echo $i; ?>" class="btn-small blue darken-2 modal-trigger">Definir Status</a></td>
+                <td><a href="#modal-up-sol-out-<?php echo $i; ?>" class="btn-small blue darken-2 modal-trigger">Definir</a></td>
                 <td>
             </tr>
 

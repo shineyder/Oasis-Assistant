@@ -58,7 +58,13 @@ if (isset($_POST['btn-talk'])) :
         endif;
     endif;
     $email_send = new Mail();
-    $email_send->sendMail("adrianoshineyder@hotmail.com", 'Adriano', 'Shineyder', $message, str_replace('ã', 'a', $subject), $target_file);
+
+    // Sanitização
+    $what = array( 'ä','ã','à','á','â','ê','ë','è','é','ï','ì','í','ö','õ','ò','ó','ô','ü','ù','ú','û','À','Á','Ã','Â','É','Í','Ó','Ú','ñ','Ñ','ç','Ç',' ','-','(',')',',',';',':','|','!','"','#','$','%','&','/','=','?','~','^','>','<','ª','º' );
+
+    $by   = array( 'a','a','a','a','a','e','e','e','e','i','i','i','o','o','o','o','o','u','u','u','u','A','A','A','A','E','I','O','U','n','n','c','C','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' );
+
+    $email_send->sendMail("adrianoshineyder@hotmail.com", 'Adriano', 'Shineyder', str_replace($what, $by, $message), str_replace($what, $by, $subject), $target_file);
     $_SESSION['mensagem'] = "Solicitação enviada!";
 
     if ($target_file != '') :

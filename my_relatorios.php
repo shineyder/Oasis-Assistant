@@ -68,7 +68,7 @@ endif;
 ?>
 
 <?php
-if (isset($_POST['btn-pub'])) :
+if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador->getAccess() < 8) :
     if (isset($ver)) :
         $pub = $publicador->getId();
     else :
@@ -146,11 +146,6 @@ if (isset($_POST['btn-pub'])) :
 
                                     <input id="n_edi_<?php echo $i; ?>" name="n_edi_<?php echo $i; ?>" type="number" class="validate" value=<?php echo $dados->getDesc4()?> min="0">
                                     <label for="n_edi_<?php echo $i; ?>">Número de Edifícios</label><br><br>
-                                    
-                                    <label>
-                                        <input type="checkbox" id="trab_<?php echo $i; ?>" name="trab_<?php echo $i; ?>" <?php echo(($dados->getDesc1() === "1") ? "checked = 'checked'" : "")?>>
-                                        <span> Quadra Trabalhada</span>
-                                    </label><br><br>
 
                                     <button type="submit" name="btn-up-rel-<?php echo $i; ?>" class="btn-small blue darken-2">Confirmar</button>
                                     <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>

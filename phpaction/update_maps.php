@@ -74,7 +74,6 @@ for ($i = 0; $i < $count; $i++) :
     if (isset($_POST['btn-up-rel-' . $i])) :
         $id_map = $_POST['id_map'];
         $dados_quadra = MapasDAO::getInstance()->read($id_map);
-        $dados_quadra->setTrab(isset($_POST['trab_' . $i]) ? "1" : "0");
         $dados_quadra->setRes($_POST['n_res_' . $i]);
         $dados_quadra->setCom($_POST['n_com_' . $i]);
         $dados_quadra->setEdi($_POST['n_edi_' . $i]);
@@ -95,8 +94,7 @@ for ($i = 0; $i < $count; $i++) :
         $event = new Eventos(null, $publicador->getId(), $id_map, null, "delRel", null, null, null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
 
-        $cob = EventoDAO::getInstance()->cobertNow();
-        $dados_quadra_old = EventoDAO::getInstance()->readLastRelatorio($id_map, $publicador->getId(), $cob);
+        $dados_quadra_old = EventoDAO::getInstance()->readLastRelatorio($id_map);
 
         if ($dados_quadra_old == 0) :
             $dados_quadra->setTrab(0);
@@ -105,7 +103,7 @@ for ($i = 0; $i < $count; $i++) :
             $dados_quadra->setEdi(0);
             MapasDAO::getInstance()->update($dados_quadra);
         else :
-            $dados_quadra->setTrab($dados_quadra_old->getDesc1());
+            $dados_quadra->setTrab(0);
             $dados_quadra->setRes($dados_quadra_old->getDesc2());
             $dados_quadra->setCom($dados_quadra_old->getDesc3());
             $dados_quadra->setEdi($dados_quadra_old->getDesc4());

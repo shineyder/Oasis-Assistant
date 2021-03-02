@@ -1,7 +1,11 @@
 # Oasis Assistant BETA
  Projeto: Gerenciador de Territórios
  
- Versão do Projeto: 0.94
+ Versão do Projeto: 0.98
+
+ Notas da Atualização 0.98:
+ * Múltiplos erros corrigidos
+ * Problemas com a formatação corrigidos
  
  Notas da Atualização 0.94:
  * Múltiplos erros corrigidos

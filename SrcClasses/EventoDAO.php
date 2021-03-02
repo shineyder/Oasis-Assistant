@@ -98,13 +98,11 @@ class EventoDAO
         endif;
     }
 
-    public function readLastRelatorio($desc, $desc2, $cobert)
+    public function readLastRelatorio($desc)
     {
-        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod AND id_user <> :cod2  AND (event_type = 'doRel' OR event_type = 'attRel') AND cobert = :cob ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT * FROM log_eventos WHERE id_mapa = :cod AND (event_type = 'doRel' OR event_type = 'attRel') ORDER BY id DESC LIMIT 1";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->bindValue(":cod", intval($desc, 10), \PDO::PARAM_INT);
-        $p_sql->bindValue(":cod2", intval($desc2, 10), \PDO::PARAM_INT);
-        $p_sql->bindValue(":cob", intval($cobert, 10), \PDO::PARAM_INT);
         $p_sql->execute();
 
         if ($p_sql->rowCount() != 0) :

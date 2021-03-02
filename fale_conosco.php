@@ -41,7 +41,7 @@ require_once 'includes/message.php';
     <p>Envie sugestões ou relate problemas</p>
     
     <div class="row">
-        <form class="col s12 push-s2 m8 push-m2" action="phpaction/talk.php" method="POST" enctype="multipart/form-data">
+        <form class="col s10 push-s1 m8 push-m2" action="phpaction/talk.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" id="id" name="id" type="text" value=<?php echo $publicador->getId()?>>
             <input type="hidden" id="nome" name="nome" type="text" value=<?php echo $publicador->getNome()?>>
             <input type="hidden" id="sobrenome" name="sobrenome" type="text" value=<?php echo $publicador->getSobrenome()?>>
