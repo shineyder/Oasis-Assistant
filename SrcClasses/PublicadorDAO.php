@@ -113,7 +113,7 @@ class PublicadorDAO
 
     public function readTable($desc, $action, $ini)
     {
-        $sql = "SELECT * FROM publicadores ORDER BY $desc $action LIMIT 1 OFFSET $ini";
+        $sql = "SELECT * FROM Publicadores ORDER BY $desc $action LIMIT 1 OFFSET $ini";
         $p_sql = Connect::conn()->prepare($sql);
         $p_sql->execute();
         return $this->showPublicador($p_sql->fetch(\PDO::FETCH_BOTH));
