@@ -1,10 +1,11 @@
 <?php
+
 session_start();
+
 /** Página:
 *       Oculta - Ação PHP - Enviar sugestão
 *   Conteúdo:
-*       Recebe a mensagem do Fale conosco e envia por email para o ADM.
-*/
+*       Recebe a mensagem do Fale conosco e envia por email para o ADM.*/
 
 use Assistant\FaleConosco;
 use Assistant\FaleConoscoDAO;

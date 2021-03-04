@@ -1,13 +1,11 @@
 <?php
+
 session_start();
-?>
-<!--
-Página:
-    Meus Relatórios
-Conteúdo:
-    Apresenta todos os relatórios feitos pelo usuário e permite alterar ou deletar relatórios feitos nas últimas 24hrs.
--->
-<?php
+
+/** Página:
+*     Meus Relatórios
+*   Conteúdo:
+*     Apresenta todos os relatórios feitos pelo usuário e permite alterar ou deletar relatórios feitos nas últimas 24hrs.*/
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';

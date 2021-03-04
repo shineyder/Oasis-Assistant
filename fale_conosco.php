@@ -1,14 +1,12 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Fale Conosco
-Conteúdo:
-    Sessão para o usuário enviar sugestões ou relatar problemas. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Fale Conosco
+*   Conteúdo:
+*     Sessão para o usuário enviar sugestões ou relatar problemas.*/
+
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 

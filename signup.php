@@ -1,14 +1,12 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Criar Conta
-Conteúdo:
-    Formulário para criar conta no sistema
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Criar Conta
+*   Conteúdo:
+*     Formulário para criar conta no sistema*/
+
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 

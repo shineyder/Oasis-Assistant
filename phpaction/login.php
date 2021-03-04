@@ -1,14 +1,12 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Oculta - Ação PHP - LogIn
-Conteúdo:
-    Confere usuário e senha e inicia sessão. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Oculta - Ação PHP - LogIn
+*   Conteúdo:
+*     Confere usuário e senha e inicia sessão.*/
+
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
@@ -27,7 +25,7 @@ if (isset($_POST['btn-entrar'])) :
         exit();
     else :
         $PublicadorDAO = PublicadorDAO::getInstance()->read('usuario', $login, 'usuario');
-        
+
         if ($PublicadorDAO->rowCount() == 1) :
             $senha = md5($senha);
             $PublicadorDAO = PublicadorDAO::getInstance()->logIn($login, $senha);
@@ -54,4 +52,3 @@ if (isset($_POST['btn-entrar'])) :
         endif;
     endif;
 endif;
-?>

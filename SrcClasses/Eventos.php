@@ -8,7 +8,7 @@ class Eventos
     private $idUser;
     private $idMap;
     private $time;
-    private $eventType; //criatePub OK!, attPub OK!, recPub OK!, delPub (do), doRel (test), attRel (do), delRel (do), terrComp (test)
+    private $eventType;
     private $data1;
     private $desc1;
     private $data2;

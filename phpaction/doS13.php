@@ -1,11 +1,11 @@
 <?php
+
 session_start();
 
-//* Página:
-/*    Oculta - Ação PHP - Emitir S13
-/*  Conteúdo:
-/*    Lê informações do banco de dados e cria a planilha da S13.
-**/
+/** Página:
+*    Oculta - Ação PHP - Emitir S13
+*  Conteúdo:
+*    Lê informações do banco de dados e cria a planilha da S13.**/
 
 use Assistant\EventoDAO;
 use Assistant\MapasDAO;

@@ -1,14 +1,12 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Home
-Conteúdo:
-    Dados do Usuário, opções de trocar email e senha. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Home
+* Conteúdo:
+*     Dados do Usuário, opções de trocar email e senha.*/
+
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 

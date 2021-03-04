@@ -11,7 +11,7 @@ class Publicadores
     private $email;
     private $usuario;
     private $senha;
-    private $access; // -1 = Desassociado; 0 = E-mail não autenticado; 1 = Publicador; 8 = Ancião; 9 = Ancião Plus; 10 = Mestre Supremo
+    private $access; // -1 = Desassociado; 0 = E-mail não autenticado; 1 = Conta em analise; 2 = Publicador; 8 = Ancião; 9 = Ancião Plus; 10 = Mestre Supremo
 
     public function __construct($id, $nome, $sobrenome, $grupo, $email, $usuario, $senha, $access)
     {

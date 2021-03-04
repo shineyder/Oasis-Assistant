@@ -1,10 +1,3 @@
-<!--
-Página:
-    Cabeçalho
-Conteúdo:
-    Abertura das tags, inclusão de todas as bibliotecas utilizadas, logo e menu de navegação.
--->
-
 <?php
 
 // Função redirect

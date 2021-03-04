@@ -1,13 +1,11 @@
 <?php
+
 session_start();
-?>
-<!--
-Página:
-    Problemas de login
-Conteúdo:
-    Sessão com opção de recuperar senha e reenviar email de autenticação. 
--->
-<?php
+
+/** Página:
+*     Problemas de login
+*   Conteúdo:
+*     Sessão com opção de recuperar senha e reenviar email de autenticação.*/
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';

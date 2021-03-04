@@ -1,14 +1,11 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Oculta - Ação PHP - Atualizar mapas
-Conteúdo:
-    Atualiza a informação do servidor com respeito aos dados das quadras. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Oculta - Ação PHP - Atualizar mapas
+*   Conteúdo:
+*     Atualiza a informação do servidor com respeito aos dados das quadras.*/
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';

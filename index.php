@@ -1,13 +1,12 @@
 <?php
+
 session_start();
-?>
-<!--
-Página:
-    Inicial
-Conteúdo:
-    Área de LogIn, opções de Criar Conta e Problemas de LogIn. 
--->
-<?php
+
+/** Página:
+*     Inicial
+*   Conteúdo:
+*     Área de LogIn, opções de Criar Conta e Problemas de LogIn.*/
+
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 

@@ -1,14 +1,12 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Oculta - Ação PHP - LogOut
-Conteúdo:
-    Encerra a sessão. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Oculta - Ação PHP - LogOut
+*   Conteúdo:
+*     Encerra a sessão.*/
+
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 

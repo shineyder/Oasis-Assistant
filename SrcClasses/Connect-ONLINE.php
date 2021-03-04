@@ -1,6 +1,8 @@
 <?php
 
-namespace Assistant;
+namespace Assistant\Online;
+
+//remover \online e renomear para Connect.php, substituindo o que tiver
 
 class Connect
 {

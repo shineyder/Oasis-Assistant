@@ -1,14 +1,11 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Oculta - Ação PHP - Criar publicador
-Conteúdo:
-    Insere informação no servidor com respeito a novos Publicadores. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Oculta - Ação PHP - Criar publicador
+*   Conteúdo:
+*     Insere informação no servidor com respeito a novos Publicadores.*/
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';

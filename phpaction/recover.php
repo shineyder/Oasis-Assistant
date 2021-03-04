@@ -1,16 +1,14 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Oculta - Ação PHP - Recuperar cadastro
-Conteúdo:
-    Recebe o problema encontrado ao fazer Login e o soluciona.
-Detalhes:
-    Existem três problemas com soluções padrão: Perca de usuário, perca de senha e email de autenticação não recebido. Caso o usuário não tenha nenhum desses três problemas, ele poderá descrever o que está ocorrendo e mandar uma foto, essas informações serão encaminhadas ao administrador.
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Oculta - Ação PHP - Recuperar cadastro
+*   Conteúdo:
+*     Recebe o problema encontrado ao fazer Login e o soluciona.
+*   Detalhes:
+*     Existem três problemas com soluções padrão: Perca de usuário, perca de senha e email de autenticação não recebido. Caso o usuário não tenha nenhum desses três problemas, ele poderá descrever o que está ocorrendo e mandar uma foto, essas informações serão encaminhadas ao administrador.*/
+
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 

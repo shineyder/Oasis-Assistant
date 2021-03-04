@@ -1,14 +1,12 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Oculta - Ação PHP - Atualizar Solicitação
-Conteúdo:
-    Atualiza a informação do servidor com respeito ao status da solicitação. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Oculta - Ação PHP - Atualizar Solicitação
+*   Conteúdo:
+*     Atualiza a informação do servidor com respeito ao status da solicitação.*/
+
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 

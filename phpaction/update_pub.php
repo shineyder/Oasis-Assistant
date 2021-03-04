@@ -1,14 +1,11 @@
 <?php
-session_start();
-?>
-<!--
-Página:
-    Oculta - Ação PHP - Atualizar Publicadores
-Conteúdo:
-    Atualiza a informação do servidor com respeito aos dados dos Publicadores. 
--->
 
-<?php
+session_start();
+
+/** Página:
+*     Oculta - Ação PHP - Atualizar Publicadores
+*   Conteúdo:
+*     Atualiza a informação do servidor com respeito aos dados dos Publicadores.*/
 
 // Função redirect
 
@@ -129,4 +126,3 @@ for ($i = 1; $i <= $countPub; $i++) :
         exit();
     endif;
 endfor;
-?>

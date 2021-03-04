@@ -1,13 +1,11 @@
 <?php
+
 session_start();
-?>
-<!--
-Página:
-    Master
-Conteúdo:
-    Apresenta todos os usuários cadastrados, histórico de alterações nos cadastros, histórico de relatórios emitidos e a opção de emitir a S-13. Nível de visibilidade da página será definido pelo nível de acesso do usuário
--->
-<?php
+
+/** Página:
+*     Master
+*   Conteúdo:
+*     Apresenta todos os usuários cadastrados, histórico de alterações nos cadastros, histórico de relatórios emitidos e a opção de emitir a S-13. Nível de visibilidade da página será definido pelo nível de acesso do usuário*/
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
