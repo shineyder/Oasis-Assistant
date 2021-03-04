@@ -1,9 +1,24 @@
 <?php
 
+
+
+
+
+
+
+
+
+
+
 namespace Composer;
 
 use Composer\Autoload\ClassLoader;
 use Composer\Semver\VersionParser;
+
+
+
+
+
 
 class InstalledVersions
 {
@@ -15,11 +30,20 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f30f92a7f7e3a673e81c60dc5447f6aea6d518e7',
+    'reference' => 'dabc71989b22c614a5752ef0f3e4001d531aea08',
     'name' => 'oasisassistant-php/composer-autoloading',
   ),
   'versions' => 
   array (
+    'almasaeed2010/adminlte' => 
+    array (
+      'pretty_version' => 'v3.0.5',
+      'version' => '3.0.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6b8b69261f1aacbb4be037c934f3c3652e6dff27',
+    ),
     'oasisassistant-php/composer-autoloading' => 
     array (
       'pretty_version' => 'dev-main',
@@ -27,7 +51,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f30f92a7f7e3a673e81c60dc5447f6aea6d518e7',
+      'reference' => 'dabc71989b22c614a5752ef0f3e4001d531aea08',
     ),
     'phpmailer/phpmailer' => 
     array (
@@ -43,6 +67,12 @@ private static $installed = array (
 private static $canGetVendors;
 private static $installedByVendor = array();
 
+
+
+
+
+
+
 public static function getInstalledPackages()
 {
 $packages = array();
@@ -50,12 +80,21 @@ foreach (self::getInstalled() as $installed) {
 $packages[] = array_keys($installed['versions']);
 }
 
+
 if (1 === \count($packages)) {
 return $packages[0];
 }
 
 return array_keys(array_flip(\call_user_func_array('array_merge', $packages)));
 }
+
+
+
+
+
+
+
+
 
 public static function isInstalled($packageName)
 {
@@ -68,6 +107,19 @@ return true;
 return false;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 public static function satisfies(VersionParser $parser, $packageName, $constraint)
 {
 $constraint = $parser->parseConstraints($constraint);
@@ -75,6 +127,15 @@ $provided = $parser->parseConstraints(self::getVersionRanges($packageName));
 
 return $provided->matches($constraint);
 }
+
+
+
+
+
+
+
+
+
 
 public static function getVersionRanges($packageName)
 {
@@ -102,6 +163,10 @@ return implode(' || ', $ranges);
 
 throw new \OutOfBoundsException('Package "' . $packageName . '" is not installed');
 }
+
+
+
+
 
 public static function getVersion($packageName)
 {
