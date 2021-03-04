@@ -61,7 +61,7 @@ if (isset($_POST['btn-env-rel'])) :
         endif;
     }
     MapasDAO::getInstance()->completTerr();
-    redirect('https://oasisassistant.000webhostapp.com/fazer_rel.php#' . $_POST['mapactive']);
+    redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
     exit();
 endif;
 
@@ -80,7 +80,7 @@ for ($i = 0; $i < $count; $i++) :
         $event = new Eventos(null, $publicador->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
         EventoDAO::getInstance()->create($event);
 
-        redirect('https://oasisassistant.000webhostapp.com/my_relatorios.php');
+        redirect('http://oasisassistant.com/my_relatorios.php');
         exit();
     endif;
 
@@ -108,7 +108,7 @@ for ($i = 0; $i < $count; $i++) :
             MapasDAO::getInstance()->update($dados_quadra);
         endif;
 
-        redirect('https://oasisassistant.000webhostapp.com/my_relatorios.php');
+        redirect('http://oasisassistant.com/my_relatorios.php');
         exit();
     endif;
 endfor;

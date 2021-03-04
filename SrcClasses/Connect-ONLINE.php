@@ -2,7 +2,7 @@
 
 namespace Assistant\Online;
 
-//remover \online e renomear para Connect.php, substituindo o que tiver
+//renomear Connect.php para Connect-OFFLINE.php, remover \online do namespace e renomear esse arquivo para Connect.php
 
 class Connect
 {

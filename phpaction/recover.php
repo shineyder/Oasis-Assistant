@@ -27,12 +27,12 @@ if (isset($_POST['btn-pro'])) :
 
     if (empty($tipo)) :
         $_SESSION['mensagem'] = "Nenhum problema selecionado";
-        redirect('https://oasisassistant.000webhostapp.com/problem.php');
+        redirect('http://oasisassistant.com/problem.php');
         exit();
     else :
         if (empty($detail[0]) or (isset($_POST['rec2']) ? empty($detail[1]) : false)) :
             $_SESSION['mensagem'] = "Informações solicitadas não preenchidas";
-            redirect('https://oasisassistant.000webhostapp.com/problem.php');
+            redirect('http://oasisassistant.com/problem.php');
             exit();
         else :
             switch ($tipo) {
@@ -42,7 +42,7 @@ if (isset($_POST['btn-pro'])) :
 
                     if ($publicador->getAccess() === null) :
                         $_SESSION['mensagem'] = "E-mail não cadastrado";
-                        redirect('https://oasisassistant.000webhostapp.com/problem.php');
+                        redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
                         $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $publicador->getNome() . " " . $publicador->getSobrenome() . ", houve uma solicita&ccedil;&atilde;o de recuperar usu&aacute;rio em sua conta.<br>Seu nome de usu&aacute;rio &eacute; <b>" . $publicador->getUsuario() . "</b>.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
@@ -54,7 +54,7 @@ if (isset($_POST['btn-pro'])) :
                         $event = new Eventos(null, $publicador->getId(), null, null, "recPub", "RecUser", $publicador->getUsuario(), null, null, null, null, null, null, null);
                         EventoDAO::getInstance()->create($event);
 
-                        redirect('https://oasisassistant.000webhostapp.com/');
+                        redirect('http://oasisassistant.com/');
                         exit();
                     endif;
                     break;
@@ -66,7 +66,7 @@ if (isset($_POST['btn-pro'])) :
 
                     if ($publicador->getAccess() === null) :
                         $_SESSION['mensagem'] = "E-mail e/ou Usuário não cadastrado";
-                        redirect('https://oasisassistant.000webhostapp.com/problem.php');
+                        redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
                         $publicador->setSenha('e10adc3949ba59abbe56e057f20f883e');
@@ -81,7 +81,7 @@ if (isset($_POST['btn-pro'])) :
                         $event = new Eventos(null, $publicador->getId(), null, null, "recPub", "RecSenha", "e10adc3949ba59abbe56e057f20f883e", null, null, null, null, null, null, null);
                         EventoDAO::getInstance()->create($event);
 
-                        redirect('https://oasisassistant.000webhostapp.com/');
+                        redirect('http://oasisassistant.com/');
                         exit();
                     endif;
                     break;
@@ -92,7 +92,7 @@ if (isset($_POST['btn-pro'])) :
 
                     if ($publicador->getAccess() === null) :
                         $_SESSION['mensagem'] = "Usuário não cadastrado";
-                        redirect('https://oasisassistant.000webhostapp.com/problem.php');
+                        redirect('http://oasisassistant.com/problem.php');
                         exit();
                     else :
                         $data_type[0] = "usuario";
@@ -103,7 +103,7 @@ if (isset($_POST['btn-pro'])) :
 
                         if ($publicador->getAccess() === null) :
                             $_SESSION['mensagem'] = "E-mail da conta já foi autenticado";
-                            redirect('https://oasisassistant.000webhostapp.com/problem.php');
+                            redirect('http://oasisassistant.com/problem.php');
                             exit();
                         else :
                             $data_type[0] = "usuario";
@@ -114,10 +114,10 @@ if (isset($_POST['btn-pro'])) :
 
                             if ($publicador->getAccess() === null) :
                                 $_SESSION['mensagem'] = "E-mail informado no cadastro não confere";
-                                redirect('https://oasisassistant.000webhostapp.com/problem.php');
+                                redirect('http://oasisassistant.com/problem.php');
                                 exit();
                             else :
-                                $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $publicador->getNome() . " " . $publicador->getSobrenome() . ", houve uma solicita&ccedil;&atilde;o para reenviar o email de autentica&ccedil;&atilde;o em sua conta. Para evitar que tal problema se repita, ser&aacute; enviado um email automaticamente e pouco depois o mesmo e-mail ser&aacute; enviado manualmente, favor desconsiderar duplicatas.<br>Sua conta j&aacute; est&aacute; quase pronta, para concluir seu cadastro e liberar seu acesso basta clicar no link abaixo:<br><br>http://oasisassistant.com/autenticate.php?cd=" . md5($publicador->getUsuario()) . "<br><br>No Oasis Assistant voc&ecirc; ter&aacute; acesso a diversas informa&ccedil;&otilde;es &uacute;teis para o servi&ccedil;o de campo local, fa&ccedil;a bom proveito dessa ferramenta.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
+                                $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $publicador->getNome() . " " . $publicador->getSobrenome() . ", houve uma solicita&ccedil;&atilde;o para reenviar o email de autentica&ccedil;&atilde;o em sua conta. Para evitar que tal problema se repita, ser&aacute; enviado um email automaticamente e pouco depois o mesmo e-mail ser&aacute; enviado manualmente, favor desconsiderar duplicatas.<br>Sua conta j&aacute; est&aacute; quase pronta, para concluir seu cadastro e liberar seu acesso basta clicar no link abaixo:<br><br>http://http://oasisassistant.com/autenticate.php?cd=" . md5($publicador->getUsuario()) . "<br><br>No Oasis Assistant voc&ecirc; ter&aacute; acesso a diversas informa&ccedil;&otilde;es &uacute;teis para o servi&ccedil;o de campo local, fa&ccedil;a bom proveito dessa ferramenta.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
 
                                 $email_send = new Mail();
                                 $email_send->sendMail($publicador->getEmail(), $publicador->getNome(), $publicador->getSobrenome(), $message, "Reenvio de email de autenticacao", "");
@@ -127,7 +127,7 @@ if (isset($_POST['btn-pro'])) :
 
                                 $_SESSION['mensagem'] = "E-mail de autenticação foi reenviado!";
 
-                                redirect('https://oasisassistant.000webhostapp.com/');
+                                redirect('http://oasisassistant.com/');
                                 exit();
                             endif;
                         endif;
@@ -144,7 +144,7 @@ if (isset($_POST['btn-pro-plus'])) :
 
     if (empty($detail) or empty($detail2)) :
         $_SESSION['mensagem'] = "Informações solicitadas não preenchidas";
-        redirect('https://oasisassistant.000webhostapp.com/problem.php');
+        redirect('http://oasisassistant.com/problem.php');
         exit();
     else :
         $target_dir = "../uploads/";
@@ -188,7 +188,7 @@ if (isset($_POST['btn-pro-plus'])) :
             unlink($target_file);
         endif;
 
-        redirect('https://oasisassistant.000webhostapp.com/');
+        redirect('http://oasisassistant.com/');
         exit();
     endif;
 endif;

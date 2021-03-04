@@ -72,6 +72,6 @@ if (isset($_POST['btn-talk'])) :
     $faleConosco = new FaleConosco(null, $id, $subject, $message, null, null, null);
     FaleConoscoDAO::getInstance()->create($faleConosco);
 
-    redirect('https://oasisassistant.000webhostapp.com/');
+    redirect('http://oasisassistant.com/');
     exit();
 endif;

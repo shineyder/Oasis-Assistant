@@ -13,7 +13,11 @@
     "phpSniffer.snippetExcludeSniffs": [
         
     ],
-    "editor.codeActionsOnSave": null,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+      },
+      "editor.formatOnSave": true,
     "editor.rulers": [
 
     

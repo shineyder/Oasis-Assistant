@@ -15,7 +15,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 //Verificação
 if (isset($_SESSION['logado'])) :
-    redirect('https://oasisassistant.000webhostapp.com/home.php');
+    redirect('http://oasisassistant.com/home.php');
     exit();
 endif;
 

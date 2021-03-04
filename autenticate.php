@@ -19,7 +19,7 @@ use Assistant\PublicadorDAO;
 
 //Verificação
 if (!isset($_GET['cd'])) :
-    redirect('https://oasisassistant.000webhostapp.com/');
+    redirect('http://oasisassistant.com/');
     exit();
 endif;
 $is_ok = 0;

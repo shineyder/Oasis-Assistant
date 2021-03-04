@@ -25,7 +25,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-pro-' . $i];
         $dadosSol->setStatus($statusN);
         FaleConoscoDAO::getInstance()->update($dadosSol);
-        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page.php');
         exit();
     endif;
 endfor;
@@ -39,7 +39,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-sug-' . $i];
         $dadosSol->setStatus($statusN);
         FaleConoscoDAO::getInstance()->update($dadosSol);
-        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page.php');
         exit();
     endif;
 endfor;
@@ -53,7 +53,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-out-' . $i];
         $dadosSol->setStatus($statusN);
         FaleConoscoDAO::getInstance()->update($dadosSol);
-        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page.php');
         exit();
     endif;
 endfor;

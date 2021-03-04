@@ -18,7 +18,7 @@ use Assistant\PublicadorDAO;
 
 //Verificação
 if (!isset($_SESSION['logado'])) :
-    redirect('https://oasisassistant.000webhostapp.com/');
+    redirect('http://oasisassistant.com/');
     exit();
 endif;
 
@@ -27,7 +27,7 @@ $publicador = unserialize($_SESSION['obj']);
 
 //Verificação de nível de acesso
 if ($publicador->getAccess() < 8) :
-    redirect('https://oasisassistant.000webhostapp.com/home.php');
+    redirect('http://oasisassistant.com/home.php');
     exit();
 endif;
 
@@ -38,7 +38,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
 <h5>Emitir S-13:</h5>
-<a target="_blank" href="https://oasisassistant.000webhostapp.com/phpaction/doS13.php" class="btn-small blue darken-4">S-13</a><br>
+<a target="_blank" href="http://oasisassistant.com/phpaction/doS13.php" class="btn-small blue darken-4">S-13</a><br>
 <h5>Lista de Publicadores: </h5>
 
 <?php
