@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Oculta - Ação PHP - Atualizar Solicitação
@@ -6,16 +9,11 @@ Conteúdo:
 -->
 
 <?php
-
 // Função redirect
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-
-// Sessão
-session_start();
 
 use Assistant\FaleConoscoDAO;
 
@@ -29,7 +27,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-pro-' . $i];
         $dadosSol->setStatus($statusN);
         FaleConoscoDAO::getInstance()->update($dadosSol);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
         exit();
     endif;
 endfor;
@@ -43,7 +41,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-sug-' . $i];
         $dadosSol->setStatus($statusN);
         FaleConoscoDAO::getInstance()->update($dadosSol);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
         exit();
     endif;
 endfor;
@@ -57,7 +55,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-out-' . $i];
         $dadosSol->setStatus($statusN);
         FaleConoscoDAO::getInstance()->update($dadosSol);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
         exit();
     endif;
 endfor;

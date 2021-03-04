@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Oculta - Ação PHP - Atualizar Publicadores
@@ -14,9 +17,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-// Sessão
-session_start();
-
 use Assistant\PublicadorDAO;
 use Assistant\EventoDAO;
 use Assistant\Eventos;
@@ -27,7 +27,7 @@ if (isset($_POST['btn-up-email'])) :
 
     if (empty($email)) :
         $_SESSION['mensagem'] = "Campo Novo E-mail não foi preenchido";
-        redirect('http://oasisassistant.com/home.php');
+        redirect('https://oasisassistant.000webhostapp.com/home.php');
         exit();
     else :
         $data_type = ['id', 'email'];
@@ -36,7 +36,7 @@ if (isset($_POST['btn-up-email'])) :
 
         if ($publicadorup->getAccess() !== null) :
             $_SESSION['mensagem'] = "E-mail antigo e novo são iguais";
-            redirect('http://oasisassistant.com/home.php');
+            redirect('https://oasisassistant.000webhostapp.com/home.php');
             exit();
         else :
             $data_type = ['id', ""];
@@ -50,7 +50,7 @@ if (isset($_POST['btn-up-email'])) :
             $event = new Eventos(null, $publicadorup->getId(), null, null, "attPub", "AltEmail", $publicadorup->getEmail(), null, null, null, null, null, null, null);
             EventoDAO::getInstance()->create($event);
 
-            redirect('http://oasisassistant.com/home.php');
+            redirect('https://oasisassistant.000webhostapp.com/home.php');
             exit();
         endif;
     endif;
@@ -64,12 +64,12 @@ if (isset($_POST['btn-up-senha'])) :
 
     if (empty($senha_old) or empty($senha) or empty($senha_conf)) :
         $_SESSION['mensagem'] = "Todos os campos precisam ser preenchidos";
-        redirect('http://oasisassistant.com/home.php');
+        redirect('https://oasisassistant.000webhostapp.com/home.php');
         exit();
     else :
         if ($senha != $senha_conf) :
             $_SESSION['mensagem'] = "As novas senhas preenchidas não são iguais";
-            redirect('http://oasisassistant.com/home.php');
+            redirect('https://oasisassistant.000webhostapp.com/home.php');
             exit();
         else :
             $data_type = ['id', 'senha'];
@@ -78,7 +78,7 @@ if (isset($_POST['btn-up-senha'])) :
 
             if ($publicadorup->getAccess() === null) :
                 $_SESSION['mensagem'] = "Senha antiga não confere";
-                redirect('http://oasisassistant.com/home.php');
+                redirect('https://oasisassistant.000webhostapp.com/home.php');
                 exit();
             else :
                 $senha = md5($senha);
@@ -90,7 +90,7 @@ if (isset($_POST['btn-up-senha'])) :
                 $event = new Eventos(null, $publicadorup->getId(), null, null, "attPub", "AltSenha", $publicadorup->getSenha(), null, null, null, null, null, null, null);
                 EventoDAO::getInstance()->create($event);
 
-                redirect('http://oasisassistant.com/home.php');
+                redirect('https://oasisassistant.000webhostapp.com/home.php');
                 exit();
             endif;
         endif;
@@ -113,7 +113,7 @@ for ($i = 1; $i <= $countPub; $i++) :
 
         $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltGrup", $pub->getGrupo(), null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
         exit();
     endif;
 
@@ -125,7 +125,7 @@ for ($i = 1; $i <= $countPub; $i++) :
 
         $event = new Eventos(null, $pub->getId(), null, null, "attPub", "AltAcc", $pub->getAccess(), null, null, null, null, null, null, null);
         EventoDAO::getInstance()->create($event);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('https://oasisassistant.000webhostapp.com/master_page.php');
         exit();
     endif;
 endfor;

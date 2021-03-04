@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Oculta - Ação PHP - Criar publicador
@@ -12,9 +15,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-
-// Sessão
-session_start();
 
 use Assistant\PublicadorDAO;
 use Assistant\Publicadores;
@@ -31,24 +31,24 @@ if (isset($_POST['btn-confirm'])) :
 
     if (empty($nome) or empty($sobrenome) or empty($email) or empty($user) or empty($senha) or empty($repeatsenha)) :
         $_SESSION['mensagem'] = "Todos os campos precisam ser preenchidos";
-        redirect('http://oasisassistant.com/signup.php');
+        redirect('https://oasisassistant.000webhostapp.com/signup.php');
         exit();
     else :
         if ($senha != $repeatsenha) :
             $_SESSION['mensagem'] = "As senhas preenchidas não são iguais";
-            redirect('http://oasisassistant.com/signup.php');
+            redirect('https://oasisassistant.000webhostapp.com/signup.php');
             exit();
         else :
             $PublicadorDAO = PublicadorDAO::getInstance()->read('usuario', $user, 'usuario');
             if ($PublicadorDAO->rowCount() != 0) :
                 $_SESSION['mensagem'] = "Usuário já registrado";
-                redirect('http://oasisassistant.com/signup.php');
+                redirect('https://oasisassistant.000webhostapp.com/signup.php');
                 exit();
             else :
                 $PublicadorDAO = PublicadorDAO::getInstance()->read('email', $email, 'email');
                 if ($PublicadorDAO->rowCount() != 0) :
                     $_SESSION['mensagem'] = "E-mail já cadastrado";
-                    redirect('http://oasisassistant.com/signup.php');
+                    redirect('https://oasisassistant.000webhostapp.com/signup.php');
                     exit();
                 else :
                     $senha = md5($senha);

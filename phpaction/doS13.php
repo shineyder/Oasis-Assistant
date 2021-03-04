@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 //* Página:
 /*    Oculta - Ação PHP - Emitir S13
@@ -18,10 +19,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-// Sessão
-session_start();
-
-//declaramos uma variavel para monstarmos a tabela
+// Declaramos uma variavel para monstarmos a tabela
 
 $dadosXls  = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 $dadosXls .= "<table border='1'>";

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Meus Relatórios
@@ -14,14 +17,11 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 use Assistant\PublicadorDAO;
 use Assistant\EventoDAO;
-use Assistant\MapasDao;
-
-// Sessão
-session_start();
+use Assistant\MapasDAO;
 
 //Verificação
 if (!isset($_SESSION['logado'])) :
-    redirect('http://oasisassistant.com/');
+    redirect('https://oasisassistant.000webhostapp.com/');
     exit();
 endif;
 
@@ -90,7 +90,7 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                     continue;
                 endif;
 
-                $loc = MapasDao::getInstance()->readLoc($dados->getIdMap());
+                $loc = MapasDAO::getInstance()->readLoc($dados->getIdMap());
                 ?>
                 <li>
                     <div class="collapsible-header">

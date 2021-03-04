@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /**
  * PHPMailer - PHP email creation and transport class.
@@ -59,8 +60,6 @@ if (!isset($_GET['code']) && !isset($_GET['provider'])) {
 }
 
 require 'vendor/autoload.php';
-
-session_start();
 
 $providerName = '';
 

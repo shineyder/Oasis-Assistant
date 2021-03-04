@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Home
@@ -6,19 +9,15 @@ Conteúdo:
 -->
 
 <?php
-
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-// Sessão
-session_start();
-
 //Verificação
 if (!isset($_SESSION['logado'])) :
-    redirect('http://oasisassistant.com/');
+    redirect('https://oasisassistant.000webhostapp.com/');
     exit();
 endif;
 
@@ -29,7 +28,13 @@ $publicador = unserialize($_SESSION['obj']);
 require_once 'includes/header.php';
 // Message
 require_once 'includes/message.php';
-?>
+
+    if ($publicador->getAccess() == 1) :
+        ?>
+        <p>Sua conta aguarda análise dos administradores, após a análise sua conta terá o acesso as funcionalidades liberado.</p>
+        <?php
+    endif;
+    ?>
 
     <b>Nome: </b> <?php echo $publicador->getNome();?> <br>
     <b>Sobrenome: </b> <?php echo $publicador->getSobrenome();?> <br>
@@ -38,7 +43,7 @@ require_once 'includes/message.php';
     <b>Usuário: </b> <?php echo $publicador->getUsuario();?> <br><br>
     <a href="#modal-email" class="btn-small blue darken-4 modal-trigger">Alterar E-mail</a>
     <a href="#modal-senha" class="btn-small blue darken-4 modal-trigger">Alterar Senha</a>
-
+    
     <!-- Modal Structure -->
     <div id="modal-email" class="modal">
         <div class="modal-content">

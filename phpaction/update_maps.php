@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Oculta - Ação PHP - Atualizar mapas
@@ -17,8 +20,6 @@ use Assistant\EventoDAO;
 use Assistant\Eventos;
 use Assistant\MapasDAO;
 
-// Sessão
-session_start();
 //Dados
 $publicador = unserialize($_SESSION['obj']);
 
@@ -63,7 +64,7 @@ if (isset($_POST['btn-env-rel'])) :
         endif;
     }
     MapasDAO::getInstance()->completTerr();
-    redirect('http://oasisassistant.com/fazer_rel.php#' . $_POST['mapactive']);
+    redirect('https://oasisassistant.000webhostapp.com/fazer_rel.php#' . $_POST['mapactive']);
     exit();
 endif;
 
@@ -82,7 +83,7 @@ for ($i = 0; $i < $count; $i++) :
         $event = new Eventos(null, $publicador->getId(), $dados_quadra->getId(), null, "attRel", "trab", $dados_quadra->getTrab(), "nRes", $dados_quadra->getRes(), "nCom", $dados_quadra->getCom(), "nEdi", $dados_quadra->getEdi(), null);
         EventoDAO::getInstance()->create($event);
 
-        redirect('http://oasisassistant.com/my_relatorios.php');
+        redirect('https://oasisassistant.000webhostapp.com/my_relatorios.php');
         exit();
     endif;
 
@@ -110,7 +111,7 @@ for ($i = 0; $i < $count; $i++) :
             MapasDAO::getInstance()->update($dados_quadra);
         endif;
 
-        redirect('http://oasisassistant.com/my_relatorios.php');
+        redirect('https://oasisassistant.000webhostapp.com/my_relatorios.php');
         exit();
     endif;
 endfor;

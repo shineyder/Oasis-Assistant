@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Criar Conta
@@ -6,16 +9,12 @@ Conteúdo:
 -->
 
 <?php
-
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-//Sessão
-session_start();
-
 //Verificação
 if (isset($_SESSION['logado'])) :
-    redirect('http://oasisassistant.com/home.php');
+    redirect('https://oasisassistant.000webhostapp.com/home.php');
     exit();
 endif;
 

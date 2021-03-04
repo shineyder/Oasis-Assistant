@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Autenticação
@@ -8,7 +11,6 @@ Detalhes:
 -->
 
 <?php
-
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
@@ -17,12 +19,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 use Assistant\PublicadorDAO;
 
-// Sessão
-session_start();
-
 //Verificação
 if (!isset($_GET['cd'])) :
-    redirect('http://oasisassistant.com/');
+    redirect('https://oasisassistant.000webhostapp.com/');
     exit();
 endif;
 $is_ok = 0;

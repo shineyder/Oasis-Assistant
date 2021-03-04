@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Fale Conosco
@@ -6,19 +9,15 @@ Conteúdo:
 -->
 
 <?php
-
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
-// Sessão
-session_start();
-
 //Verificação
 if (!isset($_SESSION['logado'])) :
-    redirect('http://oasisassistant.com/');
+    redirect('https://oasisassistant.000webhostapp.com/');
     exit();
 endif;
 

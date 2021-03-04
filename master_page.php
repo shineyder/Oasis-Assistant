@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Master
@@ -15,12 +18,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 use Assistant\FaleConoscoDAO;
 use Assistant\PublicadorDAO;
 
-// Sessão
-session_start();
-
 //Verificação
 if (!isset($_SESSION['logado'])) :
-    redirect('http://oasisassistant.com/');
+    redirect('https://oasisassistant.000webhostapp.com/');
     exit();
 endif;
 
@@ -29,7 +29,7 @@ $publicador = unserialize($_SESSION['obj']);
 
 //Verificação de nível de acesso
 if ($publicador->getAccess() < 8) :
-    redirect('http://oasisassistant.com/home.php');
+    redirect('https://oasisassistant.000webhostapp.com/home.php');
     exit();
 endif;
 
@@ -40,7 +40,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 ?>
 
 <h5>Emitir S-13:</h5>
-<a target="_blank" href="http://oasisassistant.com/phpaction/doS13.php" class="btn-small blue darken-4">S-13</a><br>
+<a target="_blank" href="https://oasisassistant.000webhostapp.com/phpaction/doS13.php" class="btn-small blue darken-4">S-13</a><br>
 <h5>Lista de Publicadores: </h5>
 
 <?php

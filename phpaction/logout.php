@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!--
 Página:
     Oculta - Ação PHP - LogOut
@@ -10,8 +13,7 @@ Conteúdo:
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 //Encerrando a sessão
-session_start();
 session_unset();
 session_destroy();
-redirect('http://oasisassistant.com/');
+redirect('https://oasisassistant.000webhostapp.com/');
 exit();

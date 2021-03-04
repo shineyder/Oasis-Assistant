@@ -6,6 +6,7 @@ Conteúdo:
 -->
 
 <?php
+
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
@@ -18,7 +19,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
     <head>
         <meta charset="utf-8">
         <title> Oasis Assistant</title>
-        <link rel="stylesheet" href= "_css/style.css"/>
+        <link rel="stylesheet" href= "_CSS/style.css"/>
         <link rel="shortcut icon" href="img/logo_oasis_assistant_min.ico">
 
         <!-- Compiled and minified CSS and Import Google Icon Font -->
@@ -52,10 +53,14 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
                     <a href="master_page.php" class="btn-small blue darken-2">Master Page</a>
                         <?php
                     endif;
-                    ?>
+                    if ($publicador->getAccess() >= 2) :
+                        ?>
                     <a href="my_relatorios.php" class="btn-small blue darken-2">Meus Relatórios</a>
                     <a href="vis_territorio.php" class="btn-small blue darken-2">Visualizar Territórios</a>
                     <a href="fale_conosco.php" class="btn-small blue darken-2">Fale Conosco</a>
+                        <?php
+                    endif;
+                    ?>
                     <a href="faq.php" class="btn-small blue darken-2">F.A.Q.</a>
                     <a href="phpaction/logout.php" class="btn-small red darken-2">Sair</a>
                 </div>

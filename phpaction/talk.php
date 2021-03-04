@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /** Página:
 *       Oculta - Ação PHP - Enviar sugestão
 *   Conteúdo:
@@ -15,9 +15,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-
-// Sessão
-session_start();
 
 if (isset($_POST['btn-talk'])) :
     $id = $_POST['id'];
@@ -74,6 +71,6 @@ if (isset($_POST['btn-talk'])) :
     $faleConosco = new FaleConosco(null, $id, $subject, $message, null, null, null);
     FaleConoscoDAO::getInstance()->create($faleConosco);
 
-    redirect('http://oasisassistant.com/');
+    redirect('https://oasisassistant.000webhostapp.com/');
     exit();
 endif;
