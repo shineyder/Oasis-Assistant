@@ -7,9 +7,6 @@ session_start();
 *   Conteúdo:
 *     Área de LogIn, opções de Criar Conta e Problemas de LogIn.*/
 
-// Load Composer's autoloader
-require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-
 // Função redirect
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 
@@ -19,71 +16,74 @@ if (isset($_SESSION['logado'])) :
     exit();
 endif;
 
-// Header
-require_once 'includes/header.php';
 // Message
 require_once 'includes/message.php';
 ?>
 
-<!-- ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Login</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Login</a></li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Oasis Assistant - Login</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-<!-- /.ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="_CSS/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="_CSS/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="_CSS/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="_CSS/toastr.min.css">
 
-<div class="row">
-    <form class="col s12 m8 push-m2" action="phpaction/login.php" method="POST">
-        <div class="row">
-            <div class="input-field col s8">
-                <input id="login" name="login" type="text" class="validate">
-                <label for="login">Login</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s8">
-                <input id="senha" name="senha" type="password" class="validate">
-                <label for="senha">Senha</label>
-            </div>
-        </div>
-        <button type="submit" name="btn-entrar" class="btn blue darken-2">Entrar</button>
-        <a href="signup.php" class="btn blue darken-2">Criar conta</a>
-        <a href="problem.php" class="btn red lighten-2">Problemas com Login</a>
-    </form>
-</div>
+    <link rel="stylesheet" href= "_CSS/style.css"/>
+</head>
 
-<!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
-</div>
-                </div>
-            </div>
-        </section>
-        <!-- /.content -->
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <img id="logo" src="../img/logo_oasis_assistant.png" alt="Logo Oásis Assistant">
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Login</p>
+
+            <form action="phpaction/login.php" method="POST">
+                <div class="input-group mb-3">
+                    <input id="login" name="login" type="text" class="form-control" placeholder="Usuário">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input id="senha" name="senha" type="password" class="form-control" placeholder="Senha">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" name="btn-entrar" class="btn btn-primary btn-block">Entrar</button>
+            </form>
+            <p class="mb-1">
+                <a href="problem.php">Problemas com Login?</a>
+            </p>
+            <p class="mb-0">
+                <a href="signup.php" class="text-center">Criar conta</a>
+            </p>
+        </div>
+        <!-- /.login-card-body -->
+    </div>
 </div>
-<!-- ./wrapper -->
-<!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
-    
+<!-- /.login-box -->
+
 <?php
 //Footer
 require_once 'includes/footer.php';

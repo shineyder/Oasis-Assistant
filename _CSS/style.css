@@ -9,11 +9,6 @@ header.cabecalho{
     background-color: rgb(248, 80, 80);
 }
 
-img#logo{
-    max-width: 350px;
-    margin-top: 25px;
-}
-
 div.cabecalho-inf{
     display: block;
     min-width: 660px;
@@ -36,6 +31,12 @@ div.content{
     box-shadow: 1px 1px 4px black;
 }
 */
+
+img#logo{
+    max-width: 350px;
+    margin-top: 25px;
+}
+
 img.map{
     display: block;
     margin-left: auto;

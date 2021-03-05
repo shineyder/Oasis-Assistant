@@ -7,7 +7,7 @@ if (isset($_SESSION['mensagem'])) :
     // Mensagem
     window.onload = function() 
     {
-        M.toast({html: '<?php echo $_SESSION['mensagem']; ?>'});
+        toastr['<?php echo $_SESSION['tipo']; ?>']('<?php echo $_SESSION['mensagem']; ?>')
     };
 </script>
 

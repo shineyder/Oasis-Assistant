@@ -21,6 +21,7 @@ if (isset($_POST['btn-entrar'])) :
 
     if (empty($login) or empty($senha)) :
         $_SESSION['mensagem'] = "Os campos Login e Senha precisam ser preenchidos";
+        $_SESSION['tipo'] = "warning";
         redirect('http://oasisassistant.com/');
         exit();
     else :
@@ -31,6 +32,7 @@ if (isset($_POST['btn-entrar'])) :
             $PublicadorDAO = PublishersDAO::getInstance()->logIn($login, $senha);
             if ($PublicadorDAO->getAccess() === null) :
                 $_SESSION['mensagem'] = "Usuário e senha não conferem";
+                $_SESSION['tipo'] = "warning";
                 redirect('http://oasisassistant.com/');
                 exit();
             else :
@@ -41,12 +43,14 @@ if (isset($_POST['btn-entrar'])) :
                     exit();
                 else :
                     $_SESSION['mensagem'] = "Acesse o email de verificação para liberar o acesso a conta";
+                    $_SESSION['tipo'] = "info";
                     redirect('http://oasisassistant.com/');
                     exit();
                 endif;
             endif;
         else :
             $_SESSION['mensagem'] = "Usuário inexistente";
+            $_SESSION['tipo'] = "warning";
             redirect('http://oasisassistant.com/');
             exit();
         endif;

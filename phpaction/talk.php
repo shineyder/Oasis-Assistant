@@ -64,6 +64,7 @@ if (isset($_POST['btn-talk'])) :
 
     $email_send->sendMail("adrianoshineyder@hotmail.com", 'Adriano', 'Shineyder', str_replace($what, $by, $message), str_replace($what, $by, $subject), $target_file);
     $_SESSION['mensagem'] = "Solicitação enviada!";
+    $_SESSION['tipo'] = "success";
 
     if ($target_file != '') :
         unlink($target_file);

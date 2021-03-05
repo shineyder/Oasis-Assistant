@@ -28,23 +28,27 @@ if (isset($_POST['btn-confirm'])) :
 
     if (empty($nome) or empty($sobrenome) or empty($email) or empty($user) or empty($senha) or empty($repeatsenha)) :
         $_SESSION['mensagem'] = "Todos os campos precisam ser preenchidos";
+        $_SESSION['tipo'] = "warning";
         redirect('http://oasisassistant.com/signup.php');
         exit();
     else :
         if ($senha != $repeatsenha) :
             $_SESSION['mensagem'] = "As senhas preenchidas não são iguais";
+            $_SESSION['tipo'] = "warning";
             redirect('http://oasisassistant.com/signup.php');
             exit();
         else :
             $PublicadorDAO = PublishersDAO::getInstance()->read('usuario', $user, 'usuario');
             if ($PublicadorDAO->rowCount() != 0) :
                 $_SESSION['mensagem'] = "Usuário já registrado";
+                $_SESSION['tipo'] = "warning";
                 redirect('http://oasisassistant.com/signup.php');
                 exit();
             else :
                 $PublicadorDAO = PublishersDAO::getInstance()->read('email', $email, 'email');
                 if ($PublicadorDAO->rowCount() != 0) :
                     $_SESSION['mensagem'] = "E-mail já cadastrado";
+                    $_SESSION['tipo'] = "warning";
                     redirect('http://oasisassistant.com/signup.php');
                     exit();
                 else :
@@ -54,6 +58,7 @@ if (isset($_POST['btn-confirm'])) :
 
                     if ($PublicadorDAO) :
                         $_SESSION['mensagem'] = "Cadastrado com sucesso!";
+                        $_SESSION['tipo'] = "success";
 
                         $evento = new Events(null, null, null, null, "criatePub", "nome", $publicador->getNome(), "sobrenome", $publicador->getSobrenome(), "email", $publicador->getEmail(), "user", $publicador->getUsuario(), null);
                         EventsDAO::getInstance()->create($evento);
@@ -62,6 +67,7 @@ if (isset($_POST['btn-confirm'])) :
                         exit();
                     else :
                         $_SESSION['mensagem'] = "Ocorreu algum erro em sua solicitação, tente novamente mais tarde";
+                        $_SESSION['tipo'] = "error";
                         header('Location: ../index.php');
                         exit();
                     endif;

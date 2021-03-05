@@ -1,4 +1,3 @@
-<!--</div>-->
 <script>
 	M.AutoInit();
 </script>
@@ -15,5 +14,7 @@
 <script src="_JS/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="_JS/demo.js"></script>
+<!-- Toastr -->
+<script src="_JS/toastr.min.js"></script>
 </body>
 </html>
