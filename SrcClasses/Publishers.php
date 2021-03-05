@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class Publicadores
+class Publishers
 {
     private $id;
     private $nome;

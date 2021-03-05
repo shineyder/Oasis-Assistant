@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class FaleConoscoDAO
+class ContactUsDAO
 {
     public static $instance;
 
@@ -14,13 +14,13 @@ class FaleConoscoDAO
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new FaleConoscoDAO();
+            self::$instance = new ContactUsDAO();
         }
 
         return self::$instance;
     }
 
-    public function create(FaleConosco $faleConosco)
+    public function create(ContactUs $faleConosco)
     {
         $sql = "INSERT INTO fale_conosco 
         (id_user,
@@ -42,7 +42,7 @@ class FaleConoscoDAO
         date_default_timezone_set('America/Sao_Paulo');
         $ticket = date_timestamp_get(date_create()) . $faleConosco->getIdUser();
 
-        $publicador = PublicadorDAO::getInstance()->readAll(['id', ''], [$faleConosco->getIdUser(), '']);
+        $publicador = PublishersDAO::getInstance()->readAll(['id', ''], [$faleConosco->getIdUser(), '']);
 
         $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $publicador->getNome() . " " . $publicador->getSobrenome() . ", houve um envio de solicita&ccedil;&atilde;o em Fale Conosco em sua conta.<br>Seu ticket de atendimento &eacute; <b>" . $ticket . "</b>.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
 
@@ -68,7 +68,7 @@ class FaleConoscoDAO
 
     private function showSol($row)
     {
-        $Sol = new FaleConosco($row['id'], $row['id_user'], $row['assunto'], $row['mensag'], $row['timeN'], $row['statusN'], $row['ticket']);
+        $Sol = new ContactUs($row['id'], $row['id_user'], $row['assunto'], $row['mensag'], $row['timeN'], $row['statusN'], $row['ticket']);
         return $Sol;
     }
 
@@ -81,7 +81,7 @@ class FaleConoscoDAO
         return $p_sql->rowCount();
     }
 
-    public function update(FaleConosco $faleConosco)
+    public function update(ContactUs $faleConosco)
     {
         if ($faleConosco->getStatus() == 'Concluido') :
             $sql = "UPDATE fale_conosco SET statusN = :statusN, timeC = :timeC WHERE id = :cod";

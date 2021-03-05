@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class MapasDAO
+class MapsDAO
 {
     public static $instance;
 
@@ -14,7 +14,7 @@ class MapasDAO
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new MapasDAO();
+            self::$instance = new MapsDAO();
         }
 
         return self::$instance;
@@ -45,11 +45,11 @@ class MapasDAO
 
     private function showMapa($row)
     {
-        $mapa = new Mapas($row['id'], $row['maps'], $row['quadra'], $row['trab'], $row['n_residencia'], $row['n_comercio'], $row['n_edificio']);
+        $mapa = new Maps($row['id'], $row['maps'], $row['quadra'], $row['trab'], $row['n_residencia'], $row['n_comercio'], $row['n_edificio']);
         return $mapa;
     }
 
-    public function update(Mapas $mapas)
+    public function update(Maps $mapas)
     {
         $sql = "UPDATE mapas SET
                     trab = :trab,
@@ -98,7 +98,7 @@ class MapasDAO
         $p_sql->execute();
 
         if ($p_sql->rowCount() == 0) :
-            EventoDAO::getInstance()->completTerr();
+            EventsDAO::getInstance()->completTerr();
             $sql = "UPDATE mapas SET trab = :trab";
             $p_sql = Connect::conn()->prepare($sql);
             $p_sql->bindValue(":trab", 0);

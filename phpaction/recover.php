@@ -16,9 +16,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 use Assistant\Mail;
-use Assistant\PublicadorDAO;
-use Assistant\EventoDAO;
-use Assistant\Eventos;
+use Assistant\PublishersDAO;
+use Assistant\EventsDAO;
+use Assistant\Events;
 
 if (isset($_POST['btn-pro'])) :
     $tipo = $_POST['cod_err'];
@@ -38,7 +38,7 @@ if (isset($_POST['btn-pro'])) :
             switch ($tipo) {
                 case 1:
                     $data_type[0] = "email";
-                    $publicador = PublicadorDAO::getInstance()->readAll($data_type, $detail);
+                    $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                     if ($publicador->getAccess() === null) :
                         $_SESSION['mensagem'] = "E-mail não cadastrado";
@@ -51,8 +51,8 @@ if (isset($_POST['btn-pro'])) :
                         $email_send->sendMail($publicador->getEmail(), $publicador->getNome(), $publicador->getSobrenome(), $message, "Recuperacao de usuario", "");
                         $_SESSION['mensagem'] = "Um e-mail para recuperação do usuario foi enviado!";
 
-                        $event = new Eventos(null, $publicador->getId(), null, null, "recPub", "RecUser", $publicador->getUsuario(), null, null, null, null, null, null, null);
-                        EventoDAO::getInstance()->create($event);
+                        $event = new Events(null, $publicador->getId(), null, null, "recPub", "RecUser", $publicador->getUsuario(), null, null, null, null, null, null, null);
+                        EventsDAO::getInstance()->create($event);
 
                         redirect('http://oasisassistant.com/');
                         exit();
@@ -62,7 +62,7 @@ if (isset($_POST['btn-pro'])) :
                 case 2:
                     $data_type[0] = "usuario";
                     $data_type[1] = "email";
-                    $publicador = PublicadorDAO::getInstance()->readAll($data_type, $detail);
+                    $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                     if ($publicador->getAccess() === null) :
                         $_SESSION['mensagem'] = "E-mail e/ou Usuário não cadastrado";
@@ -70,7 +70,7 @@ if (isset($_POST['btn-pro'])) :
                         exit();
                     else :
                         $publicador->setSenha('e10adc3949ba59abbe56e057f20f883e');
-                        $PublicadorDAO = PublicadorDAO::getInstance()->update($publicador);
+                        $PublicadorDAO = PublishersDAO::getInstance()->update($publicador);
 
                         $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $publicador->getNome() . " " . $publicador->getSobrenome() . ", houve uma solicita&ccedil;&atilde;o de recuperar senha em sua conta.<br>Sua senha foi redefinida para <b>123456</b>.<br> Note que essa &eacute; uma senha padr&atilde;o e de baixa seguran&ccedil;a, favor trocar sua senha o mais breve poss&iacute;vel.</p><p>A equipe do <b>Setor de Suporte</b> do <b>Oasis Assistant</b> nunca entra em contato com seus usu&aacute;rios solicitando sua senha, portanto n&atilde;o a compartilhe com ningu&eacute;m.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
 
@@ -78,8 +78,8 @@ if (isset($_POST['btn-pro'])) :
                         $email_send->sendMail($publicador->getEmail(), $publicador->getNome(), $publicador->getSobrenome(), $message, "Recuperacao de senha", "");
                         $_SESSION['mensagem'] = "Um e-mail para recuperação de senha foi enviado!";
 
-                        $event = new Eventos(null, $publicador->getId(), null, null, "recPub", "RecSenha", "e10adc3949ba59abbe56e057f20f883e", null, null, null, null, null, null, null);
-                        EventoDAO::getInstance()->create($event);
+                        $event = new Events(null, $publicador->getId(), null, null, "recPub", "RecSenha", "e10adc3949ba59abbe56e057f20f883e", null, null, null, null, null, null, null);
+                        EventsDAO::getInstance()->create($event);
 
                         redirect('http://oasisassistant.com/');
                         exit();
@@ -88,7 +88,7 @@ if (isset($_POST['btn-pro'])) :
 
                 case 3:
                     $data_type[0] = "usuario";
-                    $publicador = PublicadorDAO::getInstance()->readAll($data_type, $detail);
+                    $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                     if ($publicador->getAccess() === null) :
                         $_SESSION['mensagem'] = "Usuário não cadastrado";
@@ -99,7 +99,7 @@ if (isset($_POST['btn-pro'])) :
                         $data_type[1] = "access";
                         $$detail[1] = 0;
 
-                        $publicador = PublicadorDAO::getInstance()->readAll($data_type, $detail);
+                        $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                         if ($publicador->getAccess() === null) :
                             $_SESSION['mensagem'] = "E-mail da conta já foi autenticado";
@@ -110,7 +110,7 @@ if (isset($_POST['btn-pro'])) :
                             $data_type[1] = "email";
                             $$detail[1] = $_POST['rec2'];
 
-                            $publicador = PublicadorDAO::getInstance()->readAll($data_type, $detail);
+                            $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                             if ($publicador->getAccess() === null) :
                                 $_SESSION['mensagem'] = "E-mail informado no cadastro não confere";
@@ -122,8 +122,8 @@ if (isset($_POST['btn-pro'])) :
                                 $email_send = new Mail();
                                 $email_send->sendMail($publicador->getEmail(), $publicador->getNome(), $publicador->getSobrenome(), $message, "Reenvio de email de autenticacao", "");
 
-                                $event = new Eventos(null, $publicador->getId(), null, null, "recPub", "ReEmailAut", null, null, null, null, null, null, null, null);
-                                EventoDAO::getInstance()->create($event);
+                                $event = new Events(null, $publicador->getId(), null, null, "recPub", "ReEmailAut", null, null, null, null, null, null, null, null);
+                                EventsDAO::getInstance()->create($event);
 
                                 $_SESSION['mensagem'] = "E-mail de autenticação foi reenviado!";
 

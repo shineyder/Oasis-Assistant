@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class FaleConosco
+class ContactUs
 {
     private $id;
     private $idUser;

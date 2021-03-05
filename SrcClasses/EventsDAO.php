@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class EventoDAO
+class EventsDAO
 {
     public static $instance;
 
@@ -14,13 +14,13 @@ class EventoDAO
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new EventoDAO();
+            self::$instance = new EventsDAO();
         }
 
         return self::$instance;
     }
 
-    public function create(Eventos $evento)
+    public function create(Events $evento)
     {
         $sql = "INSERT INTO log_eventos 
         (id_user,
@@ -126,7 +126,7 @@ class EventoDAO
 
     private function showEvento($row)
     {
-        $Evento = new Eventos($row['id'], $row['id_user'], $row['id_mapa'], $row['timeN'], $row['event_type'], $row['data1'], $row['desc1'], $row['data2'], $row['desc2'], $row['data3'], $row['desc3'], $row['data4'], $row['desc4'], $row['cobert']);
+        $Evento = new Events($row['id'], $row['id_user'], $row['id_mapa'], $row['timeN'], $row['event_type'], $row['data1'], $row['desc1'], $row['data2'], $row['desc2'], $row['data3'], $row['desc3'], $row['data4'], $row['desc4'], $row['cobert']);
         return $Evento;
     }
 
@@ -211,7 +211,7 @@ class EventoDAO
         $p_sql->execute();
         $cobertNow = $p_sql->fetch(\PDO::FETCH_BOTH);
 
-        $event = new Eventos(null, null, null, null, 'terrComp', null, null, null, null, null, null, null, null, null);
+        $event = new Events(null, null, null, null, 'terrComp', null, null, null, null, null, null, null, null, null);
         $this->create($event);
 
         $sql = "ALTER TABLE log_eventos ALTER cobert SET default :cobert";

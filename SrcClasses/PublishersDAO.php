@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class PublicadorDAO
+class PublishersDAO
 {
     public static $instance;
 
@@ -14,13 +14,13 @@ class PublicadorDAO
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new PublicadorDAO();
+            self::$instance = new PublishersDAO();
         }
 
         return self::$instance;
     }
 
-    public function create(Publicadores $publicador)
+    public function create(Publishers $publicador)
     {
         $sql = "INSERT INTO Publicadores 
                     (nome, 
@@ -86,7 +86,7 @@ class PublicadorDAO
 
     private function showPublicador($row)
     {
-        $publicador = new Publicadores($row['id'], $row['nome'], $row['sobrenome'], $row['grupo'], $row['email'], $row['usuario'], $row['senha'], $row['access']);
+        $publicador = new Publishers($row['id'], $row['nome'], $row['sobrenome'], $row['grupo'], $row['email'], $row['usuario'], $row['senha'], $row['access']);
         return $publicador;
     }
 
@@ -127,7 +127,7 @@ class PublicadorDAO
         return $p_sql->fetch(\PDO::FETCH_BOTH);
     }
 
-    public function update(Publicadores $publicador)
+    public function update(Publishers $publicador)
     {
         $sql = "UPDATE Publicadores SET
                     nome = :nome,

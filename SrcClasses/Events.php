@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class Eventos
+class Events
 {
     private $id;
     private $idUser;

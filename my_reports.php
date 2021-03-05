@@ -13,9 +13,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-use Assistant\PublicadorDAO;
-use Assistant\EventoDAO;
-use Assistant\MapasDAO;
+use Assistant\PublishersDAO;
+use Assistant\EventsDAO;
+use Assistant\MapsDAO;
 
 //Verificação
 if (!isset($_SESSION['logado'])) :
@@ -32,7 +32,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
 
 if ($publicador->getAccess() >= 8) :
-    $totId = PublicadorDAO::getInstance()->lastId();
+    $totId = PublishersDAO::getInstance()->lastId();
     $totId = intval($totId['id']);
     ?>
     <p><h4>Ver relatórios de:</h4></p><br>
@@ -49,7 +49,7 @@ if ($publicador->getAccess() >= 8) :
             <option value="" disabled selected>Selecione uma opção</option>
             <?php
             for ($i = 1; $i <= $totId; $i++) :
-                $nome = PublicadorDAO::getInstance()->read('id', $i, 'nome, sobrenome')->fetch(\PDO::FETCH_BOTH);
+                $nome = PublishersDAO::getInstance()->read('id', $i, 'nome, sobrenome')->fetch(\PDO::FETCH_BOTH);
                 ?>
                 <option value="<?php echo $i; ?>"><?php echo $nome["nome"] . " " . $nome["sobrenome"];?></option>
                 <?php
@@ -77,18 +77,18 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
 
     <ul class="collapsible">
         <?php
-        $cob = EventoDAO::getInstance()->cobertNow();
+        $cob = EventsDAO::getInstance()->cobertNow();
         for ($j = 1; $j <= $cob; $j++) :
-            $count = EventoDAO::getInstance()->relCount($pub, $j);
+            $count = EventsDAO::getInstance()->relCount($pub, $j);
 
             for ($i = 0; $i < $count; $i++) :
-                $dados = EventoDAO::getInstance()->readRelatorio($pub, $i, $j);
+                $dados = EventsDAO::getInstance()->readRelatorio($pub, $i, $j);
 
                 if ($dados === null) :
                     continue;
                 endif;
 
-                $loc = MapasDAO::getInstance()->readLoc($dados->getIdMap());
+                $loc = MapsDAO::getInstance()->readLoc($dados->getIdMap());
                 ?>
                 <li>
                     <div class="collapsible-header">
@@ -117,7 +117,7 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                             echo "Número de Edifícios: Não informado<br>";
                         endif;
 
-                        if ($dados->getCobert() == EventoDAO::getInstance()->cobertNow()) :
+                        if ($dados->getCobert() == EventsDAO::getInstance()->cobertNow()) :
                             ?>
                             <a href="#modal-up-rel-<?php echo $i; ?>" class="btn-small blue darken-4 modal-trigger">Corrigir</a>
                             <a href="#modal-del-rel-<?php echo $i; ?>" class="btn-small red darken-4 modal-trigger">Deletar</a>
@@ -127,7 +127,7 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                     </div>
 
                     <?php
-                    if ($dados->getCobert() == EventoDAO::getInstance()->cobertNow()) :
+                    if ($dados->getCobert() == EventsDAO::getInstance()->cobertNow()) :
                         ?>
                         <!-- Modal Structure -->
                         <div id="modal-up-rel-<?php echo $i; ?>" class="modal">

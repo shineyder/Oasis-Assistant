@@ -7,9 +7,9 @@ session_start();
 *  Conteúdo:
 *    Lê informações do banco de dados e cria a planilha da S13.**/
 
-use Assistant\EventoDAO;
-use Assistant\MapasDAO;
-use Assistant\PublicadorDAO;
+use Assistant\EventsDAO;
+use Assistant\MapsDAO;
+use Assistant\PublishersDAO;
 
 header('Content-Type: text/html; charset=UTF-8');
 
@@ -29,25 +29,25 @@ for ($i = 1; $i <= 24; $i++) :
 endfor;
 $dadosXls .= "</tr>";
 
-$cobertNow = EventoDAO::getInstance()->cobertNow();
+$cobertNow = EventsDAO::getInstance()->cobertNow();
 for ($i = 1; $i <= $cobertNow; $i++) :
     $dadosXls .= "<tr>";
     for ($j = 1; $j <= 24; $j++) :
-        $mapaDAO = MapasDAO::getInstance()->firstLast($j);
-        $id = EventoDAO::getInstance()->idS13($mapaDAO[0]['id'], $mapaDAO[1]['id'], $i);
+        $mapaDAO = MapsDAO::getInstance()->firstLast($j);
+        $id = EventsDAO::getInstance()->idS13($mapaDAO[0]['id'], $mapaDAO[1]['id'], $i);
         if ($id == false) :
             $dadosXls .= "<td colspan='2'></td>";
             continue;
         else :
-            $name = PublicadorDAO::getInstance()->read('id', $id['id_user'], 'nome, sobrenome')->fetch(\PDO::FETCH_BOTH);
+            $name = PublishersDAO::getInstance()->read('id', $id['id_user'], 'nome, sobrenome')->fetch(\PDO::FETCH_BOTH);
             $dadosXls .= "<td colspan='2'>" . $name['nome'] . " " . $name['sobrenome'] . "</td>";
         endif;
     endfor;
     $dadosXls .= "</tr>";
     $dadosXls .= "<tr>";
     for ($j = 1; $j <= 24; $j++) :
-        $mapaDAO = MapasDAO::getInstance()->firstLast($j);
-        $temp = EventoDAO::getInstance()->timeS13($mapaDAO[0]['id'], $mapaDAO[1]['id'], $i);
+        $mapaDAO = MapsDAO::getInstance()->firstLast($j);
+        $temp = EventsDAO::getInstance()->timeS13($mapaDAO[0]['id'], $mapaDAO[1]['id'], $i);
         if ($temp[0] == false) :
             $dadosXls .= "<td></td>";
             $dadosXls .= "<td></td>";

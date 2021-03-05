@@ -11,7 +11,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-use Assistant\MapasDAO;
+use Assistant\MapsDAO;
 ?>
 
 <!DOCTYPE html>
@@ -54,14 +54,14 @@ use Assistant\MapasDAO;
         <div class="container">
             <?php
             for ($i = 1; $i <= 24; $i++) {
-                $mapaDAO = MapasDAO::getInstance()->firstLast($i);
+                $mapaDAO = MapsDAO::getInstance()->firstLast($i);
                 ?>
                 <article id="<?php echo $i; ?>">
                     <form action="phpaction/update_maps.php" method="POST">
                         <ul class="collapsible">
                             <?php
                             for ($j = $mapaDAO[0]["id"]; $j <= $mapaDAO[1]["id"]; $j++) {
-                                $dados_quadra = MapasDAO::getInstance()->read($j);
+                                $dados_quadra = MapsDAO::getInstance()->read($j);
                                 ?>
                                 <li>
                                     <div class="collapsible-header">Quadra <?php echo $dados_quadra->getQuadra() . (($dados_quadra->getTrab() == 0) ? " não trabalhada" : " trabalhada"); ?> </div>

@@ -7,8 +7,8 @@ session_start();
 *   Conteúdo:
 *       Recebe a mensagem do Fale conosco e envia por email para o ADM.*/
 
-use Assistant\FaleConosco;
-use Assistant\FaleConoscoDAO;
+use Assistant\ContactUs;
+use Assistant\ContactUsDAO;
 use Assistant\Mail;
 
 // Função redirect
@@ -69,8 +69,8 @@ if (isset($_POST['btn-talk'])) :
         unlink($target_file);
     endif;
 
-    $faleConosco = new FaleConosco(null, $id, $subject, $message, null, null, null);
-    FaleConoscoDAO::getInstance()->create($faleConosco);
+    $faleConosco = new ContactUs(null, $id, $subject, $message, null, null, null);
+    ContactUsDAO::getInstance()->create($faleConosco);
 
     redirect('http://oasisassistant.com/');
     exit();

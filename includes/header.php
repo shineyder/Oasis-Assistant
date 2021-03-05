@@ -48,9 +48,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
                     endif;
                     if ($publicador->getAccess() >= 2) :
                         ?>
-                    <a href="my_relatorios.php" class="btn-small blue darken-2">Meus Relatórios</a>
-                    <a href="vis_territorio.php" class="btn-small blue darken-2">Visualizar Territórios</a>
-                    <a href="fale_conosco.php" class="btn-small blue darken-2">Fale Conosco</a>
+                    <a href="my_reports.php" class="btn-small blue darken-2">Meus Relatórios</a>
+                    <a href="view_territory.php" class="btn-small blue darken-2">Visualizar Territórios</a>
+                    <a href="contact_us.php" class="btn-small blue darken-2">Fale Conosco</a>
                         <?php
                     endif;
                     ?>

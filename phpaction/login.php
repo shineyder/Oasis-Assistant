@@ -13,7 +13,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-use Assistant\PublicadorDAO;
+use Assistant\PublishersDAO;
 
 if (isset($_POST['btn-entrar'])) :
     $login = $_POST['login'];
@@ -24,11 +24,11 @@ if (isset($_POST['btn-entrar'])) :
         redirect('http://oasisassistant.com/');
         exit();
     else :
-        $PublicadorDAO = PublicadorDAO::getInstance()->read('usuario', $login, 'usuario');
+        $PublicadorDAO = PublishersDAO::getInstance()->read('usuario', $login, 'usuario');
 
         if ($PublicadorDAO->rowCount() == 1) :
             $senha = md5($senha);
-            $PublicadorDAO = PublicadorDAO::getInstance()->logIn($login, $senha);
+            $PublicadorDAO = PublishersDAO::getInstance()->logIn($login, $senha);
             if ($PublicadorDAO->getAccess() === null) :
                 $_SESSION['mensagem'] = "Usuário e senha não conferem";
                 redirect('http://oasisassistant.com/');

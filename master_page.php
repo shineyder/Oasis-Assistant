@@ -13,8 +13,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-use Assistant\FaleConoscoDAO;
-use Assistant\PublicadorDAO;
+use Assistant\ContactUsDAO;
+use Assistant\PublishersDAO;
 
 //Verificação
 if (!isset($_SESSION['logado'])) :
@@ -85,12 +85,12 @@ endif;
     </tr>
 
     <?php
-    $countPub = PublicadorDAO::getInstance()->lastId();
+    $countPub = PublishersDAO::getInstance()->lastId();
     $countPub = intval($countPub['id']);
 
     for ($i = 1; $i <= $countPub; $i++) :
         $ini = $i - 1;
-        $dadosPub = PublicadorDAO::getInstance()->readTable($desc, $action, $ini);
+        $dadosPub = PublishersDAO::getInstance()->readTable($desc, $action, $ini);
         ?>
         <tr>
             <td><?php echo $dadosPub->getNome(); ?></td>
@@ -202,7 +202,7 @@ endif;
 <h6>Problemas encontrados:</h6>
 
 <?php
-$countSol = FaleConoscoDAO::getInstance()->solCount("Problema");
+$countSol = ContactUsDAO::getInstance()->solCount("Problema");
 if ($countSol == 0) :
     echo "<p>Nenhuma solicitação em aberto com assunto Problema.</p>";
 else :
@@ -220,12 +220,12 @@ else :
         </tr>
 
         <?php
-        $countSol = FaleConoscoDAO::getInstance()->solCount("Problema");
+        $countSol = ContactUsDAO::getInstance()->solCount("Problema");
 
         for ($i = 1; $i <= $countSol; $i++) :
             $ini = $i - 1;
-            $dadosSol = FaleConoscoDAO::getInstance()->read("Problema", $ini);
-            $dadosPub = PublicadorDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
+            $dadosSol = ContactUsDAO::getInstance()->read("Problema", $ini);
+            $dadosPub = PublishersDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
             ?>
             <tr>
                 <td><?php echo $dadosPub['nome']; ?></td>
@@ -243,7 +243,7 @@ else :
             <div id="modal-up-sol-pro-<?php echo $dadosSol->getId(); ?>" class="modal">
                 <div class="modal-content">
                     <p>Defina o status da solicitação</p>
-                    <form action="phpaction/update_sol.php" method="POST">
+                    <form action="phpaction/update_req.php" method="POST">
                         <p><label>
                             <input name="sol-pro-<?php echo $i; ?>" type="radio" value="em Espera" checked/>
                             <span>em Espera</span>
@@ -272,7 +272,7 @@ endif;
 <h6>Sugestões feitas:</h6>
 
 <?php
-$countSol = FaleConoscoDAO::getInstance()->solCount("Sugestão");
+$countSol = ContactUsDAO::getInstance()->solCount("Sugestão");
 if ($countSol == 0) :
     echo "<p>Nenhuma solicitação em aberto com assunto Sugestão.</p>";
 else :
@@ -292,8 +292,8 @@ else :
         <?php
         for ($i = 1; $i <= $countSol; $i++) :
             $ini = $i - 1;
-            $dadosSol = FaleConoscoDAO::getInstance()->read("Sugestão", $ini);
-            $dadosPub = PublicadorDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
+            $dadosSol = ContactUsDAO::getInstance()->read("Sugestão", $ini);
+            $dadosPub = PublishersDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
             ?>
             <tr>
                 <td><?php echo $dadosPub['nome']; ?></td>
@@ -311,7 +311,7 @@ else :
             <div id="modal-up-sol-sug-<?php echo $i; ?>" class="modal">
                 <div class="modal-content">
                     <p>Defina o status da solicitação</p>
-                    <form action="phpaction/update_sol.php" method="POST">
+                    <form action="phpaction/update_req.php" method="POST">
                         <p><label>
                             <input name="sol-sug-<?php echo $i; ?>" type="radio" value="em Espera" checked/>
                             <span>em Espera</span>
@@ -340,7 +340,7 @@ endif;
 <h6>Outros:</h6>
 
 <?php
-$countSol = FaleConoscoDAO::getInstance()->solCount("Outro");
+$countSol = ContactUsDAO::getInstance()->solCount("Outro");
 if ($countSol == 0) :
     echo "<p>Nenhuma solicitação em aberto com assunto Outro.</p>";
 else :
@@ -360,8 +360,8 @@ else :
         <?php
         for ($i = 1; $i <= $countSol; $i++) :
             $ini = $i - 1;
-            $dadosSol = FaleConoscoDAO::getInstance()->read("Outro", $ini);
-            $dadosPub = PublicadorDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
+            $dadosSol = ContactUsDAO::getInstance()->read("Outro", $ini);
+            $dadosPub = PublishersDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
             ?>
             <tr>
                 <td><?php echo $dadosPub['nome']; ?></td>
@@ -379,7 +379,7 @@ else :
             <div id="modal-up-sol-out-<?php echo $i; ?>" class="modal">
                 <div class="modal-content">
                     <p>Defina o status da solicitação</p>
-                    <form action="phpaction/update_sol.php" method="POST">
+                    <form action="phpaction/update_req.php" method="POST">
                         <p><label>
                             <input name="sol-out-<?php echo $i; ?>" type="radio" value="em Espera" checked/>
                             <span>em Espera</span>

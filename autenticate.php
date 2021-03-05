@@ -15,7 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-use Assistant\PublicadorDAO;
+use Assistant\PublishersDAO;
 
 //Verificação
 if (!isset($_GET['cd'])) :
@@ -25,18 +25,18 @@ endif;
 $is_ok = 0;
 
 //Dados
-$dados_last = PublicadorDAO::getInstance()->lastId();
+$dados_last = PublishersDAO::getInstance()->lastId();
 
 for ($i = 1; $i <= $dados_last['id']; $i++) {
-    $PublicadorDAO = PublicadorDAO::getInstance()->read(['id' , 'access'], [$i, 0], 'usuario');
+    $PublicadorDAO = PublishersDAO::getInstance()->read(['id' , 'access'], [$i, 0], 'usuario');
     $dadostemp = $PublicadorDAO->fetch(\PDO::FETCH_BOTH);
 
     if ($dadostemp != false) {
         if ($_GET['cd'] == md5($dadostemp['usuario'])) {
             $is_ok = 1;
-            $publicador = PublicadorDAO::getInstance()->readAll(['id', ""], [$i, ""]);
+            $publicador = PublishersDAO::getInstance()->readAll(['id', ""], [$i, ""]);
             $publicador->setAccess(1);
-            $PublicadorDAO = PublicadorDAO::getInstance()->update($publicador);
+            $PublicadorDAO = PublishersDAO::getInstance()->update($publicador);
             break;
         }
     }

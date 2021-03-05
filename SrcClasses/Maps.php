@@ -2,7 +2,7 @@
 
 namespace Assistant;
 
-class Mapas
+class Maps
 {
     private $id;
     private $map;

@@ -13,10 +13,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
 // Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-use Assistant\PublicadorDAO;
-use Assistant\Publicadores;
-use Assistant\EventoDAO;
-use Assistant\Eventos;
+use Assistant\PublishersDAO;
+use Assistant\Publishers;
+use Assistant\EventsDAO;
+use Assistant\Events;
 
 if (isset($_POST['btn-confirm'])) :
     $nome = $_POST['nome'];
@@ -36,27 +36,27 @@ if (isset($_POST['btn-confirm'])) :
             redirect('http://oasisassistant.com/signup.php');
             exit();
         else :
-            $PublicadorDAO = PublicadorDAO::getInstance()->read('usuario', $user, 'usuario');
+            $PublicadorDAO = PublishersDAO::getInstance()->read('usuario', $user, 'usuario');
             if ($PublicadorDAO->rowCount() != 0) :
                 $_SESSION['mensagem'] = "Usuário já registrado";
                 redirect('http://oasisassistant.com/signup.php');
                 exit();
             else :
-                $PublicadorDAO = PublicadorDAO::getInstance()->read('email', $email, 'email');
+                $PublicadorDAO = PublishersDAO::getInstance()->read('email', $email, 'email');
                 if ($PublicadorDAO->rowCount() != 0) :
                     $_SESSION['mensagem'] = "E-mail já cadastrado";
                     redirect('http://oasisassistant.com/signup.php');
                     exit();
                 else :
                     $senha = md5($senha);
-                    $publicador = new Publicadores(null, $nome, $sobrenome, null, $email, $user, $senha, null);
-                    $PublicadorDAO = PublicadorDAO::getInstance()->create($publicador);
+                    $publicador = new Publishers(null, $nome, $sobrenome, null, $email, $user, $senha, null);
+                    $PublicadorDAO = PublishersDAO::getInstance()->create($publicador);
 
                     if ($PublicadorDAO) :
                         $_SESSION['mensagem'] = "Cadastrado com sucesso!";
 
-                        $evento = new Eventos(null, null, null, null, "criatePub", "nome", $publicador->getNome(), "sobrenome", $publicador->getSobrenome(), "email", $publicador->getEmail(), "user", $publicador->getUsuario(), null);
-                        EventoDAO::getInstance()->create($evento);
+                        $evento = new Events(null, null, null, null, "criatePub", "nome", $publicador->getNome(), "sobrenome", $publicador->getSobrenome(), "email", $publicador->getEmail(), "user", $publicador->getUsuario(), null);
+                        EventsDAO::getInstance()->create($evento);
 
                         header('Location: ../index.php');
                         exit();
