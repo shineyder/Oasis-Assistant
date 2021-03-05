@@ -1,3 +1,4 @@
+/*
 body{
     background: skyblue;
     min-width: 660px;
@@ -34,17 +35,13 @@ div.content{
     background: white;
     box-shadow: 1px 1px 4px black;
 }
-
-img#Mapa_Completo,img#Porto_novo_1,img#Porto_novo_2,img#Bairro_aparecida,img#Presidente_medici,img#Morro_Sesi,img#Del_porto,img#Mapa_Local{
+*/
+img.map{
     display: block;
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
     height: auto;
-}
-
-div.iframes{
-    display: block;
 }
 
 iframe#frame-rel{
@@ -55,4 +52,8 @@ iframe#frame-rel{
     height: 4000px;
     border: none;
 	overflow: hidden;
+}
+
+.hide{
+    display:none;
 }

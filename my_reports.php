@@ -30,11 +30,42 @@ $publicador = unserialize($_SESSION['obj']);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 // Message
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
+?>
 
+<!-- ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Relatórios</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+                            <li class="breadcrumb-item active">Relatórios</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+<!-- /.ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
+
+<?php
 if ($publicador->getAccess() >= 8) :
     $totId = PublishersDAO::getInstance()->lastId();
     $totId = intval($totId['id']);
     ?>
+    <h5>Emitir S-13:</h5>
+    <a target="_blank" href="http://oasisassistant.com/phpaction/doS13.php" class="btn-small blue darken-4">S-13</a><br><br>
     <p><h4>Ver relatórios de:</h4></p><br>
 
     <script>
@@ -175,6 +206,18 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
     <?php
 endif;
 ?>
+
+<!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
+</div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</div>
+<!-- ./wrapper -->
+<!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
 
 <script>
 $(document).ready(function() {

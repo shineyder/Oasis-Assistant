@@ -11,6 +11,10 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'M' => 
+        array (
+            'MVC\\' => 4,
+        ),
         'A' => 
         array (
             'Assistant\\' => 10,
@@ -21,6 +25,10 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'MVC\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/SrcMVC',
         ),
         'Assistant\\' => 
         array (
@@ -40,6 +48,9 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
         'Assistant\\Publishers' => __DIR__ . '/../..' . '/SrcClasses/Publishers.php',
         'Assistant\\PublishersDAO' => __DIR__ . '/../..' . '/SrcClasses/PublishersDAO.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'MVC\\Controller' => __DIR__ . '/../..' . '/SrcMVC/Controller.php',
+        'MVC\\Model' => __DIR__ . '/../..' . '/SrcMVC/Model.php',
+        'MVC\\View' => __DIR__ . '/../..' . '/SrcMVC/View.php',
         'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
         'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
         'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
