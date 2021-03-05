@@ -89,10 +89,18 @@ endif;
                 <p>Preencha os campos abaixo para alterar seu e-mail</p>
                 <form action="phpaction/update_pub.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo $publicador->getId(); ?>">
-                    <input id="email-up" name="email-up" type="email" class="validate">
-                    <label for="email-up">Novo Email</label><br><br>
+                    
+                    <div class="input-group mb-3">
+                        <input id="email-up" name="email-up" type="email" class="form-control" placeholder="Novo Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" name="btn-up-email" class="btn btn-primary">Confirmar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
                 </form>
             </div>
         </div>
@@ -102,37 +110,58 @@ endif;
 </div>
 <!-- /.modal -->
 
-<!-- Modal Structure -->
-<div id="asmodal-email" class="modal">
-    <div class="modal-content">
-        <p>Preencha os campos abaixo para alterar seu e-mail</p>
-        <form action="phpaction/update_pub.php" method="POST">
-            <input type="hidden" name="id" value="<?php echo $publicador->getId(); ?>">
-            <input id="email-up" name="email-up" type="email" class="validate">
-            <label for="email-up">Novo Email</label><br><br>
-            <button type="submit" name="btn-up-email" class="btn-small blue darken-2">Confirmar</button>
-            <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
-        </form>
-    </div>
-</div>
+<!-- modal -->
+<div class="modal fade" id="modal-senha">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Alterar Senha</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Preencha os campos abaixo para alterar sua senha</p>
+                <form action="phpaction/update_pub.php" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $publicador->getId(); ?>">
+                    
+                    <div class="input-group mb-3">
+                        <input id="senha-old" name="senha-old" type="password" class="form-control" placeholder="Senha Antiga">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
 
-<!-- Modal Structure -->
-<div id="modal-senha" class="modal">
-    <div class="modal-content">
-        <p>Preencha os campos abaixo para alterar sua senha</p>
-        <form action="phpaction/update_pub.php" method="POST">
-            <input type="hidden" name="id" value="<?php echo $publicador->getId(); ?>">
-            <input id="senha-old" name="senha-old" type="password" class="validate">
-            <label for="senha-old">Senha Antiga</label><br>
-            <input id="senha-up" name="senha-up" type="password" class="validate">
-            <label for="senha-up">Nova Senha</label><br>
-            <input id="senha-up-conf" name="senha-up-conf" type="password" class="validate">
-            <label for="senha-up-conf">Confirmar Nova Senha</label><br><br>
-            <button type="submit" name="btn-up-senha" class="btn-small blue darken-2">Confirmar</button>
-            <a href="#!" class="modal-action modal-close waves-effect btn-small red darken-2">Cancelar</a>
-        </form>
+                    <div class="input-group mb-3">
+                        <input id="senha-up" name="senha-up" type="password" class="form-control" placeholder="Nova Senha">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input id="senha-up-conf" name="senha-up-conf" type="password" class="form-control" placeholder="Confirmar Nova Senha">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" name="btn-up-senha" class="btn btn-primary">Confirmar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
 </div>
+<!-- /.modal -->
 
 <!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
                     </div>
@@ -145,12 +174,6 @@ endif;
 </div>
 <!-- ./wrapper -->
 <!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
-
-<script>
-    $(document).ready(function(){
-        $('.modal').modal();
-        });
-</script>
 
 <?php
 //Footer

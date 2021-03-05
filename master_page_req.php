@@ -282,12 +282,6 @@ endif;
 </div>
 <!-- ./wrapper -->
 <!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
-
-<script>
-$(document).ready(function(){
-    $('.modal').modal();
-});
-</script>
     
 <?php
 //Footer

@@ -23,6 +23,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Toastr -->
     <link rel="stylesheet" href="_CSS/toastr.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="_CSS/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="_CSS/responsive.bootstrap4.min.css">
 
     <link rel="stylesheet" href= "_CSS/style.css"/>
     <link rel="shortcut icon" href="img/logo_oasis_assistant_min.ico">

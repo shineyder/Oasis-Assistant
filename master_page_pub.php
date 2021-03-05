@@ -63,8 +63,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
                     <div class="col-12">
 <!-- /.ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
 
-<h5>Lista de Publicadores: </h5>
-
 <?php
 $action = 'ASC';
 $desc = 'id';
@@ -95,6 +93,79 @@ if (isset($_GET["desc"])) :
     endif;
 endif;
 ?>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Lista de Publicadores: </h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th><a href="master_page.php?desc=<?php echo 'nome';?>&action=<?php echo $action;?>">Nome</a></th>
+                    <th><a href="master_page.php?desc=<?php echo 'sobrenome';?>&action=<?php echo $action;?>">Sobrenome</a></th>
+                    <th>Usuário</th>
+                    <th>E-mail</th>
+                    <th><a href="master_page.php?desc=<?php echo 'grupo';?>&action=<?php echo $action;?>">Grupo</a></th>
+                    <th><a href="master_page.php?desc=<?php echo 'acesso';?>&action=<?php echo $action;?>">Acesso</a></th>
+                    <th>Definir Grupo</th>
+                    <th>Definir Acesso</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            $countPub = PublishersDAO::getInstance()->lastId();
+            $countPub = intval($countPub['id']);
+
+            for ($i = 1; $i <= $countPub; $i++) :
+                $ini = $i - 1;
+                $dadosPub = PublishersDAO::getInstance()->readTable($desc, $action, $ini);
+                ?>
+                <tr>
+                    <td><?php echo $dadosPub->getNome(); ?></td>
+                    <td><?php echo $dadosPub->getSobrenome(); ?></td>
+                    <td><?php echo $dadosPub->getUsuario(); ?></td>
+                    <td><?php echo $dadosPub->getEmail(); ?></td>
+                    <td><?php echo $dadosPub->getGrupo(); ?></td>
+                    <td><?php echo $dadosPub->getAccess(); ?></td>
+
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-gru-<?php echo $dadosPub->getId(); ?>">
+                        Definir
+                    </button></td>
+                    
+                    <td>
+                    <?php if ($publicador->getId() != $dadosPub->getId()) :?> 
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-acc-<?php echo $dadosPub->getId(); ?>">
+                            Definir
+                        </button>
+                    <?php endif; ?></td>
+                </tr>
+
+                <!--FALTA ADAPTAR OS DOIS MODAIS-->
+                <?php
+            endfor;
+            ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Usuário</th>
+                    <th>E-mail</th>
+                    <th>Grupo</th>
+                    <th>Acesso</th>
+                    <th>Definir Grupo</th>
+                    <th>Definir Acesso</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
+
+
 
 <table style="width: 98%; word-wrap: break-word; table-layout: fixed;">
     <tr>
@@ -234,10 +305,14 @@ endif;
 <!-- ./wrapper -->
 <!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
 
+<!-- page script -->
 <script>
-$(document).ready(function(){
-    $('.modal').modal();
-});
+    $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+  });
 </script>
     
 <?php

@@ -224,11 +224,6 @@ $(document).ready(function() {
     $('.collapsible').collapsible({accordion: false});
 })
 
-$(document).ready(function(){
-$('.modal').modal();
-});
-</script>
-
 <?php
 //Footer
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';

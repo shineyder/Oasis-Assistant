@@ -404,12 +404,6 @@ else :
     <?php
 endif;
 ?>
-
-<script>
-$(document).ready(function(){
-    $('.modal').modal();
-});
-</script>
     
 <?php
 //Footer
