@@ -41,6 +41,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
     <link rel="stylesheet" href="_CSS/toastr.min.css">
 
     <link rel="stylesheet" href= "_CSS/style.css"/>
+    <link rel="shortcut icon" href="img/logo_oasis_assistant_min.ico">
 </head>
 
 <body class="hold-transition register-page"> <!--adaptado para PROBLEMAS COM LOGIN-->
