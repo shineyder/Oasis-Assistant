@@ -177,8 +177,13 @@ function volt2() {
     <img class="map" id="Mapa_Local_img" src="mapas/1.jpg" alt="Mapa Local">
 </div>
 
-<button id="voltar1" href="#" onclick="volt1()" class="hide">Voltar</button>
-<button id="voltar2" href="#" onclick="volt2()" class="hide">Voltar</button>
+<div id="voltar1" class="hide">
+    <button href="#" onclick="volt1()" class="btn btn-danger btn-block">Voltar</button>
+</div>
+
+<div id="voltar2" class="hide">
+    <button href="#" onclick="volt2()" class="btn btn-danger btn-block">Voltar</button>
+</div>
 
 <div id="div-rel" class="hide">
     <iframe scrolling="no" src="report.php" name="rel" id="frame-rel"></iframe>

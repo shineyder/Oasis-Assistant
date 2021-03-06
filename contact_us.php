@@ -55,47 +55,48 @@ require_once 'includes/message.php';
                     <div class="col-12">
 <!-- /.ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
 
-<script>
-    $(document).ready(function(){
-        $('select').formSelect();
-    });
-</script>
-
-<p>Envie sugestões ou relate problemas</p>
-
-<div class="row">
-    <form class="col s10 push-s1 m8 push-m2" action="phpaction/talk.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" id="id" name="id" type="text" value=<?php echo $publicador->getId()?>>
-        <input type="hidden" id="nome" name="nome" type="text" value=<?php echo $publicador->getNome()?>>
-        <input type="hidden" id="sobrenome" name="sobrenome" type="text" value=<?php echo $publicador->getSobrenome()?>>
-        <input type="hidden" id="email" name="email" type="email" value=<?php echo $publicador->getEmail()?>>
-        <span>Selecione o motivo do contato:</span>
-        <p><label>
-            <input name="assunto" type="radio" value="Problema" checked />
-            <span>Relatar um problema</span>
-        </label></p>
-        <p><label>
-            <input name="assunto" type="radio" value="Sugestão"/>
-            <span>Fazer uma sugestão</span>
-        </label></p>
-        <p><label>
-            <input name="assunto" type="radio" value="Outro"/>
-            <span>Outro</span>
-        </label></p>
-
-        <textarea id="mensag" name="mensag"></textarea>
-        <label for="mensag">Mensagem</label>
-
-        <div class="btn-file">
-            <br><span>Arquivo limitado a 1Mb (.png ou .jpeg)</span>
-            <input type="file" id="fileToUploadTalk" name="fileToUploadTalk" accept="image/png, image/jpeg">
-            <br><label for="fileToUploadTalk">Imagem (opcional)</label>
-        </div>
-        <br>
-        <button type="submit" name="btn-talk" class="btn blue darken-2">Enviar</button>
-        <a href="home.php" class="btn red darken-2">Cancelar</a>
-    </form>
-</div>
+<div class="card">
+    <div class="card-body"> <!--ADAPTADO-->
+        <form action="phpaction/talk.php" method="POST" enctype="multipart/form-data" role="form">
+            <p>Selecione o motivo do contato:</p>
+            <input type="hidden" id="id" name="id" type="text" value=<?php echo $publicador->getId()?>>
+            <input type="hidden" id="nome" name="nome" type="text" value=<?php echo $publicador->getNome()?>>
+            <input type="hidden" id="sobrenome" name="sobrenome" type="text" value=<?php echo $publicador->getSobrenome()?>>
+            <input type="hidden" id="email" name="email" type="email" value=<?php echo $publicador->getEmail()?>>
+            <!-- radio -->
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="assunto" id="assunto1" value="Problema">
+                    <label for="assunto1" class="custom-control-label">Relatar um problema</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="assunto" id="assunto2" value="Sugestão">
+                    <label for="assunto2" class="custom-control-label">Fazer uma sugestão</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="assunto" id="assunto3" value="Outro">
+                    <label for="assunto3" class="custom-control-label">Outro</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Mensagem:</label>
+                <textarea id="mensag" name="mensag" class="form-control" rows="4" placeholder="Digite ..."></textarea>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" id="fileToUploadTalk" name="fileToUploadTalk" accept="image/png, image/jpeg" class="custom-file-input">
+                    <label class="custom-file-label" for="fileToUploadTalk">Imagem (opcional)</label>
+                    <span>Arquivo limitado a 1Mb (.png ou .jpeg)</span>
+                </div>
+            </div>
+            <br>
+            <button type="submit" name="btn-talk" class="btn btn-primary btn-block">Enviar</button>
+        </form>
+        
+    </div>
+    <!-- /.form-box -->
+    <a href="home.php" class="btn btn-danger btn-block">Cancelar</a>
+</div><!-- /.card -->
 
 <!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
                     </div>

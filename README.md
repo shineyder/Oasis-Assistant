@@ -1,7 +1,12 @@
-# Oasis Assistant BETA
+# Oasis Assistant
  Projeto: Gerenciador de Territórios
  
- Versão do Projeto: 0.98
+ Versão do Projeto: 1.0
+
+ Notas da Atualização 1.0:
+ * Múltiplos erros corrigidos
+ * Layout completamente re-feito
+ * Site totalmente responsivo
 
  Notas da Atualização 0.98:
  * Múltiplos erros corrigidos
@@ -15,10 +20,5 @@
  * Múltiplos erros corrigidos
  * Sessão Fale Conosco Criada
  * Master Page tem acesso a todos os Tickets em aberto da sessão Fale Conosco
-
- Atualizações futuras: 
- * Alterar exibição do menu para ocupar menos espaço
- 
- Propósito inicial (v1.0): Sistema de gerenciamento de territórios.
  
  Propósitos futuros: Adicionar mais funções para o sistema gerenciar.
