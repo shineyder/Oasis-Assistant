@@ -79,8 +79,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                     <?php
-                    //if ($publicador->getAccess() >= 8) :
-                    ?>
+                    if ($publicador->getAccess() >= 8) :
+                        ?>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user-cog"></i>
@@ -106,12 +106,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
                             </ul>
                         </li>
                         <?php
-                    //endif;
-                        ?>
+                    endif;
 
-                    <?php
-                    //if ($publicador->getAccess() >= 2) :
-                    ?>
+                    if ($publicador->getAccess() >= 2) :
+                        ?>
                         <li class="nav-header">Território</li>
 
                         <li class="nav-item">
@@ -132,8 +130,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
                             </a>
                         </li>
                         <?php
-                    //endif;
-                        ?>
+                    endif;
+                    ?>
 
                     <li class="nav-header">Outros</li>
 
