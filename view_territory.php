@@ -135,6 +135,40 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
     </div>
 </div>
 
+<div id="Mapa_Local" class="hide">
+    <img class="map" id="Mapa_Local_img" src="mapas/1.jpg" alt="Mapa Local">
+</div>
+
+<div id="voltar1" class="hide">
+    <button href="#" onclick="volt1()" class="btn btn-danger btn-block">Voltar</button>
+</div>
+
+<div id="voltar2" class="hide">
+    <button href="#" onclick="volt2()" class="btn btn-danger btn-block">Voltar</button>
+</div>
+
+<div id="div-rel" class="hide">
+    <iframe scrolling="no" src="report.php" name="rel" id="frame-rel"></iframe>
+</div>
+
+<!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</div>
+<!-- ./wrapper -->
+<!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
+
+<script type = "text/javascript" src="_JS/imageMapResizer.min.js"></script>
+
+<script>
+    imageMapResize();
+</script>
+
 <script>
 function edit(param) {
     document.getElementById(param).setAttribute("class", "");
@@ -171,40 +205,6 @@ function volt2() {
     document.getElementById("voltar1").setAttribute("class", "btn-small red darken-2");
     document.getElementById("voltar2").setAttribute("class", "hide");
 }
-</script>
-
-<div id="Mapa_Local" class="hide">
-    <img class="map" id="Mapa_Local_img" src="mapas/1.jpg" alt="Mapa Local">
-</div>
-
-<div id="voltar1" class="hide">
-    <button href="#" onclick="volt1()" class="btn btn-danger btn-block">Voltar</button>
-</div>
-
-<div id="voltar2" class="hide">
-    <button href="#" onclick="volt2()" class="btn btn-danger btn-block">Voltar</button>
-</div>
-
-<div id="div-rel" class="hide">
-    <iframe scrolling="no" src="report.php" name="rel" id="frame-rel"></iframe>
-</div>
-
-<!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-</div>
-<!-- ./wrapper -->
-<!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
-
-<script type = "text/javascript" src="_JS/imageMapResizer.min.js"></script>
-
-<script>
-    imageMapResize();
 </script>
 
 <?php

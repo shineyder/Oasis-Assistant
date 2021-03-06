@@ -1,9 +1,9 @@
-img#logo{
+#logo{
     max-width: 350px;
     margin-top: 25px;
 }
 
-img.map{
+.map{
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -11,7 +11,7 @@ img.map{
     height: auto;
 }
 
-iframe#frame-rel{
+#frame-rel{
     display: block;
     min-width: 600px;
     width: 90%;
