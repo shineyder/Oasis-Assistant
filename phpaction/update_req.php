@@ -16,7 +16,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 use Assistant\ContactUsDAO;
 
 $countSol = ContactUsDAO::getInstance()->solCount("Problema");
-var_dump($_POST);
 
 for ($i = 1; $i <= $countSol; $i++) :
     $ini = $i - 1;
@@ -25,7 +24,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-pro-' . $i];
         $dadosSol->setStatus($statusN);
         ContactUsDAO::getInstance()->update($dadosSol);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page_req.php');
         exit();
     endif;
 endfor;
@@ -39,7 +38,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-sug-' . $i];
         $dadosSol->setStatus($statusN);
         ContactUsDAO::getInstance()->update($dadosSol);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page_req.php');
         exit();
     endif;
 endfor;
@@ -53,7 +52,7 @@ for ($i = 1; $i <= $countSol; $i++) :
         $statusN = $_POST['sol-out-' . $i];
         $dadosSol->setStatus($statusN);
         ContactUsDAO::getInstance()->update($dadosSol);
-        redirect('http://oasisassistant.com/master_page.php');
+        redirect('http://oasisassistant.com/master_page_req.php');
         exit();
     endif;
 endfor;

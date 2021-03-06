@@ -100,7 +100,7 @@ endif;
                     </div>
 
                     <button type="submit" name="btn-up-email" class="btn btn-primary">Confirmar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </form>
             </div>
         </div>
@@ -153,7 +153,7 @@ endif;
                     </div>
 
                     <button type="submit" name="btn-up-senha" class="btn btn-primary">Confirmar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </form>
             </div>
         </div>
