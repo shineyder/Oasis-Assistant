@@ -13,8 +13,7 @@
 
 #frame-rel{
     display: block;
-    min-width: 600px;
-    width: 90%;
+    width: 100%;
     margin: 10px;
     height: 4000px;
     border: none;

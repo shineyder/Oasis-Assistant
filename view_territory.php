@@ -147,9 +147,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
     <button href="#" onclick="volt2()" class="btn btn-danger btn-block">Voltar</button>
 </div>
 
-<div id="div-rel" class="hide">
-    <iframe scrolling="no" src="report.php" name="rel" id="frame-rel"></iframe>
-</div>
+<!-- Content Wrapper. Contains page content -->
+<div id="div-rel" class="hide" class="content-wrapper iframe-mode" data-widget="iframe" data-loading-screen="750">
+    <div class="tab-content">
+        <iframe scrolling="no" src="report.php" name="rel" id="frame-rel"></iframe>
+    </div>
+  </div>
 
 <!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
                     </div>
