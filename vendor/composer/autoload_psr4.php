@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Views\\' => array($baseDir . '/MVC/Views'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
-    'MVC\\' => array($baseDir . '/SrcMVC'),
+    'Models\\' => array($baseDir . '/MVC/Models'),
+    'Controllers\\' => array($baseDir . '/MVC/Controllers'),
     'Assistant\\' => array($baseDir . '/SrcClasses'),
 );

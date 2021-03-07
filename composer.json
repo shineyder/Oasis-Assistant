@@ -15,7 +15,9 @@
     "autoload": {
         "psr-4": {
             "Assistant\\": "SrcClasses/",
-            "MVC\\": "SrcMVC/"
+            "Controllers\\": "MVC/Controllers/",
+            "Models\\": "MVC/Models/",
+            "Views\\": "MVC/Views/"
         }
     },
     "config":{
