@@ -10,6 +10,8 @@
 <script src="_JS/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="_JS/demo.js"></script>
+<!-- overlayScrollbars -->
+<script src="_JS/jquery.overlayScrollbars.min.js"></script>
 <!-- Toastr -->
 <script src="_JS/toastr.min.js"></script>
 <!-- DataTables -->

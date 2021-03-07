@@ -19,6 +19,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
     <link rel="stylesheet" href="_CSS/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="_CSS/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="_CSS/OverlayScrollbars.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Toastr -->
@@ -29,13 +31,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
     <link rel="stylesheet" href= "_CSS/style.css"/>
     <link rel="shortcut icon" href="img/logo_oasis_assistant_min.ico">
-
-    <!-- Compiled and minified CSS and Import Google Icon Font -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
-    
 </head>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-fixed">
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
