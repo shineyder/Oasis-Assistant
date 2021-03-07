@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_SESSION['mensagem'])) :
+if (isset($_SESSION['mensagem']) and $_SESSION['mensagem'] != []) :
     ?>
 
 <script>
@@ -15,4 +15,5 @@ if (isset($_SESSION['mensagem'])) :
 endif;
 
 $_SESSION['mensagem'] = [];
+$_SESSION['tipo'] = [];
 ?>

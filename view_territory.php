@@ -152,7 +152,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
     <div class="tab-content">
         <iframe scrolling="no" src="report.php" name="rel" id="frame-rel"></iframe>
     </div>
-  </div>
+</div>
 
 <!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
                     </div>
