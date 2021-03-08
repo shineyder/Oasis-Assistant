@@ -14,6 +14,12 @@ class Connect
     {
         if (!isset(self::$instance)) :
             self::$instance = new \PDO("mysql:host=" . self::$servername . ";dbname=" . self::$db_name . "", self::$username, self::$password);
+            try {
+                self::$instance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            } catch (\PDOException $e) {
+                self::$instance = null;
+                die($e->getMessage());
+            }
         endif;
         return self::$instance;
     }
