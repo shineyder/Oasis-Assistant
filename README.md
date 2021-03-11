@@ -21,4 +21,5 @@
  * Sessão Fale Conosco Criada
  * Master Page tem acesso a todos os Tickets em aberto da sessão Fale Conosco
  
+ Propósitos futuros: Refatorar seguindo padrão MVC.
  Propósitos futuros: Adicionar mais funções para o sistema gerenciar.

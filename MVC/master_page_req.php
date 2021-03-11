@@ -99,20 +99,20 @@ else :
                                 $dadosPub = PublishersDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
                                 ?>
                                 <tr>
-                                    <td><?php echo $dadosPub['nome']; ?></td>
-                                    <td><?php echo $dadosPub['sobrenome']; ?></td>
-                                    <td><?php echo $dadosPub['email']; ?></td>
-                                    <td><?php echo $dadosSol->getMensag(); ?></td>
-                                    <td><?php echo $dadosSol->getTimeN(); ?></td>
-                                    <td><?php echo $dadosSol->getTicket(); ?></td>
-                                    <td><?php echo $dadosSol->getStatus(); ?></td>
+                                    <td><?php echo $dadosPub['nome'];?></td>
+                                    <td><?php echo $dadosPub['sobrenome'];?></td>
+                                    <td><?php echo $dadosPub['email'];?></td>
+                                    <td><?php echo $dadosSol->getMensag();?></td>
+                                    <td><?php echo $dadosSol->getTimeN();?></td>
+                                    <td><?php echo $dadosSol->getTicket();?></td>
+                                    <td><?php echo $dadosSol->getStatus();?></td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-pro-<?php echo $i; ?>">Definir</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-pro-<?php echo $i;?>">Definir</button>
                                     </td>
                                 </tr>
 
                                 <!-- modal -->
-                                <div class="modal fade" id="modal-up-sol-pro-<?php echo $i; ?>">
+                                <div class="modal fade" id="modal-up-sol-pro-<?php echo $i;?>">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -127,19 +127,19 @@ else :
                                                     <!-- radio -->
                                                     <div class="form-group">
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-pro-<?php echo $i; ?>" id="sol-pro1-<?php echo $i; ?>" value="em Espera">
-                                                            <label for="sol-pro1-<?php echo $i; ?>" class="custom-control-label">em Espera</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-pro-<?php echo $i;?>" id="sol-pro1-<?php echo $i;?>" value="em Espera">
+                                                            <label for="sol-pro1-<?php echo $i;?>" class="custom-control-label">em Espera</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-pro-<?php echo $i; ?>" id="sol-pro2-<?php echo $i; ?>" value="em Analise">
-                                                            <label for="sol-pro2-<?php echo $i; ?>" class="custom-control-label">em Analise</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-pro-<?php echo $i;?>" id="sol-pro2-<?php echo $i;?>" value="em Analise">
+                                                            <label for="sol-pro2-<?php echo $i;?>" class="custom-control-label">em Analise</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-pro-<?php echo $i; ?>" id="sol-pro3-<?php echo $i; ?>" value="Concluido">
-                                                            <label for="sol-pro3-<?php echo $i; ?>" class="custom-control-label">Concluido</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-pro-<?php echo $i;?>" id="sol-pro3-<?php echo $i;?>" value="Concluido">
+                                                            <label for="sol-pro3-<?php echo $i;?>" class="custom-control-label">Concluido</label>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" name="btn-up-sol-pro-<?php echo $i; ?>" class="btn btn-primary">Confirmar</button>
+                                                    <button type="submit" name="btn-up-sol-pro-<?php echo $i;?>" class="btn btn-primary">Confirmar</button>
                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                 </form>
                                             </div>
@@ -211,20 +211,20 @@ else :
                                 $dadosPub = PublishersDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
                                 ?>
                                 <tr>
-                                    <td><?php echo $dadosPub['nome']; ?></td>
-                                    <td><?php echo $dadosPub['sobrenome']; ?></td>
-                                    <td><?php echo $dadosPub['email']; ?></td>
-                                    <td><?php echo $dadosSol->getMensag(); ?></td>
-                                    <td><?php echo $dadosSol->getTimeN(); ?></td>
-                                    <td><?php echo $dadosSol->getTicket(); ?></td>
-                                    <td><?php echo $dadosSol->getStatus(); ?></td>
+                                    <td><?php echo $dadosPub['nome'];?></td>
+                                    <td><?php echo $dadosPub['sobrenome'];?></td>
+                                    <td><?php echo $dadosPub['email'];?></td>
+                                    <td><?php echo $dadosSol->getMensag();?></td>
+                                    <td><?php echo $dadosSol->getTimeN();?></td>
+                                    <td><?php echo $dadosSol->getTicket();?></td>
+                                    <td><?php echo $dadosSol->getStatus();?></td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-sug-<?php echo $i; ?>">Definir</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-sug-<?php echo $i;?>">Definir</button>
                                     </td>
                                 </tr>
 
                                 <!-- modal -->
-                                <div class="modal fade" id="modal-up-sol-sug-<?php echo $i; ?>">
+                                <div class="modal fade" id="modal-up-sol-sug-<?php echo $i;?>">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -239,19 +239,19 @@ else :
                                                     <!-- radio -->
                                                     <div class="form-group">
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-sug-<?php echo $i; ?>" id="sol-sug1-<?php echo $i; ?>" value="em Espera">
-                                                            <label for="sol-sug1-<?php echo $i; ?>" class="custom-control-label">em Espera</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-sug-<?php echo $i;?>" id="sol-sug1-<?php echo $i;?>" value="em Espera">
+                                                            <label for="sol-sug1-<?php echo $i;?>" class="custom-control-label">em Espera</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-sug-<?php echo $i; ?>" id="sol-sug2-<?php echo $i; ?>" value="em Analise">
-                                                            <label for="sol-sug2-<?php echo $i; ?>" class="custom-control-label">em Analise</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-sug-<?php echo $i;?>" id="sol-sug2-<?php echo $i;?>" value="em Analise">
+                                                            <label for="sol-sug2-<?php echo $i;?>" class="custom-control-label">em Analise</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-sug-<?php echo $i; ?>" id="sol-sug3-<?php echo $i; ?>" value="Concluido">
-                                                            <label for="sol-sug3-<?php echo $i; ?>" class="custom-control-label">Concluido</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-sug-<?php echo $i;?>" id="sol-sug3-<?php echo $i;?>" value="Concluido">
+                                                            <label for="sol-sug3-<?php echo $i;?>" class="custom-control-label">Concluido</label>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" name="btn-up-sol-sug-<?php echo $i; ?>"  class="btn btn-primary">Confirmar</button>
+                                                    <button type="submit" name="btn-up-sol-sug-<?php echo $i;?>"  class="btn btn-primary">Confirmar</button>
                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                 </form>
                                             </div>
@@ -323,20 +323,20 @@ else :
                                 $dadosPub = PublishersDAO::getInstance()->read('id', $dadosSol->getIdUser(), 'nome, sobrenome, email')->fetch(\PDO::FETCH_BOTH);
                                 ?>
                                 <tr>
-                                    <td><?php echo $dadosPub['nome']; ?></td>
-                                    <td><?php echo $dadosPub['sobrenome']; ?></td>
-                                    <td><?php echo $dadosPub['email']; ?></td>
-                                    <td><?php echo $dadosSol->getMensag(); ?></td>
-                                    <td><?php echo $dadosSol->getTimeN(); ?></td>
-                                    <td><?php echo $dadosSol->getTicket(); ?></td>
-                                    <td><?php echo $dadosSol->getStatus(); ?></td>
+                                    <td><?php echo $dadosPub['nome'];?></td>
+                                    <td><?php echo $dadosPub['sobrenome'];?></td>
+                                    <td><?php echo $dadosPub['email'];?></td>
+                                    <td><?php echo $dadosSol->getMensag();?></td>
+                                    <td><?php echo $dadosSol->getTimeN();?></td>
+                                    <td><?php echo $dadosSol->getTicket();?></td>
+                                    <td><?php echo $dadosSol->getStatus();?></td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-out-<?php echo $i; ?>">Definir</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-out-<?php echo $i;?>">Definir</button>
                                     </td>
                                 </tr>
 
                                 <!-- modal -->
-                                <div class="modal fade" id="modal-up-sol-out-<?php echo $i; ?>">
+                                <div class="modal fade" id="modal-up-sol-out-<?php echo $i;?>">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -351,19 +351,19 @@ else :
                                                     <!-- radio -->
                                                     <div class="form-group">
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-out-<?php echo $i; ?>" id="sol-out1-<?php echo $i; ?>" value="em Espera">
-                                                            <label for="sol-out1-<?php echo $i; ?>" class="custom-control-label">em Espera</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-out-<?php echo $i;?>" id="sol-out1-<?php echo $i;?>" value="em Espera">
+                                                            <label for="sol-out1-<?php echo $i;?>" class="custom-control-label">em Espera</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-out-<?php echo $i; ?>" id="sol-out2-<?php echo $i; ?>" value="em Analise">
-                                                            <label for="sol-out2-<?php echo $i; ?>" class="custom-control-label">em Analise</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-out-<?php echo $i;?>" id="sol-out2-<?php echo $i;?>" value="em Analise">
+                                                            <label for="sol-out2-<?php echo $i;?>" class="custom-control-label">em Analise</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input class="custom-control-input" type="radio" name="sol-out-<?php echo $i; ?>" id="sol-out3-<?php echo $i; ?>" value="Concluido">
-                                                            <label for="sol-out3-<?php echo $i; ?>" class="custom-control-label">Concluido</label>
+                                                            <input class="custom-control-input" type="radio" name="sol-out-<?php echo $i;?>" id="sol-out3-<?php echo $i;?>" value="Concluido">
+                                                            <label for="sol-out3-<?php echo $i;?>" class="custom-control-label">Concluido</label>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" name="btn-up-sol-out-<?php echo $i; ?>"  class="btn btn-primary">Confirmar</button>
+                                                    <button type="submit" name="btn-up-sol-out-<?php echo $i;?>"  class="btn btn-primary">Confirmar</button>
                                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                 </form>
                                             </div>

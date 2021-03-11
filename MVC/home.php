@@ -88,7 +88,7 @@ endif;
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar seu e-mail</p>
                 <form action="phpaction/update_pub.php" method="POST">
-                    <input type="hidden" name="id" value="<?php echo $publicador->getId(); ?>">
+                    <input type="hidden" name="id" value="<?php echo $publicador->getId();?>">
                     
                     <div class="input-group mb-3">
                         <input id="email-up" name="email-up" type="email" class="form-control" placeholder="Novo Email">
@@ -123,7 +123,7 @@ endif;
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar sua senha</p>
                 <form action="phpaction/update_pub.php" method="POST">
-                    <input type="hidden" name="id" value="<?php echo $publicador->getId(); ?>">
+                    <input type="hidden" name="id" value="<?php echo $publicador->getId();?>">
                     
                     <div class="input-group mb-3">
                         <input id="senha-old" name="senha-old" type="password" class="form-control" placeholder="Senha Antiga">

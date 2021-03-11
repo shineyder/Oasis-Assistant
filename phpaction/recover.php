@@ -26,13 +26,13 @@ if (isset($_POST['btn-pro'])) :
     $data_type = ["", ""];
 
     if (empty($tipo)) :
-        $_SESSION['mensagem'] = "Nenhum problema selecionado";
+        $_SESSION['message'] = "Nenhum problema selecionado";
         $_SESSION['tipo'] = "warning";
         redirect('http://oasisassistant.com/problem.php');
         exit();
     else :
         if (empty($detail[0]) or (isset($_POST['rec2']) ? empty($detail[1]) : false)) :
-            $_SESSION['mensagem'] = "Informações solicitadas não preenchidas";
+            $_SESSION['message'] = "Informações solicitadas não preenchidas";
             $_SESSION['tipo'] = "warning";
             redirect('http://oasisassistant.com/problem.php');
             exit();
@@ -43,7 +43,7 @@ if (isset($_POST['btn-pro'])) :
                     $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                     if ($publicador->getAccess() === null) :
-                        $_SESSION['mensagem'] = "E-mail não cadastrado";
+                        $_SESSION['message'] = "E-mail não cadastrado";
                         $_SESSION['tipo'] = "warning";
                         redirect('http://oasisassistant.com/problem.php');
                         exit();
@@ -52,7 +52,7 @@ if (isset($_POST['btn-pro'])) :
 
                         $email_send = new Mail();
                         $email_send->sendMail($publicador->getEmail(), $publicador->getNome(), $publicador->getSobrenome(), $message, "Recuperacao de usuario", "");
-                        $_SESSION['mensagem'] = "Um e-mail para recuperação do usuario foi enviado!";
+                        $_SESSION['message'] = "Um e-mail para recuperação do usuario foi enviado!";
                         $_SESSION['tipo'] = "success";
 
                         $event = new Events(null, $publicador->getId(), null, null, "recPub", "RecUser", $publicador->getUsuario(), null, null, null, null, null, null, null);
@@ -69,7 +69,7 @@ if (isset($_POST['btn-pro'])) :
                     $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                     if ($publicador->getAccess() === null) :
-                        $_SESSION['mensagem'] = "E-mail e/ou Usuário não cadastrado";
+                        $_SESSION['message'] = "E-mail e/ou Usuário não cadastrado";
                         $_SESSION['tipo'] = "warning";
                         redirect('http://oasisassistant.com/problem.php');
                         exit();
@@ -81,7 +81,7 @@ if (isset($_POST['btn-pro'])) :
 
                         $email_send = new Mail();
                         $email_send->sendMail($publicador->getEmail(), $publicador->getNome(), $publicador->getSobrenome(), $message, "Recuperacao de senha", "");
-                        $_SESSION['mensagem'] = "Um e-mail para recuperação de senha foi enviado!";
+                        $_SESSION['message'] = "Um e-mail para recuperação de senha foi enviado!";
                         $_SESSION['tipo'] = "success";
 
                         $event = new Events(null, $publicador->getId(), null, null, "recPub", "RecSenha", "e10adc3949ba59abbe56e057f20f883e", null, null, null, null, null, null, null);
@@ -97,7 +97,7 @@ if (isset($_POST['btn-pro'])) :
                     $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                     if ($publicador->getAccess() === null) :
-                        $_SESSION['mensagem'] = "Usuário não cadastrado";
+                        $_SESSION['message'] = "Usuário não cadastrado";
                         $_SESSION['tipo'] = "warning";
                         redirect('http://oasisassistant.com/problem.php');
                         exit();
@@ -109,7 +109,7 @@ if (isset($_POST['btn-pro'])) :
                         $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                         if ($publicador->getAccess() === null) :
-                            $_SESSION['mensagem'] = "E-mail da conta já foi autenticado";
+                            $_SESSION['message'] = "E-mail da conta já foi autenticado";
                             $_SESSION['tipo'] = "info";
                             redirect('http://oasisassistant.com/problem.php');
                             exit();
@@ -121,7 +121,7 @@ if (isset($_POST['btn-pro'])) :
                             $publicador = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
                             if ($publicador->getAccess() === null) :
-                                $_SESSION['mensagem'] = "E-mail informado no cadastro não confere";
+                                $_SESSION['message'] = "E-mail informado no cadastro não confere";
                                 $_SESSION['tipo'] = "warning";
                                 redirect('http://oasisassistant.com/problem.php');
                                 exit();
@@ -134,7 +134,7 @@ if (isset($_POST['btn-pro'])) :
                                 $event = new Events(null, $publicador->getId(), null, null, "recPub", "ReEmailAut", null, null, null, null, null, null, null, null);
                                 EventsDAO::getInstance()->create($event);
 
-                                $_SESSION['mensagem'] = "E-mail de autenticação foi reenviado!";
+                                $_SESSION['message'] = "E-mail de autenticação foi reenviado!";
                                 $_SESSION['tipo'] = "success";
 
                                 redirect('http://oasisassistant.com/');
@@ -153,7 +153,7 @@ if (isset($_POST['btn-pro-plus'])) :
     $detail2 = $_POST['rec2'];
 
     if (empty($detail) or empty($detail2)) :
-        $_SESSION['mensagem'] = "Informações solicitadas não preenchidas";
+        $_SESSION['message'] = "Informações solicitadas não preenchidas";
         $_SESSION['tipo'] = "warning";
         redirect('http://oasisassistant.com/problem.php');
         exit();
@@ -193,7 +193,7 @@ if (isset($_POST['btn-pro-plus'])) :
 
         $email_send = new Mail();
         $email_send->sendMail('adrianoshineyder@hotmail.com', 'Adriano', 'Shineyder', strtr($message, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_"), "Problema nao padrao", $target_file);
-        $_SESSION['mensagem'] = "Solicitação enviada!";
+        $_SESSION['message'] = "Solicitação enviada!";
         $_SESSION['tipo'] = "success";
 
         if ($target_file != '') :

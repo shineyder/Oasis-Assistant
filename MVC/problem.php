@@ -83,7 +83,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="cod_err" value="<?php echo $_POST['problem']; ?>">
+                            <input type="hidden" name="cod_err" value="<?php echo $_POST['problem'];?>">
                             <br>
                             <button type="submit" name="btn-pro" class="btn btn-primary btn-block">Enviar</button>
                             <?php
@@ -106,7 +106,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="cod_err" value="<?php echo $_POST['problem']; ?>">
+                            <input type="hidden" name="cod_err" value="<?php echo $_POST['problem'];?>">
                             <br>
                             <button type="submit" name="btn-pro" class="btn btn-primary btn-block">Enviar</button>
                             <?php
@@ -129,7 +129,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/message.php';
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="cod_err" value="<?php echo $_POST['problem']; ?>">
+                            <input type="hidden" name="cod_err" value="<?php echo $_POST['problem'];?>">
                             <br>
                             <button type="submit" name="btn-pro" class="btn btn-primary btn-block">Enviar</button>
                             <?php

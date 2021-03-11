@@ -125,24 +125,24 @@ endif;
                         $dadosPub = PublishersDAO::getInstance()->readTable($desc, $action, $ini);
                         ?>
                         <tr>
-                            <td><?php echo $dadosPub->getNome(); ?></td>
-                            <td><?php echo $dadosPub->getSobrenome(); ?></td>
-                            <td><?php echo $dadosPub->getUsuario(); ?></td>
-                            <td><?php echo $dadosPub->getEmail(); ?></td>
-                            <td><?php echo $dadosPub->getGrupo(); ?></td>
-                            <td><?php echo $dadosPub->getAccess(); ?></td>
+                            <td><?php echo $dadosPub->getNome();?></td>
+                            <td><?php echo $dadosPub->getSobrenome();?></td>
+                            <td><?php echo $dadosPub->getUsuario();?></td>
+                            <td><?php echo $dadosPub->getEmail();?></td>
+                            <td><?php echo $dadosPub->getGrupo();?></td>
+                            <td><?php echo $dadosPub->getAccess();?></td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-gru-<?php echo $dadosPub->getId(); ?>">Definir</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-gru-<?php echo $dadosPub->getId();?>">Definir</button>
                             </td>
                             <td>
                                 <?php if ($publicador->getId() != $dadosPub->getId()) :?> 
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-acc-<?php echo $dadosPub->getId(); ?>">Definir</button>
-                                <?php endif; ?>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-acc-<?php echo $dadosPub->getId();?>">Definir</button>
+                                <?php endif;?>
                             </td>
                         </tr>
 
                         <!-- modal -->
-                        <div class="modal fade" id="modal-up-gru-<?php echo $dadosPub->getId(); ?>" style="height: 400px;">
+                        <div class="modal fade" id="modal-up-gru-<?php echo $dadosPub->getId();?>" style="height: 400px;">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -154,31 +154,31 @@ endif;
                                     <div class="modal-body">
                                         <p>Selecione o Grupo ao qual o publicador pertence</p>
                                         <form action="phpaction/update_pub.php" method="POST">
-                                            <input type="hidden" name="id" value="<?php echo $publicador->getId(); ?>">
+                                            <input type="hidden" name="id" value="<?php echo $publicador->getId();?>">
                                             <!-- radio -->
                                             <div class="form-group">
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId(); ?>" id="group1-<?php echo $dadosPub->getId(); ?>" value="Porto Novo 1">
-                                                    <label for="group1-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Porto Novo 1</label>
+                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId();?>" id="group1-<?php echo $dadosPub->getId();?>" value="Porto Novo 1">
+                                                    <label for="group1-<?php echo $dadosPub->getId();?>" class="custom-control-label">Porto Novo 1</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId(); ?>" id="group2-<?php echo $dadosPub->getId(); ?>" value="Porto Novo 2">
-                                                    <label for="group2-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Porto Novo 2</label>
+                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId();?>" id="group2-<?php echo $dadosPub->getId();?>" value="Porto Novo 2">
+                                                    <label for="group2-<?php echo $dadosPub->getId();?>" class="custom-control-label">Porto Novo 2</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId(); ?>" id="group3-<?php echo $dadosPub->getId(); ?>" value="Presidente Médici">
-                                                    <label for="group3-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Presidente Médici</label>
+                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId();?>" id="group3-<?php echo $dadosPub->getId();?>" value="Presidente Médici">
+                                                    <label for="group3-<?php echo $dadosPub->getId();?>" class="custom-control-label">Presidente Médici</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId(); ?>" id="group4-<?php echo $dadosPub->getId(); ?>" value="Morro do Sesi">
-                                                    <label for="group4-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Morro do Sesi</label>
+                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId();?>" id="group4-<?php echo $dadosPub->getId();?>" value="Morro do Sesi">
+                                                    <label for="group4-<?php echo $dadosPub->getId();?>" class="custom-control-label">Morro do Sesi</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId(); ?>" id="group5-<?php echo $dadosPub->getId(); ?>" value="Del Porto">
-                                                    <label for="group5-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Del Porto</label>
+                                                    <input class="custom-control-input" type="radio" name="group-<?php echo $dadosPub->getId();?>" id="group5-<?php echo $dadosPub->getId();?>" value="Del Porto">
+                                                    <label for="group5-<?php echo $dadosPub->getId();?>" class="custom-control-label">Del Porto</label>
                                                 </div>
                                             </div>
-                                            <button type="submit" name="btn-up-gru-<?php echo $dadosPub->getId(); ?>" class="btn btn-primary">Confirmar</button>
+                                            <button type="submit" name="btn-up-gru-<?php echo $dadosPub->getId();?>" class="btn btn-primary">Confirmar</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                         </form>
                                     </div>
@@ -190,7 +190,7 @@ endif;
                         <!-- /.modal -->
 
                         <!-- modal -->
-                        <div class="modal fade" id="modal-up-acc-<?php echo $dadosPub->getId(); ?>">
+                        <div class="modal fade" id="modal-up-acc-<?php echo $dadosPub->getId();?>">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -205,53 +205,53 @@ endif;
                                             <!-- radio -->
                                             <div class="form-group">
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc1-<?php echo $dadosPub->getId(); ?>" value="-1">
-                                                    <label for="acc1-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Desassociado</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc1-<?php echo $dadosPub->getId();?>" value="-1">
+                                                    <label for="acc1-<?php echo $dadosPub->getId();?>" class="custom-control-label">Desassociado</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc2-<?php echo $dadosPub->getId(); ?>" value="1">
-                                                    <label for="acc2-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 1</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc2-<?php echo $dadosPub->getId();?>" value="1">
+                                                    <label for="acc2-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 1</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc3-<?php echo $dadosPub->getId(); ?>" value="2">
-                                                    <label for="acc3-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 2</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc3-<?php echo $dadosPub->getId();?>" value="2">
+                                                    <label for="acc3-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 2</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc4-<?php echo $dadosPub->getId(); ?>" value="3">
-                                                    <label for="acc4-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 3</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc4-<?php echo $dadosPub->getId();?>" value="3">
+                                                    <label for="acc4-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 3</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc5-<?php echo $dadosPub->getId(); ?>" value="4">
-                                                    <label for="acc5-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 4</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc5-<?php echo $dadosPub->getId();?>" value="4">
+                                                    <label for="acc5-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 4</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc6-<?php echo $dadosPub->getId(); ?>" value="5">
-                                                    <label for="acc6-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 5</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc6-<?php echo $dadosPub->getId();?>" value="5">
+                                                    <label for="acc6-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 5</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc7-<?php echo $dadosPub->getId(); ?>" value="6">
-                                                    <label for="acc7-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 6</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc7-<?php echo $dadosPub->getId();?>" value="6">
+                                                    <label for="acc7-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 6</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc8-<?php echo $dadosPub->getId(); ?>" value="7">
-                                                    <label for="acc8-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 7</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc8-<?php echo $dadosPub->getId();?>" value="7">
+                                                    <label for="acc8-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 7</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc9-<?php echo $dadosPub->getId(); ?>" value="8">
-                                                    <label for="acc9-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 8</label>
+                                                    <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc9-<?php echo $dadosPub->getId();?>" value="8">
+                                                    <label for="acc9-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 8</label>
                                                 </div>
                                                 <?php
                                                 if ($publicador->getAccess() == 10) :
                                                     ?>
                                                     <div class="custom-control custom-radio">
-                                                        <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId(); ?>" id="acc10-<?php echo $dadosPub->getId(); ?>" value="9">
-                                                        <label for="acc10-<?php echo $dadosPub->getId(); ?>" class="custom-control-label">Publicador nv 9</label>
+                                                        <input class="custom-control-input" type="radio" name="acc-<?php echo $dadosPub->getId();?>" id="acc10-<?php echo $dadosPub->getId();?>" value="9">
+                                                        <label for="acc10-<?php echo $dadosPub->getId();?>" class="custom-control-label">Publicador nv 9</label>
                                                     </div>
                                                     <?php
                                                 endif;
                                                 ?>
                                             </div>
-                                            <button type="submit" name="btn-up-acc-<?php echo $dadosPub->getId(); ?>" class="btn btn-primary">Confirmar</button>
+                                            <button type="submit" name="btn-up-acc-<?php echo $dadosPub->getId();?>" class="btn btn-primary">Confirmar</button>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                         </form>
                                     </div>

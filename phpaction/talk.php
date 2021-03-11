@@ -63,7 +63,7 @@ if (isset($_POST['btn-talk'])) :
     $by   = array( 'a','a','a','a','a','e','e','e','e','i','i','i','o','o','o','o','o','u','u','u','u','A','A','A','A','E','I','O','U','n','n','c','C','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' );
 
     $email_send->sendMail("adrianoshineyder@hotmail.com", 'Adriano', 'Shineyder', str_replace($what, $by, $message), str_replace($what, $by, $subject), $target_file);
-    $_SESSION['mensagem'] = "Solicitação enviada!";
+    $_SESSION['message'] = "Solicitação enviada!";
     $_SESSION['tipo'] = "success";
 
     if ($target_file != '') :

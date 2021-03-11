@@ -23,7 +23,7 @@ if (isset($_POST['btn-up-email'])) :
     $email = $_POST['email-up'];
 
     if (empty($email)) :
-        $_SESSION['mensagem'] = "Campo Novo E-mail não foi preenchido";
+        $_SESSION['message'] = "Campo Novo E-mail não foi preenchido";
         $_SESSION['tipo'] = "warning";
         redirect('http://oasisassistant.com/home.php');
         exit();
@@ -33,7 +33,7 @@ if (isset($_POST['btn-up-email'])) :
         $publicadorup = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
         if ($publicadorup->getAccess() !== null) :
-            $_SESSION['mensagem'] = "E-mail antigo e novo são iguais";
+            $_SESSION['message'] = "E-mail antigo e novo são iguais";
             $_SESSION['tipo'] = "warning";
             redirect('http://oasisassistant.com/home.php');
             exit();
@@ -44,7 +44,7 @@ if (isset($_POST['btn-up-email'])) :
             $publicadorup->setEmail($email);
             $PublicadorDAO = PublishersDAO::getInstance()->update($publicadorup);
             $_SESSION['obj'] = serialize($publicadorup);
-            $_SESSION['mensagem'] = "E-mail alterado com sucesso!";
+            $_SESSION['message'] = "E-mail alterado com sucesso!";
             $_SESSION['tipo'] = "success";
 
             $event = new Events(null, $publicadorup->getId(), null, null, "attPub", "AltEmail", $publicadorup->getEmail(), null, null, null, null, null, null, null);
@@ -63,13 +63,13 @@ if (isset($_POST['btn-up-senha'])) :
     $senha_conf = $_POST['senha-up-conf'];
 
     if (empty($senha_old) or empty($senha) or empty($senha_conf)) :
-        $_SESSION['mensagem'] = "Todos os campos precisam ser preenchidos";
+        $_SESSION['message'] = "Todos os campos precisam ser preenchidos";
         $_SESSION['tipo'] = "warning";
         redirect('http://oasisassistant.com/home.php');
         exit();
     else :
         if ($senha != $senha_conf) :
-            $_SESSION['mensagem'] = "As novas senhas preenchidas não são iguais";
+            $_SESSION['message'] = "As novas senhas preenchidas não são iguais";
             $_SESSION['tipo'] = "warning";
             redirect('http://oasisassistant.com/home.php');
             exit();
@@ -79,7 +79,7 @@ if (isset($_POST['btn-up-senha'])) :
             $publicadorup = PublishersDAO::getInstance()->readAll($data_type, $detail);
 
             if ($publicadorup->getAccess() === null) :
-                $_SESSION['mensagem'] = "Senha antiga não confere";
+                $_SESSION['message'] = "Senha antiga não confere";
                 $_SESSION['tipo'] = "warning";
                 redirect('http://oasisassistant.com/home.php');
                 exit();
@@ -88,7 +88,7 @@ if (isset($_POST['btn-up-senha'])) :
                 $publicadorup->setSenha($senha);
                 $PublicadorDAO = PublishersDAO::getInstance()->update($publicadorup);
                 $_SESSION['obj'] = serialize($publicadorup);
-                $_SESSION['mensagem'] = "Senha alterada com sucesso!";
+                $_SESSION['message'] = "Senha alterada com sucesso!";
                 $_SESSION['tipo'] = "success";
 
                 $event = new Events(null, $publicadorup->getId(), null, null, "attPub", "AltSenha", $publicadorup->getSenha(), null, null, null, null, null, null, null);

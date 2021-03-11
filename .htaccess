@@ -4,8 +4,8 @@
 # DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:16914377:
 
 # 000webhost Fire up PHP file without filename extension
-#RewriteEngine on
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-l
-#RewriteRule ^(.*)$ index.php?url=$1 {QSA,L}
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

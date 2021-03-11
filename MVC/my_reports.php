@@ -77,7 +77,7 @@ if ($publicador->getAccess() >= 8) :
                 for ($i = 1; $i <= $totId; $i++) :
                     $nome = PublishersDAO::getInstance()->read('id', $i, 'nome, sobrenome')->fetch(\PDO::FETCH_BOTH);
                     ?>
-                    <option value="<?php echo $i; ?>"><?php echo $nome["nome"] . " " . $nome["sobrenome"];?></option>
+                    <option value="<?php echo $i;?>"><?php echo $nome["nome"] . " " . $nome["sobrenome"];?></option>
                     <?php
                 endfor;
                 ?>
@@ -116,7 +116,7 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
             <!-- Default box -->
             <div class="card collapsed-card">
                 <div class="card-header">
-                    <h3 class="card-title">Relatório da Quadra <?php echo $loc["quadra"]; ?> do Mapa <?php echo $loc["maps"]; ?></h3>
+                    <h3 class="card-title">Relatório da Quadra <?php echo $loc["quadra"];?> do Mapa <?php echo $loc["maps"];?></h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Colapsar"><i class="fas fa-minus"></i></button>
                     </div>
@@ -146,8 +146,8 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
 
                     if ($dados->getCobert() == EventsDAO::getInstance()->cobertNow()) :
                         ?>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-rel-<?php echo $i; ?>">Corrigir</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-del-rel-<?php echo $i; ?>">Deletar</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-rel-<?php echo $i;?>">Corrigir</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-del-rel-<?php echo $i;?>">Deletar</button>
                         <?php
                     endif;
                     ?>
@@ -156,7 +156,7 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                 <?php
                 if ($dados->getCobert() == EventsDAO::getInstance()->cobertNow()) :
                     ?>
-                    <div class="modal fade" id="modal-up-rel-<?php echo $i; ?>">
+                    <div class="modal fade" id="modal-up-rel-<?php echo $i;?>">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -168,10 +168,10 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                                 <div class="modal-body">
                                     <p>Preencha os campos abaixo para alterar o relatório</p>
                                     <form action="phpaction/update_maps.php" method="POST">
-                                        <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap(); ?>">
+                                        <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap();?>">
                                         
                                         <div class="input-group mb-3">
-                                            <input id="n_res_<?php echo $i; ?>" name="n_res_<?php echo $i; ?>" type="number" class="form-control" placeholder="Número de Residências">
+                                            <input id="n_res_<?php echo $i;?>" name="n_res_<?php echo $i;?>" type="number" class="form-control" placeholder="Número de Residências">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-home"></span>
@@ -179,7 +179,7 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                                             </div>
                                         </div>
                                         <div class="input-group mb-3">
-                                            <input id="n_com_<?php echo $i; ?>" name="n_com_<?php echo $i; ?>" type="number" class="form-control" placeholder="Número de Comércios">
+                                            <input id="n_com_<?php echo $i;?>" name="n_com_<?php echo $i;?>" type="number" class="form-control" placeholder="Número de Comércios">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-store"></span>
@@ -187,14 +187,14 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                                             </div>
                                         </div>
                                         <div class="input-group mb-3">
-                                            <input id="n_edi_<?php echo $i; ?>" name="n_edi_<?php echo $i; ?>" type="number" class="form-control" placeholder="Número de Edifícios">
+                                            <input id="n_edi_<?php echo $i;?>" name="n_edi_<?php echo $i;?>" type="number" class="form-control" placeholder="Número de Edifícios">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-building"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" name="btn-up-rel-<?php echo $i; ?>" class="btn btn-primary">Confirmar</button>
+                                        <button type="submit" name="btn-up-rel-<?php echo $i;?>" class="btn btn-primary">Confirmar</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                     </form>
                                 </div>
@@ -206,7 +206,7 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                     <!-- /.modal -->
 
                     <!-- modal -->
-                    <div class="modal fade" id="modal-del-rel-<?php echo $i; ?>">
+                    <div class="modal fade" id="modal-del-rel-<?php echo $i;?>">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -219,8 +219,8 @@ if (($publicador->getAccess() >= 8 and isset($_POST['btn-pub'])) or $publicador-
                                     <h5>Tem certeza que deseja deletar esse relatório?</h5>
                                     <p>Todas as informações fornecidas serão deletadas!</p>
                                     <form action="phpaction/update_maps.php" method="POST">
-                                        <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap(); ?>">
-                                        <button type="submit" name="btn-del-rel-<?php echo $i; ?>" class="btn btn-warning">Confirmar</button>
+                                        <input type="hidden" name="id_map" value="<?php echo $dados->getIdMap();?>">
+                                        <button type="submit" name="btn-del-rel-<?php echo $i;?>" class="btn btn-warning">Confirmar</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                     </form>
                                 </div>
