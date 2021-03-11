@@ -30,3 +30,5 @@ define('URL', 'http://oasisassistant.com/');
 
 //PATH ONLINE
 //define('URL', 'https://oasisassistant.000webhostapp.com/');
+
+date_default_timezone_set('America/Sao_Paulo');

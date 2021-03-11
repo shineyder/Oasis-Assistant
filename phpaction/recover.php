@@ -180,9 +180,10 @@ if (isset($_POST['btn-pro-plus'])) :
             $uploadOk = 0;
         endif;
 
-        if ($uploadOk == 0) :        // Verifica se houve algum erro
+        // Verifica se houve algum erro
+        if ($uploadOk == 0) :
             $target_file = '';
-        else :                      // Faz upload se nada deu errado
+        else :// Faz upload se nada deu errado
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) :
             else :
                 $target_file = '';

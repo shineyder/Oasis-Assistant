@@ -1,3 +1,11 @@
+<!-- Page script -->
+<script>
+//Initialize Select2 Elements
+$('.select2bs4').select2({
+    theme: 'bootstrap4'
+})
+</script>
+
 <!-- jQuery -->
 <script src=<?php echo URL . "_public/_JS/jquery.min.js";?>></script>
 <!-- Bootstrap 4 -->

@@ -26,35 +26,7 @@ $publicador = unserialize($_SESSION['obj']);
 require_once 'includes/header.php';
 // Message
 require_once 'includes/message.php';
-?>
 
-<!-- ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Meu Perfil</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Meu Perfil</a></li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-<!-- /.ABERTURA DAS ESTRUTURAS DE CONTEUDO-->
-<?php
 if ($publicador->getAccess() == 1) :
     ?>
     <p>Sua conta aguarda análise dos administradores, após a análise sua conta terá o acesso as funcionalidades liberado.</p>
@@ -162,18 +134,6 @@ endif;
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-</div>
-<!-- ./wrapper -->
-<!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
 
 <?php
 //Footer

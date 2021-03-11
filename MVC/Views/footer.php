@@ -1,3 +1,15 @@
+<!-- FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</div>
+<!-- ./wrapper -->
+<!-- /.FECHAMENTO DAS ESTRUTURAS DE CONTEUDO-->
+
 <script>
     M.AutoInit();
 </script>

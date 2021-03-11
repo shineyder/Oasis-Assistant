@@ -22,4 +22,4 @@
     <link rel="shortcut icon" href=<?php echo URL . "_img/logo/logo_oasis_assistant_min.ico";?>>
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition register-page"> <!--adaptado para PROBLEMAS COM LOGIN-->

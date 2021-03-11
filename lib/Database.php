@@ -70,8 +70,18 @@ class Database
         if ($stmt->rowCount() > 1) :
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         else :
+            if ($data == "*") :
+                return $this->showObj($stmt->fetch(\PDO::FETCH_ASSOC), $table);
+            endif;
             return $stmt->fetch(\PDO::FETCH_ASSOC);
         endif;
+    }
+
+    public function showObj($row, $table)
+    {
+        $objName = "\obj\\" . $table;
+        $obj = new $objName($row);
+        return $obj;
     }
 
     /**
@@ -82,7 +92,6 @@ class Database
      */
     public function update($table, $data, $where)
     {
-        //
         ksort($data);
         $fieldDetails = null;
         foreach ($data as $key => $value) :

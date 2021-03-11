@@ -13,6 +13,7 @@ class Index extends \lib\Controller
 
     public function index()
     {
+        $this->view->title = "Oasis Assistant: Login";
         $this->view->render('index/inc/header');
         $this->view->render('message');
         $this->view->render('index/index');
