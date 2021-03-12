@@ -1,9 +1,7 @@
 <?php
 
-/** Página:
-*     Problemas de login
-*   Conteúdo:
-*     Sessão com opção de recuperar senha e reenviar email de autenticação.
+/** Página: Problemas de login
+*   Conteúdo: Sessão com opção de recuperar senha e reenviar email de autenticação.
 */
 
 ?>

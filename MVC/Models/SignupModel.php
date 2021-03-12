@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use lib\Mail;
 use utl\Hash;
 
 class SignupModel extends \lib\Model
@@ -45,6 +46,11 @@ class SignupModel extends \lib\Model
         //Registra o novo publicador
         $publicador = ["nome" => $nome, "sobrenome" => $sobrenome, "email" => $email, "usuario" => $usuario, "senha" => $senha];
         $this->db->create("publisher", $publicador);
+
+        //Envia email de Bem-Vindo e Autenticação para o novo publicador
+        $email_send = new Mail();
+        $message = $email_send->message(5, [$nome, $sobrenome, $usuario]);
+        $email_send->sendMail($publicador['email'], $publicador['nome'], $publicador['sobrenome'], $message, "E-mail de Autenticacao", "");
 
         //Registra na log de eventos
         $log = ["id" => null, "id_user" => null, "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "createPub", "data1" => "nome", "desc1" => $nome, "data2" => "sobrenome", "desc2" => $sobrenome, "data3" => "email", "desc3" => $email, "data4" => "usuario", "desc4" => $usuario];

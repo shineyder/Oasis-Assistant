@@ -1,9 +1,8 @@
 <?php
 
-/** Página:
-*     Criar Conta
-*   Conteúdo:
-*     Formulário para criar conta no sistema*/
+/** Página: Criar Conta
+*   Conteúdo: Formulário para criar conta no sistema
+*/
 
 ?>
 
