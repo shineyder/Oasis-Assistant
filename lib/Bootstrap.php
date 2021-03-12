@@ -30,8 +30,8 @@ class Bootstrap
 
     /**
      * getURL
-     * @param string $url Get a url and work on her
-     * @return array $url Processed url pass to this->url
+     * @param string $url Pega a url para processamento
+     * @return array $url Passa a url processada para this->url
      */
 
     private function getURL()
@@ -90,7 +90,7 @@ class Bootstrap
 
     /**
      * error
-     * @param string $erro Description of an error
+     * @param string $erro Descrição do erro para exibir na página de erro
      */
     private function error($erro)
     {

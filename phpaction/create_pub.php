@@ -60,7 +60,7 @@ if (isset($_POST['btn-confirm'])) :
                         $_SESSION['message'] = "Cadastrado com sucesso!";
                         $_SESSION['tipo'] = "success";
 
-                        $evento = new Events(null, null, null, null, "criatePub", "nome", $publicador->getNome(), "sobrenome", $publicador->getSobrenome(), "email", $publicador->getEmail(), "user", $publicador->getUsuario(), null);
+                        $evento = new Events(null, null, null, null, "createPub", "nome", $publicador->getNome(), "sobrenome", $publicador->getSobrenome(), "email", $publicador->getEmail(), "user", $publicador->getUsuario(), null);
                         EventsDAO::getInstance()->create($evento);
 
                         header('Location: ../index.php');

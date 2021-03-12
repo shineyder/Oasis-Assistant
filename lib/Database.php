@@ -77,6 +77,12 @@ class Database
         endif;
     }
 
+    /**
+     * showObj
+     * @param array $row Array com valores a serem transformados em objeto
+     * @param string $table Nome da tabela que o objeto pertence
+     * @return object $obj Retorna objeto instanciado
+     */
     public function showObj($row, $table)
     {
         $objName = "\obj\\" . $table;
