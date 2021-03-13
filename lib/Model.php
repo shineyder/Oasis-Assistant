@@ -13,7 +13,7 @@ class Model
 
     /**
      * sanitize
-     * @param integer $tipo Descrição: 1 => usuario / 2 => senha / 3 => email / 4 => mixed (evite usar) / 5 => números inteiros / 6 => palavras / default => texto comum
+     * @param integer $tipo Descrição: 1 => usuario / 2 => senha / 3 => email / 4 => mixed (evite usar) / 5 => números inteiros / 6 => palavra / 7 => palavras / default => texto comum
      * @param string $name nome da entrada dentro de $_POST (se $_POST['bla'], então $name="bla")
      * @param string $local Destino para redirecionar em caso de erro ("" => index)
      * @return string $data Retorna variavel que estava em POST validada
@@ -93,6 +93,19 @@ class Model
                         throw new \Exception("Caracteres especiais não permitidos");
                     endif;
                     break;
+                case 7:
+                        $form   ->post($name)
+                                ->val('minLength', 1)
+                                ->val('maxLength', 32)
+                                ->val('alphaPlusSpaces')
+    
+                                ->submit();
+                        $data = $form->fetch();
+                        $dataFilter = filter_var(trim($data[$name]), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                        if ($dataFilter != $data[$name]) :
+                            throw new \Exception("Caracteres especiais não permitidos");
+                        endif;
+                        break;
                 default:
                     $form   ->post($name)
                             ->val('minLength', 1)

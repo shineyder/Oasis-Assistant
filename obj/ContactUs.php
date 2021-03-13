@@ -9,18 +9,20 @@ class ContactUs
     private $assunto;
     private $mensag;
     private $timeN;
-    private $status;
+    private $timeC;
+    private $statusN;
     private $ticket;
 
-    public function __construct($id, $idUser, $assunto, $mensag, $timeN, $status, $ticket)
+    public function __construct($row)
     {
-        $this->id = $id;
-        $this->idUser = $idUser;
-        $this->assunto = $assunto; // Problema - Sugestão - Outro
-        $this->mensag = $mensag;
-        $this->timeN = $timeN;
-        $this->status = $status; // em Espera - em Analise - Concluido
-        $this->ticket = $ticket;
+        $this->id = $row['id'];
+        $this->idUser = $row['idUser'];
+        $this->assunto = $row['assunto']; // Problema - Sugestão - Outro
+        $this->mensag = $row['mensag'];
+        $this->timeN = $row['timeN'];
+        $this->timeC = $row['timeC'];
+        $this->statusN = $row['statusN']; // em Espera - em Analise - Concluido
+        $this->ticket = $row['ticket'];
     }
 
     public function getId()
@@ -78,14 +80,25 @@ class ContactUs
         return $this;
     }
 
-    public function getStatus()
+    public function getTimeC()
     {
-        return $this->status;
+        return $this->timeC;
     }
 
-    public function setStatus($status)
+    public function setTimeC($timeC)
     {
-        $this->status = $status;
+        $this->timeN = $timeC;
+        return $this;
+    }
+
+    public function getStatusN()
+    {
+        return $this->statusN;
+    }
+
+    public function setStatusN($statusN)
+    {
+        $this->status = $statusN;
         return $this;
     }
 

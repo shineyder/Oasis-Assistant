@@ -39,6 +39,13 @@ class Validator
         endif;
     }
 
+    public function alphaPlusSpaces($data)
+    {
+        if (!ctype_alpha(str_replace(' ', '', $data))) :
+            return "Todo caracter deve ser uma letra";
+        endif;
+    }
+
     public function __call($name, $arguments)
     {
         throw new Exception("$name não existe dentro de: " . __CLASS__);
