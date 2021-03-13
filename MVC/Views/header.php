@@ -89,13 +89,13 @@ use lib\Session;
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href=<?php echo URL . "master_page_pub";?> class="nav-link">
+                                    <a href=<?php echo URL . "masterPub";?> class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Publicadores</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href=<?php echo URL . "master_page_req";?> class="nav-link">
+                                    <a href=<?php echo URL . "masterReq";?> class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Solicitações</p>
                                     </a>
@@ -108,7 +108,7 @@ use lib\Session;
                         <li class="nav-header">Território</li>
 
                         <li class="nav-item">
-                            <a href=<?php echo URL . "my_reports";?> class="nav-link">
+                            <a href=<?php echo URL . "myReports";?> class="nav-link">
                             <i class="nav-icon fas fa-street-view"></i>
                             <p>
                                 Meus Relatórios
@@ -117,7 +117,7 @@ use lib\Session;
                         </li>
 
                         <li class="nav-item">
-                            <a href=<?php echo URL . "view_territory";?> class="nav-link">
+                            <a href=<?php echo URL . "viewTerritory";?> class="nav-link">
                             <i class="nav-icon fas fa-map"></i>
                             <p>
                                 Visualizar Territórios
@@ -129,7 +129,7 @@ use lib\Session;
                     <li class="nav-header">Outros</li>
 
                     <li class="nav-item">
-                        <a href=<?php echo URL . "contact_us";?> class="nav-link">
+                        <a href=<?php echo URL . "contactUs";?> class="nav-link">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
                             Fale Conosco
@@ -173,7 +173,7 @@ use lib\Session;
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href=<?php echo URL . "home";?>>Home</a></li>
                                 <li class="breadcrumb-item active"><?php echo $this->local;?></a></li>
                             </ol>
                         </div>

@@ -56,7 +56,7 @@ class Database
      * @param string $details other details (LIMIT, OFFSET, DESC/ASC and other ALL TOGETHER)
      * @return array An associative array with data from DB
      */
-    public function read($table, $data, $where, $details = "")
+    public function read($table, $data, $where = "", $details = "")
     {
         if ($where != "") :
             $stmt = $this::conn()->prepare("SELECT $data FROM $table WHERE $where $details");
@@ -67,12 +67,23 @@ class Database
         $stmt->execute();
         $this::closeConn();
 
+        if ($data == "*") :
+            if ($stmt->rowCount() > 1) :
+                $i = 0;
+                $info = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                foreach ($info as $value) :
+                    $dados[$i] = $this->showObj($value, $table);
+                    $i++;
+                endforeach;
+                return $dados;
+            else :
+                return $this->showObj($stmt->fetch(\PDO::FETCH_ASSOC), $table);
+            endif;
+        endif;
+
         if ($stmt->rowCount() > 1) :
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         else :
-            if ($data == "*") :
-                return $this->showObj($stmt->fetch(\PDO::FETCH_ASSOC), $table);
-            endif;
             return $stmt->fetch(\PDO::FETCH_ASSOC);
         endif;
     }
