@@ -56,7 +56,7 @@ class Database
      * @param string $details other details (LIMIT, OFFSET, DESC/ASC and other ALL TOGETHER)
      * @return array An associative array with data from DB
      */
-    public function read($table, $data, $where, $details)
+    public function read($table, $data, $where, $details = "")
     {
         if ($where != "") :
             $stmt = $this::conn()->prepare("SELECT $data FROM $table WHERE $where $details");

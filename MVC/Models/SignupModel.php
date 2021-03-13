@@ -32,13 +32,13 @@ class SignupModel extends \lib\Model
         $senha = Hash::create('md5', $this->sanitize(2, "senha", "signup"), HASH_PASS_KEY);
 
         //Verifica se o nome de usuario já está em uso
-        $info = $this->db->read("publisher", "usuario", "usuario = '$usuario'", "");
+        $info = $this->db->read("publisher", "usuario", "usuario = '$usuario'");
         if ($info != false) :
             $this->msg("Usuário já registrado", "warning", "signup");
         endif;
 
         //Verifica se o email já está em uso
-        $info = $this->db->read("publisher", "email", "email = '$email'", "");
+        $info = $this->db->read("publisher", "email", "email = '$email'");
         if ($info != false) :
             $this->msg("E-mail já cadastrado", "warning", "signup");
         endif;

@@ -1,45 +1,24 @@
 <?php
 
-session_start();
+/** Página: Home
+*   Conteúdo: Dados do Usuário, opções de trocar email e senha.
+*/
 
-/** Página:
-*     Home
-*   Conteúdo:
-*     Dados do Usuário, opções de trocar email e senha.*/
+use utl\Hash;
 
-// Load Composer's autoloader
-require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-
-// Função redirect
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpaction/redirect.php';
-
-//Verificação
-if (!isset($_SESSION['logado'])) :
-    redirect('http://oasisassistant.com/');
-    exit();
-endif;
-
-//Dados
-$publicador = unserialize($_SESSION['obj']);
-
-// Header
-require_once 'includes/header.php';
-// Message
-require_once 'includes/message.php';
-
-if ($publicador->getAccess() == 1) :
+if ($this->publicador->getAccess() == 1) :
     ?>
-    <p>Sua conta aguarda análise dos administradores, após a análise sua conta terá o acesso as funcionalidades liberado.</p>
+    <p>Sua conta aguarda análise dos administradores, após a análise sua conta terá o acesso às funcionalidades liberado.</p>
     <?php
 endif;
 ?>
 
-<b>Nome: </b><?php echo $publicador->getNome();?> <br>
-<b>Sobrenome: </b><?php echo $publicador->getSobrenome();?> <br>
-<b>E-mail: </b><?php echo $publicador->getEmail();?> <br>
-<b>Grupo: </b><?php echo (($publicador->getGrupo() == null) ? "à definir" : $publicador->getGrupo());?>
+<b>Nome: </b><?php echo $this->publicador->getNome();?> <br>
+<b>Sobrenome: </b><?php echo $this->publicador->getSobrenome();?> <br>
+<b>E-mail: </b><?php echo $this->publicador->getEmail();?> <br>
+<b>Grupo: </b><?php echo (($this->publicador->getGrupo() == null) ? "à definir" : $this->publicador->getGrupo());?>
 <br>
-<b>Usuário: </b> <?php echo $publicador->getUsuario();?><br><br>
+<b>Usuário: </b> <?php echo $this->publicador->getUsuario();?><br><br>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-email">
     Alterar E-mail
 </button>
@@ -59,8 +38,8 @@ endif;
             </div>
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar seu e-mail</p>
-                <form action="phpaction/update_pub.php" method="POST">
-                    <input type="hidden" name="id" value="<?php echo $publicador->getId();?>">
+                <form action="home/updatePubEmail" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $this->publicador->getId();?>">
                     
                     <div class="input-group mb-3">
                         <input id="email-up" name="email-up" type="email" class="form-control" placeholder="Novo Email">
@@ -94,8 +73,8 @@ endif;
             </div>
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar sua senha</p>
-                <form action="phpaction/update_pub.php" method="POST">
-                    <input type="hidden" name="id" value="<?php echo $publicador->getId();?>">
+                <form action="home/updatePubPass" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $this->publicador->getId();?>">
                     
                     <div class="input-group mb-3">
                         <input id="senha-old" name="senha-old" type="password" class="form-control" placeholder="Senha Antiga">
@@ -107,7 +86,7 @@ endif;
                     </div>
 
                     <div class="input-group mb-3">
-                        <input id="senha-up" name="senha-up" type="password" class="form-control" placeholder="Nova Senha">
+                        <input id="senha-new" name="senha-new" type="password" class="form-control" placeholder="Nova Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -116,7 +95,7 @@ endif;
                     </div>
 
                     <div class="input-group mb-3">
-                        <input id="senha-up-conf" name="senha-up-conf" type="password" class="form-control" placeholder="Confirmar Nova Senha">
+                        <input id="senha-new-conf" name="senha-new-conf" type="password" class="form-control" placeholder="Confirmar Nova Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -134,8 +113,3 @@ endif;
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<?php
-//Footer
-require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php';
-?>

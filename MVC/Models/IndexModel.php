@@ -20,13 +20,13 @@ class IndexModel extends \lib\Model
         $senha = Hash::create('md5', $this->sanitize(2, "senha", ""), HASH_PASS_KEY);
 
         //Verifica se usuário existe
-        $verify = $this->db->read("publisher", "id", "usuario = '$usuario'", "");
+        $verify = $this->db->read("publisher", "id", "usuario = '$usuario'");
         if ($verify == false) :
             $this->msg("Usuário inexistente", "warning");
         endif;
 
         //Verifica se a senha confere
-        $verify = $this->db->read("publisher", "id, access", "usuario = '$usuario' AND senha = '$senha'", "");
+        $verify = $this->db->read("publisher", "id, access", "usuario = '$usuario' AND senha = '$senha'");
         if ($verify == false) :
             $this->msg("Usuário e senha não conferem", "warning");
         endif;

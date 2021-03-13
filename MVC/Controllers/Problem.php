@@ -2,13 +2,14 @@
 
 namespace Controllers;
 
+use utl\Auth;
+
 class Problem extends \lib\Controller
 {
     public function __construct()
     {
         parent::__construct();
-        //QUANDO HOME TIVER PRONTO PODE DESCOMENTAR
-        //Auth::handleLogSession();
+        Auth::handleLogSession();
     }
 
     public function index()

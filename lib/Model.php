@@ -65,7 +65,7 @@ class Model
 
                             ->submit();
                     $data = $form->fetch();
-                    $data = trim($data);
+                    $dataFilter = trim($data[$name]);
                     break;
 
                 case 5:
@@ -75,7 +75,10 @@ class Model
 
                             ->submit();
                     $data = $form->fetch();
-                    $data = trim($data);
+                    $dataFilter = filter_var(trim($data[$name]), FILTER_VALIDATE_INT);
+                    if ($dataFilter != $data[$name]) :
+                        throw new \Exception("Somente números são permitidos");
+                    endif;
                     break;
                 case 6:
                     $form   ->post($name)

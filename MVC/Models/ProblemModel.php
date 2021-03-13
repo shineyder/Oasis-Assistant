@@ -31,7 +31,7 @@ class ProblemModel extends \lib\Model
                 $email = $this->sanitize(3, "rec", "problem");
 
                 //Verifica se o email informado está cadastrado
-                $info = $this->db->read("publisher", "*", "email = '$email'", "");
+                $info = $this->db->read("publisher", "*", "email = '$email'");
                 if ($info == false) :
                     $this->msg("E-mail não cadastrado", "warning", "problem");
                 endif;
@@ -55,7 +55,7 @@ class ProblemModel extends \lib\Model
                 $email = $this->sanitize(3, "rec2", "problem");
 
                 //Verifica se o usuario e o email informado está cadastrado
-                $info = $this->db->read("publisher", "*", "usuario = '$user' AND email = '$email'", "");
+                $info = $this->db->read("publisher", "*", "usuario = '$user' AND email = '$email'");
                 if ($info == false) :
                     $this->msg("E-mail e/ou Usuário não cadastrado", "warning", "problem");
                 endif;
@@ -83,13 +83,13 @@ class ProblemModel extends \lib\Model
                 $email = $this->sanitize(3, "rec2", "problem");
 
                 //Verifica se o usuario informado está cadastrado
-                $info = $this->db->read("publisher", "*", "usuario = '$user'", "");
+                $info = $this->db->read("publisher", "*", "usuario = '$user'");
                 if ($info == false) :
                     $this->msg("Usuário não cadastrado", "warning", "problem");
                 endif;
 
                 //Verifica se o email informado é o mesmo do cadastro
-                $info = $this->db->read("publisher", "*", "usuario = '$user' AND email = '$email'", "");
+                $info = $this->db->read("publisher", "*", "usuario = '$user' AND email = '$email'");
                 if ($info == false) :
                     $this->msg("E-mail informado não confere", "warning", "problem");
                 endif;

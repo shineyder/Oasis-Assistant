@@ -2,13 +2,14 @@
 
 namespace Controllers;
 
+use utl\Auth;
+
 class FAQ extends \lib\Controller
 {
     public function __construct()
     {
         parent::__construct();
-        //QUANDO HOME TIVER PRONTO PODE DESCOMENTAR
-        //Auth::handleLogin();
+        Auth::handleLogin();
     }
 
     public function index()

@@ -13,7 +13,7 @@ class AutenticateModel extends \lib\Model
     {
         $verify = 0;
         $data = array();
-        $data = $this->db->read("publisher", "id, usuario", "access = 0", "");
+        $data = $this->db->read("publisher", "id, usuario", "access = 0");
 
         if (@is_array($data[0])) :
             foreach ($data as $dataSingle) :
