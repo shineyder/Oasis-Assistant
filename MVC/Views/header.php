@@ -117,7 +117,7 @@ use lib\Session;
                         </li>
 
                         <li class="nav-item">
-                            <a href=<?php echo URL . "viewTerritory";?> class="nav-link">
+                            <a href=<?php echo URL . "territory";?> class="nav-link">
                             <i class="nav-icon fas fa-map"></i>
                             <p>
                                 Visualizar Territórios
