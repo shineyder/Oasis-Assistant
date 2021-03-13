@@ -19,7 +19,7 @@ class Territory extends \lib\Controller
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('territory/index');
-        $this->view->render('territory/inc/pageScript');
+        //$this->view->render('territory/inc/pageScript');
         $this->view->render('footer');
     }
 
@@ -28,8 +28,33 @@ class Territory extends \lib\Controller
         $this->model->updateMaps();
     }
 
-    // public function showRegionalMap($identificator);
-    // {
-    //     //
-    // }
+    public function showRegio($identificator)
+    {
+        $this->view->title = "Oasis Assistant: Territórios";
+        $this->view->local = "Territórios";
+        $this->view->regio = $identificator;
+        $this->view->render('header');
+        $this->view->render('message');
+        $this->view->render('territory/mapaRegio');
+        $this->view->render('territory/inc/pageScriptRegio');
+        $this->view->render('footer');
+    }
+
+    public function showLoc($identificator)
+    {
+        $this->view->title = "Oasis Assistant: Territórios";
+        $this->view->local = "Territórios";
+        $this->view->loc = $identificator;
+        $this->view->render('header');
+        $this->view->render('message');
+        $this->view->render('territory/mapaLoc');
+        $this->view->render('territory/inc/pageScriptLoc');
+        $this->view->render('footer');
+    }
+
+    public function frame($identificator)
+    {
+        $this->view->reportLoc = $identificator;
+        $this->view->render('territory/report');
+    }
 }
