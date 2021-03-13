@@ -49,7 +49,7 @@ class Mail
 
     /**
      * message
-     * @param int $tipo Tipo de mensagem que será enviado (1 => Esquece user / 2 => Esquece senha / 3 => Email de autenticação / 4 => Outro problema)
+     * @param int $tipo Tipo de mensagem que será enviado (1 => Esquece user / 2 => Esquece senha / 3 => Email de autenticação / 4 => Outro problema / 5 => Nova Conta / 6 => Solicitação)
      * @param string $data Dados a serem escrito na mensagem
      * @return string Mensagem criada
      */
@@ -70,6 +70,9 @@ class Mail
                 break;
             case 5:
                 $message = "<h3>Bem vindo ao Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $data[0] . " " . $data[1] . ", sua conta j&aacute; est&aacute; quase pronta, para concluir seu cadastro e liberar seu acesso basta clicar no link abaixo:<br><br>http://oasisassistant.com/autenticate/autenticate/" . md5($data[2]) . "<br><br>No Oasis Assistant voc&ecirc; ter&aacute; acesso a diversas informa&ccedil;&otilde;es &uacute;teis para o servi&ccedil;o de campo local, fa&ccedil;a bom proveito dessa ferramenta.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
+                break;
+            case 6:
+                $message = "<h3>Obrigado por usar o Oasis Assistant!</h3><br><p>Prezado irm&atilde;o " . $data[0] . " " . $data[1] . ", houve um envio de solicita&ccedil;&atilde;o em Fale Conosco em sua conta.<br>Seu ticket de atendimento &eacute; <b>" . $data[2] . "</b>.</p><p>Se voc&ecirc; n&atilde;o &eacute; a pessoa a quem foi destinado esse e-mail, favor desconsidere-o.</p><p>Qualquer d&uacute;vida estamos &agrave; disposi&ccedil;&atilde;o.</p><br><p>Seus irm&atilde;os,<br><b>Oasis Assistant<br>Setor de Suporte</b></p>";
                 break;
         endswitch;
 

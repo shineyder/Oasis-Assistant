@@ -48,7 +48,6 @@ class ProblemModel extends \lib\Model
                 //Se tudo deu certo emite mensagem de sucesso e retorna a index
                 $this->msg("Um e-mail para recuperação do usuario foi enviado!", "success");
                 break;
-
             case 2: //Esqueceu senha
                 //Validando POST
                 $user = $this->sanitize(1, "rec", "problem");
@@ -76,7 +75,6 @@ class ProblemModel extends \lib\Model
                 //Se tudo deu certo emite mensagem de sucesso e retorna a index
                 $this->msg("Um e-mail para recuperação de senha foi enviado!", "success");
                 break;
-
             case 3: //Não recebeu email de autenticação
                 //Validando POST
                 $user = $this->sanitize(1, "rec", "problem");
@@ -112,43 +110,10 @@ class ProblemModel extends \lib\Model
                 $this->msg("E-mail de autenticação foi reenviado!", "success");
                 break;
             case 4: //Outro problema
-                //Validando POST
+                //Validando POST e verificando Anexo
                 $text = $this->sanitize(10, "rec", "problem");
                 $identificador = $this->sanitize(4, "rec2", "problem");
-
-                //Local de upload de arquivo
-                $target_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
-                $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-                if ($_FILES["fileToUpload"]["error"] == 0) :
-                    // Verifica se é mesmo uma imagem
-                    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                    if ($check !== false) :
-                        $uploadOk = 1;
-                    else :
-                        $uploadOk = 0;
-                    endif;
-
-                    // Verifica tamanho do arquivo
-                    if ($_FILES["fileToUpload"]["size"] > 1000000) :
-                        $uploadOk = 0;
-                    endif;
-                else :
-                    $uploadOk = 0;
-                endif;
-
-                // Verifica se houve algum erro
-                if ($uploadOk == 0) :
-                    $target_file = '';
-                else :
-                    // Faz upload se nada deu errado
-                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) :
-                    else :
-                        $target_file = '';
-                    endif;
-                endif;
+                $target_file = $this->verifyImg($_FILES["fileToUpload"]);
 
                 //Envia email com os dados da solicitação
                 $email_send = new Mail();

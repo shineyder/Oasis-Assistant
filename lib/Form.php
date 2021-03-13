@@ -26,11 +26,24 @@ class Form
     }
 
     /** This is to run $_POST */
-    public function post($field)
+    public function post($field, $clean = false)
     {
-        $this->postData[$field] = $_POST[$field];
+        if ($clean) :
+            $this->postData[$field] = $this->clean($_POST[$field]);
+        else :
+            $this->postData[$field] = $_POST[$field];
+        endif;
         $this->currentItem = $field;
         return $this;
+    }
+
+    /**
+     * clean
+     * @return string Retorna string sem caracter especial
+     */
+    public function clean($data)
+    {
+        return strtr(utf8_decode($data), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
     }
 
     /** This is to return the posted data */

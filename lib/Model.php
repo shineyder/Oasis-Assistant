@@ -24,7 +24,7 @@ class Model
             $form = new Form();
             switch ($tipo) :
                 case 1:
-                    $form   ->post($name)
+                    $form   ->post($name, 1)
                             ->val('alpha')
                             ->val('minLength', 4)
                             ->val('maxLength', 32)
@@ -81,7 +81,7 @@ class Model
                     endif;
                     break;
                 case 6:
-                    $form   ->post($name)
+                    $form   ->post($name, 1)
                             ->val('minLength', 1)
                             ->val('maxLength', 32)
                             ->val('alpha')
@@ -94,20 +94,20 @@ class Model
                     endif;
                     break;
                 case 7:
-                        $form   ->post($name)
-                                ->val('minLength', 1)
-                                ->val('maxLength', 32)
-                                ->val('alphaPlusSpaces')
-    
-                                ->submit();
-                        $data = $form->fetch();
-                        $dataFilter = filter_var(trim($data[$name]), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                        if ($dataFilter != $data[$name]) :
-                            throw new \Exception("Caracteres especiais não permitidos");
-                        endif;
-                        break;
+                    $form   ->post($name, 1)
+                            ->val('minLength', 1)
+                            ->val('maxLength', 32)
+                            ->val('alphaPlusSpaces')
+
+                            ->submit();
+                    $data = $form->fetch();
+                    $dataFilter = filter_var(trim($data[$name]), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    if ($dataFilter != $data[$name]) :
+                        throw new \Exception("Caracteres especiais não permitidos");
+                    endif;
+                    break;
                 default:
-                    $form   ->post($name)
+                    $form   ->post($name, 1)
                             ->val('minLength', 1)
 
                             ->submit();
@@ -134,5 +134,48 @@ class Model
         Session::set('message', $text);
         Session::set('tipo', $tipo);
         Redirect::redirect(URL . $local);
+    }
+
+    /**
+     * verifyImg Verifica se imagem existe e se respeita as restrições
+     * @return string $target_file Retorna localização do arquivo ou '' caso as verificações falhem
+     */
+    public function verifyImg($file)
+    {
+        //Local de upload de arquivo
+        $target_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
+        $target_file = $target_dir . basename($file["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        if ($file["error"] == 0) :
+            // Verifica se é mesmo uma imagem
+            $check = getimagesize($file["tmp_name"]);
+            if ($check !== false) :
+                $uploadOk = 1;
+            else :
+                $uploadOk = 0;
+            endif;
+
+            // Verifica tamanho do arquivo
+            if ($file["size"] > 1000000) :
+                $uploadOk = 0;
+            endif;
+        else :
+            $uploadOk = 0;
+        endif;
+
+        // Verifica se houve algum erro
+        if ($uploadOk == 0) :
+            $target_file = '';
+        else :
+            // Faz upload se nada deu errado
+            if (move_uploaded_file($file["tmp_name"], $target_file)) :
+            else :
+                $target_file = '';
+            endif;
+        endif;
+
+        return $target_file;
     }
 }
