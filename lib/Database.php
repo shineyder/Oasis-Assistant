@@ -137,7 +137,7 @@ class Database
             $info = $this->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
 
             $log = ["id" => null, "id_user" => null, "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "terrComp", "data1" => null, "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
-            $this->db->create("event", $log);
+            $this->create("event", $log);
 
             $sql = "ALTER TABLE event ALTER cobert SET default :cobert";
             $p_sql = $this::conn()->prepare($sql);
