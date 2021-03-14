@@ -68,23 +68,35 @@ class Bootstrap
         //url[0] = Controller
         //url[1] = Method
         //url[2] = Param
+        //url[3] = Param 2
 
         if ($this->controller == null) :
             return false;
         endif;
 
-        if (isset($this->url[1])) :
-            if (method_exists($this->controller, $this->url[1])) :
-                if (isset($this->url[2])) :
-                    $this->controller->{$this->url[1]}($this->url[2]);
-                else :
-                    $this->controller->{$this->url[1]}();
-                endif;
-            else :
-                $this->error("Esse método não existe<br>");
-            endif;
-        else :
+        if (!isset($this->url[1])) :
             $this->controller->index();
+            return false;
+        endif;
+
+        if (!method_exists($this->controller, $this->url[1])) :
+            $this->error("Esse método não existe<br>");
+            return false;
+        endif;
+
+        if (isset($this->url[3])) :
+            $this->controller->{$this->url[1]}($this->url[2], $this->url[3]);
+            return false;
+        endif;
+
+        if (isset($this->url[2])) :
+            $this->controller->{$this->url[1]}($this->url[2]);
+            return false;
+        endif;
+
+        if (isset($this->url[1])) :
+            $this->controller->{$this->url[1]}();
+            return false;
         endif;
     }
 

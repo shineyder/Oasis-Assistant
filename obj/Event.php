@@ -19,22 +19,22 @@ class Event
     private $desc4;
     private $cobert;
 
-    public function __construct($id, $idUser, $idMap, $time, $eventType, $data1, $desc1, $data2, $desc2, $data3, $desc3, $data4, $desc4, $cobert)
+    public function __construct($row)
     {
-        $this->id = $id;
-        $this->idUser = $idUser;
-        $this->idMap = $idMap;
-        $this->time = $time;
-        $this->eventType = $eventType;
-        $this->data1 = $data1;
-        $this->desc1 = $desc1;
-        $this->data2 = $data2;
-        $this->desc2 = $desc2;
-        $this->data3 = $data3;
-        $this->desc3 = $desc3;
-        $this->data4 = $data4;
-        $this->desc4 = $desc4;
-        $this->cobert = $cobert;
+        $this->id = $row['id'];
+        $this->idUser = $row['id_user'];
+        $this->idMap = $row['id_mapa'];
+        $this->time = $row['timeN'];
+        $this->eventType = $row['event_type'];
+        $this->data1 = $row['data1'];
+        $this->desc1 = $row['desc1'];
+        $this->data2 = $row['data2'];
+        $this->desc2 = $row['desc2'];
+        $this->data3 = $row['data3'];
+        $this->desc3 = $row['desc3'];
+        $this->data4 = $row['data4'];
+        $this->desc4 = $row['desc4'];
+        $this->cobert = $row['cobert'];
     }
 
     public function getId()

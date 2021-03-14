@@ -19,42 +19,42 @@ class Territory extends \lib\Controller
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('territory/index');
-        //$this->view->render('territory/inc/pageScript');
         $this->view->render('footer');
     }
 
-    public function updateMaps()
+    public function updateMaps($identificator)
     {
-        $this->model->updateMaps();
+        $this->model->updateMaps($identificator);
     }
 
-    public function showRegio($identificator)
+    public function showRegio($regio)
     {
         $this->view->title = "Oasis Assistant: Territórios";
         $this->view->local = "Territórios";
-        $this->view->regio = $identificator;
+        $this->view->regio = $regio;
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('territory/mapaRegio');
-        $this->view->render('territory/inc/pageScriptRegio');
         $this->view->render('footer');
     }
 
-    public function showLoc($identificator)
+    public function showLoc($regio, $loc)
     {
         $this->view->title = "Oasis Assistant: Territórios";
         $this->view->local = "Territórios";
-        $this->view->loc = $identificator;
+        $this->view->regio = $regio;
+        $this->view->loc = $loc;
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('territory/mapaLoc');
-        $this->view->render('territory/inc/pageScriptLoc');
         $this->view->render('footer');
     }
 
     public function frame($identificator)
     {
+        $this->view->data = $this->model->db->read("map", "*", "maps = $identificator");
         $this->view->reportLoc = $identificator;
+        $this->view->render('message');
         $this->view->render('territory/report');
     }
 }

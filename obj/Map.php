@@ -12,15 +12,15 @@ class Map
     private $com;
     private $edi;
 
-    public function __construct($id, $map, $quadra, $trab, $res, $com, $edi)
+    public function __construct($row)
     {
-        $this->id = $id;
-        $this->map = $map;
-        $this->quadra = $quadra;
-        $this->trab = $trab;
-        $this->res = $res;
-        $this->com = $com;
-        $this->edi = $edi;
+        $this->id = $row['id'];
+        $this->map = $row['maps'];
+        $this->quadra = $row['quadra'];
+        $this->trab = $row['trab'];
+        $this->res = $row['n_residencia'];
+        $this->com = $row['n_comercio'];
+        $this->edi = $row['n_edificio'];
     }
 
     public function getId()
