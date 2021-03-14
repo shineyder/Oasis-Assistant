@@ -101,7 +101,7 @@ use lib\Session;
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href=<?php echo URL . "Reports";?> class="nav-link">
+                                    <a href=<?php echo URL . "Report";?> class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Relatórios</p>
                                     </a>
@@ -115,7 +115,7 @@ use lib\Session;
 
                         <?php if (Session::get('access') < 8) :?>
                             <li class="nav-item">
-                                <a href=<?php echo URL . "Reports";?> class="nav-link">
+                                <a href=<?php echo URL . "Report";?> class="nav-link">
                                 <i class="nav-icon fas fa-street-view"></i>
                                 <p>
                                     Meus Relatórios

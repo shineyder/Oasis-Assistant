@@ -29,9 +29,9 @@ class Territory extends \lib\Controller
 
     public function showRegio($regio)
     {
+        $this->view->regio = $regio;
         $this->view->title = "Oasis Assistant: Territórios";
         $this->view->local = "Territórios";
-        $this->view->regio = $regio;
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('territory/mapaRegio');
@@ -40,10 +40,10 @@ class Territory extends \lib\Controller
 
     public function showLoc($regio, $loc)
     {
-        $this->view->title = "Oasis Assistant: Territórios";
-        $this->view->local = "Territórios";
         $this->view->regio = $regio;
         $this->view->loc = $loc;
+        $this->view->title = "Oasis Assistant: Territórios";
+        $this->view->local = "Territórios";
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('territory/mapaLoc');

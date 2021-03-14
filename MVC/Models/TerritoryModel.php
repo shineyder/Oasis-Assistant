@@ -63,9 +63,37 @@ class TerritoryModel extends \lib\Model
         endforeach;
 
         //Verifica se o território foi completo
-        $this->db->completeTerr();
+        $this->completeTerr();
 
         //Emite mensagem de sucesso e redireciona para o frame dos relatórios
         $this->msg("Relatório enviado com sucesso!", "success", "territory/frame/" . $_POST['mapactive']);
+    }
+
+    /**
+     * completeTerr
+     * Verifica se todas as quadras do território foram trabalhadas
+     * Em caso afirmativo, registra na tabela de eventos e reinicia todo território
+     */
+    public function completeTerr()
+    {
+        $data = $this->db->read("map", "id", "trab = 0");
+
+        if ($data == false) :
+            $info = $this->db->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
+
+            $log = ["id" => null, "id_user" => null, "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "terrComp", "data1" => null, "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+            $this->db->create("event", $log);
+
+            $sql = "ALTER TABLE event ALTER cobert SET default :cobert";
+            $p_sql = $this->db::conn()->prepare($sql);
+            $p_sql->bindValue(":cobert", $info['cobert'] + 1);
+            $p_sql->execute();
+            $this->db::closeConn();
+
+            $this->db->update("map", ["trab" => 0], "1 = 1");
+            return 0;
+        else :
+            return 0;
+        endif;
     }
 }

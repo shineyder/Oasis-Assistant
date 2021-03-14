@@ -67,6 +67,10 @@ class Database
         $stmt->execute();
         $this::closeConn();
 
+        if ($stmt->rowCount() == 0) :
+            return false;
+        endif;
+
         if ($data == "*") :
             if ($stmt->rowCount() > 1) :
                 $i = 0;
@@ -122,34 +126,6 @@ class Database
         endforeach;
         $stmt->execute();
         $this::closeConn();
-    }
-
-    /**
-     * completeTerr
-     * Verifica se todas as quadras do território foram trabalhadas
-     * Em caso afirmativo, registra na tabela de eventos e reinicia todo território
-     */
-    public function completeTerr()
-    {
-        $data = $this->read("map", "id", "trab = 0");
-
-        if ($data == false) :
-            $info = $this->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
-
-            $log = ["id" => null, "id_user" => null, "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "terrComp", "data1" => null, "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
-            $this->create("event", $log);
-
-            $sql = "ALTER TABLE event ALTER cobert SET default :cobert";
-            $p_sql = $this::conn()->prepare($sql);
-            $p_sql->bindValue(":cobert", $info['cobert'] + 1);
-            $p_sql->execute();
-            $this::closeConn();
-
-            $this->update("map", ["trab" => 0], "1 = 1");
-            return 0;
-        else :
-            return 0;
-        endif;
     }
 
     /**
