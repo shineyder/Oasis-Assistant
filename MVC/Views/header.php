@@ -100,6 +100,12 @@ use lib\Session;
                                     <p>Solicitações</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href=<?php echo URL . "Reports";?> class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Relatórios</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     <?php endif;?>
@@ -107,14 +113,16 @@ use lib\Session;
                     <?php if (Session::get('access') >= 2) :?>
                         <li class="nav-header">Território</li>
 
-                        <li class="nav-item">
-                            <a href=<?php echo URL . "myReports";?> class="nav-link">
-                            <i class="nav-icon fas fa-street-view"></i>
-                            <p>
-                                Meus Relatórios
-                            </p>
-                            </a>
-                        </li>
+                        <?php if (Session::get('access') < 8) :?>
+                            <li class="nav-item">
+                                <a href=<?php echo URL . "Reports";?> class="nav-link">
+                                <i class="nav-icon fas fa-street-view"></i>
+                                <p>
+                                    Meus Relatórios
+                                </p>
+                                </a>
+                            </li>
+                        <?php endif;?>
 
                         <li class="nav-item">
                             <a href=<?php echo URL . "territory";?> class="nav-link">
