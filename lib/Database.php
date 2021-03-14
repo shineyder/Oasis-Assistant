@@ -143,6 +143,7 @@ class Database
             $p_sql = $this::conn()->prepare($sql);
             $p_sql->bindValue(":cobert", $info['cobert'] + 1);
             $p_sql->execute();
+            $this::closeConn();
 
             $this->update("map", ["trab" => 0], "1 = 1");
             return 0;
