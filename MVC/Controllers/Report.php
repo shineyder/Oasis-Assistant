@@ -15,7 +15,7 @@ class Report extends \lib\Controller
     public function index()
     {
         $this->view->pub = $this->model->db->read("publisher", "id, nome, sobrenome");
-        $this->view->report = $this->model->readRelatorio();
+        $this->view->report = $this->model->readReport();
         $this->view->title = "Oasis Assistant: Relatórios";
         $this->view->local = "Relatórios";
         $this->view->render('header');
@@ -24,9 +24,14 @@ class Report extends \lib\Controller
         $this->view->render('footer');
     }
 
-    public function updatePub()
+    public function updateRep()
     {
-        $this->model->updatePub();
+        $this->model->updateRep();
+    }
+
+    public function deleteeRep()
+    {
+        $this->model->deleteRep();
     }
 
     public function doS13()

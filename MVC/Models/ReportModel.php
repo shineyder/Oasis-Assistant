@@ -11,7 +11,12 @@ class ReportModel extends \lib\Model
         parent::__construct();
     }
 
-    public function updatePub()
+    public function updateRep()
+    {
+        //
+    }
+
+    public function deleteRep()
     {
         //
     }
@@ -21,7 +26,7 @@ class ReportModel extends \lib\Model
         //
     }
 
-    public function readRelatorio()
+    public function readReport()
     {
         //Se acesso for de ADM, lê todos os publicadores
         if (Session::get('access') >= 8) :
@@ -55,28 +60,34 @@ class ReportModel extends \lib\Model
             //Avalia se os relatórios registrados (doRel) foram corrigidos (attRel) ou deletados (delRel)
             for ($i = 0; $i < $repQtd; $i++) :
                 $relOld = $this->db->read("event", "*", "id_user = $id AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id LIMIT 1 OFFSET $i");
-                $quad = $relOld->getIdMap();
-                $relAtt = $this->db->read("event", "*", "id_user = $id AND id_mapa = $quad AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = $cob", "ORDER BY id DESC LIMIT 1");
+
+                //Verifica se relatório sofreu alterações
+                $idMap = $relOld->getIdMap();
+                $relAtt = $this->db->read("event", "*", "id_user = $id AND id_mapa = $idMap AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = $cob", "ORDER BY id DESC LIMIT 1");
+
+                //Verifica Mapa e Quadra do relatório
+                $quad = $this->db->read("map", "maps, quadra", "id = $idMap");
 
                 //Caso não tenha nenhuma mudança, envia o relatório
                 if ($relAtt == false) :
-                    $rel[$id][$i] = $relOld;
+                    $rel[$id][$i] = [$relOld, $quad];
                     continue;
                 endif;
 
                 //Caso o relatório tenha sido deletado, não envia dado
                 $tipo = $relAtt->getEventType();
-                if ($tipo = "delRel") :
+                if ($tipo == "delRel") :
                     $rel[$id][$i] = null;
                     continue;
                 endif;
 
                 //Caso o relatório tenha sido atualizado, envia a atualização
-                if ($tipo = "attRel") :
-                    $rel[$id][$i] = $relAtt;
+                if ($tipo == "attRel") :
+                    $rel[$id][$i] = [$relAtt, $quad];
                     continue;
                 endif;
             endfor;
         endforeach;
+        return $rel;
     }
 }
