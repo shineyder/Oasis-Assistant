@@ -7,6 +7,18 @@ namespace Composer\Autoload;
 class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
 {
     public static $prefixLengthsPsr4 = array (
+        'u' => 
+        array (
+            'utl\\' => 4,
+        ),
+        'o' => 
+        array (
+            'obj\\' => 4,
+        ),
+        'l' => 
+        array (
+            'lib\\' => 4,
+        ),
         'V' => 
         array (
             'Views\\' => 6,
@@ -23,13 +35,21 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
         array (
             'Controllers\\' => 12,
         ),
-        'A' => 
-        array (
-            'Assistant\\' => 10,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'utl\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/utl',
+        ),
+        'obj\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/obj',
+        ),
+        'lib\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib',
+        ),
         'Views\\' => 
         array (
             0 => __DIR__ . '/../..' . '/MVC/Views',
@@ -46,29 +66,47 @@ class ComposerStaticInit1138772e4aef1ce15276223b77b476d0
         array (
             0 => __DIR__ . '/../..' . '/MVC/Controllers',
         ),
-        'Assistant\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/SrcClasses',
-        ),
     );
 
     public static $classMap = array (
-        'Assistant\\Connect' => __DIR__ . '/../..' . '/SrcClasses/Connect.php',
-        'Assistant\\ContactUs' => __DIR__ . '/../..' . '/SrcClasses/ContactUs.php',
-        'Assistant\\ContactUsDAO' => __DIR__ . '/../..' . '/SrcClasses/ContactUsDAO.php',
-        'Assistant\\Events' => __DIR__ . '/../..' . '/SrcClasses/Events.php',
-        'Assistant\\EventsDAO' => __DIR__ . '/../..' . '/SrcClasses/EventsDAO.php',
-        'Assistant\\Mail' => __DIR__ . '/../..' . '/SrcClasses/Mail.php',
-        'Assistant\\Maps' => __DIR__ . '/../..' . '/SrcClasses/Maps.php',
-        'Assistant\\MapsDAO' => __DIR__ . '/../..' . '/SrcClasses/MapsDAO.php',
-        'Assistant\\Publishers' => __DIR__ . '/../..' . '/SrcClasses/Publishers.php',
-        'Assistant\\PublishersDAO' => __DIR__ . '/../..' . '/SrcClasses/PublishersDAO.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Controllers\\Autenticate' => __DIR__ . '/../..' . '/MVC/Controllers/Autenticate.php',
+        'Controllers\\Erro' => __DIR__ . '/../..' . '/MVC/Controllers/Erro.php',
+        'Controllers\\FAQ' => __DIR__ . '/../..' . '/MVC/Controllers/FAQ.php',
+        'Controllers\\Home' => __DIR__ . '/../..' . '/MVC/Controllers/Home.php',
+        'Controllers\\Index' => __DIR__ . '/../..' . '/MVC/Controllers/Index.php',
+        'Controllers\\MasterPub' => __DIR__ . '/../..' . '/MVC/Controllers/MasterPub.php',
+        'Controllers\\MasterReq' => __DIR__ . '/../..' . '/MVC/Controllers/MasterReq.php',
+        'Controllers\\Problem' => __DIR__ . '/../..' . '/MVC/Controllers/Problem.php',
+        'Controllers\\Signup' => __DIR__ . '/../..' . '/MVC/Controllers/Signup.php',
+        'Models\\AutenticateModel' => __DIR__ . '/../..' . '/MVC/Models/AutenticateModel.php',
+        'Models\\HomeModel' => __DIR__ . '/../..' . '/MVC/Models/HomeModel.php',
+        'Models\\IndexModel' => __DIR__ . '/../..' . '/MVC/Models/IndexModel.php',
+        'Models\\MasterPubModel' => __DIR__ . '/../..' . '/MVC/Models/MasterPubModel.php',
+        'Models\\MasterReqModel' => __DIR__ . '/../..' . '/MVC/Models/MasterReqModel.php',
+        'Models\\ProblemModel' => __DIR__ . '/../..' . '/MVC/Models/ProblemModel.php',
+        'Models\\SignupModel' => __DIR__ . '/../..' . '/MVC/Models/SignupModel.php',
         'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
         'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
         'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
         'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
         'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
+        'lib\\Bootstrap' => __DIR__ . '/../..' . '/lib/Bootstrap.php',
+        'lib\\Controller' => __DIR__ . '/../..' . '/lib/Controller.php',
+        'lib\\Database' => __DIR__ . '/../..' . '/lib/Database.php',
+        'lib\\Form' => __DIR__ . '/../..' . '/lib/Form.php',
+        'lib\\Mail' => __DIR__ . '/../..' . '/lib/Mail.php',
+        'lib\\Model' => __DIR__ . '/../..' . '/lib/Model.php',
+        'lib\\Session' => __DIR__ . '/../..' . '/lib/Session.php',
+        'lib\\View' => __DIR__ . '/../..' . '/lib/View.php',
+        'obj\\ContactUs' => __DIR__ . '/../..' . '/obj/ContactUs.php',
+        'obj\\Event' => __DIR__ . '/../..' . '/obj/Event.php',
+        'obj\\Map' => __DIR__ . '/../..' . '/obj/Map.php',
+        'obj\\Publisher' => __DIR__ . '/../..' . '/obj/Publisher.php',
+        'utl\\Auth' => __DIR__ . '/../..' . '/utl/Auth.php',
+        'utl\\Hash' => __DIR__ . '/../..' . '/utl/Hash.php',
+        'utl\\Redirect' => __DIR__ . '/../..' . '/utl/Redirect.php',
+        'utl\\Validator' => __DIR__ . '/../..' . '/utl/Validator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
