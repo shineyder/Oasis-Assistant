@@ -87,7 +87,7 @@ if ((Session::get("access") >= 8 and isset($_POST['btn-pub'])) or Session::get("
                                 <input type="hidden" name="id_map" value="<?php echo $singleReport[0]->getIdMap();?>">
                                 
                                 <div class="input-group mb-3">
-                                    <input id="n_res_<?php echo $singleReport[0]->getId();?>" name="n_res_<?php echo $singleReport[0]->getId();?>" type="number" class="form-control" placeholder="Número de Residências">
+                                    <input id="n_res_<?php echo $singleReport[0]->getId();?>" name="n_res" type="number" class="form-control" placeholder="Número de Residências">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-home"></span>
@@ -95,7 +95,7 @@ if ((Session::get("access") >= 8 and isset($_POST['btn-pub'])) or Session::get("
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input id="n_com_<?php echo $singleReport[0]->getId();?>" name="n_com_<?php echo $singleReport[0]->getId();?>" type="number" class="form-control" placeholder="Número de Comércios">
+                                    <input id="n_com_<?php echo $singleReport[0]->getId();?>" name="n_com" type="number" class="form-control" placeholder="Número de Comércios">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-store"></span>
@@ -103,7 +103,7 @@ if ((Session::get("access") >= 8 and isset($_POST['btn-pub'])) or Session::get("
                                     </div>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input id="n_edi_<?php echo $singleReport[0]->getId();?>" name="n_edi_<?php echo $singleReport[0]->getId();?>" type="number" class="form-control" placeholder="Número de Edifícios">
+                                    <input id="n_edi_<?php echo $singleReport[0]->getId();?>" name="n_edi" type="number" class="form-control" placeholder="Número de Edifícios">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-building"></span>

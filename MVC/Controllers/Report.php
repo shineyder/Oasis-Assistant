@@ -29,7 +29,7 @@ class Report extends \lib\Controller
         $this->model->updateRep();
     }
 
-    public function deleteeRep()
+    public function deleteRep()
     {
         $this->model->deleteRep();
     }
