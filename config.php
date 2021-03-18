@@ -18,13 +18,6 @@ define('DB_NAME', 'oasis_assistant');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-//Constants: SERVER CONN ONLINE
-// define('DB_TYPE', 'mysql');
-// define('DB_HOST', 'localhost');
-// define('DB_NAME', 'id16295567_oasis_assistant');
-// define('DB_USER', 'id16295567_shineyder');
-// define('DB_PASS', '6!h6/&>tg[A&CdQV');
-
 //PATH OFFLINE
 define('URL', 'http://oasisassistant.com/');
 
