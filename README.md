@@ -1,7 +1,9 @@
 # Oasis Assistant
  Projeto: Gerenciador de Territórios
  
- Versão do Projeto: 1.0
+ Versão do Projeto: 1.4
+ * Alguns erros corrigidos
+ * Código refatorado para aplicar arquitetura MVC
 
  Notas da Atualização 1.0:
  * Múltiplos erros corrigidos
@@ -21,5 +23,4 @@
  * Sessão Fale Conosco Criada
  * Master Page tem acesso a todos os Tickets em aberto da sessão Fale Conosco
  
- Propósitos futuros: Refatorar seguindo padrão MVC.
  Propósitos futuros: Adicionar mais funções para o sistema gerenciar.
