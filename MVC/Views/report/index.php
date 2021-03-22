@@ -176,7 +176,7 @@ if ((Session::get("access") >= 8 and isset($_POST['btn-pub'])) or Session::get("
     endforeach;
     $nPg = ceil($this->count[$publisher] / 15);
     if ($nPg != 1) :
-        echo "<div class='pagination'>";
+        echo "<div class='pag'>";
         if ($this->pg != 1) :
             echo "<a href=" . URL . "report/index/" . ($nPg - 1) . ">&laquo;</a>";
         endif;
