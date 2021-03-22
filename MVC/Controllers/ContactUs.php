@@ -21,7 +21,7 @@ class ContactUs extends \lib\Controller
         $this->view->local = "Fale Conosco";
         $this->view->render('header');
         $this->view->render('message');
-        $this->view->render('contacUs/index');
+        $this->view->render('contactUs/index');
         $this->view->render('footer');
     }
 

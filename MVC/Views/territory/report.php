@@ -35,7 +35,7 @@
 
     <body>
         <div class="container">
-            <form action=<?php echo URL . "territory/updateMaps/" . $this->reportLoc
+            <form action=<?php echo URL . "Territory/updateMaps/" . $this->reportLoc
             ;?> method="POST">
                 <ul class="collapsible">
                     <?php

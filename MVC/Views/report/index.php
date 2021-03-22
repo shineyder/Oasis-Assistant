@@ -10,7 +10,7 @@ use lib\Session;
 if (Session::get("access") >= 8) :
     ?>
     <h5>Emitir S-13:</h5>
-    <a target="_blank" href="report/doS13" class="btn btn-primary">S-13</a>
+    <a target="_blank" href="Report/doS13" class="btn btn-primary">S-13</a>
     <br><br>
     <form action="#" method="POST">
         <!-- select -->
@@ -35,12 +35,12 @@ else :
 endif;
 
 if (isset($read)) :
-    echo "<iframe scrolling='no' src=" . URL . "report/frame/" . $read . " name='report' id='frame-rep'></iframe>";
+    echo "<iframe scrolling='no' src=" . URL . "Report/frame/" . $read . " name='report' id='frame-rep'></iframe>";
 endif;
 
 if (isset($_POST['btn-pub'])) :
     $read = $_POST['publicador'];
-    echo "<iframe scrolling='no' src=" . URL . "report/frame/" . $read . " name='report' id='frame-rep'></iframe>";
+    echo "<iframe scrolling='no' src=" . URL . "Report/frame/" . $read . " name='report' id='frame-rep'></iframe>";
 endif;
 ?>
 

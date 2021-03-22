@@ -14,7 +14,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Login</p>
 
-            <form action="index/loginRun" method="POST">
+            <form action="Index/loginRun" method="POST">
                 <div class="input-group mb-3">
                     <input id="usuario" name="usuario" type="text" class="form-control" placeholder="Usuário">
                     <div class="input-group-append">
@@ -34,10 +34,10 @@
                 <button type="submit" name="btn-entrar" class="btn btn-primary btn-block">Entrar</button>
             </form>
             <p class="mb-1">
-                <a href=<?php echo URL . "problem";?>>Problemas com Login?</a>
+                <a href=<?php echo URL . "Problem";?>>Problemas com Login?</a>
             </p>
             <p class="mb-0">
-                <a href=<?php echo URL . "signup";?> class="text-center">Criar conta</a>
+                <a href=<?php echo URL . "Signup";?> class="text-center">Criar conta</a>
             </p>
         </div>
         <!-- /.login-card-body -->

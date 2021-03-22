@@ -63,7 +63,7 @@ use lib\Session;
                                     </div>
                                     <div class="modal-body">
                                         <p>Selecione o Grupo ao qual o publicador pertence</p>
-                                        <form action="masterPub/updatePubGrupo" method="POST">
+                                        <form action="MasterPub/updatePubGrupo" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $dadosPub->getId();?>">
                                             <!-- radio -->
                                             <div class="form-group">
@@ -111,7 +111,7 @@ use lib\Session;
                                     </div>
                                     <div class="modal-body">
                                         <p>Defina o nível de acesso do publicador</p>
-                                        <form action="masterPub/updatePubAccess" method="POST">
+                                        <form action="MasterPub/updatePubAccess" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $dadosPub->getId();?>">
                                             <!-- radio -->
                                             <div class="form-group">

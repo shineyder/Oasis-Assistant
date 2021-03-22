@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body"> <!--ADAPTADO-->
-        <form action="contactus/sendTalk" method="POST" enctype="multipart/form-data" role="form">
+        <form action="ContactUs/sendTalk" method="POST" enctype="multipart/form-data" role="form">
             <p>Selecione o motivo do contato:</p>
             <input type="hidden" id="id" name="id" type="text" value=<?php echo $this->publicador->getId()?>>
             <input type="hidden" id="nome" name="nome" type="text" value=<?php echo $this->publicador->getNome()?>>
@@ -38,5 +38,5 @@
         
     </div>
     <!-- /.form-box -->
-    <a href="home" class="btn btn-danger btn-block">Cancelar</a>
+    <a href="Home" class="btn btn-danger btn-block">Cancelar</a>
 </div><!-- /.card -->

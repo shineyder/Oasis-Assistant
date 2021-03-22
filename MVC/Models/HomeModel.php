@@ -13,21 +13,19 @@ class HomeModel extends \lib\Model
 
     public function updatePubEmail()
     {
-        echo "<pre>";
-        print_r($_POST);
         //Validando POST
-        $id = $this->sanitize(5, 'id', "home");
-        $email = $this->sanitize(3, 'email-up', "home");
+        $id = $this->sanitize(5, 'id', "Home");
+        $email = $this->sanitize(3, 'email-up', "Home");
 
         //Verificando se os campos foram preenchidos
         if (empty($email)) :
-            $this->msg("Campo Novo E-mail não foi preenchido", "warning", "home");
+            $this->msg("Campo Novo E-mail não foi preenchido", "warning", "Home");
         endif;
 
         //Verificando se o novo email e o anterior são iguais
         $publicadorUp = $this->db->read("publisher", "*", "id = $id");
         if ($publicadorUp->getEmail() == $email) :
-            $this->msg("E-mail antigo e novo são iguais", "warning", "home");
+            $this->msg("E-mail antigo e novo são iguais", "warning", "Home");
         endif;
 
         //Atualiza o email no cadastro
@@ -38,26 +36,26 @@ class HomeModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Emite mensagem de sucesso e direciona para home
-        $this->msg("E-mail alterado com sucesso!", "success", "home");
+        $this->msg("E-mail alterado com sucesso!", "success", "Home");
         exit();
     }
 
     public function updatePubPass()
     {
         //Validando POST
-        $id = $this->sanitize(5, 'id', "home");
-        $senha_old = $this->sanitize(2, 'senha-old', "home");
-        $senha = $this->sanitize(2, 'senha-new', "home");
-        $senha_conf = $this->sanitize(2, 'senha-new-conf', "home");
+        $id = $this->sanitize(5, 'id', "Home");
+        $senha_old = $this->sanitize(2, 'senha-old', "Home");
+        $senha = $this->sanitize(2, 'senha-new', "Home");
+        $senha_conf = $this->sanitize(2, 'senha-new-conf', "Home");
 
         //Verificando se os campos foram preenchidos
         if (empty($senha_old) or empty($senha) or empty($senha_conf)) :
-            $this->msg("Todos os campos precisam ser preenchidos", "warning", "home");
+            $this->msg("Todos os campos precisam ser preenchidos", "warning", "Home");
         endif;
 
         //Verifica se as senhas novas digitadas são iguais
         if ($senha != $senha_conf) :
-            $this->msg("As novas senhas preenchidas não são iguais", "warning", "home");
+            $this->msg("As novas senhas preenchidas não são iguais", "warning", "Home");
         endif;
 
         //Criptografa as senhas
@@ -67,7 +65,7 @@ class HomeModel extends \lib\Model
         //Verifica se a senha antiga confere
         $publicadorUp = $this->db->read("publisher", "*", "id = $id");
         if ($publicadorUp->getSenha() != $senha_old) :
-            $this->msg("Senha antiga não confere", "warning", "home");
+            $this->msg("Senha antiga não confere", "warning", "Home");
         endif;
 
         //Atualiza a senha no cadastro
@@ -78,6 +76,6 @@ class HomeModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Emite mensagem de sucesso e direciona para home
-        $this->msg("Senha alterada com sucesso!", "success", "home");
+        $this->msg("Senha alterada com sucesso!", "success", "Home");
     }
 }

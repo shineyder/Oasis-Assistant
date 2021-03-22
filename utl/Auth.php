@@ -11,7 +11,7 @@ class Auth
         if ($logged == false) :
             session_unset();
             session_destroy();
-            header('Location: http://oasisassistant.com/');
+            Redirect::redirect(URL);
             exit();
         endif;
     }
@@ -21,7 +21,7 @@ class Auth
         @session_start();
         $logged = (isset($_SESSION['loggedIn'])) ? $_SESSION['loggedIn'] : false;
         if ($logged == 1) :
-            header('Location: http://oasisassistant.com/home');
+            Redirect::redirect(URL . 'Home');
             exit();
         endif;
     }
@@ -31,7 +31,7 @@ class Auth
         @session_start();
         $access = $_SESSION['access'];
         if ($access < $accessMin) :
-            header('Location: http://oasisassistant.com/home');
+            Redirect::redirect(URL . 'Home');
             exit();
         endif;
     }

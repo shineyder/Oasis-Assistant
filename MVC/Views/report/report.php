@@ -79,7 +79,7 @@ foreach ($this->report as $singleReport) :
                     </div>
                     <div class="modal-body">
                         <p>Preencha os campos abaixo para alterar o relatório</p>
-                        <form action=<?php echo URL . "report/updateRep";?> method="POST">
+                        <form action=<?php echo URL . "Report/updateRep";?> method="POST">
                             <input type="hidden" name="id_map" value="<?php echo $singleReport[0]->getIdMap();?>">
                             <input type="hidden" name="pg" value="<?php echo $this->pg?>">
                             
@@ -131,7 +131,7 @@ foreach ($this->report as $singleReport) :
                     <div class="modal-body">
                         <h5>Tem certeza que deseja deletar esse relatório?</h5>
                         <p>Todas as informações fornecidas serão deletadas!</p>
-                        <form action=<?php echo URL . "report/deleteRep";?> method="POST">
+                        <form action=<?php echo URL . "Report/deleteRep";?> method="POST">
                             <input type="hidden" name="id_map" value="<?php echo $singleReport[0]->getIdMap();?>">
                             <input type="hidden" name="pg" value="<?php echo $this->pg?>">
                             <button type="submit" name="btn-del-rel-<?php echo $singleReport[0]->getId();?>" class="btn btn-warning">Confirmar</button>
@@ -154,17 +154,17 @@ $nPg = ceil($this->count / 15);
 if ($nPg != 1) :
     echo "<div class='pag'>";
     if ($this->pg != 1) :
-        echo "<a href=" . URL . "report/frame/" . $this->read . "/" . ($this->pg - 1) . ">&laquo;</a>";
+        echo "<a href=" . URL . "Report/frame/" . $this->read . "/" . ($this->pg - 1) . ">&laquo;</a>";
     endif;
     for ($i = 1; $i <= $nPg; $i++) :
         if ($this->pg == $i) :
-            echo "<a href=" . URL . "report/frame/" . $this->read . "/" . $i . " class='active'>$i</a>";
+            echo "<a href=" . URL . "Report/frame/" . $this->read . "/" . $i . " class='active'>$i</a>";
         else :
-            echo "<a href=" . URL . "report/frame/" . $this->read . "/" . $i . ">$i</a>";
+            echo "<a href=" . URL . "Report/frame/" . $this->read . "/" . $i . ">$i</a>";
         endif;
     endfor;
     if ($this->pg != $nPg) :
-        echo "<a href=" . URL . "report/frame/" . $this->read . "/" . ($this->pg + 1) . ">&raquo;</a>";
+        echo "<a href=" . URL . "Report/frame/" . $this->read . "/" . ($this->pg + 1) . ">&raquo;</a>";
     endif;
     echo "</div>";
 endif;

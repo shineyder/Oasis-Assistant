@@ -24,14 +24,14 @@ class MasterReqModel extends \lib\Model
     public function updateReq()
     {
         //Validando POST
-        $id = $this->sanitize(5, "id", "masterreq");
-        $statusN = $this->sanitize(7, "sol", "masterreq");
+        $id = $this->sanitize(5, "id", "MasterReq");
+        $statusN = $this->sanitize(7, "sol", "MasterReq");
 
         //Atualiza o grupo no cadastro
         $this->db->update("contactus", ["statusN" => $statusN], "id = $id");
 
         //Emite mensagem de sucesso e direciona para Master Solicitações
-        $this->msg("Status atualizado com sucesso!", "success", "masterreq");
+        $this->msg("Status atualizado com sucesso!", "success", "MasterReq");
         exit();
     }
 }

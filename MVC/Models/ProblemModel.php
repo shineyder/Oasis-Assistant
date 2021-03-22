@@ -13,27 +13,27 @@ class ProblemModel extends \lib\Model
 
     public function recover()
     {
-        $tipo = $this->sanitize(5, "cod_err", "problem");
+        $tipo = $this->sanitize(5, "cod_err", "Problem");
 
         //Verifica se algum Tipo de problema foi selecionado
         if (empty($tipo)) :
-            $this->msg("Nenhum problema selecionado", "warning", "problem");
+            $this->msg("Nenhum problema selecionado", "warning", "Problem");
         endif;
 
         //Verifica se as informações sobre o problema foram preenchidas
         if (empty($_POST['rec']) or (isset($_POST['rec2']) ? empty($_POST['rec2']) : false)) :
-            $this->msg("Informações solicitadas não preenchidas", "warning", "problem");
+            $this->msg("Informações solicitadas não preenchidas", "warning", "Problem");
         endif;
 
         switch ($tipo) :
             case 1: // Esqueceu usuario
                 //Validando POST
-                $email = $this->sanitize(3, "rec", "problem");
+                $email = $this->sanitize(3, "rec", "Problem");
 
                 //Verifica se o email informado está cadastrado
                 $info = $this->db->read("publisher", "*", "email = '$email'");
                 if ($info == false) :
-                    $this->msg("E-mail não cadastrado", "warning", "problem");
+                    $this->msg("E-mail não cadastrado", "warning", "Problem");
                 endif;
 
                 //Envia email com dados para recuperação
@@ -50,13 +50,13 @@ class ProblemModel extends \lib\Model
                 break;
             case 2: //Esqueceu senha
                 //Validando POST
-                $user = $this->sanitize(1, "rec", "problem");
-                $email = $this->sanitize(3, "rec2", "problem");
+                $user = $this->sanitize(1, "rec", "Problem");
+                $email = $this->sanitize(3, "rec2", "Problem");
 
                 //Verifica se o usuario e o email informado está cadastrado
                 $info = $this->db->read("publisher", "*", "usuario = '$user' AND email = '$email'");
                 if ($info == false) :
-                    $this->msg("E-mail e/ou Usuário não cadastrado", "warning", "problem");
+                    $this->msg("E-mail e/ou Usuário não cadastrado", "warning", "Problem");
                 endif;
 
                 //Define nova senha como 123456
@@ -77,24 +77,24 @@ class ProblemModel extends \lib\Model
                 break;
             case 3: //Não recebeu email de autenticação
                 //Validando POST
-                $user = $this->sanitize(1, "rec", "problem");
-                $email = $this->sanitize(3, "rec2", "problem");
+                $user = $this->sanitize(1, "rec", "Problem");
+                $email = $this->sanitize(3, "rec2", "Problem");
 
                 //Verifica se o usuario informado está cadastrado
                 $info = $this->db->read("publisher", "*", "usuario = '$user'");
                 if ($info == false) :
-                    $this->msg("Usuário não cadastrado", "warning", "problem");
+                    $this->msg("Usuário não cadastrado", "warning", "Problem");
                 endif;
 
                 //Verifica se o email informado é o mesmo do cadastro
                 $info = $this->db->read("publisher", "*", "usuario = '$user' AND email = '$email'");
                 if ($info == false) :
-                    $this->msg("E-mail informado não confere", "warning", "problem");
+                    $this->msg("E-mail informado não confere", "warning", "Problem");
                 endif;
 
                 //Verifica se a conta já foi autenticada
                 if ($info->getAccess() != 0) :
-                    $this->msg("E-mail da conta já foi autenticado", "warning", "problem");
+                    $this->msg("E-mail da conta já foi autenticado", "warning", "Problem");
                 endif;
 
                 //Envia email com dados para recuperação
@@ -111,8 +111,8 @@ class ProblemModel extends \lib\Model
                 break;
             case 4: //Outro problema
                 //Validando POST e verificando Anexo
-                $text = $this->sanitize(10, "rec", "problem");
-                $identificador = $this->sanitize(4, "rec2", "problem");
+                $text = $this->sanitize(10, "rec", "Problem");
+                $identificador = $this->sanitize(4, "rec2", "Problem");
                 $target_file = $this->verifyImg($_FILES["fileToUpload"]);
 
                 //Envia email com os dados da solicitação

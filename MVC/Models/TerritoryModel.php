@@ -66,7 +66,7 @@ class TerritoryModel extends \lib\Model
         $this->completeTerr();
 
         //Emite mensagem de sucesso e redireciona para o frame dos relatórios
-        $this->msg("Relatório enviado com sucesso!", "success", "territory/frame/" . $_POST['mapactive']);
+        $this->msg("Relatório enviado com sucesso!", "success", "Territory/frame/" . $_POST['mapactive']);
     }
 
     /**

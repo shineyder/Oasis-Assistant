@@ -15,7 +15,7 @@
         <div class="card-body register-card-body">
             <p class="login-box-msg">Cadastrar novo Usuário</p>
 
-            <form action="signup/registerPub" method="POST">
+            <form action="Signup/registerPub" method="POST">
                 <div class="row">
                     <div class="col-5">
                         <div class="input-group mb-3">
@@ -78,7 +78,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-6">
-                        <a href="index" class="btn btn-danger btn-block">Cancelar</a>
+                        <a href="Index" class="btn btn-danger btn-block">Cancelar</a>
                     </div>
                 <!-- /.col -->
                 </div>

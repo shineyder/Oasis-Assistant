@@ -14,12 +14,12 @@ class ContactUsModel extends \lib\Model
     public function sendTalk()
     {
         //Validando POST e verificando Anexo
-        $id = $this->sanitize(5, "id", "contactus");
-        $nome = $this->sanitize(6, "nome", "contactus");
-        $sobrenome = $this->sanitize(6, "sobrenome", "contactus");
-        $email = $this->sanitize(3, "email", "contactus");
-        $mensag = $this->sanitize(10, "mensag", "contactus");
-        $assunto = $this->sanitize(6, "assunto", "contactus");
+        $id = $this->sanitize(5, "id", "ContactUs");
+        $nome = $this->sanitize(6, "nome", "ContactUs");
+        $sobrenome = $this->sanitize(6, "sobrenome", "ContactUs");
+        $email = $this->sanitize(3, "email", "ContactUs");
+        $mensag = $this->sanitize(10, "mensag", "ContactUs");
+        $assunto = $this->sanitize(6, "assunto", "ContactUs");
         $ticket = date_timestamp_get(date_create()) . $id;
         $target_file = $this->verifyImg($_FILES["fileToUploadTalk"]);
 

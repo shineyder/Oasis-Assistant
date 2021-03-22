@@ -45,16 +45,16 @@ use lib\Session;
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href=<?php echo URL . "home";?> class="nav-link">Home</a>
+                <a href=<?php echo URL . "Home";?> class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href=<?php echo URL . "contact_us";?> class="nav-link">Fale Conosco</a>
+                <a href=<?php echo URL . "ContactUs";?> class="nav-link">Fale Conosco</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href=<?php echo URL . "faq";?> class="nav-link">F.A.Q.</a>
+                <a href=<?php echo URL . "FAQ";?> class="nav-link">F.A.Q.</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href=<?php echo URL . "home/logout";?> class="nav-link">Sair</a>
+                <a href=<?php echo URL . "Home/logout";?> class="nav-link">Sair</a>
             </li>
         </ul>
     </nav>
@@ -63,7 +63,7 @@ use lib\Session;
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href=<?php echo URL?> class="brand-link elevation-4">
+        <a href=<?php echo URL;?> class="brand-link elevation-4">
         <img src=<?php echo URL . "_img/logo/logo_oasis_assistant_min-2.png";?>
             alt="Oasis Assistant Logo"
             class="brand-image img-circle elevation-3"
@@ -89,13 +89,13 @@ use lib\Session;
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href=<?php echo URL . "masterPub";?> class="nav-link">
+                                    <a href=<?php echo URL . "MasterPub";?> class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Publicadores</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href=<?php echo URL . "masterReq";?> class="nav-link">
+                                    <a href=<?php echo URL . "MasterReq";?> class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Solicitações</p>
                                     </a>
@@ -125,7 +125,7 @@ use lib\Session;
                         <?php endif;?>
 
                         <li class="nav-item">
-                            <a href=<?php echo URL . "territory";?> class="nav-link">
+                            <a href=<?php echo URL . "Territory";?> class="nav-link">
                             <i class="nav-icon fas fa-map"></i>
                             <p>
                                 Visualizar Territórios
@@ -137,7 +137,7 @@ use lib\Session;
                     <li class="nav-header">Outros</li>
 
                     <li class="nav-item">
-                        <a href=<?php echo URL . "contactUs";?> class="nav-link">
+                        <a href=<?php echo URL . "ContactUs";?> class="nav-link">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
                             Fale Conosco
@@ -146,7 +146,7 @@ use lib\Session;
                     </li>
 
                     <li class="nav-item">
-                        <a href=<?php echo URL . "faq";?> class="nav-link">
+                        <a href=<?php echo URL . "FAQ";?> class="nav-link">
                         <i class="nav-icon fas fa-question"></i>
                         <p>
                             F.A.Q.
@@ -155,7 +155,7 @@ use lib\Session;
                     </li>
 
                     <li class="nav-item">
-                        <a href=<?php echo URL . "home/logout";?> class="nav-link">
+                        <a href=<?php echo URL . "Home/logout";?> class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
                             Sair
@@ -181,7 +181,7 @@ use lib\Session;
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href=<?php echo URL . "home";?>>Home</a></li>
+                                <li class="breadcrumb-item"><a href=<?php echo URL . "Home";?>>Home</a></li>
                                 <li class="breadcrumb-item active"><?php echo $this->local;?></a></li>
                             </ol>
                         </div>

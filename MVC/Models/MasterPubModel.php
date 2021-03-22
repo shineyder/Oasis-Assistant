@@ -12,8 +12,8 @@ class MasterPubModel extends \lib\Model
     public function updatePubGrupo()
     {
         //Validando POST
-        $id = $this->sanitize(5, "id", "masterpub");
-        $grupo = $this->sanitize(4, "group", "masterpub");
+        $id = $this->sanitize(5, "id", "MasterPub");
+        $grupo = $this->sanitize(4, "group", "MasterPub");
 
         //Atualiza o grupo no cadastro
         $this->db->update("publisher", ["grupo" => $grupo], "id = $id");
@@ -23,15 +23,15 @@ class MasterPubModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Emite mensagem de sucesso e direciona para Master Publicador
-        $this->msg("Grupo alterado com sucesso!", "success", "masterpub");
+        $this->msg("Grupo alterado com sucesso!", "success", "MasterPub");
         exit();
     }
 
     public function updatePubAccess()
     {
         //Validando POST
-        $id = $this->sanitize(5, "id", "masterpub");
-        $access = $this->sanitize(4, "acc", "masterpub");
+        $id = $this->sanitize(5, "id", "MasterPub");
+        $access = $this->sanitize(4, "acc", "MasterPub");
 
         //Atualiza o access no cadastro
         $this->db->update("publisher", ["access" => $access], "id = $id");
@@ -41,7 +41,7 @@ class MasterPubModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Emite mensagem de sucesso e direciona para Master Publicador
-        $this->msg("Acesso alterado com sucesso!", "success", "masterpub");
+        $this->msg("Acesso alterado com sucesso!", "success", "MasterPub");
         exit();
     }
 }

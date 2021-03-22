@@ -118,7 +118,7 @@ class ReportModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Se tudo deu certo emite mensagem de sucesso e retorna a index
-        $this->msg("Relatório atualizado com sucesso", "success", "report/frame/" . $idUser . "/" . $_POST['pg']);
+        $this->msg("Relatório atualizado com sucesso", "success", "Report/frame/" . $idUser . "/" . $_POST['pg']);
     }
 
     public function deleteRep()
@@ -145,7 +145,7 @@ class ReportModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Se tudo deu certo emite mensagem de sucesso e retorna a index
-        $this->msg("Relatório deletado com sucesso", "success", "report/frame/" . $idUser . "/" . $_POST['pg']);
+        $this->msg("Relatório deletado com sucesso", "success", "Report/frame/" . $idUser . "/" . $_POST['pg']);
     }
 
     public function readRep($pubId, $pg)

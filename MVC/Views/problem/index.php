@@ -29,7 +29,7 @@
     <!-- RESOLVER O PROBLEMA SELECIONADO -->
     <div class="card">
         <div class="card-body register-card-body">
-            <form action="problem/recover" method="POST" enctype="multipart/form-data" role="form">
+            <form action="Problem/recover" method="POST" enctype="multipart/form-data" role="form">
                 <?php
                 if (isset($_POST['btn-prox'])) :
                     ?>
@@ -131,7 +131,7 @@
             </form>
         </div>
         <!-- /.form-box -->
-        <a href="index" class="btn btn-danger btn-block">Cancelar</a>
+        <a href="Index" class="btn btn-danger btn-block">Cancelar</a>
     </div><!-- /.card -->
 </div>
 <!-- /.register-box -->

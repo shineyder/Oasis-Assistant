@@ -38,7 +38,7 @@ endif;
             </div>
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar seu e-mail</p>
-                <form action="home/updatePubEmail" method="POST">
+                <form action="Home/updatePubEmail" method="POST">
                     <input type="hidden" name="id" value="<?php echo $this->publicador->getId();?>">
                     
                     <div class="input-group mb-3">
@@ -73,7 +73,7 @@ endif;
             </div>
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar sua senha</p>
-                <form action="home/updatePubPass" method="POST">
+                <form action="Home/updatePubPass" method="POST">
                     <input type="hidden" name="id" value="<?php echo $this->publicador->getId();?>">
                     
                     <div class="input-group mb-3">

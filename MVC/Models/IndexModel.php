@@ -41,6 +41,6 @@ class IndexModel extends \lib\Model
         Session::set('loggedIn', true);
         Session::set('id', $verify['id']);
         Session::set('access', $verify['access']);
-        Redirect::redirect(URL . 'home');
+        Redirect::redirect(URL . 'Home');
     }
 }
