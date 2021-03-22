@@ -1,7 +1,14 @@
 # Oasis Assistant
  Projeto: Gerenciador de Territórios
  
- Versão do Projeto: 1.4
+ Versão do Projeto: 1.5
+
+ Notas da Atualização 1.5:
+ * Múltiplos erros corrigidos
+ * Adicionado novas funcionalidades às tabelas
+ * Tabelas otimizadas
+
+ Notas da Atualização 1.4:
  * Alguns erros corrigidos
  * Código refatorado para aplicar arquitetura MVC
 
