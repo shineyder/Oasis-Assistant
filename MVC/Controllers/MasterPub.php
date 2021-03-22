@@ -20,7 +20,7 @@ class MasterPub extends \lib\Controller
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('masterPub/index');
-        $this->view->render('footer');
+        $this->view->render('masterPub/inc/footer');
     }
 
     public function updatePubGrupo()

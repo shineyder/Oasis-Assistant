@@ -12,10 +12,12 @@ class Report extends \lib\Controller
         Auth::handleLogin();
     }
 
-    public function index()
+    public function index($pg = 1)
     {
         $this->view->pub = $this->model->db->read("publisher", "id, nome, sobrenome");
-        $this->view->report = $this->model->readReport();
+        $this->view->report = $this->model->readRep($pg);
+        $this->view->pg = $pg;
+        $this->view->count = $this->model->count;
         $this->view->title = "Oasis Assistant: Relatórios";
         $this->view->local = "Relatórios";
         $this->view->render('header');

@@ -148,7 +148,7 @@ class ReportModel extends \lib\Model
         $this->msg("Relatório deletado com sucesso", "success", "report");
     }
 
-    public function readReport()
+    public function readRep($pg)
     {
         //Se acesso for de ADM, lê todos os publicadores
         if (Session::get('access') >= 8) :
@@ -172,20 +172,31 @@ class ReportModel extends \lib\Model
         foreach ($pub as $singlePub) :
             $id = $singlePub['id'];
 
-            //Conta quantos relatórios foram feitos (se nenhum foi feito, vai para o prox publicador)
+            //Conta quantos relatórios foram feitos
             $repQtd = $this->db->read("event", "id", "id_user = $id AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC");
             if ($repQtd == false) :
+                //Se nenhum foi feito, vai para o prox publicador
                 continue;
             endif;
             $repQtd = count($repQtd);
+            $this->count[$id] = $repQtd;
+
+            //Primeiro e último relatório a ser lido
+            $first = ($pg - 1) * 15;
+            if ($this->count[$id] > $first + 15) :
+                $last = $first + 15;
+            else :
+                $last = $this->count[$id];
+            endif;
 
             //Avalia se os relatórios registrados (doRel) foram corrigidos (attRel) ou deletados (delRel)
-            for ($i = 0; $i < $repQtd; $i++) :
+            for ($i = $first; $i < $last; $i++) :
                 $relOld = $this->db->read("event", "*", "id_user = $id AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC LIMIT 1 OFFSET $i");
+                $idRel = $relOld->getId();
 
                 //Verifica se relatório sofreu alterações
                 $idMap = $relOld->getIdMap();
-                $relAtt = $this->db->read("event", "*", "id_user = $id AND id_mapa = $idMap AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = $cob", "ORDER BY id DESC LIMIT 1");
+                $relAtt = $this->db->read("event", "*", "id_user = $id AND id_mapa = $idMap AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = $cob AND id > $idRel", "ORDER BY id DESC LIMIT 1");
 
                 //Verifica Mapa e Quadra do relatório
                 $quad = $this->db->read("map", "maps, quadra", "id = $idMap");
@@ -199,6 +210,7 @@ class ReportModel extends \lib\Model
                 //Caso o relatório tenha sido deletado, não envia dado
                 $tipo = $relAtt->getEventType();
                 if ($tipo == "delRel") :
+                    $rel[$id][$i] = ["Relatório deletado", $quad];
                     continue;
                 endif;
 

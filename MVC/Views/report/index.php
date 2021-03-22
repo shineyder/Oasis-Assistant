@@ -40,11 +40,25 @@ endif;
 <p>OBS: Quando se completa o território, todos os relatórios até então são arquivados e, portanto, não aparecerão nesta página.</p>
 
 <?php
+
 if ((Session::get("access") >= 8 and isset($_POST['btn-pub'])) or Session::get("access") < 8) :
+    ?>
+    <!-- SEARCH FORM -->
+    <form action="report/searchRep" method="POST">
+    <div class="input-group mb-3 col-lg-4 col-md-6 col-sm-8">
+        <input id="search" name="search" type="search" class="form-control" placeholder="Ex: M1">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-search"></span>
+            </div>
+        </div>
+    </div>
+    </form>
+    <?php
     if (isset($ver)) :
         $publisher = Session::get("id");
     else :
-        $publisher = $_POST['publicador'];
+        $publisher = $this->read;
     endif;
 
     if (!isset($this->report[$publisher])) :
@@ -53,6 +67,16 @@ if ((Session::get("access") >= 8 and isset($_POST['btn-pub'])) or Session::get("
     endif;
 
     foreach ($this->report[$publisher] as $singleReport) :
+        if ($singleReport[0] == "Relatório deletado") :
+            ?>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Relatório da Quadra <?php echo $singleReport[1]["quadra"];?> do Mapa <?php echo $singleReport[1]["maps"];?> DELETADO</h3>
+                </div>
+            </div>
+            <?php
+            continue;
+        endif;
         ?>
         <!-- Default box -->
         <div class="card collapsed-card">
@@ -150,6 +174,24 @@ if ((Session::get("access") >= 8 and isset($_POST['btn-pub'])) or Session::get("
         <!-- /.card -->
         <?php
     endforeach;
+    $nPg = ceil($this->count[$publisher] / 15);
+    if ($nPg != 1) :
+        echo "<div class='pagination'>";
+        if ($this->pg != 1) :
+            echo "<a href=" . URL . "report/index/" . ($nPg - 1) . ">&laquo;</a>";
+        endif;
+        for ($i = 1; $i <= $nPg; $i++) :
+            if ($this->pg == $i) :
+                echo "<a href=" . URL . "report/index/" . $i . " class='active'>$i</a>";
+            else :
+                echo "<a href=" . URL . "report/index/" . $i . ">$i</a>";
+            endif;
+        endfor;
+        if ($this->pg != $nPg) :
+            echo "<a href=" . URL . "report/index/" . ($nPg + 1) . ">&raquo;</a>";
+        endif;
+        echo "</div>";
+    endif;
 endif;
 ?>
 

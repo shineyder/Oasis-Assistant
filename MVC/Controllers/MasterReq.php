@@ -24,7 +24,7 @@ class MasterReq extends \lib\Controller
         $this->view->render('header');
         $this->view->render('message');
         $this->view->render('masterReq/index');
-        $this->view->render('footer');
+        $this->view->render('masterReq/inc/footer');
     }
 
     public function updateReq()
