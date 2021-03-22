@@ -20,6 +20,15 @@
 	overflow: hidden;
 }
 
+#frame-rep{
+    display: block;
+    width: 100%;
+    margin: 10px;
+    height: 4000px;
+    border: none;
+	overflow: hidden;
+}
+
 .hide{
     display:none;
 }

@@ -103,7 +103,7 @@ class ReportModel extends \lib\Model
 
     public function updateRep()
     {
-        //Sanitiza POST e declara IDs
+        //POST e IDs
         $idUser = Session::get('id');
         $idMap = $_POST['id_map'];
         $nRes = $_POST['n_res'];
@@ -118,7 +118,7 @@ class ReportModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Se tudo deu certo emite mensagem de sucesso e retorna a index
-        $this->msg("Relatório atualizado com sucesso", "success", "report");
+        $this->msg("Relatório atualizado com sucesso", "success", "report/frame/" . $idUser . "/" . $_POST['pg']);
     }
 
     public function deleteRep()
@@ -145,82 +145,65 @@ class ReportModel extends \lib\Model
         $this->db->create("event", $log);
 
         //Se tudo deu certo emite mensagem de sucesso e retorna a index
-        $this->msg("Relatório deletado com sucesso", "success", "report");
+        $this->msg("Relatório deletado com sucesso", "success", "report/frame/" . $idUser . "/" . $_POST['pg']);
     }
 
-    public function readRep($pg)
+    public function readRep($pubId, $pg)
     {
-        //Se acesso for de ADM, lê todos os publicadores
-        if (Session::get('access') >= 8) :
-            $pub = $this->db->read("publisher", "id, nome, sobrenome");
-        else :
-            $id = Session::get('id');
-            $pub = $this->db->read("publisher", "id, nome, sobrenome", "id = $id");
-        endif;
-
         //Lê a cobertura atual e inicia Relatório como vazio
         $cob = $this->db->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
         $cob = (isset($cob['cobert'])) ? $cob['cobert'] : 1;
         $rel = null;
 
-        //Verifica se a leitura será de um unico publicador e faz as adaptações necessárias
-        if (isset($pub['id'])) :
-            $pub = [0 => $pub];
+        //Conta quantos relatórios foram feitos
+        $repQtd = $this->db->read("event", "id", "id_user = $pubId AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC");
+        if ($repQtd == false) :
+            //Se nenhum foi feito, vai para o prox publicador
+            $this->count = 0;
+            return false;
+        endif;
+        $repQtd = count($repQtd);
+        $this->count = $repQtd;
+
+        //Primeiro e último relatório a ser lido
+        $first = ($pg - 1) * 15;
+        if ($this->count > $first + 15) :
+            $last = $first + 15;
+        else :
+            $last = $this->count;
         endif;
 
-        //Faz a analise para cada publicador
-        foreach ($pub as $singlePub) :
-            $id = $singlePub['id'];
+        //Avalia se os relatórios registrados (doRel) foram corrigidos (attRel) ou deletados (delRel)
+        for ($i = $first; $i < $last; $i++) :
+            $relOld = $this->db->read("event", "*", "id_user = $pubId AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC LIMIT 1 OFFSET $i");
+            $idRel = $relOld->getId();
 
-            //Conta quantos relatórios foram feitos
-            $repQtd = $this->db->read("event", "id", "id_user = $id AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC");
-            if ($repQtd == false) :
-                //Se nenhum foi feito, vai para o prox publicador
+            //Verifica se relatório sofreu alterações
+            $idMap = $relOld->getIdMap();
+            $relAtt = $this->db->read("event", "*", "id_user = $pubId AND id_mapa = $idMap AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = $cob AND id > $idRel", "ORDER BY id DESC LIMIT 1");
+
+            //Verifica Mapa e Quadra do relatório
+            $quad = $this->db->read("map", "maps, quadra", "id = $idMap");
+
+            //Caso não tenha nenhuma mudança, envia o relatório
+            if ($relAtt == false) :
+                $rel[$i] = [$relOld, $quad];
                 continue;
             endif;
-            $repQtd = count($repQtd);
-            $this->count[$id] = $repQtd;
 
-            //Primeiro e último relatório a ser lido
-            $first = ($pg - 1) * 15;
-            if ($this->count[$id] > $first + 15) :
-                $last = $first + 15;
-            else :
-                $last = $this->count[$id];
+            //Caso o relatório tenha sido deletado, não envia dado
+            $tipo = $relAtt->getEventType();
+            if ($tipo == "delRel") :
+                $rel[$i] = ["Relatório deletado", $quad];
+                continue;
             endif;
 
-            //Avalia se os relatórios registrados (doRel) foram corrigidos (attRel) ou deletados (delRel)
-            for ($i = $first; $i < $last; $i++) :
-                $relOld = $this->db->read("event", "*", "id_user = $id AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC LIMIT 1 OFFSET $i");
-                $idRel = $relOld->getId();
-
-                //Verifica se relatório sofreu alterações
-                $idMap = $relOld->getIdMap();
-                $relAtt = $this->db->read("event", "*", "id_user = $id AND id_mapa = $idMap AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = $cob AND id > $idRel", "ORDER BY id DESC LIMIT 1");
-
-                //Verifica Mapa e Quadra do relatório
-                $quad = $this->db->read("map", "maps, quadra", "id = $idMap");
-
-                //Caso não tenha nenhuma mudança, envia o relatório
-                if ($relAtt == false) :
-                    $rel[$id][$i] = [$relOld, $quad];
-                    continue;
-                endif;
-
-                //Caso o relatório tenha sido deletado, não envia dado
-                $tipo = $relAtt->getEventType();
-                if ($tipo == "delRel") :
-                    $rel[$id][$i] = ["Relatório deletado", $quad];
-                    continue;
-                endif;
-
-                //Caso o relatório tenha sido atualizado, envia a atualização
-                if ($tipo == "attRel") :
-                    $rel[$id][$i] = [$relAtt, $quad];
-                    continue;
-                endif;
-            endfor;
-        endforeach;
+            //Caso o relatório tenha sido atualizado, envia a atualização
+            if ($tipo == "attRel") :
+                $rel[$i] = [$relAtt, $quad];
+                continue;
+            endif;
+        endfor;
         return $rel;
     }
 }

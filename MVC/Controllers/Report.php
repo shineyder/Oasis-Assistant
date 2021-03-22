@@ -12,12 +12,9 @@ class Report extends \lib\Controller
         Auth::handleLogin();
     }
 
-    public function index($pg = 1)
+    public function index()
     {
         $this->view->pub = $this->model->db->read("publisher", "id, nome, sobrenome");
-        $this->view->report = $this->model->readRep($pg);
-        $this->view->pg = $pg;
-        $this->view->count = $this->model->count;
         $this->view->title = "Oasis Assistant: Relatórios";
         $this->view->local = "Relatórios";
         $this->view->render('header');
@@ -39,5 +36,15 @@ class Report extends \lib\Controller
     public function doS13()
     {
         $this->model->doS13();
+    }
+
+    public function frame($pubId, $pg = 1)
+    {
+        $this->view->report = $this->model->readRep($pubId, $pg);
+        $this->view->pg = $pg;
+        $this->view->count = $this->model->count;
+        $this->view->read = $pubId;
+        $this->view->render('message');
+        $this->view->render('report/report');
     }
 }
