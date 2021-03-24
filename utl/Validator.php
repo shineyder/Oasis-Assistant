@@ -2,15 +2,8 @@
 
 namespace utl;
 
-use Exception;
-
 class Validator
 {
-    public function __construct()
-    {
-        //CONSTRUCT
-    }
-
     public function minLength($data, $arg)
     {
         if (strlen($data) < $arg) :
@@ -44,10 +37,5 @@ class Validator
         if (!ctype_alpha(str_replace(' ', '', $data))) :
             return "Todo caracter deve ser uma letra";
         endif;
-    }
-
-    public function __call($name, $arguments)
-    {
-        throw new Exception("$name não existe dentro de: " . __CLASS__);
     }
 }

@@ -7,7 +7,7 @@ class Map
     private $id;
     private $map;
     private $quadra;
-    private $trab;
+    private $worked;
     private $res;
     private $com;
     private $edi;
@@ -17,10 +17,10 @@ class Map
         $this->id = $row['id'];
         $this->map = $row['maps'];
         $this->quadra = $row['quadra'];
-        $this->trab = $row['trab'];
-        $this->res = $row['n_residencia'];
-        $this->com = $row['n_comercio'];
-        $this->edi = $row['n_edificio'];
+        $this->worked = $row['worked'];
+        $this->res = $row['nResidencia'];
+        $this->com = $row['nComercio'];
+        $this->edi = $row['nEdificio'];
     }
 
     public function getId()
@@ -57,14 +57,14 @@ class Map
         return $this;
     }
 
-    public function getTrab()
+    public function getWorked()
     {
-        return $this->trab;
+        return $this->worked;
     }
 
-    public function setTrab($trab)
+    public function setWorked($worked)
     {
-        $this->trab = $trab;
+        $this->worked = $worked;
         return $this;
     }
 

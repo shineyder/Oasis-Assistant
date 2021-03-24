@@ -39,13 +39,13 @@ class ReportModel extends \lib\Model
                 $mapLast = $mapLast['id'];
 
                 //Lê id de qual publicador mais trabalhou no mapa
-                $idUser = $this->db->read("event", "id_user, COUNT(id_user) AS Qtd", "cobert = $i AND id_mapa BETWEEN $mapFirst AND $mapLast", "GROUP BY id_user ORDER BY COUNT(id_user) DESC LIMIT 1");
+                $idUser = $this->db->read("event", "idUser, COUNT(idUser) AS Qtd", "cobert = $i AND idMapa BETWEEN $mapFirst AND $mapLast", "GROUP BY idUser ORDER BY COUNT(idUser) DESC LIMIT 1");
                 //Escreve nome do publicador, se houver
                 if ($idUser == false) :
                     $dadosXls .= "<td colspan='2'></td>";
                     continue;
                 else :
-                    $idUser = $idUser['id_user'];
+                    $idUser = $idUser['idUser'];
                     $publisher = $this->db->read("publisher", "nome, sobrenome", "id = $idUser");
                     $dadosXls .= "<td colspan='2'>" . $publisher['nome'] . " " . $publisher['sobrenome'] . "</td>";
                 endif;
@@ -62,16 +62,16 @@ class ReportModel extends \lib\Model
                 $mapLast = $mapLast['id'];
 
                 //Lê quando trabalho no mapa começou
-                $temp[0] = $this->db->read("event", "timeN", "cobert = $i AND event_type = 'doRel' AND id_mapa BETWEEN $mapFirst AND $mapLast", "ORDER BY timeN LIMIT 1");
+                $temp[0] = $this->db->read("event", "timeN", "cobert = $i AND eventType = 'doRel' AND idMapa BETWEEN $mapFirst AND $mapLast", "ORDER BY timeN LIMIT 1");
 
                 //Confere se todas as quadras do mapa foram trabalhadas
-                $conf = $this->db->read("event", "COUNT(id_user) AS Qtd", "cobert = $i AND event_type = 'doRel' AND id_mapa BETWEEN $mapFirst AND $mapLast");
+                $conf = $this->db->read("event", "COUNT(idUser) AS Qtd", "cobert = $i AND eventType = 'doRel' AND idMapa BETWEEN $mapFirst AND $mapLast");
                 if ($conf['Qtd'] < ($mapLast - $mapFirst + 1)) :
                     //Se não foi completo, tempo de conclusão fica vazio
                     $temp[1]['timeN'] = "";
                 else :
                     //Se foi completo, lê o tempo de conclusão
-                    $temp[1] = $this->db->read("event", "timeN", "cobert = $i AND event_type = 'doRel' AND id_mapa BETWEEN $mapFirst AND $mapLast", "ORDER BY timeN DESC LIMIT 1");
+                    $temp[1] = $this->db->read("event", "timeN", "cobert = $i AND eventType = 'doRel' AND idMapa BETWEEN $mapFirst AND $mapLast", "ORDER BY timeN DESC LIMIT 1");
                 endif;
 
                 //Escreve as datas de inicio e fim do trabalho no mapa, se houver
@@ -111,10 +111,10 @@ class ReportModel extends \lib\Model
         $nEdi = $_POST['n_edi'];
 
         //Atualiza tabela map
-        $this->db->update("map", ["trab" => 1, "n_residencia" => $nRes, "n_comercio" => $nCom, "n_edificio" => $nEdi], "id = $idMap");
+        $this->db->update("map", ["worked" => 1, "nResidencia" => $nRes, "nComercio" => $nCom, "nEdificio" => $nEdi], "id = $idMap");
 
         //Salva log do ocorrido na tabela de eventos
-        $log = ["id" => null, "id_user" => $idUser, "id_mapa" => $idMap, "timeN" => date('d/m/Y H:i:s'), "event_type" => "attRel", "data1" => "trab", "desc1" => 1, "data2" => "nRes", "desc2" => $nRes, "data3" => "nCom", "desc3" => $nCom, "data4" => "nEdi", "desc4" => $nEdi];
+        $log = ["id" => null, "idUser" => $idUser, "idMapa" => $idMap, "timeN" => date('d/m/Y H:i:s'), "eventType" => "attRel", "data1" => "worked", "desc1" => 1, "data2" => "nRes", "desc2" => $nRes, "data3" => "nCom", "desc3" => $nCom, "data4" => "nEdi", "desc4" => $nEdi];
         $this->db->create("event", $log);
 
         //Se tudo deu certo emite mensagem de sucesso e retorna a index
@@ -130,18 +130,18 @@ class ReportModel extends \lib\Model
         //Verifica se existem dados salvos de coberturas passadas
         $cob = $this->db->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
         $cob = $cob['cobert'] - 1;
-        $dadosQuadraOld = $this->db->read("event", "*", "id_mapa = $idMap AND (event_type = 'doRel' OR event_type = 'attRel') AND cobert = $cob", "ORDER BY id DESC LIMIT 1");
+        $dadosQuadraOld = $this->db->read("event", "*", "idMapa = $idMap AND (eventType = 'doRel' OR eventType = 'attRel') AND cobert = $cob", "ORDER BY id DESC LIMIT 1");
 
         if ($dadosQuadraOld == false) :
             //Se não houver dados, define como 0
-            $this->db->update("map", ["trab" => 0, "n_residencia" => 0, "n_comercio" => 0, "n_edificio" => 0], "id = $idMap");
+            $this->db->update("map", ["worked" => 0, "nResidencia" => 0, "nComercio" => 0, "nEdificio" => 0], "id = $idMap");
         else :
             //Se houver dados, lança eles
-            $this->db->update("map", ["trab" => 0, "n_residencia" => $dadosQuadraOld->getDesc2(), "n_comercio" => $dadosQuadraOld->getDesc3(), "n_edificio" => $dadosQuadraOld->getDesc4()], "id = $idMap");
+            $this->db->update("map", ["worked" => 0, "nResidencia" => $dadosQuadraOld->getDesc2(), "nComercio" => $dadosQuadraOld->getDesc3(), "nEdificio" => $dadosQuadraOld->getDesc4()], "id = $idMap");
         endif;
 
         //Salva log do ocorrido na tabela de eventos
-        $log = ["id" => null, "id_user" => $idUser, "id_mapa" => $idMap, "timeN" => date('d/m/Y H:i:s'), "event_type" => "delRel", "data1" => null, "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+        $log = ["id" => null, "idUser" => $idUser, "idMapa" => $idMap, "timeN" => date('d/m/Y H:i:s'), "eventType" => "delRel", "data1" => null, "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
         $this->db->create("event", $log);
 
         //Se tudo deu certo emite mensagem de sucesso e retorna a index
@@ -156,7 +156,7 @@ class ReportModel extends \lib\Model
         $rel = null;
 
         //Conta quantos relatórios foram feitos
-        $repQtd = $this->db->read("event", "id", "id_user = $pubId AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC");
+        $repQtd = $this->db->read("event", "id", "idUser = $pubId AND eventType = 'doRel' AND cobert = $cob", "ORDER BY id DESC");
         if ($repQtd == false) :
             //Se nenhum foi feito, vai para o prox publicador
             $this->count = 0;
@@ -175,12 +175,12 @@ class ReportModel extends \lib\Model
 
         //Avalia se os relatórios registrados (doRel) foram corrigidos (attRel) ou deletados (delRel)
         for ($i = $first; $i < $last; $i++) :
-            $relOld = $this->db->read("event", "*", "id_user = $pubId AND event_type = 'doRel' AND cobert = $cob", "ORDER BY id DESC LIMIT 1 OFFSET $i");
+            $relOld = $this->db->read("event", "*", "idUser = $pubId AND eventType = 'doRel' AND cobert = $cob", "ORDER BY id DESC LIMIT 1 OFFSET $i");
             $idRel = $relOld->getId();
 
             //Verifica se relatório sofreu alterações
             $idMap = $relOld->getIdMap();
-            $relAtt = $this->db->read("event", "*", "id_user = $pubId AND id_mapa = $idMap AND (event_type = 'attRel' OR event_type = 'delRel') AND cobert = $cob AND id > $idRel", "ORDER BY id DESC LIMIT 1");
+            $relAtt = $this->db->read("event", "*", "idUser = $pubId AND idMapa = $idMap AND (eventType = 'attRel' OR eventType = 'delRel') AND cobert = $cob AND id > $idRel", "ORDER BY id DESC LIMIT 1");
 
             //Verifica Mapa e Quadra do relatório
             $quad = $this->db->read("map", "maps, quadra", "id = $idMap");

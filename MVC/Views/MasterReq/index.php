@@ -36,10 +36,10 @@ endif;
                         <td><?php echo $this->publishers[$key]['nome'];?></td>
                         <td><?php echo $this->publishers[$key]['sobrenome'];?></td>
                         <td><?php echo $this->publishers[$key]['email'];?></td>
-                        <td><?php echo $dadosProblem->getMensag();?></td>
-                        <td><?php echo $dadosProblem->getTimeN();?></td>
+                        <td><?php echo $dadosProblem->getMessage();?></td>
+                        <td><?php echo $dadosProblem->getTimeInitialize();?></td>
                         <td><?php echo $dadosProblem->getTicket();?></td>
-                        <td><?php echo $dadosProblem->getStatusN();?></td>
+                        <td><?php echo $dadosProblem->getStatusNow();?></td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-pro-<?php echo $dadosProblem->getId();?>">Definir</button>
                         </td>
@@ -138,10 +138,10 @@ endif;
                         <td><?php echo $this->publishers[$key]['nome'];?></td>
                         <td><?php echo $this->publishers[$key]['sobrenome'];?></td>
                         <td><?php echo $this->publishers[$key]['email'];?></td>
-                        <td><?php echo $dadosSugest->getMensag();?></td>
-                        <td><?php echo $dadosSugest->getTimeN();?></td>
+                        <td><?php echo $dadosSugest->getMessage();?></td>
+                        <td><?php echo $dadosSugest->getTimeInitialize();?></td>
                         <td><?php echo $dadosSugest->getTicket();?></td>
-                        <td><?php echo $dadosSugest->getStatusN();?></td>
+                        <td><?php echo $dadosSugest->getStatusNow();?></td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-sug-<?php echo $dadosSugest->getId();?>">Definir</button>
                         </td>
@@ -240,10 +240,10 @@ endif;
                         <td><?php echo $this->publishers[$key]['nome'];?></td>
                         <td><?php echo $this->publishers[$key]['sobrenome'];?></td>
                         <td><?php echo $this->publishers[$key]['email'];?></td>
-                        <td><?php echo $dadosOther->getMensag();?></td>
-                        <td><?php echo $dadosOther->getTimeN();?></td>
+                        <td><?php echo $dadosOther->getMessage();?></td>
+                        <td><?php echo $dadosOther->getTimeInitialize();?></td>
                         <td><?php echo $dadosOther->getTicket();?></td>
-                        <td><?php echo $dadosOther->getStatusN();?></td>
+                        <td><?php echo $dadosOther->getStatusNow();?></td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-out-<?php echo $dadosOther->getId();?>">Definir</button>
                         </td>

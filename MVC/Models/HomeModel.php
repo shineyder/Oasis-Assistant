@@ -32,7 +32,7 @@ class HomeModel extends \lib\Model
         $this->db->update("publisher", ["email" => $email], "id = $id");
 
         //Registra log do ocorrido
-        $log = ["id" => null, "id_user" => $publicadorUp->getId(), "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "attPub", "data1" => "AltEmail", "desc1" => $email, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+        $log = ["id" => null, "idUser" => $publicadorUp->getId(), "idMapa" => null, "timeN" => date('d/m/Y H:i:s'), "eventType" => "attPub", "data1" => "AltEmail", "desc1" => $email, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
         $this->db->create("event", $log);
 
         //Emite mensagem de sucesso e direciona para home
@@ -72,7 +72,7 @@ class HomeModel extends \lib\Model
         $this->db->update("publisher", ["senha" => $senha], "id = $id");
 
         //Registra log do ocorrido
-        $log = ["id" => null, "id_user" => $publicadorUp->getId(), "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "attPub", "data1" => "AltSenha", "desc1" => $senha, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+        $log = ["id" => null, "idUser" => $publicadorUp->getId(), "idMapa" => null, "timeN" => date('d/m/Y H:i:s'), "eventType" => "attPub", "data1" => "AltSenha", "desc1" => $senha, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
         $this->db->create("event", $log);
 
         //Emite mensagem de sucesso e direciona para home

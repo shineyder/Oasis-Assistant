@@ -25,7 +25,7 @@
 
     <script>
     function myFunction(param){
-        if (document.getElementById("trab_" + param).checked) {
+        if (document.getElementById("work_" + param).checked) {
             document.getElementById("data-" + param).setAttribute("class", "");
         } else {
             document.getElementById("data-" + param).setAttribute("class", "hide");
@@ -42,19 +42,19 @@
                     foreach ($this->data as $dados_quadra) :
                         ?>
                         <li>
-                            <div class="collapsible-header">Quadra <?php echo $dados_quadra->getQuadra() . (($dados_quadra->getTrab() == 0) ? " não trabalhada" : " trabalhada");?> </div>
+                            <div class="collapsible-header">Quadra <?php echo $dados_quadra->getQuadra() . (($dados_quadra->getWorked() == 0) ? " não trabalhada" : " trabalhada");?> </div>
                             <div class="collapsible-body">
                                 <div class="row">
                                     <div>
                                         <label>
                                             <?php
-                                            if ($dados_quadra->getTrab() == 1) :
+                                            if ($dados_quadra->getWorked() == 1) :
                                                 ?>
-                                                <input type="hidden" id="trab_<?php echo $dados_quadra->getId();?>" name="trab_<?php echo $dados_quadra->getId();?>" value = "1">
+                                                <input type="hidden" id="work_<?php echo $dados_quadra->getId();?>" name="work_<?php echo $dados_quadra->getId();?>" value = "1">
                                                 <?php
                                             else :
                                                 ?>
-                                                <input type="checkbox" id="trab_<?php echo $dados_quadra->getId();?>" name="trab_<?php echo $dados_quadra->getId();?>" onclick='myFunction(<?php echo $dados_quadra->getId();?>)' <?php echo(($dados_quadra->getTrab() == 1) ? "checked = 'checked' disabled = 'disabled'" : "")?>>
+                                                <input type="checkbox" id="work_<?php echo $dados_quadra->getId();?>" name="work_<?php echo $dados_quadra->getId();?>" onclick='myFunction(<?php echo $dados_quadra->getId();?>)' <?php echo(($dados_quadra->getWorked() == 1) ? "checked = 'checked' disabled = 'disabled'" : "")?>>
                                                 <span> Quadra Trabalhada</span>
                                                 <?php
                                             endif;
@@ -62,7 +62,7 @@
                                         </label>
                                     </div>
                                 <?php
-                                if ($dados_quadra->getTrab() == 1) :
+                                if ($dados_quadra->getWorked() == 1) :
                                     ?>
                                     <div class="col s12">
                                         <span> Número de Residências: <?php echo $dados_quadra->getRes()?></span><br>

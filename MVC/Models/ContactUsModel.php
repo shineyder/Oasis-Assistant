@@ -32,7 +32,7 @@ class ContactUsModel extends \lib\Model
         $email_send->sendMail($email, $nome, $sobrenome, $message, "Confirmacao de envio - Fale Conosco", "");
 
         //Salva solicitação no banco de dados
-        $talk = ["id" => null, "idUser" => $id, "assunto" => $assunto, "mensag" => $mensag, "timeN" => date('d/m/Y H:i:s'), "timeC" => null, "statusN" => "em Espera", "ticket" => $ticket];
+        $talk = ["id" => null, "idUser" => $id, "assunto" => $assunto, "mensag" => $mensag, "timeInitialize" => date('d/m/Y H:i:s'), "timeConclusion" => null, "statusNow" => "em Espera", "ticket" => $ticket];
         $this->db->create("contactus", $talk);
 
         //Apaga a img

@@ -7,21 +7,21 @@ class ContactUs
     private $id;
     private $idUser;
     private $assunto;
-    private $mensag;
-    private $timeN;
-    private $timeC;
-    private $statusN;
+    private $message;
+    private $timeInitialize;
+    private $timeConclusion;
+    private $statusNow;
     private $ticket;
 
     public function __construct($row)
     {
         $this->id = $row['id'];
         $this->idUser = $row['idUser'];
-        $this->assunto = $row['assunto']; // Problema - Sugestão - Outro
-        $this->mensag = $row['mensag'];
-        $this->timeN = $row['timeN'];
-        $this->timeC = $row['timeC'];
-        $this->statusN = $row['statusN']; // em Espera - em Analise - Concluido
+        $this->assunto = $row['assunto'];
+        $this->message = $row['message'];
+        $this->timeInitialize = $row['timeInitialize'];
+        $this->timeConclusion = $row['timeConclusion'];
+        $this->statusNow = $row['statusNow'];
         $this->ticket = $row['ticket'];
     }
 
@@ -58,47 +58,47 @@ class ContactUs
         return $this;
     }
 
-    public function getMensag()
+    public function getMessage()
     {
-        return $this->mensag;
+        return $this->message;
     }
 
-    public function setMensag($mensag)
+    public function setMessage($message)
     {
-        $this->mensag = $mensag;
+        $this->message = $message;
         return $this;
     }
 
-    public function getTimeN()
+    public function getTimeInitialize()
     {
-        return $this->timeN;
+        return $this->timeInitialize;
     }
 
-    public function setTimeN($timeN)
+    public function setTimeInitialize($timeInitialize)
     {
-        $this->timeN = $timeN;
+        $this->timeInitialize = $timeInitialize;
         return $this;
     }
 
-    public function getTimeC()
+    public function getTimeConclusion()
     {
-        return $this->timeC;
+        return $this->timeConclusion;
     }
 
-    public function setTimeC($timeC)
+    public function setTimeConclusion($timeConclusion)
     {
-        $this->timeN = $timeC;
+        $this->timeConclusion = $timeConclusion;
         return $this;
     }
 
-    public function getStatusN()
+    public function getStatusNow()
     {
-        return $this->statusN;
+        return $this->statusNow;
     }
 
-    public function setStatusN($statusN)
+    public function setStatusNow($statusNow)
     {
-        $this->status = $statusN;
+        $this->statusNow = $statusNow;
         return $this;
     }
 

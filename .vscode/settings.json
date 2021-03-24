@@ -11,7 +11,6 @@
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "phpSniffer.snippetExcludeSniffs": [
-        
     ],
     "editor.codeActionsOnSave": {
         "source.fixAll": true,
@@ -24,6 +23,7 @@
     ],
     "phpcs.executablePath": "C:\\Users\\Adriano\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs.bat",
     "phpcs.showSources": true,
-    "phpcs.standard": "",
-    "php.executablePath": ""
+    "phpcs.standard": "PSR12",
+    "php.executablePath": "C:\\xampp\\php\\php.exe",
+    "files.eol": "\n"
 }

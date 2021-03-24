@@ -22,10 +22,10 @@ class Event
     public function __construct($row)
     {
         $this->id = $row['id'];
-        $this->idUser = $row['id_user'];
-        $this->idMap = $row['id_mapa'];
+        $this->idUser = $row['idUser'];
+        $this->idMap = $row['idMapa'];
         $this->time = $row['timeN'];
-        $this->eventType = $row['event_type'];
+        $this->eventType = $row['eventType'];
         $this->data1 = $row['data1'];
         $this->desc1 = $row['desc1'];
         $this->data2 = $row['data2'];

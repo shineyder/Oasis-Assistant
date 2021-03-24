@@ -53,7 +53,7 @@ class SignupModel extends \lib\Model
         $email_send->sendMail($publicador['email'], $publicador['nome'], $publicador['sobrenome'], $message, "E-mail de Autenticacao", "");
 
         //Registra na log de eventos
-        $log = ["id" => null, "id_user" => null, "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "createPub", "data1" => "nome", "desc1" => $nome, "data2" => "sobrenome", "desc2" => $sobrenome, "data3" => "email", "desc3" => $email, "data4" => "usuario", "desc4" => $usuario];
+        $log = ["id" => null, "idUser" => null, "idMapa" => null, "timeN" => date('d/m/Y H:i:s'), "eventType" => "createPub", "data1" => "nome", "desc1" => $nome, "data2" => "sobrenome", "desc2" => $sobrenome, "data3" => "email", "desc3" => $email, "data4" => "usuario", "desc4" => $usuario];
         $this->db->create("event", $log);
 
         //Emite mensagem de sucesso e redireciona para a index

@@ -7,11 +7,11 @@ class Publisher
     private $id;
     private $nome;
     private $sobrenome;
-    private $grupo; // 1 = Porto Novo 1; 2 = Porto Novo 2; 3 = Presidente Médici; 4 = Morro do Sesi; 5 = Del Porto
+    private $grupo;
     private $email;
     private $usuario;
     private $senha;
-    private $access; // -1 = Desassociado; 0 = E-mail não autenticado; 1 = Conta em analise; 2 = Publicador; 8 = Ancião; 9 = Ancião Plus; 10 = Mestre Supremo
+    private $access;
 
     public function __construct($row)
     {

@@ -42,7 +42,7 @@ class ProblemModel extends \lib\Model
                 $email_send->sendMail($info->getEmail(), $info->getNome(), $info->getSobrenome(), $message, "Recuperacao de usuario", "");
 
                 //Salva log do ocorrido na tabela de eventos
-                $log = ["id" => null, "id_user" => $info->getId(), "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "recPub", "data1" => "RecUser", "desc1" => $info->getUsuario(), "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+                $log = ["id" => null, "idUser" => $info->getId(), "idMapa" => null, "timeN" => date('d/m/Y H:i:s'), "eventType" => "recPub", "data1" => "RecUser", "desc1" => $info->getUsuario(), "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
                 $this->db->create("event", $log);
 
                 //Se tudo deu certo emite mensagem de sucesso e retorna a index
@@ -69,7 +69,7 @@ class ProblemModel extends \lib\Model
                 $email_send->sendMail($info->getEmail(), $info->getNome(), $info->getSobrenome(), $message, "Recuperacao de senha", "");
 
                 //Salva log do ocorrido na tabela de eventos
-                $log = ["id" => null, "id_user" => $info->getId(), "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "recPub", "data1" => "RecSenha", "desc1" => "dbb2e19e00fa08193553b6930032b95a", "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+                $log = ["id" => null, "idUser" => $info->getId(), "idMapa" => null, "timeN" => date('d/m/Y H:i:s'), "eventType" => "recPub", "data1" => "RecSenha", "desc1" => "dbb2e19e00fa08193553b6930032b95a", "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
                 $this->db->create("event", $log);
 
                 //Se tudo deu certo emite mensagem de sucesso e retorna a index
@@ -103,7 +103,7 @@ class ProblemModel extends \lib\Model
                 $email_send->sendMail($info->getEmail(), $info->getNome(), $info->getSobrenome(), $message, "Reenvio de email de autenticacao", "");
 
                 //Salva log do ocorrido na tabela de eventos
-                $log = ["id" => null, "id_user" => $info->getId(), "id_mapa" => null, "timeN" => date('d/m/Y H:i:s'), "event_type" => "recPub", "data1" => "ReEmailAut", "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+                $log = ["id" => null, "idUser" => $info->getId(), "idMapa" => null, "timeN" => date('d/m/Y H:i:s'), "eventType" => "recPub", "data1" => "ReEmailAut", "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
                 $this->db->create("event", $log);
 
                 //Se tudo deu certo emite mensagem de sucesso e retorna a index

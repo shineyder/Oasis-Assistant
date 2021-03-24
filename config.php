@@ -15,5 +15,3 @@ define('DB_PASS', '');
 
 //PATH OFFLINE
 define('URL', 'http://oasisassistant.com/');
-
-date_default_timezone_set('America/Sao_Paulo');
