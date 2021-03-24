@@ -1,11 +1,3 @@
-<?php
-
-/** Página: Criar Conta
-*   Conteúdo: Formulário para criar conta no sistema
-*/
-
-?>
-
 <div class="register-box">
     <div class="register-logo">
         <img id="logo" src=<?php echo URL . "_img/logo/logo_oasis_assistant.png";?> alt="Logo Oásis Assistant">
@@ -15,7 +7,7 @@
         <div class="card-body register-card-body">
             <p class="login-box-msg">Cadastrar novo Usuário</p>
 
-            <form action="Signup/registerPub" method="POST">
+            <form action="Signup/registerPublisher" method="POST">
                 <div class="row">
                     <div class="col-5">
                         <div class="input-group mb-3">

@@ -35,8 +35,8 @@
             <br>
             <button type="submit" name="btn-talk" class="btn btn-primary btn-block">Enviar</button>
         </form>
-        
     </div>
-    <!-- /.form-box -->
+    <!-- /.card-body -->
     <a href="Home" class="btn btn-danger btn-block">Cancelar</a>
-</div><!-- /.card -->
+</div>
+<!-- /.card -->

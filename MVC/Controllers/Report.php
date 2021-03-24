@@ -23,14 +23,14 @@ class Report extends \lib\Controller
         $this->view->render('footer');
     }
 
-    public function updateRep()
+    public function updateReport()
     {
-        $this->model->updateRep();
+        $this->model->updateReport();
     }
 
-    public function deleteRep()
+    public function deleteReport()
     {
-        $this->model->deleteRep();
+        $this->model->deleteReport();
     }
 
     public function doS13()
@@ -40,7 +40,7 @@ class Report extends \lib\Controller
 
     public function frame($pubId, $pg = 1)
     {
-        $this->view->report = $this->model->readRep($pubId, $pg);
+        $this->view->report = $this->model->readReport($pubId, $pg);
         $this->view->pg = $pg;
         $this->view->count = $this->model->count;
         $this->view->read = $pubId;

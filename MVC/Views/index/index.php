@@ -1,15 +1,7 @@
-<?php
-
-/** Página: Inicial
-*   Conteúdo: Área de LogIn, opções de Criar Conta e Problemas de LogIn.
-*/
-
-?>
 <div class="login-box">
     <div class="login-logo">
         <img id="logo" src=<?php echo URL . "_img/logo/logo_oasis_assistant.png";?> alt="Logo Oásis Assistant">
     </div>
-    <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Login</p>
@@ -42,5 +34,6 @@
         </div>
         <!-- /.login-card-body -->
     </div>
+    <!-- /.card -->
 </div>
 <!-- /.login-box -->

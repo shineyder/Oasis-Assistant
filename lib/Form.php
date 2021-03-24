@@ -7,57 +7,32 @@ use utl\Validator;
 
 class Form
 {
-    /** @var object $validator The validator object */
     private $validator;
-
-    /** @var array $postData Stores the posted data */
     private $postData = array();
-
-    /** @var string $currentItem Stores the immediately posted item */
     private $currentItem = null;
-
-    /** @var array $error Holds the current form erros */
     private $currentError = array();
 
-    /** Construct: Instantiate the validator class */
     public function __construct()
     {
         $this->validator = new Validator();
     }
 
-    /** This is to run $_POST */
-    public function post($field, $clean = false)
+    public function post($field)
     {
-        if ($clean) :
-            $this->postData[$field] = $this->clean($_POST[$field]);
-        else :
-            $this->postData[$field] = $_POST[$field];
-        endif;
+        $this->postData[$field] = $_POST[$field];
         $this->currentItem = $field;
         return $this;
     }
 
-    /**
-     * clean
-     * @return string Retorna string sem caracter especial
-     */
-    public function clean($data)
+    public function clean()
     {
-        return strtr(utf8_decode($data), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+        $this->postData[$this->currentItem] = strtr(utf8_decode($this->postData[$this->currentItem]), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+        return $this;
     }
 
-    /** This is to return the posted data */
-    public function fetch($fieldName = false)
+    public function fetch()
     {
-        if ($fieldName) :
-            if (isset($this->postData[$fieldName])) :
-                return $this->postData[$fieldName];
-            else :
-                return false;
-            endif;
-        else :
-            return $this->postData;
-        endif;
+        return $this->postData;
     }
 
     /**

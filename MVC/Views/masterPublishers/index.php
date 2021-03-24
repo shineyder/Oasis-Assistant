@@ -1,10 +1,5 @@
 <?php
 
-/** Página:
-*     Master - Reports (relatórios)
-*   Conteúdo:
-*     Apresenta todos os usuários cadastrados, histórico de alterações nos cadastros, histórico de relatórios emitidos e a opção de emitir a S-13. Nível de visibilidade da página será definido pelo nível de acesso do usuário*/
-
 use lib\Session;
 
 ?>
@@ -63,7 +58,7 @@ use lib\Session;
                                     </div>
                                     <div class="modal-body">
                                         <p>Selecione o Grupo ao qual o publicador pertence</p>
-                                        <form action="MasterPub/updatePubGrupo" method="POST">
+                                        <form action="MasterPublishers/updatePublisherGroup" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $dadosPub->getId();?>">
                                             <!-- radio -->
                                             <div class="form-group">
@@ -111,7 +106,7 @@ use lib\Session;
                                     </div>
                                     <div class="modal-body">
                                         <p>Defina o nível de acesso do publicador</p>
-                                        <form action="MasterPub/updatePubAccess" method="POST">
+                                        <form action="MasterPublishers/updatePublisherAccess" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $dadosPub->getId();?>">
                                             <!-- radio -->
                                             <div class="form-group">

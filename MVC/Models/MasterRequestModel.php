@@ -2,7 +2,7 @@
 
 namespace Models;
 
-class MasterReqModel extends \lib\Model
+class MasterRequestModel extends \lib\Model
 {
     public function __construct()
     {
@@ -21,17 +21,14 @@ class MasterReqModel extends \lib\Model
         return $user;
     }
 
-    public function updateReq()
+    public function updateRequest()
     {
-        //Validando POST
-        $id = $this->sanitize(5, "id", "MasterReq");
-        $statusNow = $this->sanitize(7, "sol", "MasterReq");
+        $id = $this->sanitize(5, "id", "MasterRequest");
+        $statusNow = $this->sanitize(7, "sol", "MasterRequest");
 
-        //Atualiza o grupo no cadastro
         $this->db->update("contactus", ["statusNow" => $statusNow], "id = $id");
 
-        //Emite mensagem de sucesso e direciona para Master Solicitações
-        $this->msg("Status atualizado com sucesso!", "success", "MasterReq");
+        $this->msg("Status atualizado com sucesso!", "success", "MasterRequest");
         exit();
     }
 }

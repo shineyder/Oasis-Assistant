@@ -1,10 +1,5 @@
 <?php
 
-/** Página: Autenticação
-*   Conteúdo: Sessão de autenticação de email.
-*   Detalhes: Usuários sem email autenticado tem permissão de acesso nível 0 e não conseguem logar, ao autenticar o email o nivel de acesso se torna 1.
-*/
-
 if ($this->verify == 1) :
     ?>
     <div class="center">

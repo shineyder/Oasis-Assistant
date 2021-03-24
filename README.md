@@ -1,7 +1,10 @@
 # Oasis Assistant
  Projeto: Gerenciador de Territórios
  
- Versão do Projeto: 1.5
+ Versão do Projeto: 1.6
+
+ Notas da Atualização 1.6:
+ * Código mais limpo
 
  Notas da Atualização 1.5:
  * Múltiplos erros corrigidos

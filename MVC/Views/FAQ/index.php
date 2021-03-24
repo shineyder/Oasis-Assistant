@@ -1,11 +1,3 @@
-<?php
-
-/** Página: FAQ
-*   Conteúdo: Perguntas comuns e suas respostas
-*/
-
-?>
-
 <h5>Questões Frequentemente Perguntadas:</h5>
 
 <ul>

@@ -50,7 +50,7 @@ class Mail
     /**
      * message
      * @param int $tipo Tipo de mensagem que será enviado (1 => Esquece user / 2 => Esquece senha / 3 => Email de autenticação / 4 => Outro problema / 5 => Nova Conta / 6 => Solicitação)
-     * @param string $data Dados a serem escrito na mensagem
+     * @param string $data Dados a serem escritos na mensagem
      * @return string Mensagem criada
      */
     public function message($tipo, $data)

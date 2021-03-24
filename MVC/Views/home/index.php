@@ -1,24 +1,16 @@
 <?php
 
-/** Página: Home
-*   Conteúdo: Dados do Usuário, opções de trocar email e senha.
-*/
-
-use utl\Hash;
-
 if ($this->publicador->getAccess() == 1) :
-    ?>
-    <p>Sua conta aguarda análise dos administradores, após a análise sua conta terá o acesso às funcionalidades liberado.</p>
-    <?php
+    echo "<p>Sua conta aguarda análise dos administradores, após a análise sua conta terá o acesso às funcionalidades liberado.</p>";
 endif;
+
+echo "<b>Nome: </b>" . $this->publicador->getNome() . "<br>";
+echo "<b>Sobrenome: </b>" . $this->publicador->getSobrenome() . "<br>";
+echo "<b>E-mail: </b>" . $this->publicador->getEmail() . "<br>";
+echo "<b>Grupo: </b>" . (($this->publicador->getGrupo() == null) ? "à definir" : $this->publicador->getGrupo()) . "<br>";
+echo "<b>Usuário: </b>" . $this->publicador->getUsuario() . "<br><br>";
 ?>
 
-<b>Nome: </b><?php echo $this->publicador->getNome();?> <br>
-<b>Sobrenome: </b><?php echo $this->publicador->getSobrenome();?> <br>
-<b>E-mail: </b><?php echo $this->publicador->getEmail();?> <br>
-<b>Grupo: </b><?php echo (($this->publicador->getGrupo() == null) ? "à definir" : $this->publicador->getGrupo());?>
-<br>
-<b>Usuário: </b> <?php echo $this->publicador->getUsuario();?><br><br>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-email">
     Alterar E-mail
 </button>
@@ -38,7 +30,7 @@ endif;
             </div>
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar seu e-mail</p>
-                <form action="Home/updatePubEmail" method="POST">
+                <form action="Home/updatePublisherEmail" method="POST">
                     <input type="hidden" name="id" value="<?php echo $this->publicador->getId();?>">
                     
                     <div class="input-group mb-3">
@@ -73,9 +65,9 @@ endif;
             </div>
             <div class="modal-body">
                 <p>Preencha os campos abaixo para alterar sua senha</p>
-                <form action="Home/updatePubPass" method="POST">
+                <form action="Home/updatePublisherPassword" method="POST">
                     <input type="hidden" name="id" value="<?php echo $this->publicador->getId();?>">
-                    
+
                     <div class="input-group mb-3">
                         <input id="senha-old" name="senha-old" type="password" class="form-control" placeholder="Senha Antiga">
                         <div class="input-group-append">

@@ -13,8 +13,8 @@ class Model
 
     /**
      * sanitize
-     * @param integer $tipo Descrição: 1 => usuario / 2 => senha / 3 => email / 4 => mixed (evite usar) / 5 => números inteiros / 6 => palavra / 7 => palavras / default => texto comum
-     * @param string $name nome da entrada dentro de $_POST (se $_POST['bla'], então $name="bla")
+     * @param integer $tipo 1 => usuario / 2 => senha / 3 => email / 4 => mixed / 5 => números inteiros / 6 => palavra / 7 => palavras / default => texto comum
+     * @param string $name Nome da entrada dentro de $_POST (se $_POST['bla'], então $name="bla")
      * @param string $local Destino para redirecionar em caso de erro ("" => index)
      * @return string $data Retorna variavel que estava em POST validada
      */
@@ -24,7 +24,8 @@ class Model
             $form = new Form();
             switch ($tipo) :
                 case 1:
-                    $form   ->post($name, 1)
+                    $form   ->post($name)
+                            ->clean()
                             ->val('alpha')
                             ->val('minLength', 4)
                             ->val('maxLength', 32)
@@ -81,7 +82,8 @@ class Model
                     endif;
                     break;
                 case 6:
-                    $form   ->post($name, 1)
+                    $form   ->post($name)
+                            ->clean()
                             ->val('minLength', 1)
                             ->val('maxLength', 32)
                             ->val('alpha')
@@ -94,7 +96,8 @@ class Model
                     endif;
                     break;
                 case 7:
-                    $form   ->post($name, 1)
+                    $form   ->post($name)
+                            ->clean()
                             ->val('minLength', 1)
                             ->val('maxLength', 32)
                             ->val('alphaPlusSpaces')
@@ -107,7 +110,8 @@ class Model
                     endif;
                     break;
                 default:
-                    $form   ->post($name, 1)
+                    $form   ->post($name)
+                            ->clean()
                             ->val('minLength', 1)
 
                             ->submit();
@@ -124,9 +128,10 @@ class Model
     }
 
     /**
-     * error
-     * @param string $text Mensagem de erro
-     * @param string $tipo Nível do erro ("warning", "info", "danger", "success")
+     * msg
+     * @param string $text Mensagem
+     * @param string $tipo Nível da msg ("warning", "info", "danger", "success")
+     * @param string $local Local para redirecionar ("" => index)
      */
     public function msg($text, $tipo, $local = "")
     {
@@ -142,40 +147,29 @@ class Model
      */
     public function verifyImg($file)
     {
-        //Local de upload de arquivo
         $target_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
         $target_file = $target_dir . basename($file["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        if ($file["error"] == 0) :
-            // Verifica se é mesmo uma imagem
-            $check = getimagesize($file["tmp_name"]);
-            if ($check !== false) :
-                $uploadOk = 1;
-            else :
-                $uploadOk = 0;
-            endif;
-
-            // Verifica tamanho do arquivo
-            if ($file["size"] > 1000000) :
-                $uploadOk = 0;
-            endif;
-        else :
-            $uploadOk = 0;
+        if ($file["error"] != 0) :
+            return '';
         endif;
 
-        // Verifica se houve algum erro
-        if ($uploadOk == 0) :
-            $target_file = '';
-        else :
-            // Faz upload se nada deu errado
-            if (move_uploaded_file($file["tmp_name"], $target_file)) :
-            else :
-                $target_file = '';
-            endif;
+        // Verifica se é mesmo uma imagem
+        $check = getimagesize($file["tmp_name"]);
+        if ($check === false) :
+            return '';
         endif;
 
-        return $target_file;
+        // Verifica tamanho do arquivo
+        if ($file["size"] > 1000000) :
+            return '';
+        endif;
+
+        // Faz upload se nada deu errado
+        if (move_uploaded_file($file["tmp_name"], $target_file)) :
+            return $target_file;
+        endif;
+
+        return '';
     }
 }

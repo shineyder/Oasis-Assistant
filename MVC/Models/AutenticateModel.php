@@ -15,24 +15,29 @@ class AutenticateModel extends \lib\Model
         $data = array();
         $data = $this->db->read("publisher", "id, usuario", "access = 0");
 
+        if ($data == false) :
+            return $verify;
+        endif;
+
         if (@is_array($data[0])) :
             foreach ($data as $dataSingle) :
-                if ($cod == md5($dataSingle['usuario'])) :
-                    $verify = 1;
-                    $id = $dataSingle['id'];
-                    $this->db->update("publisher", ['access' => 1], "id = $id");
-                    return $verify;
-                endif;
+                $verify = $this->verifyAutenticateCode($cod, $dataSingle);
             endforeach;
         else :
-            if ($cod == @md5($data['usuario'])) :
-                $verify = 1;
-                $id = $data['id'];
-                $this->db->update("publisher", ['access' => 1], "id = $id");
-                return $verify;
-            endif;
+            $verify = $this->verifyAutenticateCode($cod, $data);
         endif;
 
         return $verify;
+    }
+
+    public function verifyAutenticateCode($cod, $data)
+    {
+        $isEqual = 0;
+        if ($cod == md5($data['usuario'])) :
+            $isEqual = 1;
+            $id = $data['id'];
+            $this->db->update("publisher", ['access' => 1], "id = $id");
+        endif;
+        return $isEqual;
     }
 }

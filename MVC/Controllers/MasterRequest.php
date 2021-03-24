@@ -4,7 +4,7 @@ namespace Controllers;
 
 use utl\Auth;
 
-class MasterReq extends \lib\Controller
+class MasterRequest extends \lib\Controller
 {
     public function __construct()
     {
@@ -23,12 +23,12 @@ class MasterReq extends \lib\Controller
         $this->view->local = "Master: Solicitações";
         $this->view->render('header');
         $this->view->render('message');
-        $this->view->render('masterReq/index');
-        $this->view->render('masterReq/inc/footer');
+        $this->view->render('masterRequest/index');
+        $this->view->render('masterRequest/inc/footer');
     }
 
-    public function updateReq()
+    public function updateRequest()
     {
-        $this->model->updateReq();
+        $this->model->updateRequest();
     }
 }

@@ -89,13 +89,13 @@ use lib\Session;
 
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href=<?php echo URL . "MasterPub";?> class="nav-link">
+                                    <a href=<?php echo URL . "MasterPublishers";?> class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Publicadores</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href=<?php echo URL . "MasterReq";?> class="nav-link">
+                                    <a href=<?php echo URL . "MasterRequest";?> class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Solicitações</p>
                                     </a>

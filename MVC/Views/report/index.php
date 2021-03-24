@@ -1,9 +1,5 @@
 <?php
 
-/** Página: Relatórios
-*   Conteúdo: Apresenta todos os relatórios feitos pelo usuário (Se acessado por Master, apresenta todos os relatório de todos os usuários)
-*/
-
 use lib\Session;
 
 //Se acesso for maior que 8, exibe opção de emitir S13 e de escolher de qual publicador verá os relatórios

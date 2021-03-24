@@ -21,8 +21,8 @@ class Signup extends \lib\Controller
         $this->view->render('signup/inc/footer');
     }
 
-    public function registerPub()
+    public function registerPublisher()
     {
-        $this->model->registerPub();
+        $this->model->registerPublisher();
     }
 }

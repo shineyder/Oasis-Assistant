@@ -1,9 +1,5 @@
 <?php
 
-/** Página: Master - Requests (Solicitações)
-*   Conteúdo: Apresenta todos as solicitações em aberto. Nível de visibilidade da página será definido pelo nível de acesso do usuário
-*/
-
 if (!$this->problem) :
     echo "<p>Nenhuma solicitação em aberto com assunto Problema.</p>";
 endif;
@@ -33,13 +29,13 @@ endif;
                     $key = array_search($dadosProblem->getIdUser(), array_column($this->publishers, 'id'));
                     ?>
                     <tr>
-                        <td><?php echo $this->publishers[$key]['nome'];?></td>
-                        <td><?php echo $this->publishers[$key]['sobrenome'];?></td>
-                        <td><?php echo $this->publishers[$key]['email'];?></td>
-                        <td><?php echo $dadosProblem->getMessage();?></td>
-                        <td><?php echo $dadosProblem->getTimeInitialize();?></td>
-                        <td><?php echo $dadosProblem->getTicket();?></td>
-                        <td><?php echo $dadosProblem->getStatusNow();?></td>
+                        <td><?php echo $this->publishers[$key]['nome']?></td>
+                        <td><?php echo $this->publishers[$key]['sobrenome']?></td>
+                        <td><?php echo $this->publishers[$key]['email']?></td>
+                        <td><?php echo $dadosProblem->getMessage()?></td>
+                        <td><?php echo $dadosProblem->getTimeInitialize()?></td>
+                        <td><?php echo $dadosProblem->getTicket()?></td>
+                        <td><?php echo $dadosProblem->getStatusNow()?></td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-up-sol-pro-<?php echo $dadosProblem->getId();?>">Definir</button>
                         </td>
@@ -57,7 +53,7 @@ endif;
                                 </div>
                                 <div class="modal-body">
                                     <p>Defina o status da solicitação</p>
-                                    <form action="MasterReq/updateReq" method="POST">
+                                    <form action="MasterRequest/updateRequest" method="POST">
                                         <input type="hidden" name="id" value=<?php echo $dadosProblem->getId();?>>
                                         <!-- radio -->
                                         <div class="form-group">
@@ -159,7 +155,7 @@ endif;
                                 </div>
                                 <div class="modal-body">
                                     <p>Defina o status da solicitação</p>
-                                    <form action="MasterReq/updateReq" method="POST">
+                                    <form action="MasterRequest/updateRequest" method="POST">
                                         <input type="hidden" name="id" value=<?php echo $dadosSugest->getId();?>>
                                         <!-- radio -->
                                         <div class="form-group">
@@ -261,7 +257,7 @@ endif;
                                 </div>
                                 <div class="modal-body">
                                     <p>Defina o status da solicitação</p>
-                                    <form action="MasterReq/updateReq" method="POST">
+                                    <form action="MasterRequest/updateRequest" method="POST">
                                         <input type="hidden" name="id" value=<?php echo $dadosOther->getId();?>>
                                         <!-- radio -->
                                         <div class="form-group">

@@ -33,13 +33,13 @@ class Home extends \lib\Controller
         exit();
     }
 
-    public function updatePubEmail()
+    public function updatePublisherEmail()
     {
-        $this->model->updatePubEmail();
+        $this->model->updatePublisherEmail();
     }
 
-    public function updatePubPass()
+    public function updatePublisherPassword()
     {
-        $this->model->updatePubPass();
+        $this->model->updatePublisherPassword();
     }
 }

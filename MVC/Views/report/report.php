@@ -79,7 +79,7 @@ foreach ($this->report as $singleReport) :
                     </div>
                     <div class="modal-body">
                         <p>Preencha os campos abaixo para alterar o relatório</p>
-                        <form action=<?php echo URL . "Report/updateRep";?> method="POST">
+                        <form action=<?php echo URL . "Report/updateReport";?> method="POST">
                             <input type="hidden" name="id_map" value="<?php echo $singleReport[0]->getIdMap();?>">
                             <input type="hidden" name="pg" value="<?php echo $this->pg?>">
                             
@@ -131,7 +131,7 @@ foreach ($this->report as $singleReport) :
                     <div class="modal-body">
                         <h5>Tem certeza que deseja deletar esse relatório?</h5>
                         <p>Todas as informações fornecidas serão deletadas!</p>
-                        <form action=<?php echo URL . "Report/deleteRep";?> method="POST">
+                        <form action=<?php echo URL . "Report/deleteReport";?> method="POST">
                             <input type="hidden" name="id_map" value="<?php echo $singleReport[0]->getIdMap();?>">
                             <input type="hidden" name="pg" value="<?php echo $this->pg?>">
                             <button type="submit" name="btn-del-rel-<?php echo $singleReport[0]->getId();?>" class="btn btn-warning">Confirmar</button>

@@ -12,27 +12,17 @@ class Bootstrap
 
     public function init()
     {
-        //Sets the protected URL
+        //Inicializa $url
         $this->getURL();
 
-        //Load the default controller if no URL is set
         if (empty($this->url[0])) :
             $this->loadDefaultController();
             return false;
         endif;
 
-        //Load the Controller
         $this->loadExistingController();
-
-        //Call methods
         $this->callControllerMethod();
     }
-
-    /**
-     * getURL
-     * @param string $url Pega a url para processamento
-     * @return array $url Passa a url processada para this->url
-     */
 
     private function getURL()
     {
@@ -63,8 +53,7 @@ class Bootstrap
 
     private function callControllerMethod()
     {
-        //http://mvctest.com/Controller/Method/Param
-        //so...
+        //http://mvctest.com/Controller/Method/Param/Param2
         //url[0] = Controller
         //url[1] = Method
         //url[2] = Param
@@ -100,10 +89,6 @@ class Bootstrap
         endif;
     }
 
-    /**
-     * error
-     * @param string $erro Descrição do erro para exibir na página de erro
-     */
     private function error($erro)
     {
         $controller = new Erro();

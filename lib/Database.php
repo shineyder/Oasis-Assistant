@@ -30,8 +30,8 @@ class Database
 
     /**
      * create
-     * @param string $table Name of table
-     * @param array $data An associative array to insert
+     * @param string $table Nome da tabela
+     * @param array $data Um array associativo para adicionar
      */
 
     public function create($table, $data)
@@ -50,11 +50,11 @@ class Database
 
     /**
      * read
-     * @param string $table Name of table
-     * @param string $data Name of colunms to extract
-     * @param string $where the WHERE query part (remember: use '' in string values)
-     * @param string $details other details (LIMIT, OFFSET, DESC/ASC and other ALL TOGETHER)
-     * @return array An associative array with data from DB
+     * @param string $table Nome da tabela
+     * @param string $data Nome da coluna para extrair
+     * @param string $where A parte WHERE da query (lembre: use '' ao enviar strings)
+     * @param string $details Outros detalhes (LIMIT, OFFSET, DESC/ASC e outros)
+     * @return array Uma array associativa com os dados do DB
      */
     public function read($table, $data, $where = "", $details = "")
     {
@@ -63,7 +63,6 @@ class Database
         else :
             $stmt = $this::conn()->prepare("SELECT $data FROM $table $details");
         endif;
-
         $stmt->execute();
         $this::closeConn();
 
@@ -71,25 +70,28 @@ class Database
             return false;
         endif;
 
-        if ($data == "*") :
-            if ($stmt->rowCount() > 1) :
-                $i = 0;
-                $info = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-                foreach ($info as $value) :
-                    $dados[$i] = $this->showObj($value, $table);
-                    $i++;
-                endforeach;
-                return $dados;
-            else :
-                return $this->showObj($stmt->fetch(\PDO::FETCH_ASSOC), $table);
-            endif;
+        if ($stmt->rowCount() > 1) :
+            $multiData = 1;
+            $info = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        else :
+            $info = $stmt->fetch(\PDO::FETCH_ASSOC);
         endif;
 
-        if ($stmt->rowCount() > 1) :
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        else :
-            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (isset($multiData) and $data == "*") :
+            $i = 0;
+            foreach ($info as $value) :
+                $dados[$i] = $this->showObj($value, $table);
+                $i++;
+            endforeach;
+            return $dados;
         endif;
+
+        if (!isset($multiData) and $data == "*") :
+            $dados = $this->showObj($info, $table);
+            return $dados;
+        endif;
+
+        return $info;
     }
 
     /**
@@ -107,9 +109,9 @@ class Database
 
     /**
      * update
-     * @param string $table Name of table
-     * @param array $data An associative array to insert
-     * @param string $where the WHERE query part
+     * @param string $table Nome da tabela
+     * @param array $data Uma array associativa para atualizar
+     * @param string $where A parte WHERE da query (lembre: use '' ao enviar strings)
      */
     public function update($table, $data, $where)
     {
@@ -129,9 +131,23 @@ class Database
     }
 
     /**
+     * alterTable
+     * @param string $table Nome da tabela
+     * @param string $data Nome da coluna que será alterada
+     * @param string $value Novo valor default da coluna
+     */
+    public function alterTable($table, $data, $value)
+    {
+        $stmt = $this::conn()->prepare("ALTER TABLE $table ALTER $data SET default :data");
+        $stmt->bindValue(":data", $value);
+        $stmt->execute();
+        $this::closeConn();
+    }
+
+    /**
      * delete
-     * @param string $table Name of table
-     * @param string $where the WHERE query part
+     * @param string $table Nome da tabela
+     * @param string $where A parte WHERE da query
      */
     public function delete($table, $where, $limit = 1)
     {

@@ -4,7 +4,7 @@ namespace Controllers;
 
 use utl\Auth;
 
-class MasterPub extends \lib\Controller
+class MasterPublishers extends \lib\Controller
 {
     public function __construct()
     {
@@ -19,17 +19,17 @@ class MasterPub extends \lib\Controller
         $this->view->local = "Master: Publicadores";
         $this->view->render('header');
         $this->view->render('message');
-        $this->view->render('masterPub/index');
-        $this->view->render('masterPub/inc/footer');
+        $this->view->render('masterPublishers/index');
+        $this->view->render('masterPublishers/inc/footer');
     }
 
-    public function updatePubGrupo()
+    public function updatePublisherGroup()
     {
-        $this->model->updatePubGrupo();
+        $this->model->updatePublisherGroup();
     }
 
-    public function updatePubAccess()
+    public function updatePublisherAccess()
     {
-        $this->model->updatePubAccess();
+        $this->model->updatePublisherAccess();
     }
 }

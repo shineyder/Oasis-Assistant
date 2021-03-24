@@ -1,11 +1,3 @@
-<?php
-
-/** Página: Problemas de login
-*   Conteúdo: Sessão com opção de recuperar senha e reenviar email de autenticação.
-*/
-
-?>
-
 <div class="register-box">
     <div class="register-logo">
         <img id="logo" src=<?php echo URL . "_img/logo/logo_oasis_assistant.png";?> alt="Logo Oásis Assistant">
@@ -32,9 +24,7 @@
             <form action="Problem/recover" method="POST" enctype="multipart/form-data" role="form">
                 <?php
                 if (isset($_POST['btn-prox'])) :
-                    ?>
-                    <p class="login-box-msg">Recuperação de conta</p>
-                    <?php
+                    echo "<p class='login-box-msg'>Recuperação de conta</p>";
                     switch ($_POST['problem']) :
                         case 1:
                             ?>

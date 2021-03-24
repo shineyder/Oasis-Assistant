@@ -14,6 +14,7 @@ class ReportModel extends \lib\Model
     public function doS13()
     {
         header('Content-Type: text/html; charset=UTF-8');
+
         //Variavel para monstarmos a tabela
         $dadosXls  = "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
         $dadosXls .= "<table border='1'>";
@@ -26,9 +27,11 @@ class ReportModel extends \lib\Model
         //Lê cobert atual
         $cobertNow = $this->db->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
         $cobertNow = $cobertNow['cobert'];
+
         //Passa pelos registros de cada cobert
         for ($i = 1; $i <= $cobertNow; $i++) :
             $dadosXls .= "<tr>";
+
             //Passa por cada um dos mapas para preencher os nomes dos dirigentes
             for ($j = 1; $j <= 24; $j++) :
                 //Lê qual id da primeira quadra do mapa
@@ -40,6 +43,7 @@ class ReportModel extends \lib\Model
 
                 //Lê id de qual publicador mais trabalhou no mapa
                 $idUser = $this->db->read("event", "idUser, COUNT(idUser) AS Qtd", "cobert = $i AND idMapa BETWEEN $mapFirst AND $mapLast", "GROUP BY idUser ORDER BY COUNT(idUser) DESC LIMIT 1");
+
                 //Escreve nome do publicador, se houver
                 if ($idUser == false) :
                     $dadosXls .= "<td colspan='2'></td>";
@@ -50,8 +54,10 @@ class ReportModel extends \lib\Model
                     $dadosXls .= "<td colspan='2'>" . $publisher['nome'] . " " . $publisher['sobrenome'] . "</td>";
                 endif;
             endfor;
+
             $dadosXls .= "</tr>";
             $dadosXls .= "<tr>";
+
             //Passa por cada um dos mapas para preencher as datas trabalhadas
             for ($j = 1; $j <= 24; $j++) :
                 //Lê qual id da primeira quadra do mapa
@@ -101,29 +107,37 @@ class ReportModel extends \lib\Model
         exit;
     }
 
-    public function updateRep()
+    public function updateReport()
     {
-        //POST e IDs
         $idUser = Session::get('id');
         $idMap = $_POST['id_map'];
         $nRes = $_POST['n_res'];
         $nCom = $_POST['n_com'];
         $nEdi = $_POST['n_edi'];
 
-        //Atualiza tabela map
         $this->db->update("map", ["worked" => 1, "nResidencia" => $nRes, "nComercio" => $nCom, "nEdificio" => $nEdi], "id = $idMap");
 
         //Salva log do ocorrido na tabela de eventos
-        $log = ["id" => null, "idUser" => $idUser, "idMapa" => $idMap, "timeN" => date('d/m/Y H:i:s'), "eventType" => "attRel", "data1" => "worked", "desc1" => 1, "data2" => "nRes", "desc2" => $nRes, "data3" => "nCom", "desc3" => $nCom, "data4" => "nEdi", "desc4" => $nEdi];
+        $log = ["id" => null,
+                "idUser" => $idUser,
+                "idMapa" => $idMap,
+                "timeN" => date('d/m/Y H:i:s'),
+                "eventType" => "attRel",
+                "data1" => "worked",
+                "desc1" => 1,
+                "data2" => "nRes",
+                "desc2" => $nRes,
+                "data3" => "nCom",
+                "desc3" => $nCom,
+                "data4" => "nEdi",
+                "desc4" => $nEdi];
         $this->db->create("event", $log);
 
-        //Se tudo deu certo emite mensagem de sucesso e retorna a index
         $this->msg("Relatório atualizado com sucesso", "success", "Report/frame/" . $idUser . "/" . $_POST['pg']);
     }
 
-    public function deleteRep()
+    public function deleteReport()
     {
-        //Declara IDs
         $idMap = $_POST['id_map'];
         $idUser = Session::get('id');
 
@@ -140,15 +154,25 @@ class ReportModel extends \lib\Model
             $this->db->update("map", ["worked" => 0, "nResidencia" => $dadosQuadraOld->getDesc2(), "nComercio" => $dadosQuadraOld->getDesc3(), "nEdificio" => $dadosQuadraOld->getDesc4()], "id = $idMap");
         endif;
 
-        //Salva log do ocorrido na tabela de eventos
-        $log = ["id" => null, "idUser" => $idUser, "idMapa" => $idMap, "timeN" => date('d/m/Y H:i:s'), "eventType" => "delRel", "data1" => null, "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
+        $log = ["id" => null,
+                "idUser" => $idUser,
+                "idMapa" => $idMap,
+                "timeN" => date('d/m/Y H:i:s'),
+                "eventType" => "delRel",
+                "data1" => null,
+                "desc1" => null,
+                "data2" => null,
+                "desc2" => null,
+                "data3" => null,
+                "desc3" => null,
+                "data4" => null,
+                "desc4" => null];
         $this->db->create("event", $log);
 
-        //Se tudo deu certo emite mensagem de sucesso e retorna a index
         $this->msg("Relatório deletado com sucesso", "success", "Report/frame/" . $idUser . "/" . $_POST['pg']);
     }
 
-    public function readRep($pubId, $pg)
+    public function readReport($pubId, $pg)
     {
         //Lê a cobertura atual e inicia Relatório como vazio
         $cob = $this->db->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");

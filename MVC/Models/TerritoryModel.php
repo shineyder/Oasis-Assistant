@@ -13,10 +13,8 @@ class TerritoryModel extends \lib\Model
 
     public function updateMaps($identificator)
     {
-        //Lê todos os dados do referido mapa
         $data = $this->db->read("map", "*", "maps = $identificator");
 
-        //Analisa quadra por quadra
         foreach ($data as $dados_quadra) :
             $newDataWork = ["worked" => ""];
             $newDataRes = ["nResidencia" => ""];
@@ -50,50 +48,64 @@ class TerritoryModel extends \lib\Model
                 $change = 1;
             endif;
 
-            //Caso tenha alguma mudança
             if ($change == 1) :
-                //Atualiza a tabela map
                 $newData = array_merge($newDataWork, $newDataRes, $newDataCom, $newDataEdi);
                 $this->db->update("map", $newData, "id = $idMap");
 
-                //Registra o evento do relatório
-                $log = ["id" => null, "idUser" => $idUser, "idMapa" => $idMap, "timeN" => date('d/m/Y H:i:s'), "eventType" => "doRel", "data1" => "worked", "desc1" => $newData['worked'], "data2" => "nRes", "desc2" => $newData['nResidencia'], "data3" => "nCom", "desc3" => $newData['nComercio'], "data4" => "nEdi", "desc4" => $newData['nEdificio']];
+                $log = ["id" => null,
+                        "idUser" => $idUser,
+                        "idMapa" => $idMap,
+                        "timeN" => date('d/m/Y H:i:s'),
+                        "eventType" => "doRel",
+                        "data1" => "worked",
+                        "desc1" => $newData['worked'],
+                        "data2" => "nRes",
+                        "desc2" => $newData['nResidencia'],
+                        "data3" => "nCom",
+                        "desc3" => $newData['nComercio'],
+                        "data4" => "nEdi",
+                        "desc4" => $newData['nEdificio']];
                 $this->db->create("event", $log);
             endif;
         endforeach;
 
         //Verifica se o território foi completo
-        $this->completeTerr();
+        $this->verifyIfTerritoryIsFinished();
 
-        //Emite mensagem de sucesso e redireciona para o frame dos relatórios
         $this->msg("Relatório enviado com sucesso!", "success", "Territory/frame/" . $_POST['mapactive']);
     }
 
-    /**
-     * completeTerr
-     * Verifica se todas as quadras do território foram trabalhadas
-     * Em caso afirmativo, registra na tabela de eventos e reinicia todo território
-     */
-    public function completeTerr()
+    public function verifyIfTerritoryIsFinished()
     {
         $data = $this->db->read("map", "id", "worked = 0");
-
         if ($data == false) :
-            $info = $this->db->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
-
-            $log = ["id" => null, "idUser" => null, "idMapa" => null, "timeN" => date('d/m/Y H:i:s'), "eventType" => "terrComp", "data1" => null, "desc1" => null, "data2" => null, "desc2" => null, "data3" => null, "desc3" => null, "data4" => null, "desc4" => null];
-            $this->db->create("event", $log);
-
-            $sql = "ALTER TABLE event ALTER cobert SET default :cobert";
-            $p_sql = $this->db::conn()->prepare($sql);
-            $p_sql->bindValue(":cobert", $info['cobert'] + 1);
-            $p_sql->execute();
-            $this->db::closeConn();
-
-            $this->db->update("map", ["worked" => 0], "1 = 1");
-            return 0;
-        else :
-            return 0;
+            $this->completeTerritory();
         endif;
+        return 0;
+    }
+
+    public function completeTerritory()
+    {
+        $info = $this->db->read("event", "cobert", "", "ORDER BY id DESC LIMIT 1");
+
+        $log = ["id" => null,
+                "idUser" => null,
+                "idMapa" => null,
+                "timeN" => date('d/m/Y H:i:s'),
+                "eventType" => "terrComp",
+                "data1" => null,
+                "desc1" => null,
+                "data2" => null,
+                "desc2" => null,
+                "data3" => null,
+                "desc3" => null,
+                "data4" => null,
+                "desc4" => null];
+        $this->db->create("event", $log);
+
+        $newCobertDefault = $info['cobert'] + 1;
+        $this->db->alterTable("event", "cobert", $newCobertDefault);
+
+        $this->db->update("map", ["worked" => 0], "1 = 1");
     }
 }
